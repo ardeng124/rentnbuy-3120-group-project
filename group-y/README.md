@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# A Real-Time Chat Service
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository is the starter kit for the COMP3120 Individual Project
+for 2022: a real time chat service.  The back-end implementation is
+in the `server` subdirectory.  The front-end project is homed in the
+main directory (with sources in `src`).  
 
-## Available Scripts
+Note that you can make any changes you deem necessary to this code including
+fixing bugs and adding features.  That includes changing this file which should document
+your personal project.
 
-In the project directory, you can run:
+## Configuration
 
-### `npm start`
+Copy the file `.env.dist` to `.env` and edit the file with your own
+settings - in particular your MongoDB settings if you are doing server
+side development.  Note that these settings are only relevant to the
+server implementation, not the front-end.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Frontend Project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The `src` folder contains a template front-end React project to get you
+started.
 
-### `npm test`
+To install React and all the required packages, run:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+To run the front-end development server:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm run start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This will run the server on port 3000.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You can run the front-end tests as usual with:
 
-### `npm run eject`
+```bash
+npm run test
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Which will run any tests you have added to the front-end project under `src`.  Currently it
+runs one dummy test.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Backend Server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The backend server is documented in [Backend Server](doc/backend.md). 

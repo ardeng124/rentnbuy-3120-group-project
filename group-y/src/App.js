@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import Conversations from './Pages/Conversations.js'
+import SignUp from './Pages/SignUp.js'
 import './App.css';
 
-function App() {
-  return (
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from "react-router-dom"
+
+function App() { 
+
+  const padding = {
+    padding: 12
+  }
+  
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <div className="Links">
+          <Link style={padding} to="/">Home</Link>
+          <Link style={padding} to="/login">Sign Up</Link>
+        </div>
+    
+      <Routes>
+        <Route path="/" element ={<Conversations />} />
+        <Route path="/login" element ={<SignUp />} />
+      </Routes> 
+      </Router>
     </div>
   );
 }

@@ -111,7 +111,7 @@ const SignInForm = ({updateFn}) => {
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>
                 <Stack spacing={2} alignItems="center">
-                    <button type="submit" variant="contained">Signup</button>
+                    <button className="appBtn" type="submit" variant="contained">Signup</button>
                 </Stack>
             </form>
         </div>

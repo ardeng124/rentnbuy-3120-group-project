@@ -38,6 +38,10 @@ body, html {
   margin-top: 30px;
 }
 
+.loginheader h1{
+  margin-top: 30px;
+}
+
 .LoginPage{
   background-color: #F6FFF8;
 }
@@ -69,13 +73,14 @@ body, html {
   margin-bottom:20px;
   margin-top: 20px;
 }
-button{
+.appBtn{
   background-color: #81BEA4;
 
   width:120px;
   border-radius: 11px;
   border: 1px solid #6b908090;
   font-weight: 400;
+  font-size:14px;
 }
 
 .MasterHeader ul{
@@ -89,12 +94,13 @@ button{
 }
 .MasterHeader li{
   float: left;
+  font-size: 14pt;
 }
 .MasterHeader li a {
   display: block;
   color: var(--text-colour);
   text-align: center;
-  padding: 14px 16px;
+  padding: 24px 26px;
   text-decoration: none;
   border-radius: 10px;
   margin-right: 10px;
@@ -104,10 +110,66 @@ button{
   background-color: #CCE3DE;
 }
 .MasterHeader li a:hover:not(.active) {
-  background-color: #111;
+  background-color: #a1bab5;
 }
 
 .MasterHeader .active {
   background-color: #8FCAB0;
   color: white;
+}
+
+
+.usrAccLi {
+  float: right !important;
+}
+
+.usrAccBtn {
+  background-color: #D9D9D9;
+  border-radius: 100%;
+  padding:35px;
+  margin:5px
+}
+
+
+
+.miniNavBar ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #E0F4EC;
+  top: 0;
+  width: 100%;
+}
+.miniNavBar li{
+  float: left;
+  font-size: 11pt;
+}
+.miniNavBar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin:5px;
+
+}
+.miniNavBar li a:not(.active) {
+  background-color: #95BBB3;
+}
+.miniNavBar li a:hover:not(.active) {
+  background-color: #7f9e98;
+}
+
+.miniNavBar .active {
+  background-color: #95BB9B;
+  color: white;
+}
+.UserSettingsPage .loginheader{
+  background-color:var(--header);
+  margin-bottom: 50px;
+  margin-top: 0px;
+  padding-bottom: 0px;
 }

@@ -1,7 +1,7 @@
 import HomePage from './Pages/HomePage.js'
 import LogIn from './Pages/LogIn.js'
 import SignUp from './Pages/SignUp'
-
+import UserSettings from './Pages/UserSettings.js';
 import './App.css';
 
 import {
@@ -27,6 +27,8 @@ function App() {
         <Route path="/" element ={<HomePage />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<SignUp />} />
+        <Route path="/settings" element={<UserSettings />} />
+
       </Routes> 
       </Router>
     </div>

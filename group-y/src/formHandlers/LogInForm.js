@@ -31,7 +31,7 @@ const LogInForm = ({updateFn}) => {
             <form className="border" onSubmit={formHandler}>
                 <input className="input" type="text" placeholder="Username" name="username" onChange={updateField} required/>
                 <input className="input" type="password" placeholder="Password" name="password" onChange={updateField} required/>
-                    <button type="submit">Login</button>
+                    <button className="appBtn" type="submit">Login</button>
             </form>
         </div>
     )

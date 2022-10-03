@@ -11,6 +11,9 @@ const Conversations = () => {
 
     const [error, setError] = useState(false)
 
+    const handleUserClicked = (event) => {
+        console.log("clicked on user icon")
+    }
     // const addNewConvo = (data) => {
 
     //     axios.post("http://localhost:8102/api/conversations", data, ProfileToken)
@@ -47,7 +50,8 @@ const Conversations = () => {
             <div className='MasterHeader'>
                 <ul>
                     <li><a href="/login">Login</a></li>
-                    <li><a class="active" href="/">Home</a></li>
+                    <li><a className="active" href="/">Home</a></li>
+                    <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
                 </ul>
         </div>          
             {/* <ConversationForm updateFn={addNewConvo}/>

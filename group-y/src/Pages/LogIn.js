@@ -104,7 +104,7 @@ const Login = () => {
       {renderErrorMessage("uname")}
       {logInTracker ? console.log("User Logged In") : <p className="largeText"> Or sign up if you do not have an account.</p>}
       {logInTracker ? console.log("User Logged In") : <Stack spacing={2} alignItems="center">
-        <button onClick={(signIn)} variant="contained">Signup</button>
+        <button className="appBtn" onClick={(signIn)} variant="contained">Signup</button>
 
       </Stack>}
       </section>

@@ -100,11 +100,11 @@ const SignIn = () => {
       <section className="loginBox">
         <h1 className="log-sign-in">Signup</h1>
         {logInTracker ? <div>Your account '{localStorage.getItem('username')}' has successfully been registered!</div> : <SignUpForm updateFn={createNewUser}/>}
-        {logInTracker && <Stack spacing={2} alignItems="center"> <button onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
+        {logInTracker && <Stack spacing={2} alignItems="center"> <button className="appBtn" onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
         {renderErrorMessage("uname")}
         <p className="largeText"> Or Login if you already have an account.</p> 
         <Stack spacing={2} alignItems="center">
-          <button onClick={(logIn)} variant="contained">Login</button>
+          <button className="appBtn" onClick={(logIn)} variant="contained">Login</button>
       </Stack>
       </section>
     </div>

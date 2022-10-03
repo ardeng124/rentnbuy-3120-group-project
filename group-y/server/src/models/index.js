@@ -1,9 +1,14 @@
 const mongoose = require('mongoose')
 const config = require('../config')
 
+//Password Field added - Allow for Login of user. 
+//Cross Device Login extended feature
+//Username must be unique
+//Password does not
 const sessionSchema = new mongoose.Schema({
-    username: {type: String, unique: true}
-  })
+  username: {type: String, unique: true},
+  password: {type: String, unique: false}
+})
 
 sessionSchema.set('toJSON', {
   transform: (document, returnedObject) => {

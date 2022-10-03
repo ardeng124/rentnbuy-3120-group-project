@@ -1,7 +1,8 @@
+import LoginForm from "../formHandlers/logInForm.js";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import SignUpForm from "../formHandlers/signUpForm.js";
+import authProfile from "../authProfile.js";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
@@ -11,7 +12,7 @@ import Button from '@mui/material/Button';
 //the tokens authorization. unless they logout.
 let logInTracker = false;
 
-const SignIn = () => {
+const Login = () => {
 
   //Sets current location of the user to the page they are on
   localStorage.setItem('location', window.location.pathname)
@@ -34,33 +35,31 @@ const SignIn = () => {
   //Goes straight to /conversations if logged in (if token exists)
   useEffect(() => {
     if (token) {
-      logInTracker = false;
-      console.log("token exists", logInTracker)
+      logInTracker = true;
+      console.log("Token Exists!", logInTracker)
       if (location !== "/") {
         //Do Nothing
-        logInTracker = true;
       } else if(!logInTracker) {
-        navigate("/");
+        navigate("/conversations");
       }
     }
-  })
+  }, [])
 
   //Error Message State Variable
   const [errorMessages, setErrorMessages] = useState({});
 
   //Create new User Function
-  const createNewUser = (newUnit) => {
+  const createNewUser = (newUser) => {
 
-    axios.post("http://localhost:8102/auth/register", newUnit)
+    axios.post("http://localhost:8102/auth/login", newUser, authProfile())
     .then(response => {          
       console.log("POST response", response)
-      if (response.data.status === "username taken") {
-        setErrorMessages({name: "uname", message: "Username already Exists!"})
+      if (response.data.status === "user does not exist") {
+        setErrorMessages({name: "uname", message: "Your Username or password is incorrect!"})
       } else {
-        console.log("new user")
+        console.log("A New User has been created!")
         logInTracker = true;
         setErrorMessages({name: "uname", message: ""})
-        localStorage.setItem('user', response.data)
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('username', response.data.username)
         navigate("/")
@@ -76,28 +75,29 @@ const SignIn = () => {
     console.log("Logging Out...")
   }
 
-  //Navigate to login Page
-  const logIn = () => {
-    navigate("/login")
-  }
-
+  //Error message created
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
     <div className="error">{errorMessages.message}</div>
   );
 
+  //Navigate to signin Page
+  const signIn = () => {
+    navigate("/register")
+  }
+
  return (
-    <div className="log-sign-container">
-        <h1 className="log-sign-in">Signup</h1>
-        {logInTracker ? <div>Your account '{localStorage.getItem('username')}' has successfully been registered!</div> : <SignUpForm updateFn={createNewUser}/>}
-        {logInTracker && <Stack spacing={2} alignItems="center"> <Button onClick={(logOut)} variant="contained">Logout</Button> </Stack>}     
-        {renderErrorMessage("uname")}
-        <p className="largeText"> Or Login if you already have an account.</p> 
-        <Stack spacing={2} alignItems="center">
-          <Button onClick={(logIn)} variant="contained">Login</Button>
-      </Stack>
+    <div>
+      <h1 className="log-sign-in">Login</h1>
+      {logInTracker ? <div>{localStorage.getItem('username')} has successfully logged in!</div> : <LoginForm updateFn={createNewUser}/>}
+      {logInTracker && <Stack spacing={2} alignItems="center"> <Button onClick={(logOut)} variant="contained">Logout</Button> </Stack>}     
+      {renderErrorMessage("uname")}
+      {logInTracker ? console.log("User Logged In") : <p className="largeText"> Or sign up if you do not have an account.</p>}
+      {logInTracker ? console.log("User Logged In") : <Stack spacing={2} alignItems="center">
+        <Button onClick={(signIn)} variant="contained">Signup</Button>
+      </Stack>}
     </div>
  );  
 }
 
-export default SignIn
+export default Login

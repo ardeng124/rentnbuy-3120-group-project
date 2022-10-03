@@ -4,7 +4,8 @@ const models = require('../models')
 const createSession = async (request, response) => {
 
     const session = new models.Session({
-        username: request.body.username
+        username: request.body.username,
+        password: request.body.password
     })
 
     const returned = await session.save()
@@ -63,4 +64,27 @@ const validUser = async (request) => {
     return false
 }
 
-module.exports = { validUser, getUser, createSession }
+//Extended Functionality (Users can log in with exisiting credentials)
+const existingUser = async (request, response) => {
+    //Storing the username and password from the request body
+    const { username, password } = request.body
+
+    //Find a match on 'username' and 'password'
+    const matchExistingUser = await models.Session.findOne({ username, password })
+
+    //If the user 'username' and 'password' matches an exisiting entry
+    //then it will be true
+    if (matchExistingUser) {
+        response.json({
+            status: "success",
+            username: matchExistingUser.username,
+            token: matchExistingUser._id
+        })
+    //Username and/or password do not match any of the entries in the database
+    } else {
+        response.json({status: "user does not exist"})
+    }
+}
+
+//Exporting all the functions
+module.exports = { validUser, getUser, createSession, existingUser }

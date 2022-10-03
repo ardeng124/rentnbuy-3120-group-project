@@ -1,7 +1,8 @@
 const express = require('express')
 const auth = require('./controllers/auth')
 const conv = require('./controllers/conversations')
-const messages = require('./controllers/messages')
+const messages = require('./controllers/comments')
+const items = require('./controllers/items')
 
 const router = express.Router()
  
@@ -34,5 +35,6 @@ router.get('/api/conversations/:id/:msgid', messages.getMessage)
 /* DELETE to message URL to delete the message */
 router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 
+router.get('/api/items', items.getItems)
 
 module.exports = router 

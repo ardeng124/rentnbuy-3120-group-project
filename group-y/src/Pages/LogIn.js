@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import authProfile from "../authProfile.js";
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 
 //Tracking Logged in status
 //Could add a if check -> which checks for a token
@@ -87,15 +87,27 @@ const Login = () => {
   }
 
  return (
-    <div>
-      <h1 className="log-sign-in">Login</h1>
+    <div className="LoginPage">
+      <section className="loginheader">
+      <div className='MasterHeader'>
+        <ul>
+            <li><a class="active" href="/login">Login</a></li>
+            <li><a  href="/">Home</a></li>
+        </ul>
+        </div>
+      <h1>Welcome to RentNBuy</h1>
+      </section>
+      <section className="loginBox">
+      <h1 className="loginpageHeading">Login</h1>
       {logInTracker ? <div>{localStorage.getItem('username')} has successfully logged in!</div> : <LoginForm updateFn={createNewUser}/>}
-      {logInTracker && <Stack spacing={2} alignItems="center"> <Button onClick={(logOut)} variant="contained">Logout</Button> </Stack>}     
+      {logInTracker && <Stack spacing={2} alignItems="center"> <button onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
       {renderErrorMessage("uname")}
       {logInTracker ? console.log("User Logged In") : <p className="largeText"> Or sign up if you do not have an account.</p>}
       {logInTracker ? console.log("User Logged In") : <Stack spacing={2} alignItems="center">
-        <Button onClick={(signIn)} variant="contained">Signup</Button>
+        <button onClick={(signIn)} variant="contained">Signup</button>
+
       </Stack>}
+      </section>
     </div>
  );  
 }

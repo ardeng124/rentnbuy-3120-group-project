@@ -1,7 +1,6 @@
 //Imports
 import React, { useState } from "react";
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 
 //Need A button that says register to go to a register page
 //instead of the initial login page
@@ -31,23 +30,25 @@ const SignInForm = ({updateFn}) => {
     return (
         <div className ="formContainer">
             <form onSubmit={formHandler}>
-                <label className="label" htmlFor="username"> Username: </label>
+                <fieldset>
+                    <legend> Personal details</legend>
+                    <input className="input" type="text" placeholder="Full name" name="fullname" onChange={updateField} required/>
+                    <input className="input" type="email" placeholder="Email" name="email" onChange={updateField} required/>
+                </fieldset>
+
                 <input className="input" type="text" placeholder="Enter Username" name="username" onChange={updateField} required/>
-                <label className="label" htmlFor="password"> Password: </label>
                 <input className="input" type="password" placeholder="Enter Password" name="password" onChange={updateField} required/>
-                <label className="label" htmlFor="repeatPassword"> Repeat Password: </label>
                 <input className="input" type="password" placeholder="Repeat Password" name="repeatPassword" onChange={updateField} required/>
                 
                 {/* Age */}
-                <label for="start">Start date:</label>
+                <label for="start">Birthday: </label>
 
                 <input type="date" id="start" name="trip-start"
                 min="1901-01-01" max="2022-12-31"/>
 
 
                 {/* Gender */}
-                <fieldset>
-                    <legend>Choose your interests</legend>
+                {/* <fieldset>
                     <div>
                         <input type="checkbox" id="male" name="gender" value="Male" />
                         <label for="male">Male</label>
@@ -60,20 +61,20 @@ const SignInForm = ({updateFn}) => {
                     <label className="label" htmlFor="otherGender"> Other: </label>
                     <input className="input" type="text" placeholder="Enter Gender" name="otherGender" onChange={updateField} required/>
                     </div>
-                </fieldset>
+                </fieldset> */}
 
                 {/* Phone Number - Not working as intended */}
-                <label for="phone">Phone Number:</label>
+                {/* <label for="phone">Phone Number:</label>
 
                 <input type="tel" id="phone" name="phone"
                 pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"
                 placeholder="Enter Phone Number"
                 required/>
 
-                <small>Format: 1234-567-890 </small>
+                <small>Format: 1234-567-890 </small> */}
 
                 {/* Address */}
-                <div class="form-group">
+                {/* <div class="form-group">
                     <input type="street" 
                         class="form-control" 
                         id="autocomplete" 
@@ -105,12 +106,12 @@ const SignInForm = ({updateFn}) => {
                         class="form-control" 
                         id="inputCountry" 
                         placeholder="Country"/>
-                    </div>
+                    </div> */}
 
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>
                 <Stack spacing={2} alignItems="center">
-                    <Button type="submit" variant="contained">Signup</Button>
+                    <button type="submit" variant="contained">Signup</button>
                 </Stack>
             </form>
         </div>

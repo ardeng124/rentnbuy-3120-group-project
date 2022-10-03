@@ -1,4 +1,4 @@
-import Conversations from './Pages/Conversations.js'
+import HomePage from './Pages/HomePage.js'
 import LogIn from './Pages/LogIn.js'
 import SignUp from './Pages/SignUp'
 
@@ -18,13 +18,13 @@ function App() {
     return (
     <div className="App">
       <Router>
-        <div className="Links">
+        {/* <div className="Links">
           <Link style={padding} to="/">Home</Link>
           <Link style={padding} to="/login">Log In</Link>
-        </div>
+        </div> */}
     
       <Routes>
-        <Route path="/" element ={<Conversations />} />
+        <Route path="/" element ={<HomePage />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<SignUp />} />
       </Routes> 

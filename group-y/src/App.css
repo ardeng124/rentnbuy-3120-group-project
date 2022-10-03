@@ -1,6 +1,15 @@
+/* https://coolors.co/palette/6b9080-a4c3b2-cce3de-eaf4f4-f6fff8 */
+:root{
+  --text-colour:#6B9080;
+  --button-colour: #81BEA4;
+  --outline-colour:#6B9080;
+  --header:#C2EFDC;
+  --nav-header: #6FA48D;
+}
+
 body, html {
   height: 100%;
-  background-color: rgb(68, 68, 68);
+  background-color: #F6FFF8;
 }
 
 .App {
@@ -8,7 +17,7 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgb(0, 0, 0);
+  color: #6B9080;
   height: 200%;
   overflow: hidden;
 }
@@ -19,10 +28,86 @@ body, html {
   transition: all .3s ease;
 }
 
-.App-header {
-  padding-bottom: 5%;
-  padding-top: 1%;
-  min-height: 100%;
-  height:auto;
-  justify-content: center;
+.loginpageHeading{
+  color: #6B9080;
+  margin:40px;
+  font-size:40px;
+  
+}
+.LoginPage h1{
+  margin-top: 30px;
+}
+
+.LoginPage{
+  background-color: #F6FFF8;
+}
+.loginBox{
+  background-color: #E3EDE9;
+  width:30%;
+  margin: auto; 
+  border-radius: 20px;
+  border:1px solid #a4c3b285 ;
+
+}
+.loginheader{
+  background-color:var(--header);
+  margin-bottom: 50px;
+  margin-top: 0px;
+  padding-bottom: 30px;
+}
+.formContainer{
+  margin:auto
+}
+.formContainer .input{
+  background-color: #CCE3DE;
+  border: 1px solid #a4c3b27d ;
+  border-radius: 10px;
+  color: #747c78;
+
+  display: block;
+  margin: auto;
+  margin-bottom:20px;
+  margin-top: 20px;
+}
+button{
+  background-color: #81BEA4;
+
+  width:120px;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+}
+
+.MasterHeader ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--nav-header);
+  top: 0;
+  width: 100%;
+}
+.MasterHeader li{
+  float: left;
+}
+.MasterHeader li a {
+  display: block;
+  color: var(--text-colour);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin:5px;
+}
+.MasterHeader li a:not(.active) {
+  background-color: #CCE3DE;
+}
+.MasterHeader li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.MasterHeader .active {
+  background-color: #8FCAB0;
+  color: white;
 }

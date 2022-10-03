@@ -271,6 +271,7 @@ select:focus {
 label,
 legend {
   display: block;
+  margin: auto;
   margin-bottom: .5rem;
   font-weight: 600; }
 fieldset {
@@ -300,8 +301,8 @@ ol ol,
 ol ul {
   margin: 1.5rem 0 1.5rem 3rem;
   font-size: 90%; }
-li {
-  margin-bottom: 1rem; }
+/* li {
+  margin-bottom: 1rem; } */
 
 
 /* Code

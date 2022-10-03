@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import SignUpForm from "../formHandlers/SignUpForm.js";
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import button from '@mui/material/button';
 
 //Tracking Logged in status
 //Could add a if check -> which checks for a token
@@ -87,15 +87,26 @@ const SignIn = () => {
   );
 
  return (
-    <div className="log-sign-container">
+<div className="LoginPage">
+      <section className="loginheader">
+      <div className='MasterHeader'>
+        <ul>
+            <li><a class="active" href="/login">Login</a></li>
+            <li><a  href="/">Home</a></li>
+        </ul>
+        </div>
+      <h1>Welcome to RentNBuy</h1>
+      </section>
+      <section className="loginBox">
         <h1 className="log-sign-in">Signup</h1>
         {logInTracker ? <div>Your account '{localStorage.getItem('username')}' has successfully been registered!</div> : <SignUpForm updateFn={createNewUser}/>}
-        {logInTracker && <Stack spacing={2} alignItems="center"> <Button onClick={(logOut)} variant="contained">Logout</Button> </Stack>}     
+        {logInTracker && <Stack spacing={2} alignItems="center"> <button onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
         {renderErrorMessage("uname")}
         <p className="largeText"> Or Login if you already have an account.</p> 
         <Stack spacing={2} alignItems="center">
-          <Button onClick={(logIn)} variant="contained">Login</Button>
+          <button onClick={(logIn)} variant="contained">Login</button>
       </Stack>
+      </section>
     </div>
  );  
 }

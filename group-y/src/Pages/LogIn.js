@@ -1,4 +1,4 @@
-import LoginForm from "../formHandlers/logInForm.js";
+import LoginForm from "../formHandlers/LogInForm.js";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";

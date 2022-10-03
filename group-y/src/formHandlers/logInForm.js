@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 //Need A button that says register to go to a register page
 //instead of the initial login page
-const logInForm = ({updateFn}) => {
+const LogInForm = ({updateFn}) => {
 
     const initialState = {username: '', password: ''}
 
@@ -43,4 +43,4 @@ const logInForm = ({updateFn}) => {
     )
 }
 
-export default logInForm
+export default LogInForm

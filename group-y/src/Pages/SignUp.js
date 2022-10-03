@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
-import SignUpForm from "../formHandlers/signUpForm.js";
+import SignUpForm from "../formHandlers/SignUpForm.js";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 

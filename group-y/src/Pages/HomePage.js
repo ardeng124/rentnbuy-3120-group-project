@@ -48,17 +48,18 @@ const Conversations = () => {
             
         <div className='HomePage'> 
             <div className='MasterHeader'>
-                <ul>
-                    <li><a href="/login">Login</a></li>
-                    <li><a className="active" href="/">Home</a></li>
                     <div className='dropDownMaster'>
                         <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
                         <div class="dropdownMenu">
-                            <li><a href='/settings'>Settings</a></li>
-                            <li><a href='/userdetails'>Edit details</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
 
                         </div>
                     </div>
+                <ul>
+                    <li><a href="/login">Login</a></li>
+                    <li><a className="active" href="/">Home</a></li>
                 </ul>
         </div>          
             {/* <ConversationForm updateFn={addNewConvo}/>

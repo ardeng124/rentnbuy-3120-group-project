@@ -9,7 +9,6 @@ function UserSettings() {
     const formHandler = (event) => {
         event.preventDefault()
         console.log("Form submitted: ", formInfo)
-        updateFn(formInfo)
         // setFormInfo(initialState)
     }
 

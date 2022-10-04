@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate} from "react-router-dom"
 
 import {
     BrowserRouter as Router,
@@ -6,6 +7,7 @@ import {
   } from "react-router-dom"
 
 const Conversations = () => {
+    const navigate = useNavigate()
 
     // const [convos, setConversations] = useState([])
 
@@ -13,6 +15,7 @@ const Conversations = () => {
 
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
+        navigate("/userview")
     }
     // const addNewConvo = (data) => {
 

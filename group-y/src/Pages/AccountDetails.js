@@ -1,10 +1,13 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 function AccountDetails() {
     const [formInfo, setFormInfo] = useState({ username: "", password: "" })
 
+    const navigate = useNavigate()
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
+        navigate("/userview")
     }
     const formHandler = (event) => {
         event.preventDefault()
@@ -25,37 +28,26 @@ function AccountDetails() {
         <div className="AccountDetailsPage">
             <section className="loginheader">
                 <div className="MasterHeader">
+                    <div className='dropDownMaster'>
+                        <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
+                        <div class="dropdownMenu">
+                            <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
+                        </div>
+                    </div>
                     <ul>
-                        <li>
-                            <a href="/login">Login</a>
-                        </li>
-                        <li>
-                            <a href="/">Home</a>
-                        </li>
-                        <li className="usrAccLi">
-                            {" "}
-                            <button
-                                className="usrAccBtn"
-                                onClick={handleUserClicked}
-                            ></button>
-                        </li>
+                        <li> <a href="/login">Login</a> </li>
+                        <li> <a href="/">Home</a> </li>
                     </ul>
                 </div>
                 <h1>Account Details</h1>
 
                 <div className="miniNavBar">
                     <ul>
-                        <li>
-                            <a href="/settings">Settings</a>
-                        </li>
-                        <li>
-                            <a className="active" href="/userdetails">
-                                Details
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/userview">View</a>
-                        </li>
+                        <li> <a href="/settings">Settings</a> </li>
+                        <li> <a className="active" href="/userdetails">Details</a> </li>
+                        <li> <a href="/userview">View</a> </li>
                     </ul>
                 </div>
             </section>
@@ -64,7 +56,10 @@ function AccountDetails() {
                     <br></br>
                     <form className="border" onSubmit={formHandler}>
                         {/* TODO: state updates on input change here */}
-                        <button className="editUsrIconBtn" onClick={()=> console.log("update")}/>
+                        <button
+                            className="editUsrIconBtn"
+                            onClick={() => console.log("update")}
+                        />
                         <fieldset className="passChangeFieldSet">
                             <input
                                 className="input"

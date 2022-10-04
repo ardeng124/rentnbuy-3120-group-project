@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
 
 function UserSettings() {
+    const navigate = useNavigate()
     const [formInfo, setFormInfo] = useState({username: '', password: ''})
 
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
+        navigate("/userview")
     }
     const formHandler = (event) => {
         event.preventDefault()
@@ -26,37 +29,29 @@ function UserSettings() {
       <div className="UserSettingsPage">
           <section className="loginheader">
               <div className="MasterHeader">
+
+                <div className='dropDownMaster'>
+                        <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
+                        <div class="dropdownMenu">
+                            <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
+                            <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
+
+                        </div>
+                    </div>
                   <ul>
-                      <li>
-                          <a href="/login">Login</a>
-                      </li>
-                      <li>
-                          <a href="/">Home</a>
-                      </li>
-                      <li className="usrAccLi">
-                          {" "}
-                          <button
-                              className="usrAccBtn"
-                              onClick={handleUserClicked}
-                          ></button>
-                      </li>
+                      <li> <a href="/login">Login</a> </li>
+                      <li> <a href="/">Home</a> </li>
+
                   </ul>
               </div>
               <h1>User Settings</h1>
 
               <div className="miniNavBar">
                   <ul>
-                      <li>
-                          <a className="active" href="/settings">
-                              Settings
-                          </a>
-                      </li>
-                      <li>
-                          <a href="/userdetails">Details</a>
-                      </li>
-                      <li>
-                          <a href="/userview">View</a>
-                      </li>
+                      <li> <a className="active" href="/settings"> Settings</a> </li>
+                      <li> <a href="/userdetails">Details</a> </li>
+                      <li> <a href="/userview">View</a> </li>
                   </ul>
               </div>
           </section>
@@ -88,7 +83,7 @@ function UserSettings() {
                               type="password"
                               placeholder="New password"
                               name="oldPass"
-                              
+                        
                           />
                           <input
                               className="input"

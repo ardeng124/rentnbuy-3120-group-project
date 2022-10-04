@@ -4,6 +4,7 @@ import SignUp from './Pages/SignUp'
 import UserSettings from './Pages/UserSettings.js';
 import './App.css';
 import AccountDetails from './Pages/AccountDetails.js';
+import UserView from './Pages/UserView.js';
 
 
 import {
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/register" element={<SignUp />} />
                     <Route path="/settings" element={<UserSettings />} />
                     <Route path="/userdetails" element={<AccountDetails />} />
+                    <Route path="/userview" element={<UserView />} />
                 </Routes>
             </Router>
         </div>

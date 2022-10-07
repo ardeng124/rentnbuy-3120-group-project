@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const config = require('../config')
-
+const Profile = require('./profile')
+const Item = require('./item')
+const Category = require('./category')
+const Review = require('./review')
 //Password Field added - Allow for Login of user. 
 //Cross Device Login extended feature
 //Username must be unique
@@ -77,4 +80,13 @@ const initDB = async () => {
         })
     }
 
-module.exports = { Session, Conversation, Message, initDB }
+module.exports = { 
+  Session, 
+  Conversation, 
+  Message, 
+  initDB, 
+  Profile, 
+  Item,
+  Category,
+  Review
+}

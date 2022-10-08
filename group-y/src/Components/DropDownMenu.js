@@ -10,6 +10,11 @@ function DropDownMenu() {
         console.log("clicked on user icon")
         navigate("/userview")
     }
+    //TODO: do something with the future axios file here
+     const handleLogOut = (event) => {
+         navigate("/login")
+         
+     }
 
     return (
         <div className='dropDownMaster'>
@@ -19,6 +24,8 @@ function DropDownMenu() {
                 <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                 <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                 <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
+                <li className='dropDownLi'><button className="logOutBtn" onClick={handleLogOut}>Log out</button></li>
+
             </div>
         </div>
     )

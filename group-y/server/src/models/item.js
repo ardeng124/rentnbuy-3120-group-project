@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const itemSchema = new mongoose.Schema({
+        name: String,
         rating: Number,
         price: Number, 
         creatorId: {

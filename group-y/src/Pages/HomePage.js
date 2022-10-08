@@ -1,81 +1,90 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
+import axios from "axios"
 
 import {
     BrowserRouter as Router,
     Routes, Route, Link
   } from "react-router-dom"
-
-const Conversations = () => {
+import NewestListingItem from '../Components/NewestListingItem';
+  var loggedIn = true
+  var token = localStorage.getItem('token') // Used to display the logout button if signed in if (token){" "}
+  if (token) { 
+    loggedIn = true
+} else {
+    loggedIn = false
+}
+const HomePage = () => {
     const navigate = useNavigate()
 
     // const [convos, setConversations] = useState([])
 
     const [error, setError] = useState(false)
-
+    const [newListings, setListings] = useState([])
+    useEffect(() => {   
+        axios.get("http://localhost:8102/api/items/").then((response) => {
+            console.log(response)
+            let arr = response.data.items.slice(3)
+            setListings(response.data.items)
+            // console.log(response.data.items)
+            
+        })
+    }, [])
+    
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
         navigate("/userview")
     }
-    // const addNewConvo = (data) => {
-
-    //     axios.post("http://localhost:8102/api/conversations", data, ProfileToken)
-    //     .then(response => {
-    //         axios.get("http://localhost:8102/api/conversations", ProfileToken)
-    //         .then((response) => {
-    //             setConversations(response.data.conversations)
-    //         })
-    //     })
-    //   }
-
-    // const fetchConvos = () => {
-    // axios.get("http://localhost:8102/api/conversations", ProfileToken)
-    // .then((response) => {
-    //     console.log("GET response: ", response)
-    //     setConversations(response.data.conversations)
-    //     console.log("GET Conversations: ", response.data.conversations)
-    // }) 
-    // .catch((error) => {
-    //     console.log("401 Error, Not Authorized!")
-    //     setError(true)
-    //     })
-    // }
-    
-    // useEffect(() => {
-    //     fetchConvos()
-    //     console.log("Fetching Convos")
-    // },[])
-    
+    const handleLoginButtonClicked = (event) => {
+        navigate("/login")
+    }
     
         return (
-            
-        <div className='HomePage'> 
-            <div className='MasterHeader'>
-            
-                <DropDownMenu></DropDownMenu>
+            <div className="HomePage">
+                <section className="loginheader">
+                    <div className="MasterHeader">
+                        {loggedIn && <DropDownMenu></DropDownMenu>}
 
-                <ul>
-                    <li><a href="/login">Login</a></li>
-                    <li><a className="active" href="/">Home</a></li>
-                </ul>
-        </div>          
-            {/* <ConversationForm updateFn={addNewConvo}/>
-            <h4> Conversations Listed Below: </h4>
-            <div className='allConvos'>
-            {convos.map(({ creator, id, messages, title }) => (
-            <li className='convoList' key={id}>
-            <p>Forum Title: <Link to="/messages">{title}</Link></p>
-            <p>Messages: {messages}</p>
-            <p>Author: {creator}</p>
-            <p>ID: {id}</p>       
-            </li>
-      ))} 
-      </div>       */}
-      <h3>This is the homepage</h3>
-      </div>
-    )
+                        <ul>
+                            
+                            <li>
+                                <a className="active" href="/">
+                                    Home
+                                </a>
+                            </li>
+                        </ul>
+                        {loggedIn && (
+                            <h1>Welcome {localStorage.getItem("username")}</h1>
+                        )}
+                        {!loggedIn && <h1>Welcome to RentNBuy</h1>}
+                    </div>
+                </section>
+                <section className="homepageMainContent">
+                    {!loggedIn && <p> You are browsing as a guest</p>}
+                    {!loggedIn && <button className="appBtn" onClick={handleLoginButtonClicked}>Login</button>}
+
+                    {loggedIn && (
+                        <div className="homePageContainer">
+                            <h3> Your Feed</h3>
+                        </div>
+                    )}
+                    <div className="homePageContainer">
+                        <h3> Newest Listings</h3>
+                        <div className="itemContainer">
+                            {newListings.map((x) => (
+                                <NewestListingItem
+                                    itemName={x.name}
+                                    itemDesc={x.description}
+                                    itemPrice={x.price}
+                                ></NewestListingItem>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        )
     
 }
 
-export default Conversations
+export default HomePage

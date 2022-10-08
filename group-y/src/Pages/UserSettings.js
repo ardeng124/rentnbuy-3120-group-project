@@ -32,20 +32,19 @@ function UserSettings() {
                 <DropDownMenu></DropDownMenu>
 
                 <ul>
-                    <li> <a href="/login">Login</a> </li>
                     <li> <a href="/">Home</a> </li>
 
                 </ul>
               </div>
               <h1>User Settings</h1>
 
-              <div className="miniNavBar">
+              {/* <div className="miniNavBar">
                   <ul>
                       <li> <a href="/userview">Profile</a> </li>
                       <li> <a className="active" href="/settings"> Settings</a> </li>
                       <li> <a href="/userdetails">Details</a> </li>
                   </ul>
-              </div>
+              </div> */}
           </section>
           <section class="loginBox">
               <div className="formContainer">

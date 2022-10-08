@@ -357,3 +357,12 @@ body, html {
   flex-wrap: wrap;
   margin: auto;
 }
+
+.logOutBtn{
+  background-color: #7c4825;
+  margin: 5px;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size: 14px;
+}

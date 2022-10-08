@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const models = require('../models')
 
 const User = require('../models/user')
@@ -10,11 +12,13 @@ const Session = require('../models/session')
  */
 const createUser = async(request, response)  => {
     const body = request.body
+    const saltRounds = 10
+    const passwordHash = await bcrypt.hash(body.password, saltRounds)
     const user = new User ({
         username: body.username, 
         firstName: body.firstName, 
         lastName: body.lastName, 
-        passwordHash: body.password, 
+        passwordHash: passwordHash, 
         image: "", //TO DO GridFS, 
         age: body.age, 
         isAdmin: false, 
@@ -23,15 +27,36 @@ const createUser = async(request, response)  => {
         location: body.location,
     })
     const savedUser = await user.save()
-    console.log(savedUser)
-    const session = new Session({
-        userId: savedUser.id
-    })
-    const savedSession = await session.save()
-    response.status(201).json(savedSession)
+    const userForToken = {
+        username: savedUser.username,
+        id: user.id,
+    }
+    // generate a token for the registered user 
+    const token = jwt.sign(userForToken, process.env.SECRET)
+    response
+        .status(200)
+        .send({ token, username: user.username, name: user.name })
 }
 
-
+const loginUser = async(request, response) => {
+    const {username, password} = request.body
+    const user = await User.findOne({username})
+    console.log(user)
+    const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
+    if (!(user && passwordCorrect)) {
+        return response.status(401).json({
+          error: 'invalid username or password'
+        })
+    }
+    const userForToken = {
+        username: user.username,
+        id: user.id,
+    }
+    const token = jwt.sign(userForToken, process.env.SECRET)
+    response
+    .status(200)
+    .send({ token, username: user.username, name: user.name })
+}
 const getUser = async (request, response) => {
 
     const authHeader = request.get('Authorization')
@@ -94,4 +119,4 @@ const existingUser = async (request, response) => {
 }
 
 //Exporting all the functions
-module.exports = { validUser, getUser, existingUser, createUser }
+module.exports = { validUser, getUser, existingUser, createUser, loginUser }

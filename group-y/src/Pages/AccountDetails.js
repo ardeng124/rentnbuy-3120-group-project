@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import DropDownMenu from "../Components/DropDownMenu";
 
 function AccountDetails() {
     const [formInfo, setFormInfo] = useState({ username: "", password: "" })
@@ -28,15 +29,7 @@ function AccountDetails() {
         <div className="AccountDetailsPage">
             <section className="loginheader">
                 <div className="MasterHeader">
-                    <div className='dropDownMaster'>
-                        <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
-                        <div className="dropdownMenu">
-                            <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
-                        </div>
-                    </div>
+                    <DropDownMenu></DropDownMenu>
                     <ul>
                         <li> <a href="/login">Login</a> </li>
                         <li> <a href="/">Home</a> </li>

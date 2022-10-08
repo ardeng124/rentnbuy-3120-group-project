@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    username: String, 
-    firstName: String, 
+    username: {type: String, unique: true},
+    password: {type: String, unique: false},
     lastName: String, 
     passwordHash: String, 
     image: String, //TO DO GridFS, 

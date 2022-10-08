@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
+import DropDownMenu from "../Components/DropDownMenu";
 
 import {
     BrowserRouter as Router,
@@ -51,15 +52,9 @@ const Conversations = () => {
             
         <div className='HomePage'> 
             <div className='MasterHeader'>
-                    <div className='dropDownMaster'>
-                        <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
-                        <div class="dropdownMenu">
-                            <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
-                        </div>
-                    </div>
+            
+                <DropDownMenu></DropDownMenu>
+
                 <ul>
                     <li><a href="/login">Login</a></li>
                     <li><a className="active" href="/">Home</a></li>

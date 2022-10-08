@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import DropDownMenu from "../Components/DropDownMenu";
 
 function UserSettings() {
     const navigate = useNavigate()
     const [formInfo, setFormInfo] = useState({username: '', password: ''})
 
-    const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
-        navigate("/userview")
-    }
+    
     const formHandler = (event) => {
         event.preventDefault()
         console.log("Form submitted: ", formInfo)
@@ -25,26 +23,19 @@ function UserSettings() {
             setFormInfo({...formInfo, password: event.target.value})
         }
     }
-  return (
-      <div className="UserSettingsPage">
-          <section className="loginheader">
-              <div className="MasterHeader">
 
-                <div className='dropDownMaster'>
-                        <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
-                        <div class="dropdownMenu">
-                            <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
-                            <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
+    return (
+        <div className="UserSettingsPage">
+            <section className="loginheader">
+                <div className="MasterHeader">
 
-                        </div>
-                    </div>
-                  <ul>
-                      <li> <a href="/login">Login</a> </li>
-                      <li> <a href="/">Home</a> </li>
+                <DropDownMenu></DropDownMenu>
 
-                  </ul>
+                <ul>
+                    <li> <a href="/login">Login</a> </li>
+                    <li> <a href="/">Home</a> </li>
+
+                </ul>
               </div>
               <h1>User Settings</h1>
 

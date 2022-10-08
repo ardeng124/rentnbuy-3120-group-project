@@ -4,9 +4,20 @@ import Stack from '@mui/material/Stack';
 
 //Need A button that says register to go to a register page
 //instead of the initial login page
-const SignInForm = ({updateFn}) => {
+const SignUpForm = ({updateFn}) => {
 
-    const initialState = {username: '', password: ''}
+    const initialState = {
+        firstName: '',
+        lastName: '',
+        emailAddress: '',
+        phoneNumber: '',
+        username: '', 
+        password: '',
+        repeatPassword: '',
+        birthday: '',
+        age: '',
+        gender: ''
+    }
 
     const [formInfo, setFormInfo] = useState(initialState)
 
@@ -17,14 +28,40 @@ const SignInForm = ({updateFn}) => {
             setFormInfo({...formInfo, username: event.target.value})
         } else if (name === "password") {
             setFormInfo({...formInfo, password: event.target.value})
+        } else if (name === "repeatPassword") {
+            setFormInfo({...formInfo, repeatPassword: event.target.value})
+        } else if (name === "birthday") {
+            //Entered Birth Date
+            setFormInfo({...formInfo, birthday: event.target.value})
+            
+            //Age of User
+            const str = event.target.value
+            const age = new Date().getFullYear() - str.substring(0, 4)
+            setFormInfo({...formInfo, age: age})
+        } else if (name === "firstName") {
+            setFormInfo({...formInfo, firstName: event.target.value})
+        } else if (name === "lastName") {
+            setFormInfo({...formInfo, lastName: event.target.value})
+        } else if (name === "emailAddress") {
+            setFormInfo({...formInfo, emailAddress: event.target.value})
+        } else if (name === "phoneNumber") {
+            setFormInfo({...formInfo, phoneNumber: event.target.value})
+        } else if (name === "gender") {
+            setFormInfo({...formInfo, gender: event.target.value})
         }
     }
 
     const formHandler = (event) => {
+        console.log("password", formInfo.password != formInfo.repeatPassword)
         event.preventDefault()
-        console.log("Form submitted: ", formInfo)
-        updateFn(formInfo)
-        // setFormInfo(initialState)
+        if (formInfo.password === formInfo.repeatPassword) {
+            console.log("Form submitted: ", formInfo)
+            updateFn(formInfo)
+            // setFormInfo(initialState)
+        } else {
+            //Error Message
+            console.log("Insert Error Handling Messages")
+        }
     }
 
     return (
@@ -32,8 +69,10 @@ const SignInForm = ({updateFn}) => {
             <form onSubmit={formHandler}>
                 <fieldset>
                     <legend> Personal details</legend>
-                    <input className="input" type="text" placeholder="Full name" name="fullname" onChange={updateField} required/>
-                    <input className="input" type="email" placeholder="Email" name="email" onChange={updateField} required/>
+                    <input className="input" type="text" placeholder="First name" name="firstName" onChange={updateField} required/>
+                    <input className="input" type="text" placeholder="Last name" name="lastName" onChange={updateField} required/>
+                    <input className="input" type="email" placeholder="Email" name="emailAddress" onChange={updateField} required/>
+                    <input className="input" type="tel" placeholder="Phone Number" name="phoneNumber" onChange={updateField} required/>
                 </fieldset>
 
                 <input className="input" type="text" placeholder="Enter Username" name="username" onChange={updateField} required/>
@@ -42,39 +81,18 @@ const SignInForm = ({updateFn}) => {
                 
                 {/* Age */}
                 <label htmlFor="start">Birthday: </label>
+                <input type="date" id="start" name="birthday" min="1901-01-01" max="2022-12-31" onChange={updateField} required/>
 
-                <input type="date" id="start" name="trip-start"
-                min="1901-01-01" max="2022-12-31"/>
-
-
-                {/* Gender */}
-                {/* <fieldset>
-                    <div>
-                        <input type="checkbox" id="male" name="gender" value="Male" />
-                        <label for="male">Male</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="female" name="gender" value="Female" />
-                        <label for="female">Female</label>
-                    </div>
-                    <div>
-                    <label className="label" htmlFor="otherGender"> Other: </label>
-                    <input className="input" type="text" placeholder="Enter Gender" name="otherGender" onChange={updateField} required/>
-                    </div>
-                </fieldset> */}
-
-                {/* Phone Number - Not working as intended */}
-                {/* <label for="phone">Phone Number:</label>
-
-                <input type="tel" id="phone" name="phone"
-                pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}"
-                placeholder="Enter Phone Number"
-                required/>
-
-                <small>Format: 1234-567-890 </small> */}
+                <label htmlFor="start">Gender: </label>
+                <select name="gender" placeholder="Type to search" onChange={updateField} required>
+                    <option disabled={true} value="">--Choose a option--</option>
+                    <option value="Other">Other</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
 
                 {/* Address */}
-                {/* <div class="form-group">
+                <div class="form-group">
                     <input type="street" 
                         class="form-control" 
                         id="autocomplete" 
@@ -97,16 +115,11 @@ const SignInForm = ({updateFn}) => {
                         id="inputZip" 
                         placeholder="Zip"/>
                     
-                    <input type="county" 
-                        class="form-control" 
-                        id="inputCounty" 
-                        placeholder="County"/>
-                    
                     <input type="country" 
                         class="form-control" 
                         id="inputCountry" 
                         placeholder="Country"/>
-                    </div> */}
+                    </div>
 
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>
@@ -118,4 +131,4 @@ const SignInForm = ({updateFn}) => {
     )
 }
 
-export default SignInForm
+export default SignUpForm

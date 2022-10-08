@@ -2,29 +2,12 @@ const models = require('../models')
 
 const User = require('../models/user')
 const Session = require('../models/session')
-/* Create a new session for a user */
-const createSession = async (request, response) => {
 
-    const session = new models.Session({
-        userId: request.body.username,
-    })
-
-    const returned = await session.save()
-        .catch((err) => {
-            response.json({"status": "username taken"})
-        })
-
-    if (returned) {
-        if (session._id) {
-            response.json({
-                status: "success",
-                username: returned.username,
-                token: returned._id
-            })
-        }
-    }
-}
-
+/**
+ * Creates a new user and establishes a new session for the user
+ * @param {request} request 
+ * @param {response} response 
+ */
 const createUser = async(request, response)  => {
     const body = request.body
     const user = new User ({
@@ -111,4 +94,4 @@ const existingUser = async (request, response) => {
 }
 
 //Exporting all the functions
-module.exports = { validUser, getUser, createSession, existingUser, createUser }
+module.exports = { validUser, getUser, existingUser, createUser }

@@ -41,7 +41,7 @@ const SignInForm = ({updateFn}) => {
                 <input className="input" type="password" placeholder="Repeat Password" name="repeatPassword" onChange={updateField} required/>
                 
                 {/* Age */}
-                <label for="start">Birthday: </label>
+                <label htmlFor="start">Birthday: </label>
 
                 <input type="date" id="start" name="trip-start"
                 min="1901-01-01" max="2022-12-31"/>

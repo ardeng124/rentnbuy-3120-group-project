@@ -19,6 +19,7 @@ function UserView() {
                 <div className='dropDownMaster'>
                         <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
                         <div class="dropdownMenu">
+                            <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>

@@ -57,7 +57,7 @@ const Login = () => {
       if (response.data.status === "user does not exist") {
         setErrorMessages({name: "uname", message: "Your Username or password is incorrect!"})
       } else {
-        console.log("A New User has been created!")
+        console.log("A User has logged in!")
         logInTracker = true;
         setErrorMessages({name: "uname", message: ""})
         localStorage.setItem('token', response.data.token)

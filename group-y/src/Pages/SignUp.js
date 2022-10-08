@@ -91,7 +91,7 @@ const SignIn = () => {
       <section className="loginheader">
       <div className='MasterHeader'>
         <ul>
-            <li><a class="active" href="/login">Login</a></li>
+            <li><a className="active" href="/login">Login</a></li>
             <li><a  href="/">Home</a></li>
         </ul>
         </div>

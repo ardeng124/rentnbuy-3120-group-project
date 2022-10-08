@@ -30,7 +30,8 @@ function AccountDetails() {
                 <div className="MasterHeader">
                     <div className='dropDownMaster'>
                         <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
-                        <div class="dropdownMenu">
+                        <div className="dropdownMenu">
+                            <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
@@ -45,13 +46,13 @@ function AccountDetails() {
 
                 <div className="miniNavBar">
                     <ul>
+                        <li> <a href="/userview">Profile</a> </li>
                         <li> <a href="/settings">Settings</a> </li>
-                        <li> <a className="active" href="/userdetails">Details</a> </li>
-                        <li> <a href="/userview">View</a> </li>
+                        <li> <a className="active" href="/userdetails">Details</a> </li>    
                     </ul>
                 </div>
             </section>
-            <section class="loginBox">
+            <section className="loginBox">
                 <div className="formContainer">
                     <br></br>
                     <form className="border" onSubmit={formHandler}>

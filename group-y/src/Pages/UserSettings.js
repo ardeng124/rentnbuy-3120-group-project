@@ -33,6 +33,7 @@ function UserSettings() {
                 <div className='dropDownMaster'>
                         <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
                         <div class="dropdownMenu">
+                            <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                             <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
@@ -49,9 +50,9 @@ function UserSettings() {
 
               <div className="miniNavBar">
                   <ul>
+                      <li> <a href="/userview">Profile</a> </li>
                       <li> <a className="active" href="/settings"> Settings</a> </li>
                       <li> <a href="/userdetails">Details</a> </li>
-                      <li> <a href="/userview">View</a> </li>
                   </ul>
               </div>
           </section>

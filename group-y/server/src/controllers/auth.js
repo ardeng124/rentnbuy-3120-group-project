@@ -1,27 +1,34 @@
 const models = require('../models')
 
-/* Create a new session for a user */
-const createSession = async (request, response) => {
+const User = require('../models/user')
+const Session = require('../models/session')
 
-    const session = new models.Session({
-        username: request.body.username,
-        password: request.body.password
+/**
+ * Creates a new user and establishes a new session for the user
+ * @param {request} request 
+ * @param {response} response 
+ */
+const createUser = async(request, response)  => {
+    const body = request.body
+    const user = new User ({
+        username: body.username, 
+        firstName: body.firstName, 
+        lastName: body.lastName, 
+        passwordHash: body.password, 
+        image: "", //TO DO GridFS, 
+        age: body.age, 
+        isAdmin: false, 
+        phoneNumber: body.phoneNumber, 
+        emailAddress: body.emailAddress, 
+        location: body.location,
     })
-
-    const returned = await session.save()
-        .catch((err) => {
-            response.json({"status": "username taken"})
-        })
-
-    if (returned) {
-        if (session._id) {
-            response.json({
-                status: "success",
-                username: returned.username,
-                token: returned._id
-            })
-        }
-    }
+    const savedUser = await user.save()
+    console.log(savedUser)
+    const session = new Session({
+        userId: savedUser.id
+    })
+    const savedSession = await session.save()
+    response.status(201).json(savedSession)
 }
 
 
@@ -87,4 +94,4 @@ const existingUser = async (request, response) => {
 }
 
 //Exporting all the functions
-module.exports = { validUser, getUser, createSession, existingUser }
+module.exports = { validUser, getUser, existingUser, createUser }

@@ -1,15 +1,18 @@
 const mongoose = require('mongoose')
 
 const itemSchema = new mongoose.Schema({
-    rating: Number,
-    price: Number, 
-    reviews: {type: mongoose.Types.ObjectId, ref: 'Reviews'},
-    categoryId: {type: mongoose.Types.ObjectId, ref: 'Category'},
-    location: String, 
-    AgeRating: Number, 
-    timestamp: {type: Date, default: Date.now},
-    userId: {type: mongoose.Types.ObjectId, ref: 'Session'}
-  },
+        rating: Number,
+        price: Number, 
+        creatorId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        reviews: {type: mongoose.Types.ObjectId, ref: 'Reviews'},
+        categoryId: {type: mongoose.Types.ObjectId, ref: 'Category'},
+        location: String, 
+        ageRating: Number, 
+        timestamp: {type: Date, default: Date.now},
+    },
   {
     toJSON: {virtuals: true},
     toObject: {virtuals: true}

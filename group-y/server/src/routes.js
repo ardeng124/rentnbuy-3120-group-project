@@ -15,7 +15,7 @@ router.post('/auth/register', auth.createUser)
 router.get('/auth/', auth.getUser)
 
 //Login functionality - Extended Functionality
-router.post('/auth/login', auth.existingUser)
+router.post('/auth/login', auth.loginUser)
 
 /* GET conversations returns a list of all current conservations */
 router.get('/api/conversations', conv.getConversations)

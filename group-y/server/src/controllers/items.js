@@ -15,6 +15,7 @@ const addItems = async(request, response) =>{
         creatorId: user.id,
         location: body.location, 
         AgeRating: body.ageRating, 
+        description: body.description, 
         timestamp: new Date(),
     })
     const savedItem = await item.save()

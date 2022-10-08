@@ -11,6 +11,7 @@ const itemSchema = new mongoose.Schema({
         categoryId: {type: mongoose.Types.ObjectId, ref: 'Category'},
         location: String, 
         ageRating: Number, 
+        description: String, 
         timestamp: {type: Date, default: Date.now},
     },
   {

@@ -3,14 +3,14 @@ const auth = require('./controllers/auth')
 const conv = require('./controllers/conversations')
 const messages = require('./controllers/comments')
 const items = require('./controllers/items')
-
+const reviews = require('./controllers/reviews')
 const router = express.Router()
  
 router.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
 
-router.post('/auth/register', auth.createSession)
+router.post('/auth/register', auth.createUser)
 
 router.get('/auth/', auth.getUser)
 
@@ -35,6 +35,12 @@ router.get('/api/conversations/:id/:msgid', messages.getMessage)
 /* DELETE to message URL to delete the message */
 router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 
+/* GET a list of all items */
 router.get('/api/items', items.getItems)
-
+/* POST an item */
+router.post('/api/items', items.addItems)
+/* GET all reviews */
+router.get('/api/reviews', reviews.getReviews)
+/* POST a review */
+router.post('/api/reviews', reviews.addReview)
 module.exports = router 

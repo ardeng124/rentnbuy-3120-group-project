@@ -1,27 +1,11 @@
 const mongoose = require('mongoose')
 const config = require('../config')
-const Profile = require('./profile')
+const User = require('./user')
 const Item = require('./item')
 const Category = require('./category')
 const Review = require('./review')
-//Password Field added - Allow for Login of user. 
-//Cross Device Login extended feature
-//Username must be unique
-//Password does not
-const sessionSchema = new mongoose.Schema({
-  username: {type: String, unique: true},
-  password: {type: String, unique: false}
-})
+const Session = require('./session')
 
-sessionSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = document._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
-
-const Session = mongoose.model('Session', sessionSchema)
 
 const conversationSchema = new mongoose.Schema({
     title: String,
@@ -85,7 +69,7 @@ module.exports = {
   Conversation, 
   Message, 
   initDB, 
-  Profile, 
+  User, 
   Item,
   Category,
   Review

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const categorySchema = new mongoose.Schema({
-    Image: String, 
-    Name: String, 
-    Creator: {type: mongoose.Types.ObjectId, ref: 'Session'},
+    image: String, 
+    name: String, 
+    creator: {type: mongoose.Types.ObjectId, ref: 'User'},
   },
   {
     toJSON: {virtuals: true},

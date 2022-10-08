@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const reviewSchema = new mongoose.Schema({
-    user: {type: mongoose.Types.ObjectId, ref: 'Profile'},
+    creatorId: {type: mongoose.Types.ObjectId, ref: 'User'},
     text: String, 
     timestamp: {type: Date, default: Date.now}, 
     usersWhoHaveVoted: { type : Array , "default" : [] },

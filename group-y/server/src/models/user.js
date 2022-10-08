@@ -3,10 +3,13 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
     username: {type: String, unique: true},
     password: {type: String, unique: false},
+    firstName: String,
     lastName: String, 
     passwordHash: String, 
     image: String, //TO DO GridFS, 
     age: Number, 
+    birthday: String,
+    gender: String,
     isAdmin: Boolean, 
     phoneNumber: String, 
     emailAddress: String, 

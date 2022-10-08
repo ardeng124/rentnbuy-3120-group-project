@@ -17,12 +17,29 @@ const SignUpForm = ({updateFn}) => {
         birthday: '',
         age: '',
         gender: ''
+        // location: {
+        //     street: '',
+        //     city: '',
+        //     state: '',
+        //     zipCode: '',
+        //     country: ''
+        // }
     }
+
+    // const location = {
+    //     street: '',
+    //     city: '',
+    //     state: '',
+    //     zipCode: '',
+    //     country: ''
+    // }
 
     const [formInfo, setFormInfo] = useState(initialState)
 
+    // const [locationformInfo, setLocationFormInfo] = useState(location)
+
     const updateField = (event) => {
-        // which input element is this
+        //Assign Input Elements to each attributes 
         const name = event.target.attributes.name.value
         if (name === "username") {
             setFormInfo({...formInfo, username: event.target.value})
@@ -48,6 +65,16 @@ const SignUpForm = ({updateFn}) => {
             setFormInfo({...formInfo, phoneNumber: event.target.value})
         } else if (name === "gender") {
             setFormInfo({...formInfo, gender: event.target.value})
+        } else if (name === "street") {
+            setFormInfo({...formInfo, street: event.target.value})
+        } else if (name === "city") {
+            setFormInfo({...formInfo, city: event.target.value})
+        } else if (name === "zipCode") {
+            setFormInfo({...formInfo, zipCode: event.target.value})
+        } else if (name === "state") {
+            setFormInfo({...formInfo, state: event.target.value})
+        } else if (name === "country") {
+            setFormInfo({...formInfo, country: event.target.value})
         }
     }
 
@@ -95,29 +122,28 @@ const SignUpForm = ({updateFn}) => {
                 <div class="form-group">
                     <input type="street" 
                         class="form-control" 
-                        id="autocomplete" 
+                        id="street" 
                         pattern="[A-Za-z]"
                         placeholder="Street"/>
-        
                     
                     <input type="city" 
                         class="form-control" 
-                        id="inputCity" 
+                        id="city" 
                         placeholder="City"/>
                     
                     <input type="state" 
                         class="form-control" 
-                        id="inputState" 
+                        id="state" 
                         placeholder="State"/>
                     
                     <input type="zip" 
                         class="form-control" 
-                        id="inputZip" 
+                        id="zipCode" 
                         placeholder="Zip"/>
                     
                     <input type="country" 
                         class="form-control" 
-                        id="inputCountry" 
+                        id="country" 
                         placeholder="Country"/>
                     </div>
 

@@ -11,6 +11,7 @@ const Session = require('../models/session')
  * @param {response} response 
  */
 const createUser = async(request, response)  => {
+    console.log("request", request)
     const body = request.body
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
@@ -21,6 +22,8 @@ const createUser = async(request, response)  => {
         passwordHash: passwordHash, 
         image: "", //TO DO GridFS, 
         age: body.age, 
+        birthday: body.birthday,
+        gender: body.gender,
         isAdmin: false, 
         phoneNumber: body.phoneNumber, 
         emailAddress: body.emailAddress, 

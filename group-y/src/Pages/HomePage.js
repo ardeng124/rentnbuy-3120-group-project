@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
+import axios from "axios"
 
 import {
     BrowserRouter as Router,
@@ -9,22 +10,34 @@ import {
 import NewestListingItem from '../Components/NewestListingItem';
   var loggedIn = true
   var token = localStorage.getItem('token') // Used to display the logout button if signed in if (token){" "}
-//UNCOMMENT THIS
-  // if (token) { 
-//     loggedIn = true
-// } else {
-//     loggedIn = false
-// }
+  if (token) { 
+    loggedIn = true
+} else {
+    loggedIn = false
+}
 const HomePage = () => {
     const navigate = useNavigate()
 
     // const [convos, setConversations] = useState([])
 
     const [error, setError] = useState(false)
-
+    const [newListings, setListings] = useState([])
+    useEffect(() => {   
+        axios.get("http://localhost:8102/api/items/").then((response) => {
+            console.log(response)
+            let arr = response.data.items.slice(3)
+            setListings(response.data.items)
+            // console.log(response.data.items)
+            
+        })
+    }, [])
+    
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
         navigate("/userview")
+    }
+    const handleLoginButtonClicked = (event) => {
+        navigate("/login")
     }
     
         return (
@@ -34,9 +47,7 @@ const HomePage = () => {
                         {loggedIn && <DropDownMenu></DropDownMenu>}
 
                         <ul>
-                            <li>
-                                <a href="/login">Login</a>
-                            </li>
+                            
                             <li>
                                 <a className="active" href="/">
                                     Home
@@ -50,6 +61,9 @@ const HomePage = () => {
                     </div>
                 </section>
                 <section className="homepageMainContent">
+                    {!loggedIn && <p> You are browsing as a guest</p>}
+                    {!loggedIn && <button className="appBtn" onClick={handleLoginButtonClicked}>Login</button>}
+
                     {loggedIn && (
                         <div className="homePageContainer">
                             <h3> Your Feed</h3>
@@ -58,7 +72,13 @@ const HomePage = () => {
                     <div className="homePageContainer">
                         <h3> Newest Listings</h3>
                         <div className="itemContainer">
-                           
+                            {newListings.map((x) => (
+                                <NewestListingItem
+                                    itemName={x.name}
+                                    itemDesc={x.description}
+                                    itemPrice={x.price}
+                                ></NewestListingItem>
+                            ))}
                         </div>
                     </div>
                 </section>

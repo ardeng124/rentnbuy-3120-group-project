@@ -17,26 +17,30 @@ router.get('/auth/', auth.getUser)
 //Login functionality - Extended Functionality
 router.post('/auth/login', auth.loginUser)
 
-/* GET conversations returns a list of all current conservations */
-router.get('/api/conversations', conv.getConversations)
+// /* GET conversations returns a list of all current conservations */
+// router.get('/api/conversations', conv.getConversations)
 
-/* POST to conversations creates a new conversation */
-router.post('/api/conversations', conv.createConversation)
+// /* POST to conversations creates a new conversation */
+// router.post('/api/conversations', conv.createConversation)
 
-/* GET a conversation returns the list of the last N conversations */
-router.get('/api/conversations/:id', messages.getMessages)
+// /* GET a conversation returns the list of the last N conversations */
+// router.get('/api/conversations/:id', messages.getMessages)
 
-/* POST to a conversation to create a new message */
-router.post('/api/conversations/:id', messages.createMessage)
+// /* POST to a conversation to create a new message */
+// router.post('/api/conversations/:id', messages.createMessage)
 
-/* GET a message URL to get details of a message */
-router.get('/api/conversations/:id/:msgid', messages.getMessage)
+// /* GET a message URL to get details of a message */
+// router.get('/api/conversations/:id/:msgid', messages.getMessage)
 
-/* DELETE to message URL to delete the message */
-router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
+// /* DELETE to message URL to delete the message */
+// router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 
 /* GET a list of all items */
 router.get('/api/items', items.getItems)
+
+/* GET a list of N items */
+// router.get("/api/items/count", items.getXItems)
+
 /* POST an item */
 router.post('/api/items', items.addItems)
 /* GET all reviews */

@@ -10,6 +10,7 @@ const addItems = async(request, response) =>{
     const body = request.body 
     const user = await User.findById(body.creatorId)
     const item = new Items({
+        name: body.name,
         rating: body.rating,
         price: body.price, 
         creatorId: user.id,
@@ -23,7 +24,16 @@ const addItems = async(request, response) =>{
     response.json(savedItem)
 }
 
+// const getXItems = async (request, response) => {
+//     const {count} = request.body
+//     console.log(count)
+//     var items = await Items.find({})
+//     items = items.slice(2)
+//     response.json({ items })
+// }
+
 module.exports = {
     getItems, 
-    addItems
+    addItems,
+    // getXItems
 }

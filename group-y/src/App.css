@@ -312,3 +312,48 @@ body, html {
   text-align: left;
   margin-left: 20px;
 }
+.homePageContainer{
+  background-color: #E3EDE9;
+  margin: auto;
+  width:85%;
+  padding: 20px;
+  margin-bottom: 80px;
+  border-radius: 20px;
+}
+.homepageMainContent h3 {
+  font-weight: 400;
+  font-size:30px;
+}
+.newestListingItem{
+  padding: 35px;
+  margin: 18px;
+  height: auto;
+  display: flex;
+  background-color: #D9D9D9;
+  border-radius: 28px;
+  /* width:30%; */
+  flex: 1 1 18%;
+  flex-shrink: 1;
+  max-width: 18%;
+}
+.leftNLR {
+  margin-left:30px;
+}
+.NLRimagePlaceholder {
+  background-color: #DFE1DD;
+  border-radius: 5px;
+  padding: 85px;
+  /* margin: 15px; */
+  padding: 15px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #6B9080;
+}
+.newestListingItem h3 {
+  font-size:20pt
+}
+.itemContainer{
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}

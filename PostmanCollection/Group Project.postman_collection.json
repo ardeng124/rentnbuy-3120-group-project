@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "867802d4-086d-4e2a-8ba0-d5376e9d6081",
+		"name": "Group Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/items",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"rating\": 100,\n        \"price\": 2120000, \n        \"creatorId\": \"6340bd06aa1b7b0010b5174f\",\n        \"location\": \"27 Merinda Avenue, Pymble\", \n        \"ageRating\": 18\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8102/api/items",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"api",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8102/api/items",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"api",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/auth/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"anubhav0\",\n    \"password\": \"password\",\n    \"image\": \"\",\n    \"age\": 20,\n    \"phoneNumber\": \"0444444444\",\n    \"emailAddress\": \"anubhav@email.com\",\n    \"location\": \"27 Mq Street, Macquarie\",\n    \"isAdmin\": false,\n    \"favourites\": [],\n    \"reviews\": [],\n    \"items\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8102/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/reviews",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "/api/reviews",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"creatorId\": \"6340bd06aa1b7b0010b5174f\",\n    \"text\": \"This is an amazing product\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8102/api/reviews",
+					"host": [
+						"localhost"
+					],
+					"port": "8102",
+					"path": [
+						"api",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

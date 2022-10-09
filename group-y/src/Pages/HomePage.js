@@ -9,8 +9,8 @@ import {
   } from "react-router-dom"
 import NewestListingItem from '../Components/NewestListingItem';
   var loggedIn = true
-  var token = localStorage.getItem('token') // Used to display the logout button if signed in if (token){" "}
-  if (token) { 
+var token = document.cookie.substring(6) // Used to display the logout button if signed in if (token){" "}
+if (token) { 
     loggedIn = true
 } else {
     loggedIn = false

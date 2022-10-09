@@ -1,10 +1,10 @@
 import LoginForm from "../Components/LogInForm.js";
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 import { useNavigate } from "react-router-dom";
 import authProfile from "../authProfile.js";
 import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
+import AxiosService from "../AxiosService"
 
 //Tracking Logged in status
 //Could add a if check -> which checks for a token
@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   //Go to Conversations Page if logged in already
-  const token = localStorage.getItem('token');
+  const token = document.cookie.substring(6)
 
   //If the token does not exist, set logInTracker to False
   if (!token) {
@@ -32,15 +32,25 @@ const Login = () => {
 
   let location = localStorage.getItem('location');
 
-  //Goes straight to /conversations if logged in (if token exists)
+  //Goes straight to / if logged in (if token exists)
   useEffect(() => {
+  //  AxiosService.validateToken()
+  //     .then(response => {
+  //       console.log(response)
+  //       if(response == 'success'){
+  //         logInTracker= true
+  //         navigate("/")
+  //       }
+  //     })
+
+   
     if (token) {
       logInTracker = true;
       console.log("Token Exists!", logInTracker)
       if (location !== "/") {
         //Do Nothing
       } else if(!logInTracker) {
-        navigate("/conversations");
+        navigate("/");
       }
     }
   }, [])
@@ -60,8 +70,10 @@ const Login = () => {
         console.log("A User has logged in!")
         logInTracker = true;
         setErrorMessages({name: "uname", message: ""})
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('username', response.data.username)
+        var expires = new Date(Date.now() + 86400 * 1000).toUTCString()
+        document.cookie = `token=${response.data.token}; SameSite=Lax` + expires + ";path=/;"
+        localStorage.setItem("username", response.data.username)
+        // localStorage.setItem('token', response.data.token)
         navigate("/")
       }
     })
@@ -69,10 +81,8 @@ const Login = () => {
 
   //User can log out 
   const logOut = () => {
-    localStorage.clear()
-    logInTracker = false
-    navigate("/")
-    console.log("Logging Out...")
+    AxiosService.logOut()
+    
   }
 
   //Error message created

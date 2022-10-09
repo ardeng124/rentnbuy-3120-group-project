@@ -2,6 +2,7 @@
 //if we can fix this error this can be used...
 
 import { useNavigate } from "react-router-dom"
+import AxiosService from "../AxiosService"
 
 function DropDownMenu() {
 
@@ -12,7 +13,9 @@ function DropDownMenu() {
     }
     //TODO: do something with the future axios file here
      const handleLogOut = (event) => {
-         navigate("/login")
+        AxiosService.logOut().then(x => {
+            navigate("/login")
+        })
          
      }
 
@@ -24,7 +27,7 @@ function DropDownMenu() {
                 <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                 <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                 <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
-                <li className='dropDownLi'><button className="logOutBtn" onClick={handleLogOut}>Log out</button></li>
+                <li className='dropDownLi'><button className="logOutBtn" onClick={(handleLogOut)}>Log out</button></li>
 
             </div>
         </div>

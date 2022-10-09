@@ -67,7 +67,7 @@ const getUser = async (request, response) => {
         const token = authHeader.substring(6)
         try {
             // this will throw an error if token isn't of the right format
-            const match = await models.Session.findById(token)  
+            const match = await models.Session.findOne({token: token})  
             if (match) {
                 response.json({
                     status: "success",

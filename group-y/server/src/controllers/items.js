@@ -12,7 +12,7 @@ const addItems = async(request, response) =>{
     const item = new Items({
         rating: body.rating,
         price: body.price, 
-        creatorId: user.id,
+        creatorId: body.creatorId,
         location: body.location, 
         AgeRating: body.ageRating, 
         description: body.description, 

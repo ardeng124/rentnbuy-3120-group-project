@@ -12,6 +12,7 @@ body, html {
   background-color: #F6FFF8;
 }
 
+
 .App {
   text-align: center;
   flex-direction: column;
@@ -31,7 +32,7 @@ body, html {
 .loginpageHeading{
   color: #6B9080;
   margin:40px;
-  font-size:45px;
+  /* font-size:45px; */
   
 }
 .LoginPage h1{
@@ -47,7 +48,7 @@ body, html {
 }
 .loginBox{
   background-color: #E3EDE9;
-  width:30%;
+  width:45%;
   margin: auto; 
   border-radius: 20px;
   border:1px solid #a4c3b285;
@@ -56,7 +57,7 @@ body, html {
   background-color:var(--header);
   margin-bottom: 50px;
   margin-top: 0px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 .formContainer{
   margin:auto
@@ -103,7 +104,7 @@ body, html {
   display: block;
   color: var(--text-colour);
   text-align: center;
-  padding: 24px 26px;
+  padding: 15px 20px;
   text-decoration: none;
   border-radius: 10px;
   margin-right: 10px;
@@ -130,7 +131,7 @@ body, html {
 .usrAccBtn {
   background-color: #D9D9D9;
   border-radius: 100%;
-  padding:35px;
+  padding:29px;
   margin:5px
 }
 .dropDownMaster{
@@ -154,7 +155,7 @@ body, html {
   z-index: 1;
   /* left:calc(2vw - 140px); */
   right:10px;
-  top:80px;
+  top:76px;
   /* left: 92vw; */
   /* top: 6%; */
   float:right;
@@ -203,7 +204,7 @@ body, html {
   background-color:var(--header);
   margin-bottom: 50px;
   margin-top: 0px;
-  padding-bottom: 0px;
+  /* padding-bottom: 0px; */
 }
 .formContainer label {
   display: inline !important;
@@ -220,7 +221,7 @@ body, html {
   background-color: var(--header);
   margin-bottom: 50px;
   margin-top: 0px;
-  padding-bottom: 0px;
+  /* padding-bottom: 0px; */
 }
 .AccountDetailsPage .appBtn {
   width: auto;
@@ -256,7 +257,7 @@ body, html {
 }
 .ProfileColMin h3 {
   font-weight: 500;
-  font-size: 22pt;
+  font-size: 19pt;
   margin: 20px;
 }
 .ProfileColLarge{
@@ -315,8 +316,9 @@ body, html {
 .homePageContainer{
   background-color: #E3EDE9;
   margin: auto;
-  width:85%;
-  padding: 20px;
+  width:90%;
+  padding: 10px;
+  padding-top: 20px;
   margin-bottom: 80px;
   border-radius: 20px;
 }
@@ -326,7 +328,7 @@ body, html {
 }
 .newestListingItem{
   padding: 35px;
-  margin: 18px;
+  margin: 9px;
   height: auto;
   display: flex;
   background-color: #D9D9D9;

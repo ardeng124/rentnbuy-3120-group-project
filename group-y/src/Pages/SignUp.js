@@ -98,7 +98,7 @@ const SignIn = () => {
       <h1>Welcome to RentNBuy</h1>
       </section>
       <section className="loginBox">
-        <h1 className="loginpageHeading">Signup</h1>
+        <h2 className="loginpageHeading">Signup</h2>
         {logInTracker ? <div>Your account '{localStorage.getItem('username')}' has successfully been registered!</div> : <SignUpForm updateFn={createNewUser}/>}
         {logInTracker && <Stack spacing={2} alignItems="center"> <button className="appBtn" onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
         {renderErrorMessage("uname")}

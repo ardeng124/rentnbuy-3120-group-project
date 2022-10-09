@@ -98,7 +98,7 @@ const Login = () => {
       <h1>Welcome to RentNBuy</h1>
       </section>
       <section className="loginBox">
-      <h1 className="loginpageHeading">Login</h1>
+      <h2 className="loginpageHeading">Login</h2>
       {logInTracker ? <div>{localStorage.getItem('username')} has successfully logged in!</div> : <LoginForm updateFn={createNewUser}/>}
       {logInTracker && <Stack spacing={2} alignItems="center"> <button onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
       {renderErrorMessage("uname")}

@@ -11,8 +11,16 @@ const Session = require('../models/session')
  * @param {response} response 
  */
 const createUser = async(request, response)  => {
-    console.log("request", request)
     const body = request.body
+    const existingUser = await User.findOne({
+        "username":body.username
+    })
+   
+    if(existingUser){
+        return response.status(409).json({
+            error: 'username taken'
+        })
+    }
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
     const user = new User ({
@@ -86,17 +94,17 @@ const getUser = async (request, response) => {
  *   return the username if found, false if not
 */
 const validUser = async (request) => {
-    
-    const authHeader = request.get('Authorization')
-    if (authHeader && authHeader.toLowerCase().startsWith('basic ')) {
-        const token = authHeader.substring(6)        
-        const match = await models.Session.findOne({_id: token})  
-
-        if (match) {
-            return match._id
+    const token = getToken(request)
+    try{
+        const decodedToken = jwt.verify(token, process.env.SECRET)
+        if (!decodedToken.id) {
+            return false
+        }else{
+            return true
         }
-    } 
-    return false
+    }catch(err){
+        return false
+    }
 }
 
 //Extended Functionality (Users can log in with exisiting credentials)
@@ -119,6 +127,14 @@ const existingUser = async (request, response) => {
     } else {
         response.json({status: "user does not exist"})
     }
+}
+
+const getToken = (request) => {
+    const auhorisation = request.get('Authorization')
+    if (auhorisation && auhorisation.toLowerCase().startsWith('bearer ')) {
+        return auhorisation.substring(7)
+    }
+    return null
 }
 
 //Exporting all the functions

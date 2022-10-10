@@ -1,20 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
-import axios from "axios"
+import AxiosService from '../AxiosService';
 
 import {
     BrowserRouter as Router,
     Routes, Route, Link
   } from "react-router-dom"
 import NewestListingItem from '../Components/NewestListingItem';
-  var loggedIn = true
+
 var token = document.cookie.substring(6) // Used to display the logout button if signed in if (token){" "}
-if (token) { 
-    loggedIn = true
-} else {
-    loggedIn = false
-}
+var loggedIn = false
 const HomePage = () => {
     const navigate = useNavigate()
 
@@ -23,12 +19,19 @@ const HomePage = () => {
     const [error, setError] = useState(false)
     const [newListings, setListings] = useState([])
     useEffect(() => {   
-        axios.get("http://localhost:8102/api/items/").then((response) => {
+        AxiosService.validateToken()
+        .then(response => {
             console.log(response)
-            let arr = response.data.items.slice(3)
-            setListings(response.data.items)
+            if(response == 'success'){
+            loggedIn= true
+            navigate("/")
+            }
+      })
+        AxiosService.getItems().then(response => {
+            // console.log(response)
+            // let arr = response.slice(3)
+            setListings(response)
             // console.log(response.data.items)
-            
         })
     }, [])
     
@@ -44,7 +47,7 @@ const HomePage = () => {
             <div className="HomePage">
                 <section className="loginheader">
                     <div className="MasterHeader">
-                        {loggedIn && <DropDownMenu></DropDownMenu>}
+                        <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
 
                         <ul>
                             
@@ -55,7 +58,7 @@ const HomePage = () => {
                             </li>
                         </ul>
                         {loggedIn && (
-                            <h1>Welcome {localStorage.getItem("username")}</h1>
+                            <h1>Welcome {AxiosService.getUserName()}</h1>
                         )}
                         {!loggedIn && <h1>Welcome to RentNBuy</h1>}
                     </div>

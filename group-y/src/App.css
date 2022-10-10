@@ -52,6 +52,8 @@ body, html {
   margin: auto; 
   border-radius: 20px;
   border:1px solid #a4c3b285;
+  padding:10px;
+  padding-bottom:20px;
 }
 .loginheader{
   background-color:var(--header);
@@ -69,6 +71,17 @@ body, html {
   color: #747c78;
 
   display: block;
+  margin: auto;
+  margin-bottom:20px;
+  margin-top: 20px;
+}
+.formContainer .input1{
+  background-color: #CCE3DE;
+  border: 1px solid #a4c3b27d ;
+  border-radius: 10px;
+  color: #747c78;
+
+
   margin: auto;
   margin-bottom:20px;
   margin-top: 20px;
@@ -133,6 +146,14 @@ body, html {
   border-radius: 100%;
   padding:29px;
   margin:5px
+}
+
+.usrAccBtn2 {
+  background-color: #d8c9c9;
+  border-radius: 100%;
+  padding:29px;
+  margin:5px;
+
 }
 .dropDownMaster{
   list-style-type: none;

@@ -86,11 +86,11 @@ const SignUpForm = ({updateFn}) => {
                 
                 {/* Age */}
                 <label htmlFor="start">Birthday: </label>
-                <input type="date" id="start" name="birthday" min="1901-01-01" max="2022-12-31" onChange={updateField} required/>
-
+                <input className="input1" type="date" id="start" name="birthday" min="1901-01-01" max="2022-12-31" onChange={updateField} required/>
+                 <br></br>
                 {/* Gender */}
                 <label htmlFor="start">Gender: </label>
-                <select name="gender" placeholder="Type to search" onChange={updateField} required>
+                <select className = "input1" name="gender" placeholder="Type to search" onChange={updateField} required>
                     <option disabled={true} value="">--Choose a option--</option>
                     <option value="Other">Other</option>
                     <option value="Female">Female</option>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function FriendItemProfile(props) {
+const FriendItemProfile = (props) => {
     const {friendName} = props
 
     return <div className="FriendItemProfile">

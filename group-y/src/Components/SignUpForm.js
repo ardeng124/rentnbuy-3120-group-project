@@ -16,23 +16,9 @@ const SignUpForm = ({updateFn}) => {
         repeatPassword: '',
         birthday: '',
         age: '',
-        gender: ''
-        // location: {
-        //     street: '',
-        //     city: '',
-        //     state: '',
-        //     zipCode: '',
-        //     country: ''
-        // }
+        gender: '',
+        location: ''
     }
-
-    // const location = {
-    //     street: '',
-    //     city: '',
-    //     state: '',
-    //     zipCode: '',
-    //     country: ''
-    // }
 
     const [formInfo, setFormInfo] = useState(initialState)
 
@@ -65,16 +51,8 @@ const SignUpForm = ({updateFn}) => {
             setFormInfo({...formInfo, phoneNumber: event.target.value})
         } else if (name === "gender") {
             setFormInfo({...formInfo, gender: event.target.value})
-        } else if (name === "street") {
-            setFormInfo({...formInfo, street: event.target.value})
-        } else if (name === "city") {
-            setFormInfo({...formInfo, city: event.target.value})
-        } else if (name === "zipCode") {
-            setFormInfo({...formInfo, zipCode: event.target.value})
-        } else if (name === "state") {
-            setFormInfo({...formInfo, state: event.target.value})
-        } else if (name === "country") {
-            setFormInfo({...formInfo, country: event.target.value})
+        } else if (name === "address") {
+            setFormInfo({...formInfo, location: event.target.value})
         }
     }
 
@@ -110,6 +88,7 @@ const SignUpForm = ({updateFn}) => {
                 <label htmlFor="start">Birthday: </label>
                 <input type="date" id="start" name="birthday" min="1901-01-01" max="2022-12-31" onChange={updateField} required/>
 
+                {/* Gender */}
                 <label htmlFor="start">Gender: </label>
                 <select name="gender" placeholder="Type to search" onChange={updateField} required>
                     <option disabled={true} value="">--Choose a option--</option>
@@ -119,33 +98,7 @@ const SignUpForm = ({updateFn}) => {
                 </select>
 
                 {/* Address */}
-                <div class="form-group">
-                    <input type="street" 
-                        class="form-control" 
-                        id="street" 
-                        pattern="[A-Za-z]"
-                        placeholder="Street"/>
-                    
-                    <input type="city" 
-                        class="form-control" 
-                        id="city" 
-                        placeholder="City"/>
-                    
-                    <input type="state" 
-                        class="form-control" 
-                        id="state" 
-                        placeholder="State"/>
-                    
-                    <input type="zip" 
-                        class="form-control" 
-                        id="zipCode" 
-                        placeholder="Zip"/>
-                    
-                    <input type="country" 
-                        class="form-control" 
-                        id="country" 
-                        placeholder="Country"/>
-                    </div>
+                <input className="input" type="text" placeholder="Address" name="address" onChange={updateField} required/>
 
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>

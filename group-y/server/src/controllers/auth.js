@@ -93,18 +93,23 @@ const getUser = async (request, response) => {
  * validUser - check for a valid user via Authorization header
  *   return the username if found, false if not
 */
-const validUser = async (request) => {
-    const token = getToken(request)
-    try{
-        const decodedToken = jwt.verify(token, process.env.SECRET)
-        if (!decodedToken.id) {
-            return false
-        }else{
-            return true
+const validUser = async (request, response) => {
+    // const token = getToken(request)
+    const authHeader = request.get('Authorization')
+    if (authHeader && authHeader.toLowerCase().startsWith('basic ')) {
+        const token = authHeader.substring(6)
+        try{
+            const decodedToken = jwt.verify(token, process.env.SECRET)
+            if (!decodedToken.id) {
+                return response.json({status: "unregistered"})
+            }else{
+                return response.json({status: "success" })
+            }
+        }catch(err){
+            return response.json({status: "unregistered"})
         }
-    }catch(err){
-        return false
     }
+    return response.json({status: "unregistered"})
 }
 
 //Extended Functionality (Users can log in with exisiting credentials)
@@ -130,12 +135,13 @@ const existingUser = async (request, response) => {
 }
 
 const getToken = (request) => {
-    const auhorisation = request.get('Authorization')
-    if (auhorisation && auhorisation.toLowerCase().startsWith('bearer ')) {
-        return auhorisation.substring(7)
+    const authorisation = request.get('Authorization')
+    if (authorisation && authorisation.toLowerCase().startsWith('bearer ')) {
+        console.log(authorisation)
+        return authorisation.substring(7)
     }
     return null
 }
 
 //Exporting all the functions
-module.exports = { validUser, getUser, existingUser, createUser, loginUser }
+module.exports = { validUser, existingUser, createUser, loginUser }

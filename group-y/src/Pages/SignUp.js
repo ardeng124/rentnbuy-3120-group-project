@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SignUpForm from "../Components/SignUpForm.js";
 import Stack from '@mui/material/Stack';
 import button from '@mui/material/button';
+import AxiosService from "../AxiosService"
 
 //Tracking Logged in status
 //Could add a if check -> which checks for a token
@@ -13,14 +14,11 @@ let logInTracker = false;
 
 const SignIn = () => {
 
-  //Sets current location of the user to the page they are on
-  localStorage.setItem('location', window.location.pathname)
-
   //Defining Navigate functionality
   const navigate = useNavigate()
 
   //Go to Conversations Page if logged in already
-  const token = localStorage.getItem('token');
+  const token = AxiosService.getToken()
 
   //If the token does not exist, set logInTracker to False
   if (!token) {
@@ -29,44 +27,55 @@ const SignIn = () => {
     logInTracker = true;
   }
 
-  let location = localStorage.getItem('location');
-
-  //Goes straight to /conversations if logged in (if token exists)
+  //Goes straight to / if logged in (if token exists)
   useEffect(() => {
-    if (token) {
-      logInTracker = false;
-      console.log("token exists", logInTracker)
-      if (location !== "/") {
-        //Do Nothing
-        logInTracker = true;
-      } else if(!logInTracker) {
-        navigate("/");
-      }
-    }
-  })
+   AxiosService.validateToken()
+      .then(response => {
+        console.log(response)
+        if(response == 'success'){
+          logInTracker= true
+          navigate("/")
+        }
+      })
+  }, [])
 
   //Error Message State Variable
   const [errorMessages, setErrorMessages] = useState({});
 
   //Create new User Function
   const createNewUser = (newUser) => {
-
-    axios.post("http://localhost:8102/auth/register", newUser)
-    .then(response => {          
-      console.log("POST response", response)
-      if (response.data.status === "username taken") {
-        setErrorMessages({name: "uname", message: "Username already Exists!"})
+    AxiosService.register(newUser).then(response => {
+        console.log("POST response", response)
+      if (response.data.status === "user does not exist") {
+        setErrorMessages({name: "uname", message: "Your Username or password is incorrect!"})
       } else {
-        console.log("new user")
+        console.log("A User has logged in!")
         logInTracker = true;
         setErrorMessages({name: "uname", message: ""})
-        localStorage.setItem('user', response.data)
-        localStorage.setItem('token', response.data.token)
-        localStorage.setItem('username', response.data.username)
         navigate("/")
       }
     })
-  }
+}
+
+  //Create new User Function
+//   const createNewUser = (newUser) => {
+
+//     axios.post("http://localhost:8102/auth/register", newUser)
+//     .then(response => {          
+//       console.log("POST response", response)
+//       if (response.data.status === "username taken") {
+//         setErrorMessages({name: "uname", message: "Username already Exists!"})
+//       } else {
+//         console.log("new user")
+//         logInTracker = true;
+//         setErrorMessages({name: "uname", message: ""})
+//         localStorage.setItem('user', response.data)
+//         localStorage.setItem('token', response.data.token)
+//         localStorage.setItem('username', response.data.username)
+//         navigate("/")
+//       }
+//     })
+//   }
 
   //User can log out 
   const logOut = () => {
@@ -91,7 +100,6 @@ const SignIn = () => {
       <section className="loginheader">
       <div className='MasterHeader'>
         <ul>
-            <li><a className="active" href="/login">Login</a></li>
             <li><a  href="/">Home</a></li>
         </ul>
         </div>

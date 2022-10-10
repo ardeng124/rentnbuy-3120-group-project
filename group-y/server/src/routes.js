@@ -1,7 +1,5 @@
 const express = require('express')
 const auth = require('./controllers/auth')
-const conv = require('./controllers/conversations')
-const messages = require('./controllers/comments')
 const items = require('./controllers/items')
 const reviews = require('./controllers/reviews')
 const router = express.Router()
@@ -12,7 +10,7 @@ router.get('/', (request, response) => {
 
 router.post('/auth/register', auth.createUser)
 
-router.get('/auth/', auth.getUser)
+router.get('/auth/', auth.validUser)
 
 //Login functionality - Extended Functionality
 router.post('/auth/login', auth.loginUser)

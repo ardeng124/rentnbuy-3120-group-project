@@ -36,7 +36,7 @@ router.post('/auth/login', auth.loginUser)
 // router.delete('/api/conversations/:id/:msgid', messages.deleteMessage)
 
 /* GET a list of all items */
-router.get('/api/items', items.getItems)
+router.get('/api/items/:id?', items.getItems)
 
 /* GET a list of N items */
 // router.get("/api/items/count", items.getXItems)

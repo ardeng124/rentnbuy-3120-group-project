@@ -1,19 +1,33 @@
 const Items = require('../models/item')
 const User = require('../models/user')
+const Auth = require('./auth')
 
 const getItems = async (request, response) => {
-    const items = await Items.find({})
+    let id = request.params.id;
+
+    let items;
+    if(id){
+        items = await Items.find({
+            "_id":id
+        })
+    }else {
+        items = await Items.find({})
+    }
     response.json({items})
 }
 
 const addItems = async(request, response) =>{
     const body = request.body 
+    let result = await Auth.validUser(request)
+    if(!result){
+        response.sendStatus(401)
+    }
     const user = await User.findById(body.creatorId)
     const item = new Items({
         name: body.name,
         rating: body.rating,
         price: body.price, 
-        creatorId: user.id,
+        creatorId: body.creatorId,
         location: body.location, 
         AgeRating: body.ageRating, 
         description: body.description, 
@@ -24,16 +38,7 @@ const addItems = async(request, response) =>{
     response.json(savedItem)
 }
 
-// const getXItems = async (request, response) => {
-//     const {count} = request.body
-//     console.log(count)
-//     var items = await Items.find({})
-//     items = items.slice(2)
-//     response.json({ items })
-// }
-
 module.exports = {
     getItems, 
     addItems,
-    // getXItems
 }

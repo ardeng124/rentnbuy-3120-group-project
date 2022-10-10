@@ -36,8 +36,8 @@ const Login = () => {
   //Create new User Function
   const createNewUser = (newUser) => {
     AxiosService.login(newUser).then(response => {
-        console.log("POST response", response)
-      if (response.data.status === "user does not exist") {
+      console.log("hi", response)
+      if (response.data.error === "user does not exist") {
         setErrorMessages({name: "uname", message: "Your Username or password is incorrect!"})
       } else {
         console.log("A User has logged in!")

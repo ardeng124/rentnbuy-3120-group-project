@@ -55,8 +55,9 @@ const loginUser = async(request, response) => {
     console.log(user)
     const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
     if (!(user && passwordCorrect)) {
-        return response.status(401).json({
-          error: 'invalid username or password'
+        return response.json({
+          error: 'user does not exist',
+          status: 401
         })
     }
     const userForToken = {

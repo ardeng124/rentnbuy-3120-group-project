@@ -4,34 +4,46 @@
 import { useNavigate } from "react-router-dom"
 import AxiosService from "../AxiosService"
 
-function DropDownMenu() {
-
+const DropDownMenu = (props) => {
+    const {isLoggedIn} = props
     const navigate = useNavigate()
+
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
         navigate("/userview")
     }
     //TODO: do something with the future axios file here
      const handleLogOut = (event) => {
-        AxiosService.logOut().then(x => {
-            navigate("/login")
-        })
-         
+        AxiosService.logOut()
+            navigate("/")
+            window.location.reload(false);
      }
 
-    return (
-        <div className='dropDownMaster'>
-            <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
-            <div className="dropdownMenu">
-                <li className='dropDownLi'><a className='dropDownA' href='/userview'>Profile</a></li>
-                <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
-                <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
-                <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
-                <li className='dropDownLi'><button className="logOutBtn" onClick={(handleLogOut)}>Log out</button></li>
+     const handleLogInClicked = (event) => {
+        console.log("clicked on user icon")
+        navigate("/login")
+    }
 
-            </div>
-        </div>
-    )
+     if (isLoggedIn) {
+         return (
+             <div className='dropDownMaster'>
+                 <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
+                 <div className="dropdownMenu">
+                     <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
+                     <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
+                     <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
+                     <li className='dropDownLi'><button className="logOutBtn" onClick={(handleLogOut)}>Log out</button></li>
+     
+                 </div>
+             </div>
+         )
+
+     } else {
+        return(
+        <div className='dropDownMaster'>
+                 <li className='usrAccLi'> <button className='usrAccBtn2' onClick={handleLogInClicked}></button></li>
+             </div>
+     )}
 }
 
 export default DropDownMenu

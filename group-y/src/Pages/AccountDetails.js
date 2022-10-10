@@ -1,8 +1,21 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import React, {useState, useEffect} from 'react'
+import { useNavigate} from "react-router-dom"
+import AxiosService from '../AxiosService';
 import DropDownMenu from "../Components/DropDownMenu";
 
-function AccountDetails() {
+
+const AccountDetails = () => {
+    useEffect(() => {
+        AxiosService.validateToken()
+           .then(response => {
+             console.log(response)
+             if(response == 'success'){
+            
+             } else {
+                navigate("/")
+             }
+           })
+       }, [])
     const [formInfo, setFormInfo] = useState({ username: "", password: "" })
 
     const navigate = useNavigate()

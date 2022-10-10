@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import FriendItemProfile from "../Components/FriendItemProfile";
 import DropDownMenu from "../Components/DropDownMenu";
 
-function UserView() {
+const UserView = () => {
     
     const dummyInterests = ['Houses','Electronics','Random Categeory']
     const dummyFriends = ["Arden", "Anubhav", "Raffi","Nicholas"]

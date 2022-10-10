@@ -1,8 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
+import AxiosService from "../AxiosService"
 
-function UserSettings() {
+let logInTracker = false;
+const UserSettings = () => {
+    useEffect(() => {
+        AxiosService.validateToken()
+           .then(response => {
+             console.log(response)
+             if(response == 'success'){
+               logInTracker= true
+              
+             } else {
+                navigate("/")
+             }
+           })
+       }, [])
     const navigate = useNavigate()
     const [formInfo, setFormInfo] = useState({username: '', password: ''})
 

@@ -79,11 +79,10 @@ const Login = () => {
       <h2 className="loginpageHeading">Login</h2>
       {logInTracker ? <div>{localStorage.getItem('username')} has successfully logged in!</div> : <LoginForm updateFn={createNewUser}/>}
       {logInTracker && <Stack spacing={2} alignItems="center"> <button onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
-      {renderErrorMessage("uname")}
       {logInTracker ? console.log("User Logged In") : <p className="largeText"> Or sign up if you do not have an account.</p>}
       {logInTracker ? console.log("User Logged In") : <Stack spacing={2} alignItems="center">
-      <div className="error">{errorMessages.message}</div>
         <button className="appBtn" onClick={(signIn)} variant="contained">Signup</button>
+      <div className="error">{errorMessages.message}</div>
 
       </Stack>}
       </section>

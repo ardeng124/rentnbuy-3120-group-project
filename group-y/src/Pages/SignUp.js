@@ -46,8 +46,9 @@ const SignIn = () => {
   const createNewUser = (newUser) => {
     AxiosService.register(newUser).then(response => {
         console.log("POST response", response)
-      if (response.data.status === "user does not exist") {
-        setErrorMessages({name: "uname", message: "Your Username or password is incorrect!"})
+      if (response.data.error === "username taken") {
+        console.log("fail")
+        setErrorMessages({name: "uname", message: "Username taken!"})
       } else {
         console.log("A User has logged in!")
         logInTracker = true;
@@ -109,10 +110,10 @@ const SignIn = () => {
         <h2 className="loginpageHeading">Signup</h2>
         {logInTracker ? <div>Your account '{localStorage.getItem('username')}' has successfully been registered!</div> : <SignUpForm updateFn={createNewUser}/>}
         {logInTracker && <Stack spacing={2} alignItems="center"> <button className="appBtn" onClick={(logOut)} variant="contained">Logout</button> </Stack>}     
-        {renderErrorMessage("uname")}
         {logInTracker ? console.log("User Logged In") : <p className="largeText"> Or Login if you already have an account.</p>}
         {logInTracker ? console.log("User Logged In") : <Stack spacing={2} alignItems="center">
           <button className="appBtn" onClick={(logIn)} variant="contained">Login</button>
+        {renderErrorMessage("uname")}
         </Stack>}
       </section>
     </div>

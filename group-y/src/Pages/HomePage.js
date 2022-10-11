@@ -9,9 +9,8 @@ import {
   } from "react-router-dom"
 import NewestListingItem from '../Components/NewestListingItem';
 
-var token = document.cookie.substring(6) // Used to display the logout button if signed in if (token){" "}
-var loggedIn = false
 const HomePage = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
     const navigate = useNavigate()
 
     // const [convos, setConversations] = useState([])
@@ -23,14 +22,14 @@ const HomePage = () => {
         .then(response => {
             console.log(response)
             if(response == 'success'){
-            loggedIn= true
-            navigate("/")
+                setLoggedIn(true)
+            // navigate("/")
             }
       })
         AxiosService.getItems().then(response => {
             // console.log(response)
-            // let arr = response.slice(3)
-            setListings(response)
+            let arr = response.slice(-8)
+            setListings(arr)
             // console.log(response.data.items)
         })
     }, [])

@@ -15,6 +15,15 @@ router.get('/auth/', auth.validUser)
 //Login functionality - Extended Functionality
 router.post('/auth/login', auth.loginUser)
 
+//Change User Password
+router.put('/auth/password', auth.changeUserPassword)
+
+//Edit Account Details
+router.put('/auth/edit', auth.editAccountDetails)
+
+//
+router.get('/auth/getUserDetails', auth.getUserDetails)
+
 // /* GET conversations returns a list of all current conservations */
 // router.get('/api/conversations', conv.getConversations)
 

@@ -17,9 +17,10 @@ const createUser = async(request, response)  => {
     })
    
     if(existingUser){
-        return response.status(409).json({
-            error: 'username taken'
-        })
+        return response.json({
+            error: 'username taken',
+            status: 409
+          })
     }
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)
@@ -56,9 +57,9 @@ const loginUser = async(request, response) => {
     const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
     if (!(user && passwordCorrect)) {
         return response.json({
-          error: 'user does not exist',
-          status: 401
-        })
+            error: 'user does not exist',
+            status: 401
+          })
     }
     const userForToken = {
         username: user.username,
@@ -69,25 +70,62 @@ const loginUser = async(request, response) => {
     .status(200)
     .send({ token, username: user.username, name: user.name })
 }
-const getUser = async (request, response) => {
 
-    const authHeader = request.get('Authorization')
-    if (authHeader && authHeader.toLowerCase().startsWith('basic ')) {
-        const token = authHeader.substring(6)
+// const getUser = async (request, response) => {
+
+//     const authHeader = request.get('Authorization')
+//     if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
+//         const token = authHeader.substring(7)
+//         try {
+//             // this will throw an error if token isn't of the right format
+//             const match = await models.Session.findOne({token: token})  
+//             if (match) {
+//                 response.json({
+//                     status: "success",
+//                     username: match.username,
+//                     token: match._id
+//                 })       
+//             }
+//         } catch { }
+
+//     }
+//     response.json({status: "unregistered"}) 
+// }
+
+const getDecodedToken = (token) => {
+    return jwt.verify(token, process.env.SECRET)
+}
+
+//Get User Account Details
+const getUserDetails = async (request, response) => {
+
+    // let result = await validUser(request)
+
+    let decodedToken = getDecodedToken(getToken(request))
+
+    if (decodedToken) {
+
+        const username = decodedToken.username
+
         try {
             // this will throw an error if token isn't of the right format
-            const match = await models.Session.findOne({token: token})  
+            const match = await User.findOne({username: username})
             if (match) {
-                response.json({
+                response.json(
+                {
                     status: "success",
+                    _id: match._id,
+                    firstName: match.firstName, 
+                    lastName: match.lastName,
                     username: match.username,
-                    token: match._id
+                    emailAddress: match.emailAddress,
+                    location: match.location
                 })       
             }
-        } catch { }
-
+        } catch {
+            response.sendStatus(401)
+        }
     }
-    response.json({status: "unregistered"}) 
 }
 
 /* 
@@ -97,8 +135,8 @@ const getUser = async (request, response) => {
 const validUser = async (request, response) => {
     // const token = getToken(request)
     const authHeader = request.get('Authorization')
-    if (authHeader && authHeader.toLowerCase().startsWith('basic ')) {
-        const token = authHeader.substring(6)
+    if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
+        const token = authHeader.substring(7)
         try{
             const decodedToken = jwt.verify(token, process.env.SECRET)
             if (!decodedToken.id) {
@@ -109,8 +147,8 @@ const validUser = async (request, response) => {
         }catch(err){
             return response.json({status: "unregistered"})
         }
-    }
     return response.json({status: "unregistered"})
+}
 }
 
 //Extended Functionality (Users can log in with exisiting credentials)
@@ -120,6 +158,8 @@ const existingUser = async (request, response) => {
 
     //Find a match on 'username' and 'password'
     const matchExistingUser = await models.Session.findOne({ username, password })
+
+    console.log("Hi", matchExistingUser)
 
     //If the user 'username' and 'password' matches an exisiting entry
     //then it will be true
@@ -136,13 +176,55 @@ const existingUser = async (request, response) => {
 }
 
 const getToken = (request) => {
-    const authorisation = request.get('Authorization')
-    if (authorisation && authorisation.toLowerCase().startsWith('bearer ')) {
-        console.log(authorisation)
-        return authorisation.substring(7)
+    const auhorisation = request.get('Authorization')
+    if (auhorisation && auhorisation.toLowerCase().startsWith('bearer ')) {
+        return auhorisation.substring(7)
     }
     return null
 }
 
+const editAccountDetails = async (request, response) => {
+    const userId = request.body._id
+    const emailAddress = request.body.emailAddress
+    const location = request.body.location
+    const user = await User.findOne({_id: userId})
+
+    if (user) {
+        const result = await User.findOneAndUpdate({_id: userId}, {emailAddress: emailAddress})
+        const result2 = await User.findOneAndUpdate({_id: userId}, {location: location})
+        if (result.acknowledged || result2.acknowledged) {
+            //Authorised to edit
+            response.json({status: 'success'})
+        } else {
+            //Not authorised to edit
+            response.json({status: 'User correct but failed'})
+        }
+    } else {
+        // Not authorised to edit 
+        response.json({status: 'not authorised to edit'})
+    }
+}
+
+//Change Password - Not Implemented Yet
+const changeUserPassword = async (request, response) => {
+    const {username, password} = request.body
+    const user = await User.findOne({username})
+    console.log(user)
+    const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
+    if (!(user && passwordCorrect)) {
+        return response.status(401).json({
+          error: 'invalid password'
+        })
+    }
+}
+
 //Exporting all the functions
-module.exports = { validUser, existingUser, createUser, loginUser }
+module.exports = { 
+    validUser, 
+    existingUser, 
+    createUser, 
+    loginUser, 
+    editAccountDetails, 
+    getUserDetails, 
+    changeUserPassword 
+}

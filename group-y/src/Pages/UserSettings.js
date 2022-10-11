@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from "../AxiosService"
 
-let logInTracker = false;
+// var loggedIn = false;
 const UserSettings = () => {
+    const [loggedIn, setLoggedIn] = useState(false)
     useEffect(() => {
         AxiosService.validateToken()
            .then(response => {
              console.log(response)
              if(response == 'success'){
-               logInTracker= true
-              
+                setLoggedIn(true)
              } else {
                 navigate("/")
              }
@@ -43,7 +43,7 @@ const UserSettings = () => {
             <section className="loginheader">
                 <div className="MasterHeader">
 
-                <DropDownMenu></DropDownMenu>
+                <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
 
                 <ul>
                     <li> <a href="/">Home</a> </li>
@@ -60,7 +60,7 @@ const UserSettings = () => {
                   </ul>
               </div> */}
           </section>
-          <section class="loginBox">
+          <section className="loginBox">
               <div className="formContainer">
                 <br></br>
                   <form className="border" onSubmit={formHandler}>

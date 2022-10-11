@@ -134,7 +134,11 @@ body, html {
   background-color: #8FCAB0;
   color: white;
 }
-
+.error{
+  color:red;
+  font-weight:500;
+  font-size:20pt;
+}
 
 .usrAccLi {
   display: block;

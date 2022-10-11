@@ -9,10 +9,11 @@ const getUserName = () => {
     username = localStorage.getItem('username')
     return username
 }
-//warning: avoid use
+
 const getToken = () => {
     return token
 }
+
 const logOut=() => { 
     localStorage.clear()
     token = ""
@@ -25,7 +26,7 @@ const logOut=() => {
 const validateToken = async () => {
     // token = localStorage.getItem('token')
     token = document.cookie.substring(6)
-    const response = await axios.get(serverUrl + "auth/", { headers: { "Authorization": `Basic ${token}` } })
+    const response = await axios.get(serverUrl + "auth/", { headers: { "Authorization": `bearer ${token}` } })
 
     console.log(response)
 
@@ -38,7 +39,7 @@ const validateToken = async () => {
 }
 
 const getItems = async () => {
-    const response = await axios.get(serverUrl + "api/items/", { headers: { "Authorization": `Basic ${token}` } })
+    const response = await axios.get(serverUrl + "api/items/", { headers: { "Authorization": `bearer ${token}` } })
     return response.data.items
     
 }
@@ -46,6 +47,11 @@ const getItems = async () => {
 const login = async (newUser) => {
     //do some stuff with cookies
     const response2 = await axios.post(serverUrl + "auth/login/", newUser)
+    if (response2.data.status == 401){
+
+            return response2
+    }
+
     token = response2.data.token
     // localStorage.setItem('token',token)
     const expiration_date = new Date()
@@ -58,7 +64,12 @@ const login = async (newUser) => {
 
 const register = async (newUser) => {
     //do some stuff with cookies
+   
     const response2 = await axios.post(serverUrl + "auth/register/", newUser)
+    if (response2.data.status == 409){
+        console.log("fuck")
+        return response2
+    }
     token = response2.data.token
     // localStorage.setItem('token',token)
     const expiration_date = new Date()
@@ -69,6 +80,16 @@ const register = async (newUser) => {
     return response2
 }
 
+const getUserDetails = async () => {
+    const response = await axios.get(serverUrl + "auth/getUserDetails/",{ headers: { "Authorization": `bearer ${token}` } })
+    return response
+}
+
+const editUserDetails = async (details) => {
+    const response = await axios.put(serverUrl + "auth/edit/",details, { headers: { "Authorization": `bearer ${token}` } })
+    return response
+}
+
 export default {
     validateToken,
     getUserName,
@@ -76,5 +97,7 @@ export default {
     login,
     logOut,
     register,
-    getItems
+    getItems,
+    getUserDetails,
+    editUserDetails
 }

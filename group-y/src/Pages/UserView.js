@@ -1,34 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import FriendItemProfile from "../Components/FriendItemProfile";
 import DropDownMenu from "../Components/DropDownMenu";
+import AxiosService from "../AxiosService"
+
 
 const UserView = () => {
-    
+    const [loggedIn, setLoggedIn] = useState(false)
+
     const dummyInterests = ['Houses','Electronics','Random Categeory']
     const dummyFriends = ["Arden", "Anubhav", "Raffi","Nicholas"]
+    const [userDetails, setUserDetails] = useState({status: "", firstname: "", lastName: "", username: "", emailAddress: "", location: ""})
 
+    const getUserDetails = () => {
+        AxiosService.getUserDetails()
+         .then(response => {          
+           console.log("GET response", response)
+           console.log("Response Data Is: ", response.data)
+           setUserDetails(response.data)
+         })
+     }
+
+    useEffect( () => {
+        AxiosService.validateToken()
+        .then(response => {
+            console.log(response)
+            if(response == 'success'){
+                setLoggedIn(true)
+            } else {
+                
+            }
+        })   
+        getUserDetails()
+      }, []);
+ 
+    console.log (userDetails)
     return (
         <div className="UserViewPage">
             <section className="loginheader">
                 <div className="MasterHeader">
 
-                <DropDownMenu></DropDownMenu>
+                <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
 
                   <ul>
                       <li> <a href="/">Home</a> </li>
 
                   </ul>
               </div>
-              <h1>Your Profile</h1>
+              <h1> {userDetails.username}'s Profile</h1>
             </section>
             <section className="ProfileBox">
                 <div className="ProfileColLarge">
                     <div className ="ProfileIconLarge"> </div>
-                    <li className="ProfileName">Name</li>
-                    <li className="ProfileName">Username</li>
-                    <li> Email</li>
-                    <li> Address</li>
+                    <li className="ProfileName">Name: {userDetails.firstName} {userDetails.lastName} </li>
+                    <li className="ProfileName">Username: {userDetails.username}</li>
+                    <li> Email: {userDetails.emailAddress}</li>
+                    <li> Address: {userDetails.location}</li>
                 </div>
                 <div className="ProfileColMin">
                     <h3>Interests</h3>

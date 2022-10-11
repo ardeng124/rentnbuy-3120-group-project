@@ -22,6 +22,12 @@ const userSchema = new mongoose.Schema({
         }
     ],
     items: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Item'
+      }
+    ],
+    rentedItems: [
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Item'

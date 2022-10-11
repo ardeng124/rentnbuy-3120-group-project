@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const models = require('../models')
 
 const User = require('../models/user')
-const Session = require('../models/session')
 
 /**
  * Creates a new user and establishes a new session for the user
@@ -34,6 +33,8 @@ const createUser = async(request, response)  => {
         birthday: body.birthday,
         gender: body.gender,
         isAdmin: false, 
+        rentedItems: [],
+        items: [],
         phoneNumber: body.phoneNumber, 
         emailAddress: body.emailAddress, 
         location: body.location,
@@ -119,7 +120,8 @@ const getUserDetails = async (request, response) => {
                     lastName: match.lastName,
                     username: match.username,
                     emailAddress: match.emailAddress,
-                    location: match.location
+                    location: match.location,
+                    rentedItems: match.rentedItems
                 })       
             }
         } catch {
@@ -133,23 +135,18 @@ const getUserDetails = async (request, response) => {
  *   return the username if found, false if not
 */
 const validUser = async (request, response) => {
-    // const token = getToken(request)
-    const authHeader = request.get('Authorization')
-    console.log(authHeader.toLowerCase())
-    if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
-        const token = authHeader.substring(7)
-        try{
-            const decodedToken = jwt.verify(token, process.env.SECRET)
-            if (!decodedToken.id) {
-                return response.json({status: "unregistered"})
-            }else{
-                return response.json({status: "success" })
-            }
-        }catch(err){
-            return response.json({status: "unregistered"})
+    const token = getToken(request)
+    try{
+        const decodedToken = jwt.verify(token, process.env.SECRET)
+        if (!decodedToken.id) {
+            return response.status(401).json({status:"unregistered"})
+        }else{
+            return  response.status(200).json({status:"success"})
         }
-    return response.json({status: "unregistered"})
-}
+    }catch(err){
+        return response.status(401).json({status:"unregistered"})
+    }
+    
 }
 
 //Extended Functionality (Users can log in with exisiting credentials)

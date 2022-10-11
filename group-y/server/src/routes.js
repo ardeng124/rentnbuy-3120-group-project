@@ -2,6 +2,8 @@ const express = require('express')
 const auth = require('./controllers/auth')
 const items = require('./controllers/items')
 const reviews = require('./controllers/reviews')
+const rent = require('./controllers/rent')
+
 const router = express.Router()
  
 router.get('/', (request, response) => {
@@ -55,4 +57,9 @@ router.post('/api/items', items.addItems)
 router.get('/api/reviews', reviews.getReviews)
 /* POST a review */
 router.post('/api/reviews', reviews.addReview)
+
+router.get('/api/getRentedItems', rent.getRentedItemsForAUser)
+router.post('/api/rent/:itemId', rent.rentAnItem)
+
+
 module.exports = router 

@@ -7,7 +7,7 @@ const getRentedItemsForAUser = async (request, response) => {
     if(!decodedToken){
        return response.status(401).json({status:"Unauthroised"})
     }
-    const user = await User.findOne({"username":decodedToken.username})
+    const user = await User.findOne({"username":decodedToken.username}).populate('rentedItems')
     if(!user){
         return response.status(400).json({status:"Something went wrong"})
     }

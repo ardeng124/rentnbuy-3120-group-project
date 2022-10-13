@@ -69,6 +69,8 @@ console.log(loggedIn)
                 <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
                     <ul>
                         <li> <a href="/">Home</a> </li>
+                        <li><a href="/categories"> Categories </a> </li>
+
                     </ul>
                 </div>
                 <h1> {userDetails.username}'s Account Details</h1>

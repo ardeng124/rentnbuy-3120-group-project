@@ -71,6 +71,8 @@ const Login = () => {
       <div className='MasterHeader'>
         <ul>
             <li><a  href="/">Home</a></li>
+            <li><a href="/categories"> Categories </a> </li>
+
         </ul>
         </div>
       <h1>Welcome to RentNBuy</h1>

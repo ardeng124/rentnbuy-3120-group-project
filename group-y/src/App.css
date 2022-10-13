@@ -367,9 +367,9 @@ font-size: 14pt;
   background-color: #D9D9D9;
   border-radius: 28px;
   /* width:30%; */
-  flex: 1 1 18%;
+  flex: 1 1 28%;
   flex-shrink: 1;
-  max-width: 18%;
+  max-width: 25%;
 }
 .leftNLR {
   margin-left:30px;
@@ -454,3 +454,66 @@ button {
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box; }
+.MenuBarSearch{
+  width:170%;
+  background-color: #DEF1ED;
+  padding:5px;
+  border-radius: 30px;
+  margin:5px;
+
+}
+.searchFormObject{
+  margin: 6px;
+}
+.searchFormObject input{
+  margin: 0px !important;
+  width:95%;
+  /* background-color: #CCE3DE;
+  border: 1px solid #a4c3b27d ; */
+  border-radius: 20px;
+  color: #747c78;
+  font-weight: 200;
+}
+.searchResults{
+  position: absolute !important;
+  top:70px !important;
+  background-color: #F6FFF8 !important;
+  width:40% !important;
+}
+.searchResults li{
+  display: block;
+  float: none !important;
+  margin: 5px;
+  background-color: #DEF1ED; 
+  border-radius: 10px;
+  /* display: none; */
+}
+.MenuBarSearch:focus-within .searchResults li{
+  display: block;
+}
+.leftNLR p {
+  font-size: 13pt;
+}
+.leftNLR h3 {
+  font-size: 18pt;
+}
+.srcItem {
+  background-color: #DEF1ED !important;
+  padding: 4px !important;
+}
+
+.srcItem:hover{
+  background-color: #bed3cf !important;
+}
+
+.menuSearchMaster:not(:focus-within)  .searchResults{
+  display:none;
+}
+.menuSearchMaster:focus-within  .searchResults{
+  display:block;
+}
+
+
+.searchResults :focus{
+  display: block !important;
+}

@@ -8,7 +8,7 @@ function NewestListingItem(props) {
 
     let modifiedDesc = ""
     if (typeof itemDesc !== "undefined") {
-        modifiedDesc = itemDesc.substring(0, 40) + "..."
+        modifiedDesc = itemDesc.substring(0, 55) + "..."
     }
     let modifiedPrice = ""
     if (typeof itemPrice !== "undefined") {

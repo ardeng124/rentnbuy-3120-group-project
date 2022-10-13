@@ -5,6 +5,7 @@ import UserSettings from './Pages/UserSettings.js';
 import './App.css';
 import AccountDetails from './Pages/AccountDetails.js';
 import UserView from './Pages/UserView.js';
+import ItemPage from './Pages/ItemPage.js';
 
 
 import {
@@ -33,6 +34,8 @@ function App() {
                     <Route path="/settings" element={<UserSettings />} />
                     <Route path="/userdetails" element={<AccountDetails />} />
                     <Route path="/userview" element={<UserView />} />
+                    <Route path="/item/:id" element={<ItemPage/>} />
+
                 </Routes>
             </Router>
         </div>

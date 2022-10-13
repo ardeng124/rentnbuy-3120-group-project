@@ -67,7 +67,7 @@ const register = async (newUser) => {
    
     const response2 = await axios.post(serverUrl + "auth/register/", newUser)
     if (response2.data.status == 409){
-        console.log("fuck")
+        console.log("aaa")
         return response2
     }
     token = response2.data.token

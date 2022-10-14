@@ -26,7 +26,7 @@ const logOut=() => {
 const validateToken = async () => {
     // token = localStorage.getItem('token')
     token = document.cookie.substring(6)
-    const response = await axios.get(serverUrl + "auth/", { headers: { "Authorization": `bearer ${token}` } })
+    const response = await axios.get(serverUrl + "auth/", { headers: { "Authorization": `Bearer ${token}` } })
 
     console.log(response)
 
@@ -39,7 +39,7 @@ const validateToken = async () => {
 }
 
 const getItems = async () => {
-    const response = await axios.get(serverUrl + "api/items/", { headers: { "Authorization": `bearer ${token}` } })
+    const response = await axios.get(serverUrl + "api/items/", { headers: { "Authorization": `Bearer ${token}` } })
     return response.data.items
     
 }
@@ -81,13 +81,22 @@ const register = async (newUser) => {
 }
 
 const getUserDetails = async () => {
-    const response = await axios.get(serverUrl + "auth/getUserDetails/",{ headers: { "Authorization": `bearer ${token}` } })
+    const response = await axios.get(serverUrl + "auth/getUserDetails/",{ headers: { "Authorization": `Bearer ${token}` } })
     return response
 }
 
 const editUserDetails = async (details) => {
-    const response = await axios.put(serverUrl + "auth/edit/",details, { headers: { "Authorization": `bearer ${token}` } })
+    const response = await axios.put(serverUrl + "auth/edit/",details, { headers: { "Authorization": `Bearer ${token}` } })
     return response
+}
+
+const searchItems = async (query) => {
+
+    const response = await axios.post(serverUrl + "api/search",{'query':query}).catch((error) => {
+        return error.response.data.error
+      })
+    return response
+
 }
 
 export default {
@@ -99,5 +108,6 @@ export default {
     register,
     getItems,
     getUserDetails,
-    editUserDetails
+    editUserDetails,
+    searchItems
 }

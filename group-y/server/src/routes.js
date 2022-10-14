@@ -44,6 +44,7 @@ router.get('/auth/getUserDetails', auth.getUserDetails)
 
 /* GET a list of all items */
 router.get('/api/items/:id?', items.getItems)
+router.post('/api/search', items.searchItems)
 
 /* GET a list of N items */
 // router.get("/api/items/count", items.getXItems)

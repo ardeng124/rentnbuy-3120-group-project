@@ -7,6 +7,7 @@ import AccountDetails from './Pages/AccountDetails.js';
 import UserView from './Pages/UserView.js';
 import ItemPage from './Pages/ItemPage.js';
 
+import Categories from "./Pages/Categories.js"
 
 import {
   BrowserRouter as Router,
@@ -33,6 +34,8 @@ function App() {
                     <Route path="/register" element={<SignUp />} />
                     <Route path="/settings" element={<UserSettings />} />
                     <Route path="/userdetails" element={<AccountDetails />} />
+                    <Route path="/categories" element={<Categories />} />
+
                     <Route path="/userview" element={<UserView />} />
                     <Route path="/item/:id" element={<ItemPage/>} />
 

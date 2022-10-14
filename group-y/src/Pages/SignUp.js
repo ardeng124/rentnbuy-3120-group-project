@@ -5,6 +5,7 @@ import SignUpForm from "../Components/SignUpForm.js";
 import Stack from '@mui/material/Stack';
 import button from '@mui/material/button';
 import AxiosService from "../AxiosService"
+import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 //Tracking Logged in status
 //Could add a if check -> which checks for a token
@@ -102,6 +103,10 @@ const SignIn = () => {
       <div className='MasterHeader'>
         <ul>
             <li><a  href="/">Home</a></li>
+            <li><a href="/categories"> Categories </a> </li>
+            <li>
+                    <MenuBarSearch></MenuBarSearch>
+                </li>
         </ul>
         </div>
       <h1>Welcome to RentNBuy</h1>

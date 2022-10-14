@@ -4,6 +4,7 @@ import axios, { Axios } from 'axios'
 import { useNavigate } from "react-router-dom";
 import Stack from '@mui/material/Stack';
 import AxiosService from "../AxiosService"
+import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 //Tracking Logged in status
 //Could add a if check -> which checks for a token
@@ -71,6 +72,10 @@ const Login = () => {
       <div className='MasterHeader'>
         <ul>
             <li><a  href="/">Home</a></li>
+            <li><a href="/categories"> Categories </a> </li>
+            <li>
+                <MenuBarSearch></MenuBarSearch>
+            </li>
         </ul>
         </div>
       <h1>Welcome to RentNBuy</h1>

@@ -16,6 +16,21 @@ const getItems = async (request, response) => {
     response.json({items})
 }
 
+const searchItems = async (request, response) => {
+
+    let query = request.body.query
+    console.log(query)
+    let items;
+    if(query){
+        items = await Items.find({
+            "name": { $regex: query, $options: "i" } 
+        })
+    }else {
+        items = await Items.find({})
+    }
+    response.json({items})
+}
+
 const addItems = async(request, response) =>{
     const body = request.body 
     let result = await Auth.validUser(request)
@@ -41,4 +56,5 @@ const addItems = async(request, response) =>{
 module.exports = {
     getItems, 
     addItems,
+    searchItems
 }

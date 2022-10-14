@@ -8,6 +8,7 @@ import {
     Routes, Route, Link
   } from "react-router-dom"
 import NewestListingItem from '../Components/NewestListingItem';
+import MenuBarSearch from '../Components/MenuBarSearch';
 
 const HomePage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -29,6 +30,7 @@ const HomePage = () => {
         AxiosService.getItems().then(response => {
             // console.log(response)
             let arr = response.slice(-8)
+            arr = arr.reverse()
             setListings(arr)
             // console.log(response.data.items)
         })
@@ -40,6 +42,11 @@ const HomePage = () => {
     }
     const handleLoginButtonClicked = (event) => {
         navigate("/login")
+    }
+
+    const itemClicked = (id) => {
+        navigate(`/item/${id}`)
+
     }
     
         return (
@@ -54,6 +61,14 @@ const HomePage = () => {
                                 <a className="active" href="/">
                                     Home
                                 </a>
+                            </li>
+                            <li>
+                                <a href="/categories">
+                                    Categories
+                                </a>
+                            </li>
+                            <li>
+                                <MenuBarSearch></MenuBarSearch>
                             </li>
                         </ul>
                         {loggedIn && (
@@ -79,6 +94,8 @@ const HomePage = () => {
                                     itemName={x.name}
                                     itemDesc={x.description}
                                     itemPrice={x.price}
+                                    itemId = {x.id}
+                                    ClickFunc = {() => itemClicked(x.id)}
                                 ></NewestListingItem>
                             ))}
                         </div>

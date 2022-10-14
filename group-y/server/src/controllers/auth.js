@@ -135,7 +135,7 @@ const getUserDetails = async (request, response) => {
 const validUser = async (request, response) => {
     // const token = getToken(request)
     const authHeader = request.get('Authorization')
-    console.log(authHeader.toLowerCase())
+
     if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
         const token = authHeader.substring(7)
         try{

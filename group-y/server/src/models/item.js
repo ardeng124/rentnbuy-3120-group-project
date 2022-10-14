@@ -14,6 +14,7 @@ const itemSchema = new mongoose.Schema({
         ageRating: Number, 
         description: String, 
         timestamp: {type: Date, default: Date.now},
+        currentlyAvailable: Boolean,
     },
   {
     toJSON: {virtuals: true},

@@ -104,6 +104,7 @@ const SignIn = () => {
         <ul>
             <li><a  href="/">Home</a></li>
             <li><a href="/categories"> Categories </a> </li>
+            <li> <a href="/search"> Search </a></li>
             <li>
                     <MenuBarSearch></MenuBarSearch>
                 </li>

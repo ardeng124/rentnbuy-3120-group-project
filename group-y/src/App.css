@@ -18,7 +18,10 @@ font-size: 14pt;
   line-height: 1.6;
   font-weight: 400;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #222; }
+  color: #222; 
+  animation: fade 0.3s linear;
+
+}
 
 
 .App {
@@ -374,9 +377,11 @@ font-size: 14pt;
 
 }
 .overallListingItem :hover {
-  animation: homePageItemHover 0.1s linear;
+  animation: homePageItemHover 0.1s ease-in-out;
   animation-fill-mode: forwards;
+  /* animation-direction: reverse; */
 }
+
 .overallListingItem{
   /* padding: 35px; */
   display: flex;
@@ -547,6 +552,86 @@ a :hover .seeMoreBtn{
   background-color: #bed3cf !important;
 }
 
+.SearchPage .loginheader{
+  background-color: #F6FFF8 !important;
+}
+.SearchPage{
+  list-style-type: none;
+}
+
+.SearchPage .searchFormObject input{
+  background-color: #DEF1ED;
+  padding:10px;
+  margin:20px !important;
+}
+
+.SearchPage .searchFormObject {
+  padding:10px;
+}
+.searchBoxContainer {
+  background-color: #c2efdc6d;
+  width:95%;
+  margin: auto;
+  border-radius: 20px;
+  paddding:10px;
+}
+
+.searchImage{
+  width:120px;
+  height: auto;
+  margin-right:20px
+}
+
+.searchResultItem {
+  display: flex;
+  background-color: #D5EFE4;
+  padding:20px;
+  width:90%;
+  margin: auto;
+  border-radius: 15px;
+  margin-bottom: 40px;
+
+}
+.SearchResultContainer{
+  padding:10px;
+  /* margin-bottom: 40px; */
+}
+.rightContainer{
+  flex-grow:2;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightContainer li {
+  /* display: block; */
+}
+.leftAlignItemSearchTitle {
+  float:left;
+  font-weight: 500;
+  font-size: 16pt;
+  /* flex-grow:1;
+  flex-basis:50%; */
+}
+.rightAlignItemSearch {
+  font-size: 15pt;
+  font-weight: 400;
+  float:right;
+
+}
+.descSearchItem{
+  float: left;
+  font-weight: 300;
+  font-size:13pt;
+  /* flex-grow:1;
+  flex-basis:50%; */
+  max-width: 70%;
+  word-wrap: normal;
+}
+
+.TopLineSearch{
+  flex-basis:20%;
+}
+
 /*  Animations  */
 @keyframes homePageItemHover {
   0% {
@@ -554,17 +639,28 @@ a :hover .seeMoreBtn{
   100% {
     border-radius: 58px}                  
 }
+
+@keyframes homePageItemHover-out {
+  0% {
+  border-radius: 58px;}
+  100% {
+    border-radius: 28px}                  
+}
 /* @keyframes homePageItemHover {
   0% {background-color: #D9D9D9;
   border-radius: 28px;}
   100% {background-color: #c4c0c0;
     border-radius: 58px}                  
 } */
-@keyframes anti-homePageItemHover {
+/* @keyframes anti-homePageItemHover {
   0% {
     border-radius: 0px}
   100% {
     border-radius: 0px}                  
+} */
+
+
+@keyframes fade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
 }
-
-

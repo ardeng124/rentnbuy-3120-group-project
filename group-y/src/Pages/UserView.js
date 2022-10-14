@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import FriendItemProfile from "../Components/FriendItemProfile";
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from "../AxiosService"
+import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 
 const UserView = () => {
@@ -45,7 +46,9 @@ const UserView = () => {
                   <ul>
                       <li> <a href="/">Home</a> </li>
                       <li><a href="/categories"> Categories </a> </li>
-
+                      <li>
+                    <MenuBarSearch></MenuBarSearch>
+                </li>
 
                   </ul>
               </div>

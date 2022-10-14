@@ -349,7 +349,7 @@ font-size: 14pt;
 .homePageContainer{
   background-color: #E3EDE9;
   margin: auto;
-  width:90%;
+  width:93%;
   padding: 10px;
   padding-top: 20px;
   margin-bottom: 80px;
@@ -361,7 +361,6 @@ font-size: 14pt;
 }
 .newestListingItem{
   padding: 35px;
-  margin: 9px;
   height: auto;
   display: flex;
   background-color: #D9D9D9;
@@ -369,21 +368,39 @@ font-size: 14pt;
   /* width:30%; */
   flex: 1 1 28%;
   flex-shrink: 1;
-  max-width: 25%;
+  /* max-width: 25%; */
+  cursor: pointer;
+  /* margin: 9px; */
+
+}
+.overallListingItem :hover {
+  animation: homePageItemHover 0.1s linear;
+  animation-fill-mode: forwards;
+}
+.overallListingItem{
+  /* padding: 35px; */
+  display: flex;
+  max-width: 23.5%;
+  margin: 9px;
 }
 .leftNLR {
   margin-left:30px;
 }
+.overallListingItem:hover .leftNLR {
+  animation: anti-homePageItemHover 0.1s linear;
+}
 .NLRimagePlaceholder {
-  background-color: #DFE1DD;
-  border-radius: 5px;
+  background-color: #DFE1DD !important;
+  border-radius: 5px !important;
   padding: 85px;
   /* margin: 15px; */
   padding: 15px;
   width: 60px;
   height: 60px;
   border: 1px solid #6B9080;
+
 }
+
 .newestListingItem h3 {
   font-size:20pt
 }
@@ -454,8 +471,9 @@ button {
   border: 1px solid #bbb;
   cursor: pointer;
   box-sizing: border-box; }
+
 .MenuBarSearch{
-  width:170%;
+  width:210%;
   background-color: #DEF1ED;
   padding:5px;
   border-radius: 30px;
@@ -500,8 +518,12 @@ button {
 .srcItem {
   background-color: #DEF1ED !important;
   padding: 4px !important;
+  cursor: pointer;
 }
 
+.searchResults li:hover{
+  background-color: #bed3cf !important;
+}
 .srcItem:hover{
   background-color: #bed3cf !important;
 }
@@ -513,7 +535,36 @@ button {
   display:block;
 }
 
-
 .searchResults :focus{
   display: block !important;
 }
+
+.seeMoreBtn{
+  background-color: #CCE3DE !important;
+}
+
+a :hover .seeMoreBtn{
+  background-color: #bed3cf !important;
+}
+
+/*  Animations  */
+@keyframes homePageItemHover {
+  0% {
+  border-radius: 28px;}
+  100% {
+    border-radius: 58px}                  
+}
+/* @keyframes homePageItemHover {
+  0% {background-color: #D9D9D9;
+  border-radius: 28px;}
+  100% {background-color: #c4c0c0;
+    border-radius: 58px}                  
+} */
+@keyframes anti-homePageItemHover {
+  0% {
+    border-radius: 0px}
+  100% {
+    border-radius: 0px}                  
+}
+
+

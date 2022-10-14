@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from "../AxiosService"
 import axios from "axios"
+import MenuBarSearch from "../Components/MenuBarSearch";
+
 
 const AccountDetails = () => {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -70,7 +72,9 @@ console.log(loggedIn)
                     <ul>
                         <li> <a href="/">Home</a> </li>
                         <li><a href="/categories"> Categories </a> </li>
-
+                        <li>
+                                <MenuBarSearch></MenuBarSearch>
+                            </li>
                     </ul>
                 </div>
                 <h1> {userDetails.username}'s Account Details</h1>

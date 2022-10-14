@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from "../AxiosService"
+import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 // var loggedIn = false;
 const UserSettings = () => {
@@ -48,7 +49,9 @@ const UserSettings = () => {
                 <ul>
                     <li> <a href="/">Home</a> </li>
                     <li><a href="/categories"> Categories </a> </li>
-
+                    <li>
+                    <MenuBarSearch></MenuBarSearch>
+                </li>
 
                 </ul>
               </div>

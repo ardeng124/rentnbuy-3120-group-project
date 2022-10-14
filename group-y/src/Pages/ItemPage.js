@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useNavigate,useParams, useLocation} from "react-router-dom"
 import AxiosService from "../AxiosService";
 import DropDownMenu from '../Components/DropDownMenu'
+import MenuBarSearch from "../Components/MenuBarSearch";
 
 
 const ItemPage = () => {
@@ -27,6 +28,9 @@ const ItemPage = () => {
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/categories"> Categories </a> </li>
+                <li>
+                    <MenuBarSearch></MenuBarSearch>
+                </li>
             </ul>
             </div>
             <h1>Welcome to RentNBuy</h1>

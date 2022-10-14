@@ -5,6 +5,7 @@ function NewestListingItem(props) {
     const { itemImg } = props
     const { itemDesc } = props  
     const { itemPrice } = props  
+    const { ClickFunc } = props  
 
     let modifiedDesc = ""
     if (typeof itemDesc !== "undefined") {
@@ -16,7 +17,8 @@ function NewestListingItem(props) {
     }
 
   return (
-      <div className="newestListingItem">
+    <section className='overallListingItem'>
+      <div className="newestListingItem" onClick={ClickFunc} >
           <div>
               <div className="NLRimagePlaceholder"></div>
               <p>
@@ -28,6 +30,7 @@ function NewestListingItem(props) {
               <p>{modifiedDesc}</p>
           </div>
       </div>
+      </section>
   )
 }
 

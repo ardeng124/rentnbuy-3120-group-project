@@ -32,7 +32,7 @@ const MenuBarSearch = (props) => {
    
     const itemClicked = (id) => {
         navigate(`/item/${id}`)
-        console.log(id)
+
     }
   return (
     <section className='menuSearchMaster'>
@@ -52,7 +52,7 @@ const MenuBarSearch = (props) => {
   {/* {focus && */}
     <ul className='searchResults'>
         {itemsArr.map(x=> (<li key = {x.id} className='searchResultItem'> <a href=""onClick={() =>itemClicked(x.id)} className ="srcItem" >{x.name}</a></li>))}
-        <li><a href="/search"> See more </a></li>
+        <li className='seeMoreBtn'><a href="/search"> See more </a></li>
     </ul>
     {/* } */}
     </section>

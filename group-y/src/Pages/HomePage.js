@@ -29,7 +29,7 @@ const HomePage = () => {
       })
         AxiosService.getItems().then(response => {
             // console.log(response)
-            let arr = response.slice(-9)
+            let arr = response.slice(-8)
             arr = arr.reverse()
             setListings(arr)
             // console.log(response.data.items)
@@ -42,6 +42,11 @@ const HomePage = () => {
     }
     const handleLoginButtonClicked = (event) => {
         navigate("/login")
+    }
+
+    const itemClicked = (id) => {
+        navigate(`/item/${id}`)
+
     }
     
         return (
@@ -89,6 +94,8 @@ const HomePage = () => {
                                     itemName={x.name}
                                     itemDesc={x.description}
                                     itemPrice={x.price}
+                                    itemId = {x.id}
+                                    ClickFunc = {() => itemClicked(x.id)}
                                 ></NewestListingItem>
                             ))}
                         </div>

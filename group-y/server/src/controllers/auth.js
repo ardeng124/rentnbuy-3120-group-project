@@ -109,10 +109,15 @@ const getUserDetails = async (request, response) => {
         const username = decodedToken.username
 
         try {
+            console.log("i am here", username)
             // this will throw an error if token isn't of the right format
             const match = await User.findOne({username: username})
+                            .populate("rentedItems")
+                             .populate("boughtItems")
+                             .populate("myItems")
+
             if (match) {
-                response.json(
+                return response.json(
                 {
                     status: "success",
                     _id: match._id,
@@ -121,8 +126,12 @@ const getUserDetails = async (request, response) => {
                     username: match.username,
                     emailAddress: match.emailAddress,
                     location: match.location,
-                    rentedItems: match.rentedItems
+                    rentedItems: match.rentedItems,
+                    boughtItems:match.boughtItems,
+                    myItems: match.myItems
                 })       
+            }else{
+                return response.sendStatus(400)
             }
         } catch {
             response.sendStatus(401)

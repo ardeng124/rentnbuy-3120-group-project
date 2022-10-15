@@ -21,7 +21,13 @@ const userSchema = new mongoose.Schema({
           ref: 'Review'
         }
     ],
-    items: [
+    myItems: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Item'
+      }
+    ],
+    boughtItems: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item'

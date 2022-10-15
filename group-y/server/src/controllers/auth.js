@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const models = require('../models')
+const Util = require('./util')
 
 const User = require('../models/user')
 
@@ -21,8 +22,7 @@ const createUser = async(request, response)  => {
             status: 409
           })
     }
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+    const passwordHash = await Util.hashPassword(body.password)
     const user = new User ({
         username: body.username, 
         firstName: body.firstName, 
@@ -54,7 +54,6 @@ const createUser = async(request, response)  => {
 const loginUser = async(request, response) => {
     const {username, password} = request.body
     const user = await User.findOne({username})
-    console.log(user)
     const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
     if (!(user && passwordCorrect)) {
         return response.json({
@@ -72,35 +71,12 @@ const loginUser = async(request, response) => {
     .send({ token, username: user.username, name: user.name })
 }
 
-// const getUser = async (request, response) => {
-
-//     const authHeader = request.get('Authorization')
-//     if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
-//         const token = authHeader.substring(7)
-//         try {
-//             // this will throw an error if token isn't of the right format
-//             const match = await models.Session.findOne({token: token})  
-//             if (match) {
-//                 response.json({
-//                     status: "success",
-//                     username: match.username,
-//                     token: match._id
-//                 })       
-//             }
-//         } catch { }
-
-//     }
-//     response.json({status: "unregistered"}) 
-// }
-
 const getDecodedToken = (token) => {
     return jwt.verify(token, process.env.SECRET)
 }
 
 //Get User Account Details
 const getUserDetails = async (request, response) => {
-
-    // let result = await validUser(request)
 
     let decodedToken = getDecodedToken(getToken(request))
 
@@ -212,17 +188,25 @@ const editAccountDetails = async (request, response) => {
     }
 }
 
-//Change Password - Not Implemented Yet
+/**
+ * Change the password. Needs newPassword and currentPassword 
+ * @param {username, password, newPassword} request 
+ * @param {HTTPStatus} response 
+ * @returns 
+ */
 const changeUserPassword = async (request, response) => {
-    const {username, password} = request.body
+    const {username, password, newPassword} = request.body
     const user = await User.findOne({username})
-    console.log(user)
-    const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
-    if (!(user && passwordCorrect)) {
-        return response.status(401).json({
-          error: 'invalid password'
-        })
+    if(!user){
+        return response.status(400).json({"status": "Something went wrong"})
     }
+    const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
+    if(!passwordCorrect){
+        return response.status(401).json({"status": "Old password does not match"})
+    }
+    user.passwordHash = await Util.hashPassword(newPassword)
+    await user.save()
+    return response.status(200).json({status:"password changed"})
 }
 
 //Exporting all the functions

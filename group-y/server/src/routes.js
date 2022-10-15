@@ -62,7 +62,7 @@ router.get('/api/getRentedItems', rent.getRentedItemsForAUser)
 router.post('/api/rent/:itemId', rent.rentAnItem)
 
 router.post('/api/buy/:itemId', buy.buyAnItem)
-router.get('/api/getBoughtItems', buy.getBoughtItemsForAUser)
+router.get('/api/getBoughtItems', buy.getBoughtItems)
 
 
 module.exports = router 

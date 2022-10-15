@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+const bcrypt = require('bcrypt')
 const getToken = (request) => {
     const auhorisation = request.get('Authorization')
     if (auhorisation && auhorisation.toLowerCase().startsWith('bearer ')) {
@@ -8,15 +8,21 @@ const getToken = (request) => {
     return null
 }
 const getDecodedToken = (token) => {
-    console.log(token)
     try {
         return jwt.verify(token, process.env.SECRET)
     }catch(error){
         return null
     }
 }
+const hashPassword =  async (plainTextPassword) =>{
+    const saltRounds = 10
+    console.log(plainTextPassword)
+    return bcrypt.hash(plainTextPassword, saltRounds)
+    
+}
 
 module.exports = {
     getToken, 
-    getDecodedToken
+    getDecodedToken, 
+    hashPassword
 }

@@ -43,6 +43,6 @@ const buyAnItem = async (request, response) => {
 }
 
 module.exports = {
-    getBoughtItemsForAUser,
+    getBoughtItems,
     buyAnItem
 }

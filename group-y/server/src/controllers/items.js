@@ -33,15 +33,12 @@ const searchItems = async (request, response) => {
 
 const addItems = async(request, response) =>{
     const body = request.body 
-    let result = await Auth.validUser(request)
-    if(!result){
-        response.sendStatus(401)
-    }
     const user = await User.findById(body.creatorId)
     const item = new Items({
         name: body.name,
         rating: body.rating,
         price: body.price, 
+        isAvailable: true,
         creatorId: body.creatorId,
         location: body.location, 
         AgeRating: body.ageRating, 

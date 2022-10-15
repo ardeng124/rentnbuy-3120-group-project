@@ -13,6 +13,7 @@ const itemSchema = new mongoose.Schema({
         location: String, 
         ageRating: Number, 
         description: String, 
+        isAvailable: Boolean, 
         timestamp: {type: Date, default: Date.now},
         currentlyAvailable: Boolean,
     },

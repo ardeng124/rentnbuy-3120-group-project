@@ -377,7 +377,7 @@ font-size: 14pt;
 
 }
 .overallListingItem :hover {
-  animation: homePageItemHover 0.1s ease-in-out;
+  animation: homePageItemHover 0.1s ease-in;
   animation-fill-mode: forwards;
   /* animation-direction: reverse; */
 }
@@ -579,7 +579,8 @@ a :hover .seeMoreBtn{
 .searchImage{
   width:120px;
   height: auto;
-  margin-right:20px
+  margin-right:20px;
+  border-radius:0px !important;
 }
 
 .searchResultItem {
@@ -589,33 +590,43 @@ a :hover .seeMoreBtn{
   width:90%;
   margin: auto;
   border-radius: 15px;
-  margin-bottom: 40px;
-
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+.animationParent :hover{
+  animation: searchPageItemHover 0.3s ease-in-out;
+  animation-fill-mode: forwards;
 }
 .SearchResultContainer{
   padding:10px;
   /* margin-bottom: 40px; */
 }
+.SearchResultContainer li {
+  background-color: transparent !important;
+}
 .rightContainer{
   flex-grow:2;
   display: flex;
   flex-direction: column;
+
+  background-color: transparent !important;
 }
 
-.rightContainer li {
-  /* display: block; */
-}
 .leftAlignItemSearchTitle {
   float:left;
   font-weight: 500;
   font-size: 16pt;
   /* flex-grow:1;
   flex-basis:50%; */
+  background-color: transparent !important;
+
 }
 .rightAlignItemSearch {
   font-size: 15pt;
   font-weight: 400;
   float:right;
+  background-color: transparent !important;
+
 
 }
 .descSearchItem{
@@ -626,6 +637,8 @@ a :hover .seeMoreBtn{
   flex-basis:50%; */
   max-width: 70%;
   word-wrap: normal;
+  background-color: transparent !important;
+
 }
 
 .TopLineSearch{
@@ -634,17 +647,28 @@ a :hover .seeMoreBtn{
 
 /*  Animations  */
 @keyframes homePageItemHover {
-  0% {
-  border-radius: 28px;}
-  100% {
-    border-radius: 58px}                  
+
+  from {
+    border-radius: 28px;
+  }
+
+  to {
+    border-radius: 58px
+  }
 }
+
 
 @keyframes homePageItemHover-out {
   0% {
   border-radius: 58px;}
   100% {
     border-radius: 28px}                  
+}
+@keyframes searchPageItemHover {
+  0% {background-color: #D9D9D9;
+  border-radius: 28px;}
+  100% {background-color: #e3dede;
+    border-radius: 58px}                  
 }
 /* @keyframes homePageItemHover {
   0% {background-color: #D9D9D9;

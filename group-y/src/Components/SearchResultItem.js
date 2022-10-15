@@ -16,6 +16,7 @@ const SearchResultItem = (props) => {
   return (
     
     <div className='SearchResultContainer' >
+        <div className='animationParent'>
         <div className='searchResultItem'onClick={() => itemClicked(id)}>
             <img className = 'searchImage' src={img}></img>
             <div className='rightContainer'>
@@ -23,6 +24,7 @@ const SearchResultItem = (props) => {
 
                 <li className='BottomLineSearch'> <span className='descSearchItem'>{description} </span><span className='rightAlignItemSearch'>{price}</span></li>
             </div>
+        </div>
         </div>
     </div>
   )

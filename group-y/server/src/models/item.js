@@ -15,6 +15,7 @@ const itemSchema = new mongoose.Schema({
         description: String, 
         isAvailable: Boolean, 
         timestamp: {type: Date, default: Date.now},
+        currentlyAvailable: Boolean,
     },
   {
     toJSON: {virtuals: true},

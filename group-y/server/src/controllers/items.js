@@ -19,7 +19,7 @@ const getItems = async (request, response) => {
 const searchItems = async (request, response) => {
 
     let query = request.body.query
-    console.log(query)
+
     let items;
     if(query){
         items = await Items.find({

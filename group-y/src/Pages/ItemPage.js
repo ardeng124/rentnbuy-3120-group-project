@@ -28,7 +28,6 @@ const ItemPage = () => {
 
     const rentItem = () => {
         AxiosService.rentAnItem(id).then(response => {
-            console.log("hi", response.data.items)
             AxiosService.getItemDetails(id).then(response => {
                 setItemDetails(response.data.items[0])
             }) 
@@ -66,7 +65,6 @@ const ItemPage = () => {
                 <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
                 {itemDetails.isAvailable ?  <button className="appBtn" onClick={rentItem}>Rent</button> : <button disabled className="btnReplacment">Unavailable</button>}
-                {/* <button className="appBtn" onClick={rentItem}>Rent</button> */}
             </div>
         </div>
         </div>

@@ -21,14 +21,14 @@ This is the initial README file for GROUP Y in the COMP 3120 Group Project. This
 Group Y will make use of MongoDB as its dedicated backend database, which will be used to store the following potential information:
 
 ### Mongo Database (MongoDB)
-|         |        |
 |---------|--------|
-| Session | UserID |
-|         | Token  |
+| Session || UserID |
+|         || Token  |
+|---------|--------|
+
 
 
 ### Local Storage (Cookies)
-|                                                                                 |
 |---------------------------------------------------------------------------------|
 | Cookies: | - "Cart details (Object containing an array of items, the total cost)" |
 |          | - "SessionID / JWT / method of identifying user"                       |

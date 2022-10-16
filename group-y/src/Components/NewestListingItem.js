@@ -6,6 +6,7 @@ function NewestListingItem(props) {
     const { itemDesc } = props  
     const { itemPrice } = props  
     const { ClickFunc } = props  
+    const { isAvailable } = props  
 
     let modifiedDesc = ""
     if (typeof itemDesc !== "undefined") {
@@ -16,22 +17,44 @@ function NewestListingItem(props) {
         modifiedPrice = "$"+(itemPrice/100)
     }
 
-  return (
-    <section className='overallListingItem'>
-      <div className="newestListingItem" onClick={ClickFunc} >
-          <div>
-              <div className="NLRimagePlaceholder"></div>
-              <p>
-                  <em>{modifiedPrice}</em>
-              </p>
-          </div>
-          <div className="leftNLR">
-              <h3>{itemName}</h3>
-              <p>{modifiedDesc}</p>
-          </div>
-      </div>
-      </section>
-  )
+    if(!isAvailable) {
+        return(
+            <section className='overallListingItem'>
+            <div className="newestListingItemDisabled" onClick={ClickFunc} >
+                <div>
+                    <div className="NLRimagePlaceholder"></div>
+                    <p>
+                        <em>{modifiedPrice}</em>
+                    </p>
+                    <b>Unavailable</b>
+                </div>
+                <div className="leftNLR">
+                    <h3>{itemName}</h3>
+                    <p>{modifiedDesc}</p>
+
+                </div>
+            </div>
+            </section>
+        )
+    } else{
+        return (
+          <section className='overallListingItem'>
+            <div className="newestListingItem" onClick={ClickFunc} >
+                <div>
+                    <div className="NLRimagePlaceholder"></div>
+                    <p>
+                        <em>{modifiedPrice}</em>
+                    </p>
+                </div>
+                <div className="leftNLR">
+                    <h3>{itemName}</h3>
+                    <p>{modifiedDesc}</p>
+                </div>
+            </div>
+            </section>
+        )
+
+    }
 }
 
 export default NewestListingItem

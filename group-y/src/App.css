@@ -376,6 +376,20 @@ font-size: 14pt;
   /* margin: 9px; */
 
 }
+.newestListingItemDisabled{
+  padding: 35px;
+  height: auto;
+  display: flex;
+  background-color: #decdcd;
+  border-radius: 28px;
+  /* width:30%; */
+  flex: 1 1 28%;
+  flex-shrink: 1;
+  /* max-width: 25%; */
+  cursor: pointer;
+  /* margin: 9px; */
+
+}
 .overallListingItem :hover {
   animation: homePageItemHover 0.1s ease-in;
   animation-fill-mode: forwards;
@@ -596,6 +610,17 @@ a :hover .seeMoreBtn{
 .searchResultItem {
   display: flex;
   background-color: #D5EFE4;
+  padding:20px;
+  width:90%;
+  margin: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.searchResultItemDisabled{
+  display: flex;
+  background-color: #D5EFE4;
+  opacity: 65%;
   padding:20px;
   width:90%;
   margin: auto;

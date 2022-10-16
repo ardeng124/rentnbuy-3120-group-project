@@ -51,7 +51,7 @@ const MenuBarSearch = (props) => {
   </div>
   {/* {focus && */}
     <ul className='searchResults'>
-        {itemsArr.map(x=> (<li key = {x.id} className='searchResultItem'> <a href=""onClick={() =>itemClicked(x.id)} className ="srcItem" >{x.name}</a></li>))}
+        {itemsArr.map(x=> (<li key = {x.id} className='searchResultItemMenu'> <a href=""onClick={() =>itemClicked(x.id)} className ="srcItem" >{x.name}</a></li>))}
         <li className='seeMoreBtn'><a href="/search"> See more </a></li>
     </ul>
     {/* } */}

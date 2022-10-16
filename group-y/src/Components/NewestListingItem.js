@@ -13,7 +13,7 @@ function NewestListingItem(props) {
     }
     let modifiedPrice = ""
     if (typeof itemPrice !== "undefined") {
-        modifiedPrice = "$"+itemPrice
+        modifiedPrice = "$"+(itemPrice/100)
     }
 
   return (

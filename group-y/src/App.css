@@ -573,7 +573,7 @@ a :hover .seeMoreBtn{
   width:95%;
   margin: auto;
   border-radius: 20px;
-  paddding:10px;
+  padding:10px;
 }
 
 .searchImage{
@@ -582,7 +582,17 @@ a :hover .seeMoreBtn{
   margin-right:20px;
   border-radius:0px !important;
 }
+.searchResultItemMenu{
+  padding:5px !important;
+  cursor: pointer;  
+}
+.searchResultItemMenu li :hover a {
+  background-color: #bed3cf !important;
 
+}
+.searchResults li:hover a{
+  background-color: #bed3cf !important;
+}
 .searchResultItem {
   display: flex;
   background-color: #D5EFE4;
@@ -590,7 +600,7 @@ a :hover .seeMoreBtn{
   width:90%;
   margin: auto;
   border-radius: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 .animationParent :hover{
@@ -644,6 +654,13 @@ a :hover .seeMoreBtn{
 .TopLineSearch{
   flex-basis:20%;
 }
+
+.btnReplacment{
+  background-color: #81BEA4;
+  cursor: none;
+}
+
+
 
 /*  Animations  */
 @keyframes homePageItemHover {

@@ -27,7 +27,7 @@ const Search = () => {
         return itemsArr.filter((items) => {
           const itemName = items.name.toString().toLowerCase()
 
-          return itemName.includes(query) 
+          return itemName.includes(query.toLowerCase()) 
         }) 
       }
     const filteredItems = filterItems(itemsArr, searchVal);

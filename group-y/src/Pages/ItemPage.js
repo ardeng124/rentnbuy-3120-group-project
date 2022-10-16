@@ -8,8 +8,7 @@ import MenuBarSearch from "../Components/MenuBarSearch";
 const ItemPage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const id = useParams().id
-    console.log(id)
-    const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: ""})
+    const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: "",isAvailable:true})
     useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
@@ -21,14 +20,18 @@ const ItemPage = () => {
       })
       //Get Item Details
       AxiosService.getItemDetails(id).then(response => {
-        console.log("hi", response.data.items)
+        console.log(response)
         setItemDetails(response.data.items[0])
+        console.log(itemDetails)
     }) 
     }, [])
 
     const rentItem = () => {
         AxiosService.rentAnItem(id).then(response => {
             console.log("hi", response.data.items)
+            AxiosService.getItemDetails(id).then(response => {
+                setItemDetails(response.data.items[0])
+            }) 
         })
     }
 
@@ -62,7 +65,8 @@ const ItemPage = () => {
                 <p>Description: {itemDetails.description}</p>
                 <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
-                <button className="appBtn" onClick={rentItem}>Rent</button>
+                {itemDetails.isAvailable ?  <button className="appBtn" onClick={rentItem}>Rent</button> : <button disabled className="btnReplacment">Unavailable</button>}
+                {/* <button className="appBtn" onClick={rentItem}>Rent</button> */}
             </div>
         </div>
         </div>

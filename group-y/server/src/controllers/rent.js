@@ -5,7 +5,7 @@ const Item = require('../models/item')
 const getRentedItemsForAUser = async (request, response) => {
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     if(!decodedToken){
-       return response.status(401).json({status:"Unauthroised"})
+       return response.status(401).json({status:"Unauthorised"})
     }
     const user = await User.findOne({"username":decodedToken.username}).populate('rentedItems')
     if(!user){
@@ -18,15 +18,19 @@ const getRentedItemsForAUser = async (request, response) => {
     }
 }
 
+
 const rentAnItem = async (request, response) => {
+    console.log(request)
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     const itemId = request.params.itemId;
+    console.log(decodedToken)
     if(!decodedToken){
-        return response.status(401).json({status:"Unauthroised"})
+        return response.status(401).json({status:"Unauthorised"})
     }
     const filter = {"_id": itemId}
     const update = {"isAvailable": false}
     const item = await Item.findById(itemId)
+
     if(!item.isAvailable){
         return response.status(400).json({status: "Item is not available!"})
     }
@@ -39,8 +43,9 @@ const rentAnItem = async (request, response) => {
         return response.status(400).json({status:"Something went wrong"})
     }
     return response.json(updatedItem)
-    
+   
 }
+
 
 module.exports = {
     getRentedItemsForAUser,

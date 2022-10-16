@@ -5,7 +5,7 @@ const Item = require('../models/item')
 const getBoughtItems = async (request, response) => {
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     if(!decodedToken){
-       return response.status(401).json({status:"Unauthroised"})
+       return response.status(401).json({status:"Unauthorised"})
     }
     const user = await User.findOne({"username":decodedToken.username}).populate('boughtItems')
     if(!user){
@@ -22,7 +22,7 @@ const buyAnItem = async (request, response) => {
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     const itemId = request.params.itemId;
     if(!decodedToken){
-        return response.status(401).json({status:"Unauthroised"})
+        return response.status(401).json({status:"Unauthorised"})
     }
     const filter = {"_id": itemId}
     const update = {"isAvailable": false}

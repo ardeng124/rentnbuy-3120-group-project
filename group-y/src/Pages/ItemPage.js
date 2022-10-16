@@ -9,7 +9,8 @@ const ItemPage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const id = useParams().id
     console.log(id)
-    useEffect(() => {   
+    const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: ""})
+    useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
             console.log(response)
@@ -18,7 +19,21 @@ const ItemPage = () => {
             // navigate("/")
             }
       })
-    })
+      //Get Item Details
+      AxiosService.getItemDetails(id).then(response => {
+        console.log("hi", response.data.items)
+        setItemDetails(response.data.items[0])
+    }) 
+    }, [])
+
+    const rentItem = () => {
+        AxiosService.rentAnItem(id).then(response => {
+            console.log("hi", response.data.items)
+        })
+    }
+
+    console.log("dsd", itemDetails.price)
+
     return (
         <div className="ItemPage">
         <section className="loginheader">
@@ -41,16 +56,15 @@ const ItemPage = () => {
         <div className='topPageFlex'>
             <img className='itemImg' src= "https://i.stack.imgur.com/mwFzF.png"/>
             <div className='itemInfoBox'> 
-                <h2>Title</h2>
+                <h2>{itemDetails.name}</h2>
         
-                <h4>Price:</h4>
-                <h4>Price to rent:</h4>
-                <h4>Rating - calculate average rating</h4>
-                <p>Description</p>
-                <p>Features
-               
-                </p>
-                <button className="appBtn">Rent</button>
+                <h4>Price: {itemDetails.price}</h4>
+                <h4>Price to rent: </h4>
+                <h4>Rating - calculate average rating: {itemDetails.rating}</h4>
+                <p>Description: {itemDetails.description}</p>
+                <p>Features: </p>
+                <p>Location: {itemDetails.location}</p>
+                <button className="appBtn" onClick={rentItem}>Rent</button>
             </div>
         </div>
         </div>

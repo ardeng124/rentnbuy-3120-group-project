@@ -10,7 +10,7 @@ const getItems = async (request, response) => {
         items = await Items.find({
             "_id":id
         })
-    }else {
+    } else {
         items = await Items.find({})
     }
     response.json({items})

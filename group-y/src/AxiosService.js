@@ -85,6 +85,11 @@ const getUserDetails = async () => {
     return response
 }
 
+const getItemDetails = async (itemId) => {
+    const response = await axios.get(serverUrl + "api/items/" + itemId,{ headers: { "Authorization": 'Bearer ${token}' } })
+    return response
+}
+
 const editUserDetails = async (details) => {
     const response = await axios.put(serverUrl + "auth/edit/",details, { headers: { "Authorization": `Bearer ${token}` } })
     return response
@@ -99,6 +104,12 @@ const searchItems = async (query) => {
 
 }
 
+const rentAnItem = async (query) => {
+    const response = await axios.post(serverUrl + "api/rent/:itemId",query, { headers: { "Authorization": `Bearer ${token}` } })
+    return response
+
+}
+
 export default {
     validateToken,
     getUserName,
@@ -107,7 +118,9 @@ export default {
     logOut,
     register,
     getItems,
+    getItemDetails,
     getUserDetails,
     editUserDetails,
-    searchItems
+    searchItems,
+    rentAnItem
 }

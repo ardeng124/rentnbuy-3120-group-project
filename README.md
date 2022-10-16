@@ -21,11 +21,40 @@ This is the initial README file for GROUP Y in the COMP 3120 Group Project. This
 Group Y will make use of MongoDB as its dedicated backend database, which will be used to store the following potential information:
 
 ### Mongo Database (MongoDB)
-|---------|--------|
-| Session | UserID |
-|         | Token  |
-|---------|--------|
+|       |                                                                |
+|-------|----------------------------------------------------------------|
+| User: | "UserID                                                        |
+|       | Username                                                       |
+|       | password                                                       |
+|       | firstName                                                      |
+|       | LastName                                                       |
+|       | passwordHash                                                   |
+|       | Image                                                          |
+|       | Age                                                            |
+|       | Birthday                                                       |
+|       | isAdmin                                                        |
+|       | Phone Number                                                   |
+|       | Email Address                                                  |
+|       | Favourites (Array of items user has favourited)                |
+|       | Settings (Various flags for setting such as profanity filters) |
+|       | Location                                                       |
+|       | Reviews                                                        |
+|       | myItems                                                        |
+|       | boughtItems                                                    |
+|       | rentedItems"                                                   |
 
+
+|       |             |
+|-------|-------------|
+| Item: | "_id        |
+|       | Name        |
+|       | Rating      |
+|       | Price       |
+|       | creatorId   |
+|       | Location    |
+|       | Description |
+|       | isAvailable |
+|       | timestamp"  |
 
 
 ### Local Storage (Cookies)

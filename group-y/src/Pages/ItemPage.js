@@ -32,8 +32,6 @@ const ItemPage = () => {
         })
     }
 
-    console.log("dsd", itemDetails.price)
-
     return (
         <div className="ItemPage">
         <section className="loginheader">

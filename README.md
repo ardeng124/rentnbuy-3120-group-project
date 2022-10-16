@@ -22,8 +22,8 @@ Group Y will make use of MongoDB as its dedicated backend database, which will b
 
 ### Mongo Database (MongoDB)
 |---------|--------|
-| Session || UserID |
-|         || Token  |
+| Session | UserID |
+|         | Token  |
 |---------|--------|
 
 

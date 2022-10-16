@@ -106,7 +106,6 @@ const searchItems = async (query) => {
 
 const rentAnItem = async (itemId) => {
     getToken()
-    console.log("Matisse: ", itemId)
     console.log(token)
     const response = await axios.post(serverUrl + "api/rent/" + itemId, itemId, { headers: { "Authorization": `Bearer ${token}` } })
     console.log(response)

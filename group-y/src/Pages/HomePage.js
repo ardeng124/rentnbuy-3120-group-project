@@ -29,8 +29,18 @@ const HomePage = () => {
       })
         AxiosService.getItems().then(response => {
             // console.log(response)
-            let arr = response.slice(-8)
+            let arr = response
+            //todo FIX THIS 
+            arr.forEach(function(item, index, object) {
+                if (item.isAvailable === false) {
+                    console.log(item)
+                  object.splice(index, 1);
+            }
+        });
+        
+            arr = arr.slice(-8)
             arr = arr.reverse()
+            
             setListings(arr)
             // console.log(response.data.items)
         })
@@ -96,6 +106,7 @@ const HomePage = () => {
                                     itemDesc={x.description}
                                     itemPrice={x.price}
                                     itemId = {x.id}
+                                    isAvailable={x.isAvailable}
                                     ClickFunc = {() => itemClicked(x.id)}
                                 ></NewestListingItem>
                             ))}

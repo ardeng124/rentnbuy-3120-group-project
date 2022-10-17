@@ -32,6 +32,7 @@ const DropDownMenu = (props) => {
                      <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
+                     <li className='dropDownLi'><a className='dropDownA' href='/notifications'>Notifications</a></li>
                      <li className='dropDownLi'><button className="logOutBtn" onClick={(handleLogOut)}>Log out</button></li>
      
                  </div>

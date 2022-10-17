@@ -9,6 +9,7 @@ import ItemPage from './Pages/ItemPage.js';
 import Search from './Pages/Search';
 
 import Categories from "./Pages/Categories.js"
+import Notifications from './Pages/Notifications.js';
 
 import {
   BrowserRouter as Router,
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/search" element={<Search />} />
                     <Route path="/userview" element={<UserView />} />
                     <Route path="/item/:id" element={<ItemPage/>} />
+                    <Route path="/notifications" element={<Notifications/>} />
 
                 </Routes>
             </Router>

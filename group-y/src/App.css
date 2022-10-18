@@ -369,8 +369,8 @@ font-size: 14pt;
   background-color: #D9D9D9;
   border-radius: 28px;
   /* width:30%; */
-  flex: 1 1 28%;
-  flex-shrink: 1;
+  /* flex: 1 1 28%;
+  flex-shrink: 1; */
   /* max-width: 25%; */
   cursor: pointer;
   /* margin: 9px; */
@@ -380,11 +380,12 @@ font-size: 14pt;
   padding: 35px;
   height: auto;
   display: flex;
-  background-color: #decdcd;
+  background-color: rgb(218, 212, 212);
+  opacity: 60%;
   border-radius: 28px;
   /* width:30%; */
-  flex: 1 1 28%;
-  flex-shrink: 1;
+  /* flex: 1 1 28%; */
+  /* flex-shrink: 1; */
   /* max-width: 25%; */
   cursor: pointer;
   /* margin: 9px; */
@@ -399,8 +400,10 @@ font-size: 14pt;
 .overallListingItem{
   /* padding: 35px; */
   display: flex;
-  max-width: 23.5%;
+  max-width: 23.5% ;
   margin: 9px;
+  flex: 1 1 28%;
+  flex-shrink: 1;
 }
 .leftNLR {
   margin-left:30px;
@@ -684,6 +687,19 @@ a :hover .seeMoreBtn{
   background-color: #81BEA4;
   cursor: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

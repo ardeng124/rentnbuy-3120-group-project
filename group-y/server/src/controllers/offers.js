@@ -29,6 +29,10 @@ const getOffersToMe = async (request, response) => {
 const makeOffer = async(request, response) =>{
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
     const user = await User.findOne({username:decodedToken.username})
+    console.log(request.body)
+    if(request.body.startDate == "" || request.body.endDate == ""){
+        return response.status(304).json(({"status":"Please enter both start and end date"}))
+    }
     console.log(user)
     const item = await Item.findById(request.body.itemId)
     console.log(item)
@@ -38,10 +42,10 @@ const makeOffer = async(request, response) =>{
         item: item.id,
         startDate: request.body.startDate,
         endDate: request.body.endDate,
-        offerPrice: request.body.offerPrice,
+        offerPrice: item.rentPrice,
     })
     const savedOffer = await offer.save();
-    response.json (savedOffer)
+    return response.status(201).json((savedOffer))
 }
 
 module.exports = {

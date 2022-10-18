@@ -104,11 +104,15 @@ const searchItems = async (query) => {
 
 }
 
-const rentAnItem = async (itemId) => {
+const rentAnItem = async (offer) => {
     getToken()
-    console.log(token)
-    const response = await axios.post(serverUrl + "api/rent/" + itemId, itemId, { headers: { "Authorization": `Bearer ${token}` } })
-    console.log(response)
+
+    console.log(offer)
+    const response = await axios.post(serverUrl + "api/makeOffer", offer, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+
     return response
 }
 

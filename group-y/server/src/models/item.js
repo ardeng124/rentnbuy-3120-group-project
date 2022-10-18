@@ -4,6 +4,7 @@ const itemSchema = new mongoose.Schema({
         name: String,
         rating: Number,
         price: Number, 
+        rentPrice: Number,
         creatorId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'

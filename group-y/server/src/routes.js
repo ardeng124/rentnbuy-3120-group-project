@@ -4,6 +4,7 @@ const items = require('./controllers/items')
 const reviews = require('./controllers/reviews')
 const rent = require('./controllers/rent')
 const buy = require('./controllers/buy')
+const offer = require('./controllers/offers')
 const router = express.Router()
  
 router.get('/', (request, response) => {
@@ -64,5 +65,8 @@ router.post('/api/rent/:itemId', rent.rentAnItem)
 router.post('/api/buy/:itemId', buy.buyAnItem)
 router.get('/api/getBoughtItems', buy.getBoughtItems)
 
+router.post('/api/makeOffer', offer.makeOffer)
+router.get('/api/getOffersToMe', offer.getOffersToMe)
+router.get('/api/getOffersByMe', offer.getOffersByMe)
 
 module.exports = router 

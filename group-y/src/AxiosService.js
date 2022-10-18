@@ -104,11 +104,40 @@ const searchItems = async (query) => {
 
 }
 
-const rentAnItem = async (itemId) => {
+const rentAnItem = async (offer) => {
     getToken()
-    console.log(token)
-    const response = await axios.post(serverUrl + "api/rent/" + itemId, itemId, { headers: { "Authorization": `Bearer ${token}` } })
-    console.log(response)
+
+    console.log(offer)
+    const response = await axios.post(serverUrl + "api/makeOffer", offer, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+
+    return response
+}
+
+const getOffersByMe = async () => {
+    getToken()
+
+
+    const response = await axios.get(serverUrl + "api/getOffersByMe", { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+
+    return response
+}
+
+
+const getOffersToMe = async () => {
+    getToken()
+
+
+    const response = await axios.get(serverUrl + "api/getOffersToMe", { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+
     return response
 }
 
@@ -124,5 +153,7 @@ export default {
     getUserDetails,
     editUserDetails,
     searchItems,
-    rentAnItem
+    rentAnItem,
+    getOffersByMe,
+    getOffersToMe
 }

@@ -9,6 +9,7 @@ import {
   } from "react-router-dom"
 import NewestListingItem from '../Components/NewestListingItem';
 import MenuBarSearch from '../Components/MenuBarSearch';
+import FeedListingItem from '../Components/FeedListingItem';
 
 const HomePage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -17,6 +18,8 @@ const HomePage = () => {
     // const [convos, setConversations] = useState([])
 
     const [error, setError] = useState(false)
+    const [offers, setOffers] = useState([])
+
     const [newListings, setListings] = useState([])
     useEffect(() => {   
         AxiosService.validateToken()
@@ -36,6 +39,7 @@ const HomePage = () => {
                     console.log(item)
                   object.splice(index, 1);
             }
+
         });
         
             arr = arr.slice(-8)
@@ -43,6 +47,10 @@ const HomePage = () => {
             
             setListings(arr)
             // console.log(response.data.items)
+        })
+        AxiosService.getOffersToMe().then(response => {
+            console.log(response)
+            setOffers(response.data)
         })
     }, [])
     
@@ -95,6 +103,14 @@ const HomePage = () => {
                     {loggedIn && (
                         <div className="homePageContainer">
                             <h3> Your Feed</h3>
+                            <div className="itemContainer">
+                            {offers.map(x=><FeedListingItem
+                                    itemName={x.offerMadeBy.username}
+                                    itemToRent={x.item.name}
+                                    itemPrice={x.rentPrice}
+                                    ClickFunc = {() => navigate("/notifications")}
+                                ></FeedListingItem>)}
+                        </div>
                         </div>
                     )}
                     <div className="homePageContainer">

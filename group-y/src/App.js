@@ -7,7 +7,7 @@ import AccountDetails from './Pages/AccountDetails.js';
 import UserView from './Pages/UserView.js';
 import ItemPage from './Pages/ItemPage.js';
 import Search from './Pages/Search';
-
+import YourOffers from './Pages/YourOffers.js';
 import Categories from "./Pages/Categories.js"
 import Notifications from './Pages/Notifications.js';
 
@@ -41,6 +41,7 @@ function App() {
                     <Route path="/userview" element={<UserView />} />
                     <Route path="/item/:id" element={<ItemPage/>} />
                     <Route path="/notifications" element={<Notifications/>} />
+                    <Route path="/offers" element={<YourOffers/>} />
 
                 </Routes>
             </Router>

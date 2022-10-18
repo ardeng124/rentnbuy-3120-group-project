@@ -1,7 +1,7 @@
 const Items = require('../models/item')
 const User = require('../models/user')
 const Auth = require('./auth')
-
+const Util = require('./util')
 const getItems = async (request, response) => {
     let id = request.params.id;
 
@@ -33,20 +33,22 @@ const searchItems = async (request, response) => {
 
 const addItems = async(request, response) =>{
     const body = request.body 
-    const user = await User.findById(body.creatorId)
+    const username = await Util.getDecodedToken(Util.getToken(request)).username
+    const user = await User.findOne({username:username})
+    console.log(user)
     const item = new Items({
         name: body.name,
         rating: body.rating,
         price: body.price, 
         isAvailable: true,
-        creatorId: body.creatorId,
+        creatorId: user.id,
         location: body.location, 
         AgeRating: body.ageRating, 
         description: body.description, 
         timestamp: new Date(),
     })
     const savedItem = await item.save()
-    user.items = user.items.concat(savedItem.id)
+    user.myItems = user.myItems.concat(savedItem.id)
     response.json(savedItem)
 }
 

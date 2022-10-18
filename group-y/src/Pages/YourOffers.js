@@ -9,9 +9,9 @@ import {
   } from "react-router-dom"
 
 import MenuBarSearch from '../Components/MenuBarSearch';
-import NotificationComponent from '../Components/NotificationComponent';
+import OfferComponent from '../Components/OfferComponent';
 
-const Notifications = () => {
+const YourOffers = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [offers, setOffers] = useState([])
     const navigate = useNavigate()
@@ -21,16 +21,15 @@ const Notifications = () => {
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
             if(response == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             } else {
                 navigate('/login')
             }
-            AxiosService.getOffersToMe().then(response => {
-                console.log(response)
+            AxiosService.getOffersByMe().then(response => {
                 setOffers(response.data)
+                console.log(response.data)
             })
 
       })
@@ -71,15 +70,15 @@ const Notifications = () => {
                                 <MenuBarSearch></MenuBarSearch>
                             </li>
                         </ul>
-                        <h1>Your notifications </h1>
+                        <h1>Your rent requests </h1>
                     </div>
                 </section>
                 <section className="notificationPagemainContent">
-                    {offers.map(x => <NotificationComponent senderName={x.offerMadeBy.username} dateFrom={x.startDate} dateTo={x.endDate} itemName={x.item.name} id={x.id} itemId={x.item.id} denyFn={denyOffer} approveFn={approveOffer}></NotificationComponent>)}
+                    {offers.map(x => <OfferComponent senderName={x.offerMadeTo.username} dateFrom={x.startDate} dateTo={x.endDate} itemName={x.item.name} id={x.id} itemId={x.item.id} Status={x.status}></OfferComponent>)}
                 </section>
             </div>
         )
     
 }
 
-export default Notifications
+export default YourOffers

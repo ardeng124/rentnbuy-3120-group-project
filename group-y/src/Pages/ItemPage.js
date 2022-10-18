@@ -5,14 +5,19 @@ import DropDownMenu from '../Components/DropDownMenu'
 import MenuBarSearch from "../Components/MenuBarSearch";
 
 
+
 const ItemPage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
+    const initialState = {start: '', end: ''}
+    const [formInfo, setFormInfo] = useState(initialState)
+    const [reqStatus, setReqStatus] = useState("")
+
     const id = useParams().id
-    const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: "",isAvailable:true})
+    const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: "",isAvailable:true, rentPrice:""})
     useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
+
             if(response == 'success'){
                 setLoggedIn(true)
             // navigate("/")
@@ -20,18 +25,38 @@ const ItemPage = () => {
       })
       //Get Item Details
       AxiosService.getItemDetails(id).then(response => {
-        console.log(response)
         setItemDetails(response.data.items[0])
-        console.log(itemDetails)
     }) 
     }, [])
 
-    const rentItem = () => {
-        AxiosService.rentAnItem(id).then(response => {
-            AxiosService.getItemDetails(id).then(response => {
-                setItemDetails(response.data.items[0])
-            }) 
+    const rentItem = (event) => {
+        event.preventDefault()
+        const rentRequest = {
+            "startDate":formInfo.start,
+            "endDate":formInfo.end,
+            itemId:id
+        }
+        AxiosService.rentAnItem(rentRequest).then(response => {
+
+            if(response.status == 201) {
+                setReqStatus("Successfully sent request")
+            } 
+            if(response=="error"){
+                window.alert("Please enter both a start and end date")
+            }
+              
         })
+    }
+
+    const updateField = (event) => {
+        // which input element is this
+        const name = event.target.attributes.name.value
+        if (name === "start") {
+            setFormInfo({...formInfo, start: event.target.value})
+        } else if (name === "end") {
+            setFormInfo({...formInfo, end: event.target.value})
+        }
+
     }
 
     return (
@@ -59,12 +84,22 @@ const ItemPage = () => {
                 <h2>{itemDetails.name}</h2>
         
                 <h4>Price: {itemDetails.price}</h4>
-                <h4>Price to rent: </h4>
+                <h4>Price to rent: {itemDetails.rentPrice} </h4>
                 <h4>Rating - calculate average rating: {itemDetails.rating}</h4>
                 <p>Description: {itemDetails.description}</p>
                 <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
-                {itemDetails.isAvailable ?  <button className="appBtn" onClick={rentItem}>Rent</button> : <button disabled className="btnReplacment">Unavailable</button>}
+                {itemDetails.isAvailable && <div> 
+                    <form onSubmit={rentItem} className = "formContainer">
+                
+                <label htmlFor="start">Rent Period: </label>
+                <li> From</li><input className="input1" type="date" id="start" name="start" min={new Date().toLocaleDateString('en-ca')} onChange={updateField} required/>
+                <li>To</li><input className="input1" type="date" id="start" name="end" min={formInfo.start} onChange={updateField} required/>
+
+            </form>
+                    </div>}
+                {itemDetails.isAvailable ?  <button className="appBtn" type='submit' onClick={rentItem}>Rent</button> : <button disabled className="btnReplacment">Unavailable</button>}
+                <p>{reqStatus}</p>
             </div>
         </div>
         </div>

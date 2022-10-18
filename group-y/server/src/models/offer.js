@@ -21,7 +21,7 @@ const offerSchema = new mongoose.Schema({
         },
         offerPrice: Number,
         timestamp: {type: Date, default: Date.now},
-        
+        status:String
     },
   {
     toJSON: {virtuals: true},

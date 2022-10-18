@@ -48,6 +48,7 @@ const makeOffer = async(request, response) =>{
         startDate: request.body.startDate,
         endDate: request.body.endDate,
         offerPrice: item.rentPrice,
+        status: "Pending"
     })
     const savedOffer = await offer.save();
     return response.status(201).json((savedOffer))

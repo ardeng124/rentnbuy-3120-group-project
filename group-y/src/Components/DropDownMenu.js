@@ -27,12 +27,14 @@ const DropDownMenu = (props) => {
      if (isLoggedIn) {
          return (
              <div className='dropDownMaster'>
+                <li className="userNamedisplay"> {localStorage.getItem("username")} </li>
                  <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
                  <div className="dropdownMenu">
                      <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/favourites'>Favourites</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/notifications'>Notifications</a></li>
+                     <li className='dropDownLi'><a className='dropDownA' href='/offers'>Your offers</a></li>
                      <li className='dropDownLi'><button className="logOutBtn" onClick={(handleLogOut)}>Log out</button></li>
      
                  </div>

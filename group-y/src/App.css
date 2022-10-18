@@ -734,7 +734,6 @@ display: flex;
   flex-grow: 1;
   padding: 10px;
 margin:5px;
-
 }
 .appBtnNotif{
   background-color: #81BEA4;
@@ -768,7 +767,28 @@ margin:5px;
   border-radius: 10px;
 }
 
+.userNamedisplay{
+  color:white;
+  padding:18px
+}
 
+.OfferItem{
+  display: flex;
+    background-color: #D5EFE4;
+    padding:20px;
+    width:90%;
+    margin: auto;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    list-style-type: none;
+    margin-bottom:20px;
+  }
+  
+  .OfferItem li{
+    flex-grow: 1;
+    padding: 10px;
+  margin:5px;
+  }
 
 /*  Animations  */
 @keyframes homePageItemHover {

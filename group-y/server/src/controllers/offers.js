@@ -40,6 +40,7 @@ const makeOffer = async(request, response) =>{
     
     
     const item = await Item.findById(request.body.itemId)
+    console.log(item.creatorId)
     const reciever = await User.findById(item.creatorId)
 
     const offer = new Offers ({

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function FeedListingItem(props) {
+function FeedListingItemOwn(props) {
     const { itemName } = props
     const {itemToRent} = props
     const { ClickFunc } = props  
@@ -14,9 +14,8 @@ function FeedListingItem(props) {
 
                 </div>
                 <div className="leftNLR">
-                    <h3>{itemName}</h3>
-                    <p>Wants to rent <b>{itemToRent}</b></p>
-                    <li><i>{status} </i></li>
+                    <h3> Your reqeust to {itemName}</h3>
+                    <p>for <b>{itemToRent}</b> is <i>{status}</i></p>
                 </div>
             </div>
             </section>
@@ -25,4 +24,4 @@ function FeedListingItem(props) {
     
 }
 
-export default FeedListingItem
+export default FeedListingItemOwn

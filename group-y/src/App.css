@@ -380,7 +380,7 @@ font-size: 14pt;
   padding: 35px;
   height: auto;
   display: flex;
-  background-color: #d0c3c3;
+  background-color: #cfdedb;
   border-radius: 28px;
   /* width:30%; */
   /* flex: 1 1 28%;
@@ -428,6 +428,7 @@ font-size: 14pt;
   margin: 9px;
   /* flex: 1 1 28%; */
   flex-shrink: 1;
+  list-style-type: none;
 }
 .overallListingItemFeed :hover {
   animation: homePageItemHover 0.1s ease-in;

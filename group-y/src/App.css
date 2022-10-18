@@ -376,6 +376,20 @@ font-size: 14pt;
   /* margin: 9px; */
 
 }
+.newestListingItemFeed{
+  padding: 35px;
+  height: auto;
+  display: flex;
+  background-color: #d0c3c3;
+  border-radius: 28px;
+  /* width:30%; */
+  /* flex: 1 1 28%;
+  flex-shrink: 1; */
+  /* max-width: 25%; */
+  cursor: pointer;
+  /* margin: 9px; */
+
+}
 .newestListingItemDisabled{
   padding: 35px;
   height: auto;
@@ -405,6 +419,21 @@ font-size: 14pt;
   flex: 1 1 28%;
   flex-shrink: 1;
 }
+
+.overallListingItemFeed{
+  /* padding: 35px; */
+  display: flex;
+  max-width: 23.5% ;
+  margin: 9px;
+  /* flex: 1 1 28%; */
+  flex-shrink: 1;
+}
+.overallListingItemFeed :hover {
+  animation: homePageItemHover 0.1s ease-in;
+  animation-fill-mode: forwards;
+  /* animation-direction: reverse; */
+}
+
 .leftNLR {
   margin-left:30px;
 }
@@ -689,17 +718,55 @@ a :hover .seeMoreBtn{
 }
 
 
+.NotificationItem{
+display: flex;
+  background-color: #D5EFE4;
+  padding:20px;
+  width:90%;
+  margin: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  list-style-type: none;
+  margin-bottom:20px;
+}
 
+.NotificationItem li{
+  flex-grow: 1;
+  padding: 10px;
+margin:5px;
 
+}
+.appBtnNotif{
+  background-color: #81BEA4;
 
+  width:120px;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  height: auto;
+  display: block;
 
+}
 
+.appBtnNotifDeny{
+  background-color: #be8a81;
 
-
-
-
-
-
+  width:120px;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  height: auto;
+  display: block;
+}
+.notificationPagemainContent{
+  background-color: #c2efdc6d;
+  width:95%;
+  margin: auto;
+  padding:20px;
+  border-radius: 10px;
+}
 
 
 

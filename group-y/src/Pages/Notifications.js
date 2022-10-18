@@ -9,9 +9,11 @@ import {
   } from "react-router-dom"
 
 import MenuBarSearch from '../Components/MenuBarSearch';
+import NotificationComponent from '../Components/NotificationComponent';
 
 const Notifications = () => {
     const [loggedIn, setLoggedIn] = useState(false)
+    const [offers, setOffers] = useState([])
     const navigate = useNavigate()
 
     // const [convos, setConversations] = useState([])
@@ -26,6 +28,10 @@ const Notifications = () => {
             } else {
                 navigate('/login')
             }
+            AxiosService.getOffersToMe().then(response => {
+                console.log(response)
+                setOffers(response.data)
+            })
 
       })
 
@@ -35,7 +41,14 @@ const Notifications = () => {
         console.log("clicked on user icon")
         navigate("/userview")
     }
-    
+
+    const denyOffer = () => {
+        console.log("deny")
+    }
+    const approveOffer = () => {
+
+        console.log("approve")
+    }
         return (
             <div className="NotificationPage">
                 <section className="loginheader">
@@ -62,7 +75,7 @@ const Notifications = () => {
                     </div>
                 </section>
                 <section className="notificationPagemainContent">
-                    
+                    {offers.map(x => <NotificationComponent senderName={x.offerMadeBy.username} dateFrom={x.startDate} dateTo={x.endDate} itemName={x.item.name} id={x.id} itemId={x.item.id} denyFn={denyOffer} approveFn={approveOffer}></NotificationComponent>)}
                 </section>
             </div>
         )

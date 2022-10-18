@@ -116,6 +116,31 @@ const rentAnItem = async (offer) => {
     return response
 }
 
+const getOffersByMe = async () => {
+    getToken()
+
+
+    const response = await axios.get(serverUrl + "api/getOffersByMe", { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+
+    return response
+}
+
+
+const getOffersToMe = async () => {
+    getToken()
+
+
+    const response = await axios.get(serverUrl + "api/getOffersToMe", { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+
+    return response
+}
+
 export default {
     validateToken,
     getUserName,
@@ -128,5 +153,7 @@ export default {
     getUserDetails,
     editUserDetails,
     searchItems,
-    rentAnItem
+    rentAnItem,
+    getOffersByMe,
+    getOffersToMe
 }

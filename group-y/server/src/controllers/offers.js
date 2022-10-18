@@ -5,6 +5,7 @@ const Item = require('../models/item')
 const Util = require('./util')
 
 const getOffersByMe = async (request, response) => {
+
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
     const allOffers = await Offers.find(
         {
@@ -16,6 +17,7 @@ const getOffersByMe = async (request, response) => {
 }
 
 const getOffersToMe = async (request, response) => {
+
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
     const allOffers = await Offers.find(
         {
@@ -34,11 +36,14 @@ const makeOffer = async(request, response) =>{
         return response.status(304).json(({"status":"Please enter both start and end date"}))
     }
     console.log(user)
+    
+    
     const item = await Item.findById(request.body.itemId)
-    console.log(item)
+    const reciever = await User.findById(item.creatorId)
+
     const offer = new Offers ({
-        offerMadeBy: user.id ,
-        offerMadeTo: item.creatorId, 
+        offerMadeBy: user,
+        offerMadeTo: reciever, 
         item: item.id,
         startDate: request.body.startDate,
         endDate: request.body.endDate,
@@ -46,6 +51,13 @@ const makeOffer = async(request, response) =>{
     })
     const savedOffer = await offer.save();
     return response.status(201).json((savedOffer))
+}
+
+const approveOffer = async(request, response) => {
+    //TODO
+    //offer status is set to approved
+    //item is set to unavailable
+    //offer is deleted / somehow removed from owner end or changed in a way to separate it from the others
 }
 
 module.exports = {

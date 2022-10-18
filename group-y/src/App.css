@@ -414,10 +414,11 @@ font-size: 14pt;
 .overallListingItem{
   /* padding: 35px; */
   display: flex;
-  max-width: 23.5% ;
+  /* max-width: 23.5% ; */
+  max-width:400px;
   margin: 9px;
-  flex: 1 1 28%;
-  flex-shrink: 1;
+  /* flex: 1 1 28%; */
+  /* flex-shrink: 1; */
 }
 
 .overallListingItemFeed{
@@ -783,12 +784,37 @@ margin:5px;
     list-style-type: none;
     margin-bottom:20px;
   }
+
+.OfferItemDenied{
+  display: flex;
+  background-color: #eedfdf;
+  padding:20px;
+  width:90%;
+  margin: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  list-style-type: none;
+  margin-bottom:20px;
+}
   
-  .OfferItem li{
-    flex-grow: 1;
-    padding: 10px;
-  margin:5px;
-  }
+
+.OfferItemApproved{
+  display: flex;
+  background-color: #dbe8da;
+  padding:20px;
+  width:90%;
+  margin: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  list-style-type: none;
+  margin-bottom:20px;
+}
+  
+    .offerItemLi{
+      flex-grow: 1;
+      padding: 10px;
+    margin:5px;
+    }
 
 /*  Animations  */
 @keyframes homePageItemHover {

@@ -34,13 +34,7 @@ const HomePage = () => {
             // console.log(response)
             let arr = response
             //todo FIX THIS 
-            arr.forEach(function(item, index, object) {
-                if (item.isAvailable === false) {
-                    console.log(item)
-                  object.splice(index, 1);
-            }
-
-        });
+           
         
             arr = arr.slice(-8)
             arr = arr.reverse()

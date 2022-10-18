@@ -1,5 +1,8 @@
 import React from 'react'
 
+/**
+ * FeedListingItem: Used on homepage to display details from rent requests made on items the current user has posted
+ */
 function FeedListingItem(props) {
     const { itemName } = props
     const {itemToRent} = props

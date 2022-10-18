@@ -3,6 +3,10 @@ import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
 
+/**
+ * MenuBarSearch: Displays a serach bar in the top menu bar which displays the top 10 search results that are currently available
+ *  On each search a request is sent to the database 
+ */
 
 const MenuBarSearch = (props) => {
     const navigate = useNavigate()
@@ -25,7 +29,10 @@ const MenuBarSearch = (props) => {
         event.preventDefault()
         AxiosService.searchItems(searchVal).then(response => {
             console.log(response.data.items)
-            let arr = (response.data.items).slice(-10)
+            let arr = response.data.items
+            //hide items that are unavailable
+            arr = arr.filter(x => x.isAvailable==true)
+            arr =arr.slice(-10)
             setItemsArr(arr)
         })
     }

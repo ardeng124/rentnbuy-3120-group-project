@@ -1,5 +1,8 @@
 import React from 'react'
 
+/**
+ * OfferComponent: used on the offers page to show the users individual rent requests
+ */
 const OfferComponent = (props) => {
 const {senderName, dateFrom,dateTo, itemName, Status} = props
 let dateTrimStart = dateFrom.slice(0,-14)

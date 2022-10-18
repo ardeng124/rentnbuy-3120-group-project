@@ -1,5 +1,8 @@
 import React from 'react'
 
+/**
+ * NotificationComponent: used on the notification page to display a rent request on an item
+ */
 const NotificationComponent = (props) => {
 const {senderName, dateFrom,dateTo, itemName, id, itemId, denyFn, approveFn} = props
 

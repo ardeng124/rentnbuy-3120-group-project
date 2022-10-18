@@ -119,7 +119,7 @@ const HomePage = () => {
                                     itemName={x.offerMadeTo.username}
                                     itemToRent={x.item.name}
                                     itemPrice={x.rentPrice}
-                                    ClickFunc = {() => navigate("/notifications")}
+                                    ClickFunc = {() => navigate("/offers")}
                                     status ={x.status}
                                 ></FeedListingItemOwn>)}
                         </div>

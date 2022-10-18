@@ -10,6 +10,10 @@ import {
 import MenuBarSearch from '../Components/MenuBarSearch';
 import SearchResultItem from '../Components/SearchResultItem';
 
+/**
+ * Search: Works by getting all items from database and then filtering what is shown to the user based on input 
+ *
+ */
 const Search = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [itemsArr, setItemsArr] = useState([])

@@ -28,7 +28,9 @@ const getOffersToMe = async (request, response) => {
         .populate("item")
     response.json(allOffers)
 }
-
+/**
+ * Make offer
+ */
 const makeOffer = async(request, response) =>{
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
     const user = await User.findOne({username:decodedToken.username})

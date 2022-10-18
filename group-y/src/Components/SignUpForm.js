@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import Stack from '@mui/material/Stack';
 
-//Need A button that says register to go to a register page
-//instead of the initial login page
+/**
+ * SignUpForm: contains form info for the sign up page. On submit function is {updateFn}
+ */
 const SignUpForm = ({updateFn}) => {
 
     const initialState = {

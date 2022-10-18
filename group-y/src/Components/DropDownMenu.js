@@ -1,9 +1,9 @@
-// Could use to refactor all this code.... But it is throwing an error in console 
-//if we can fix this error this can be used...
-
 import { useNavigate } from "react-router-dom"
 import AxiosService from "../AxiosService"
 
+/**
+ * DropDownMenu: Contains the user icon: A button which takes the user to their profile, and a dropdown menu which contains various user related links 
+ */
 const DropDownMenu = (props) => {
     const {isLoggedIn} = props
     const navigate = useNavigate()

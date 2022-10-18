@@ -1,5 +1,8 @@
 import React from 'react'
 
+/**
+ * FriendItemProfile: Used on profile page to display friends of the user
+ */
 const FriendItemProfile = (props) => {
     const {friendName} = props
 

@@ -1,8 +1,9 @@
 //Imports
 import React, { useState } from "react";
 
-//Need A button that says register to go to a register page
-//instead of the initial login page
+/**
+ * LogInForm: Contains a form that has inputs for the user to log in. On submit runs {updateFn}
+ */
 const LogInForm = ({updateFn}) => {
 
     const initialState = {username: '', password: ''}

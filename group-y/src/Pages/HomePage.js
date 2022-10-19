@@ -10,6 +10,7 @@ import {
 import NewestListingItem from '../Components/NewestListingItem';
 import MenuBarSearch from '../Components/MenuBarSearch';
 import FeedListingItem from '../Components/FeedListingItem';
+import FeedListingItemOwn from '../Components/FeedListingItemOwn';
 
 const HomePage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
@@ -19,6 +20,7 @@ const HomePage = () => {
 
     const [error, setError] = useState(false)
     const [offers, setOffers] = useState([])
+    const [yourOffers, setYourOffers] = useState([])
 
     const [newListings, setListings] = useState([])
     useEffect(() => {   
@@ -34,13 +36,7 @@ const HomePage = () => {
             // console.log(response)
             let arr = response
             //todo FIX THIS 
-            arr.forEach(function(item, index, object) {
-                if (item.isAvailable === false) {
-                    console.log(item)
-                  object.splice(index, 1);
-            }
-
-        });
+           
         
             arr = arr.slice(-8)
             arr = arr.reverse()
@@ -50,7 +46,15 @@ const HomePage = () => {
         })
         AxiosService.getOffersToMe().then(response => {
             console.log(response)
-            setOffers(response.data)
+            let arr = response.data
+            arr = arr.slice(-4)
+            setOffers(arr)
+        })
+        AxiosService.getOffersByMe().then(response => {
+            console.log(response)
+            let arr = response.data
+            arr = arr.slice(-4)
+            setYourOffers(arr)
         })
     }, [])
     
@@ -109,7 +113,15 @@ const HomePage = () => {
                                     itemToRent={x.item.name}
                                     itemPrice={x.rentPrice}
                                     ClickFunc = {() => navigate("/notifications")}
+                                    status ={x.status}
                                 ></FeedListingItem>)}
+                                {yourOffers.map(x=><FeedListingItemOwn
+                                    itemName={x.offerMadeTo.username}
+                                    itemToRent={x.item.name}
+                                    itemPrice={x.rentPrice}
+                                    ClickFunc = {() => navigate("/offers")}
+                                    status ={x.status}
+                                ></FeedListingItemOwn>)}
                         </div>
                         </div>
                     )}

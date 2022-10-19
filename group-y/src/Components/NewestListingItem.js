@@ -1,5 +1,9 @@
 import React from 'react'
 
+/**
+ * NewestListingItem: Used on homepage to show the latest listings
+ * Style differs depending on whether the listing is available or not
+ */
 function NewestListingItem(props) {
     const { itemName } = props
     const { itemImg } = props

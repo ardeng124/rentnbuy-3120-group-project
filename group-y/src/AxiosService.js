@@ -64,7 +64,6 @@ const login = async (newUser) => {
 
 const register = async (newUser) => {
     //do some stuff with cookies
-   
     const response2 = await axios.post(serverUrl + "auth/register/", newUser)
     if (response2.data.status == 409){
         console.log("aaa")
@@ -96,48 +95,45 @@ const editUserDetails = async (details) => {
 }
 
 const searchItems = async (query) => {
-
     const response = await axios.post(serverUrl + "api/search", {'query':query}).catch((error) => {
         return error.response.data.error
       })
     return response
-
 }
 
 const rentAnItem = async (offer) => {
     getToken()
-
     console.log(offer)
     const response = await axios.post(serverUrl + "api/makeOffer", offer, { headers: { "Authorization": `Bearer ${token}` } })
     .catch((error) => {
         return "error"
     })
-
     return response
 }
 
 const getOffersByMe = async () => {
     getToken()
-
-
     const response = await axios.get(serverUrl + "api/getOffersByMe", { headers: { "Authorization": `Bearer ${token}` } })
     .catch((error) => {
         return "error"
     })
-
     return response
 }
 
-
 const getOffersToMe = async () => {
     getToken()
-
-
     const response = await axios.get(serverUrl + "api/getOffersToMe", { headers: { "Authorization": `Bearer ${token}` } })
     .catch((error) => {
         return "error"
     })
+    return response
+}
 
+const offerStatus = async(id, status) => {
+    const response = await axios.put(serverUrl + "api/approveOffer/"+id , {"status":status}, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
     return response
 }
 
@@ -155,5 +151,6 @@ export default {
     searchItems,
     rentAnItem,
     getOffersByMe,
-    getOffersToMe
+    getOffersToMe,
+    offerStatus
 }

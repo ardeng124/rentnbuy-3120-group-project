@@ -30,7 +30,13 @@ const Notifications = () => {
             }
             AxiosService.getOffersToMe().then(response => {
                 console.log(response)
-                setOffers(response.data)
+                let arr = response.data
+                
+                arr = arr.filter(x => x.status == "Pending")
+                console.log(arr)
+                
+
+                setOffers(arr)
             })
 
       })
@@ -42,11 +48,12 @@ const Notifications = () => {
         navigate("/userview")
     }
 
-    const denyOffer = () => {
+    const denyOffer = (id) => {
+        AxiosService.offerStatus(id, "Denied").then(response => console.log(response))
         console.log("deny")
     }
-    const approveOffer = () => {
-
+    const approveOffer = (id) => {
+        AxiosService.offerStatus(id, "Approved").then(response => console.log(response))
         console.log("approve")
     }
         return (

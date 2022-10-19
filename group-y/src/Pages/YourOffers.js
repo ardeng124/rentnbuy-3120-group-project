@@ -41,13 +41,7 @@ const YourOffers = () => {
         navigate("/userview")
     }
 
-    const denyOffer = () => {
-        console.log("deny")
-    }
-    const approveOffer = () => {
 
-        console.log("approve")
-    }
         return (
             <div className="NotificationPage">
                 <section className="loginheader">

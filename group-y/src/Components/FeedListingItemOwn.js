@@ -1,9 +1,9 @@
 import React from 'react'
 
 /**
- * FeedListingItem: Used on homepage to display details from rent requests made on items the current user has posted
+ * FeedListingItemOwn: Used on homepage to display details from rent requests the current user has made
  */
-function FeedListingItem(props) {
+function FeedListingItemOwn(props) {
     const { itemName } = props
     const {itemToRent} = props
     const { ClickFunc } = props  
@@ -17,9 +17,8 @@ function FeedListingItem(props) {
 
                 </div>
                 <div className="leftNLR">
-                    <h3>{itemName}</h3>
-                    <p>Wants to rent <b>{itemToRent}</b></p>
-                    <li><i>{status} </i></li>
+                    <h3> Your reqeust to {itemName}</h3>
+                    <p>for <b>{itemToRent}</b> is <i>{status}</i></p>
                 </div>
             </div>
             </section>
@@ -28,4 +27,4 @@ function FeedListingItem(props) {
     
 }
 
-export default FeedListingItem
+export default FeedListingItemOwn

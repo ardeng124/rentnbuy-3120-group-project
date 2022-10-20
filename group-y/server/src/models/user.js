@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
     isAdmin: Boolean, 
     phoneNumber: String, 
     emailAddress: String, 
-    favourites:  { type : Array , "default" : [] },
+    favourites: [
+      {
+        type: Object,
+        ref: 'User'
+      }],
     location: String,
     reviews: [
         {

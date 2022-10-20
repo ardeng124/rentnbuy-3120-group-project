@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const models = require('../models')
 const Util = require('./util')
+const Item = require('../models/item')
 
 const User = require('../models/user')
 
@@ -104,7 +105,8 @@ const getUserDetails = async (request, response) => {
                     location: match.location,
                     rentedItems: match.rentedItems,
                     boughtItems:match.boughtItems,
-                    myItems: match.myItems
+                    myItems: match.myItems,
+                    favourites:match.favourites
                 })       
             }else{
                 return response.sendStatus(400)
@@ -209,6 +211,56 @@ const changeUserPassword = async (request, response) => {
     return response.status(200).json({status:"password changed"})
 }
 
+const addFavourite = async (request, response) => {
+    const decodedToken = Util.getDecodedToken(Util.getToken(request))
+    const user = await User.findOne({username:decodedToken.username})
+    const item = await Item.findById(request.body.itemId)
+    let favs = user.favourites
+    // console.log(favs)
+
+    favs.forEach(x => {if(x._id == item.id) {
+        response.json({"status":"favourite already exists"})
+        return;
+    }})
+    favs.push(item)
+    User.findByIdAndUpdate(user.id, {
+        favourites:favs
+    },
+    function (err, res) {
+        if (err){
+        console.log(err)
+        response.status(400).json(err)
+        }
+        else{
+        // console.log(res);
+        }
+    })
+    return response.status(200).json({status:"favourite added"})
+}
+
+const deleteFavourite = async (request, response) => {
+    const decodedToken = Util.getDecodedToken(Util.getToken(request))
+    const user = await User.findOne({username:decodedToken.username})
+    const item = await Item.findById(request.body.itemId)
+    let favs = user.favourites
+    // console.log(favss
+    favs = favs.filter(x => x._id != item.id)
+    User.findByIdAndUpdate(user.id, {
+        favourites:favs
+    },
+    function (err, res) {
+        if (err){
+        console.log(err)
+        response.status(400).json(err)
+        }
+        else{
+        // console.log(res);
+        }
+    })
+    return response.status(200).json({status:"favourite removed"})
+}
+
+
 //Exporting all the functions
 module.exports = { 
     validUser, 
@@ -217,5 +269,7 @@ module.exports = {
     loginUser, 
     editAccountDetails, 
     getUserDetails, 
-    changeUserPassword 
+    changeUserPassword,
+    addFavourite,
+    deleteFavourite
 }

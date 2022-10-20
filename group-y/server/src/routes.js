@@ -69,5 +69,7 @@ router.post('/api/makeOffer', offer.makeOffer)
 router.get('/api/getOffersToMe', offer.getOffersToMe)
 router.get('/api/getOffersByMe', offer.getOffersByMe)
 router.put('/api/approveOffer/:id', offer.offerStatus)
+router.put('/api/user/favourites', auth.addFavourite)
+router.delete('/api/user/favourites', auth.deleteFavourite)
 
 module.exports = router 

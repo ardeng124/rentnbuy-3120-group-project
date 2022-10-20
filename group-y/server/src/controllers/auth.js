@@ -195,8 +195,9 @@ const editAccountDetails = async (request, response) => {
  * @returns 
  */
 const changeUserPassword = async (request, response) => {
-    const {username, password, newPassword} = request.body
-    const user = await User.findOne({username})
+    const {password, newPassword} = request.body
+    const username = Util.getDecodedToken(Util.getToken(request)).username
+    const user = await User.findOne({username:username})
     if(!user){
         return response.status(400).json({"status": "Something went wrong"})
     }

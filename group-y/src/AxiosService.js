@@ -137,6 +137,33 @@ const offerStatus = async(id, status) => {
     return response
 }
 
+const addFavourite = async(id) => {
+    const response = await axios.put(serverUrl + "api/user/favourites" ,{"itemId":id}, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const modifyFavourite = async(id,action) => {
+    getToken()
+    console.log(action)
+    const response = await axios.put(serverUrl + "api/user/favourites" ,{"itemId":id, "action":action}, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const deleteFavourite = async(id) => {
+    getToken()
+    const response = await axios.delete(serverUrl + "api/user/favourites", {"itemId":id}, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
 export default {
     validateToken,
     getUserName,
@@ -152,5 +179,8 @@ export default {
     rentAnItem,
     getOffersByMe,
     getOffersToMe,
-    offerStatus
+    offerStatus,
+    addFavourite,
+    deleteFavourite,
+    modifyFavourite
 }

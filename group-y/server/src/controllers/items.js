@@ -2,18 +2,29 @@ const Items = require('../models/item')
 const User = require('../models/user')
 const Auth = require('./auth')
 const Util = require('./util')
+
 const getItems = async (request, response) => {
     let id = request.params.id;
-
-    let items;
+    let user;
+    let items;  
     if(id){
         items = await Items.find({
             "_id":id
         })
+        user =  await User.findOne({id:items.creatorId})
+        const usrObj = {
+            'username':user.username,
+            'id': user.id,
+            'firstName':user.firstName,
+            'lastName':user.lastName,
+        }
+        response.json({items,usrObj})
     } else {
         items = await Items.find({})
+        response.json({items})
+
     }
-    response.json({items})
+    
 }
 
 const searchItems = async (request, response) => {
@@ -41,7 +52,7 @@ const addItems = async(request, response) =>{
         rating: body.rating,
         price: body.price, 
         isAvailable: true,
-        creatorId: user.id,
+        creatorId: user,
         location: body.location, 
         AgeRating: body.ageRating, 
         description: body.description, 

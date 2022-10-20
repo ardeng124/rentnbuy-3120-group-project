@@ -7,17 +7,19 @@ import MenuBarSearch from "../Components/MenuBarSearch";
 
 
 const ItemPage = () => {
+    const navigate = useNavigate()
+
     const [loggedIn, setLoggedIn] = useState(false)
     const initialState = {start: '', end: ''}
     const [formInfo, setFormInfo] = useState(initialState)
     const [reqStatus, setReqStatus] = useState("")
 
+    const [itemAuthor, setAuthor] = useState([])
     const id = useParams().id
     const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: "",isAvailable:true, rentPrice:""})
     useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
-
             if(response == 'success'){
                 setLoggedIn(true)
             // navigate("/")
@@ -25,6 +27,10 @@ const ItemPage = () => {
       })
       //Get Item Details
       AxiosService.getItemDetails(id).then(response => {
+        console.log(response.data.items[0])
+        let arr = response.data.items[0]
+        arr.price = "$"+( arr.price/100)
+        setAuthor(response.data.usrObj)
         setItemDetails(response.data.items[0])
     }) 
     }, [])
@@ -84,6 +90,8 @@ const ItemPage = () => {
                 <h2>{itemDetails.name}</h2>
         
                 <h4>Price: {itemDetails.price}</h4>
+                {/* todo: make this navigate to a user */}
+                <h4 onClick={() => (navigate(`/userview/${itemAuthor.id}`))}> Author: {itemAuthor.username}</h4>
                 <h4>Price to rent: {itemDetails.rentPrice} </h4>
                 <h4>Rating - calculate average rating: {itemDetails.rating}</h4>
                 <p>Description: {itemDetails.description}</p>

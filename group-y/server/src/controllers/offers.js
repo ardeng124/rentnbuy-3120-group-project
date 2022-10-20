@@ -96,6 +96,7 @@ const offerStatus = async(request, response) => {
             }
         }
         )
+        //todo: Update user rentedItems array with this new item once approved
     }
     return response.status(201).json("Success")
 }

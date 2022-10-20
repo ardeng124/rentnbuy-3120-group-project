@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const getToken = (request) => {
-    const auhorisation = request.get('Authorization')
-    if (auhorisation && auhorisation.toLowerCase().startsWith('bearer ')) {
-        return auhorisation.substring(7)
+    const authorisation = request.get('Authorization')
+    if (authorisation && authorisation.toLowerCase().startsWith('bearer ')) {
+        return authorisation.substring(7)
     }
     return null
 }

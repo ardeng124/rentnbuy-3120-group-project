@@ -28,7 +28,6 @@ const validateToken = async () => {
     token = document.cookie.substring(6)
     const response = await axios.get(serverUrl + "auth/", { headers: { "Authorization": `Bearer ${token}` } })
 
-    console.log(response)
 
     if (response.data.status === "unregistered") {
         return response.data.status
@@ -85,8 +84,16 @@ const getUserDetails = async () => {
 }
 
 const getItemDetails = async (itemId) => {
-    const response = await axios.get(serverUrl + "api/items/" + itemId, { headers: { "Authorization": `Bearer ${token}` } })
-    return response
+    getToken()
+
+    if(token){
+        const response = await axios.get(serverUrl + "api/items/" + itemId, { headers: { "Authorization": `Bearer ${token}` } })
+        return response
+    } else {
+        const response = await axios.get(serverUrl + "api/items/" + itemId)
+        return response
+    }
+
 }
 
 const editUserDetails = async (details) => {
@@ -103,7 +110,7 @@ const searchItems = async (query) => {
 
 const rentAnItem = async (offer) => {
     getToken()
-    console.log(offer)
+
     const response = await axios.post(serverUrl + "api/makeOffer", offer, { headers: { "Authorization": `Bearer ${token}` } })
     .catch((error) => {
         return "error"
@@ -147,17 +154,8 @@ const addFavourite = async(id) => {
 
 const modifyFavourite = async(id,action) => {
     getToken()
-    console.log(action)
-    const response = await axios.put(serverUrl + "api/user/favourites" ,{"itemId":id, "action":action}, { headers: { "Authorization": `Bearer ${token}` } })
-    .catch((error) => {
-        return "error"
-    })
-    return response
-}
 
-const deleteFavourite = async(id) => {
-    getToken()
-    const response = await axios.delete(serverUrl + "api/user/favourites", {"itemId":id}, { headers: { "Authorization": `Bearer ${token}` } })
+    const response = await axios.put(serverUrl + "api/user/favourites" ,{"itemId":id, "action":action}, { headers: { "Authorization": `Bearer ${token}` } })
     .catch((error) => {
         return "error"
     })
@@ -181,6 +179,5 @@ export default {
     getOffersToMe,
     offerStatus,
     addFavourite,
-    deleteFavourite,
     modifyFavourite
 }

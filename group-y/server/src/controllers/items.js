@@ -4,6 +4,7 @@ const Auth = require('./auth')
 const Util = require('./util')
 
 const getItems = async (request, response) => {
+    const username = await Util.getDecodedToken(Util.getToken(request)).username
     let id = request.params.id;
     let user;
     let items;  
@@ -18,7 +19,20 @@ const getItems = async (request, response) => {
             'firstName':user.firstName,
             'lastName':user.lastName,
         }
-        response.json({items,usrObj})
+
+        if(username) {
+            const user = await User.findOne({username:username})
+            let isFavourited = false
+            user.favourites.forEach(x => {if(x._id == id) {
+                isFavourited= true
+                response.status(200).json({items,usrObj,isFavourited})
+            }})
+            if(!isFavourited){
+                response.json({items,usrObj})
+            }
+        } else {
+            response.json({items,usrObj})
+        }
     } else {
         items = await Items.find({})
         response.json({items})

@@ -10,6 +10,7 @@ import Search from './Pages/Search';
 import YourOffers from './Pages/YourOffers.js';
 import Categories from "./Pages/Categories.js"
 import Notifications from './Pages/Notifications.js';
+import FavouritesPage from './Pages/FavouritesPage.js';
 
 import {
   BrowserRouter as Router,
@@ -42,6 +43,7 @@ function App() {
                     <Route path="/item/:id" element={<ItemPage/>} />
                     <Route path="/notifications" element={<Notifications/>} />
                     <Route path="/offers" element={<YourOffers/>} />
+                    <Route path="/favourites" element={<FavouritesPage />} />
 
                 </Routes>
             </Router>

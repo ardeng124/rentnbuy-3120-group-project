@@ -108,7 +108,9 @@ const HomePage = () => {
                         <div className="homePageContainer">
                             <h3> Your Feed</h3>
                             <div className="itemContainer">
-                            {offers.map(x=><FeedListingItem
+                                {offers.map(x=> console.log(x))}
+                            {offers.map(x=> 
+                                <FeedListingItem
                                     itemName={x.offerMadeBy.username}
                                     itemToRent={x.item.name}
                                     itemPrice={x.rentPrice}

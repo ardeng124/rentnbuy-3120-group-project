@@ -8,6 +8,9 @@ const offer = require('../models/offer')
 const getOffersByMe = async (request, response) => {
 
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
+    if (!decodedToken) {
+        return response.status(401).json({})
+    }
     const allOffers = await Offers.find(
         {
             offerMadeBy:decodedToken.id,
@@ -20,6 +23,9 @@ const getOffersByMe = async (request, response) => {
 const getOffersToMe = async (request, response) => {
 
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
+    if (!decodedToken) {
+        return response.status(401).json({})
+    }
     const allOffers = await Offers.find(
         {
             offerMadeTo:decodedToken.id,
@@ -96,6 +102,7 @@ const offerStatus = async(request, response) => {
             }
         }
         )
+        //todo: Update user rentedItems array with this new item once approved
     }
     return response.status(201).json("Success")
 }

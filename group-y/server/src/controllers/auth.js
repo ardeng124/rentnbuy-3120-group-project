@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const models = require('../models')
 const Util = require('./util')
+const Item = require('../models/item')
 
 const User = require('../models/user')
 
@@ -104,7 +105,8 @@ const getUserDetails = async (request, response) => {
                     location: match.location,
                     rentedItems: match.rentedItems,
                     boughtItems:match.boughtItems,
-                    myItems: match.myItems
+                    myItems: match.myItems,
+                    favourites:match.favourites
                 })       
             }else{
                 return response.sendStatus(400)
@@ -124,12 +126,12 @@ const validUser = async (request, response) => {
     try{
         const decodedToken = jwt.verify(token, process.env.SECRET)
         if (!decodedToken.id) {
-            return response.status(401).json({status:"unregistered"})
+            return response.status(200).json({status:"unregistered"})
         }else{
             return  response.status(200).json({status:"success"})
         }
     }catch(err){
-        return response.status(401).json({status:"unregistered"})
+        return response.status(200).json({status:"unregistered"})
     }
     
 }
@@ -210,6 +212,64 @@ const changeUserPassword = async (request, response) => {
     return response.status(200).json({status:"password changed"})
 }
 
+const modifyFavourite = async (request, response) => {
+    const decodedToken = Util.getDecodedToken(Util.getToken(request))
+    const user = await User.findOne({username:decodedToken.username})
+    const item = await Item.findById(request.body.itemId)
+    const action = request.body.action
+    let favs = user.favourites
+    // console.log(favs)
+
+    if(action == "add") {
+        favs.forEach(x => {if(x._id == item.id) {
+            response.json({"status":"favourite already exists"})
+            return
+        }})
+        favs.push(item)
+        User.findByIdAndUpdate(user.id, {
+            favourites:favs
+        },
+        function (err, res) {
+            if (err){
+            console.log(err)
+            response.status(400).json(err)
+            }
+            else{
+            // console.log(res);
+            }
+        })
+        return response.status(200).json({status:"favourite added", favs})
+    }
+    if(action == "delete") {
+        console.log(request.get('Authorization'))
+       
+        // console.log(favss
+        favs = favs.filter(x => x._id != item.id)
+        User.findByIdAndUpdate(user.id, {
+            favourites:favs
+        },
+        function (err, res) {
+            if (err){
+            console.log(err)
+            response.status(400).json(err)
+            }
+            else{
+            // console.log(res);
+            }
+        })
+        return response.status(200).json({status:"favourite removed" , favs})
+        
+    }
+    else {
+        response.status(400).json({"status":"invalid action"})
+
+    }
+}
+
+const deleteFavourite = async (request, response) => {
+}
+
+
 //Exporting all the functions
 module.exports = { 
     validUser, 
@@ -218,5 +278,7 @@ module.exports = {
     loginUser, 
     editAccountDetails, 
     getUserDetails, 
-    changeUserPassword 
+    changeUserPassword,
+    modifyFavourite,
+    deleteFavourite
 }

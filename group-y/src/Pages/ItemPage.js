@@ -7,24 +7,36 @@ import MenuBarSearch from "../Components/MenuBarSearch";
 
 
 const ItemPage = () => {
+    const navigate = useNavigate()
+
     const [loggedIn, setLoggedIn] = useState(false)
+    const [isFavourited, setFavourited] = useState(false)
+
     const initialState = {start: '', end: ''}
     const [formInfo, setFormInfo] = useState(initialState)
     const [reqStatus, setReqStatus] = useState("")
 
+    const [itemAuthor, setAuthor] = useState([])
     const id = useParams().id
     const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: "",isAvailable:true, rentPrice:""})
     useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
-
             if(response == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             }
       })
       //Get Item Details
+      
       AxiosService.getItemDetails(id).then(response => {
+        let arr = response.data.items[0]
+        arr.price = "$"+( arr.price/100)
+        setAuthor(response.data.usrObj)
+        if(response.data.isFavourited != undefined) {
+            setFavourited(true)
+            console.log("True")
+        }
         setItemDetails(response.data.items[0])
     }) 
     }, [])
@@ -59,6 +71,29 @@ const ItemPage = () => {
 
     }
 
+    const addFavourite = (id) => {
+        console.log("a")
+        AxiosService.modifyFavourite(id,"add").then(response=> {
+            if(response.status == "error"){
+                window.alert("error adding favourite")
+            } else {
+            console.log(response)
+            setFavourited(true)
+            }
+        })
+    }
+
+    const removeFavourite = (id) => {
+        AxiosService.modifyFavourite(id,"delete").then(response=> {
+            if(response.status == "error"){
+                window.alert("error adding favourite")
+            } else {
+            console.log(response)
+            setFavourited(false)
+            }
+        })
+    }
+
     return (
         <div className="ItemPage">
         <section className="loginheader">
@@ -82,13 +117,15 @@ const ItemPage = () => {
             <img className='itemImg' src= "https://i.stack.imgur.com/mwFzF.png"/>
             <div className='itemInfoBox'> 
                 <h2>{itemDetails.name}</h2>
-        
                 <h4>Price: {itemDetails.price}</h4>
-                <h4>Price to rent: {itemDetails.rentPrice} </h4>
+                {/* todo: make this navigate to a user */}
+                <h4 onClick={() => (navigate(`/userview/${itemAuthor.id}`))}> Author: {itemAuthor.username}</h4>
+                <h4>Price to rent: {itemDetails.rentPrice} </h4> 
                 <h4>Rating - calculate average rating: {itemDetails.rating}</h4>
                 <p>Description: {itemDetails.description}</p>
                 <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
+                {isFavourited ? <button onClick={() => removeFavourite(itemDetails.id)} className="appBtnFavRemove">Remove Favourite</button> : <button className="appBtnFav" onClick={() => addFavourite(itemDetails.id)}>Favourite</button>}
                 {itemDetails.isAvailable && <div> 
                     <form onSubmit={rentItem} className = "formContainer">
                 

@@ -7,7 +7,14 @@ import MenuBarSearch from "../Components/MenuBarSearch.js";
 // var loggedIn = false;
 const UserSettings = () => {
 
-    const [passwordInfo, setPasswordInfo] = useState({username: localStorage.getItem('username'), oldPassword: '', newPassword: ''})
+    const initialState = {
+        username: localStorage.getItem('username'), 
+        oldPassword: '', 
+        newPassword: '', 
+        repeatNewPassword: ''
+    }
+
+    const [passwordInfo, setPasswordInfo] = useState(initialState)
 
     const [currentStatus, setStatus] = useState("")
 
@@ -28,18 +35,32 @@ const UserSettings = () => {
     
     const formHandler = (event) => {
         event.preventDefault()
-        console.log("Form submitted: ", passwordInfo)
-        // setFormInfo(initialState)
+        // console.log("Form submitted: ", passwordInfo)
+        
     }
 
+
+
         const changePassword = () => {
-            console.log("entered")
-            AxiosService.changeUserPassword(passwordInfo)
-            .then(response => {
-                console.log("Edit Response", response)
-                setStatus("Successfully updated details")
-                window.alert("Successfully updated details")
-            })
+            if (passwordInfo.newPassword === passwordInfo.repeatNewPassword) {
+                console.log("Form submitted: ", passwordInfo)
+                AxiosService.changeUserPassword(passwordInfo)
+                .then(response => {
+                    console.log("Edit Response", response)
+                    setStatus("Successfully updated Password")
+                    window.alert("Successfully updated Password")
+                })
+                .catch((e) => {
+                    console.log("e", e)
+                    if(e.response.status === 401) {
+                        setStatus("Your Original Password is Incorrect")
+                    }
+                })
+
+            } else {
+                //Error Message
+                setStatus("The new passwords do not match, try again!")
+            }
         }
 
 
@@ -50,6 +71,8 @@ const UserSettings = () => {
             setPasswordInfo({...passwordInfo, oldPassword: event.target.value})
         } else if (name === "newPass") {
             setPasswordInfo({...passwordInfo, newPassword: event.target.value})
+        } else if (name === "newPassCheck") {
+            setPasswordInfo({...passwordInfo, repeatNewPassword: event.target.value})
         }
     }
 

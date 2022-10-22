@@ -198,10 +198,8 @@ const editAccountDetails = async (request, response) => {
  */
 const changeUserPassword = async (request, response) => {
     const {oldPassword, newPassword, username} = request.body
-    console.log("test", Util.getDecodedToken(Util.getToken(request)))
     //Below line Not Working for some reason, replaced by passing username from frontend
     // const username = Util.getDecodedToken(Util.getToken(request)).username
-    console.log(username)
     const user = await User.findOne({username:username})
     if(!user){
         return response.status(400).json({"status": "Something went wrong"})

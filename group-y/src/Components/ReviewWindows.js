@@ -34,6 +34,8 @@ const ChatWindow = () => {
         })
     }
 
+    console.log("qiopdjhhqdjqd", reviews)
+
   return (
     <div>
 

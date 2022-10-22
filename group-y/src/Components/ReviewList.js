@@ -7,9 +7,8 @@ const ReviewList = ({review}) => {
   return (
     <div>
       <ul>
-        {review.map(R => <Review key={R.id} creator={R.creator} 
-        text={R.text} timestamp={R.timestamp} conversationId={R.conversation} 
-        messageId={R.id}/>)}  
+        {review.map(R => <Review key={R.id} creator={R.creator} stars={R.stars}
+        text={R.text} timestamp={R.timestamp} reviewId={R.id}/>)}  
       </ul> 
     </div>
   )

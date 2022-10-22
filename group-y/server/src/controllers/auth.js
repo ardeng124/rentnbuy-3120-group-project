@@ -197,13 +197,16 @@ const editAccountDetails = async (request, response) => {
  * @returns 
  */
 const changeUserPassword = async (request, response) => {
-    const {password, newPassword} = request.body
-    const username = Util.getDecodedToken(Util.getToken(request)).username
+    const {oldPassword, newPassword, username} = request.body
+    console.log("test", Util.getDecodedToken(Util.getToken(request)))
+    //Below line Not Working for some reason, replaced by passing username from frontend
+    // const username = Util.getDecodedToken(Util.getToken(request)).username
+    console.log(username)
     const user = await User.findOne({username:username})
     if(!user){
         return response.status(400).json({"status": "Something went wrong"})
     }
-    const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.passwordHash)
+    const passwordCorrect = user === null ? false : await bcrypt.compare(oldPassword, user.passwordHash)
     if(!passwordCorrect){
         return response.status(401).json({"status": "Old password does not match"})
     }

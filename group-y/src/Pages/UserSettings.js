@@ -6,6 +6,11 @@ import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 // var loggedIn = false;
 const UserSettings = () => {
+
+    const [passwordInfo, setPasswordInfo] = useState({username: localStorage.getItem('username'), oldPassword: '', newPassword: ''})
+
+    const [currentStatus, setStatus] = useState("")
+
     const [loggedIn, setLoggedIn] = useState(false)
     useEffect(() => {
         AxiosService.validateToken()
@@ -19,23 +24,32 @@ const UserSettings = () => {
            })
        }, [])
     const navigate = useNavigate()
-    const [formInfo, setFormInfo] = useState({username: '', password: ''})
 
     
     const formHandler = (event) => {
         event.preventDefault()
-        console.log("Form submitted: ", formInfo)
+        console.log("Form submitted: ", passwordInfo)
         // setFormInfo(initialState)
     }
+
+        const changePassword = () => {
+            console.log("entered")
+            AxiosService.changeUserPassword(passwordInfo)
+            .then(response => {
+                console.log("Edit Response", response)
+                setStatus("Successfully updated details")
+                window.alert("Successfully updated details")
+            })
+        }
 
 
     const updateField = (event) => {
         // which input element is this
         const name = event.target.attributes.name.value
-        if (name === "username") {
-            setFormInfo({...formInfo, username: event.target.value})
-        } else if (name === "password") {
-            setFormInfo({...formInfo, password: event.target.value})
+        if (name === "oldPass") {
+            setPasswordInfo({...passwordInfo, oldPassword: event.target.value})
+        } else if (name === "newPass") {
+            setPasswordInfo({...passwordInfo, newPassword: event.target.value})
         }
     }
 
@@ -76,7 +90,7 @@ const UserSettings = () => {
                           name="profanityFilter"
                           value="profanityFilter"
                       />
-                    <label for="profanityFilter"> Filter profanity?</label>
+                    <label htmlFor="profanityFilter"> Filter profanity?</label>
 
 
                       {/* TODO: state updates on input change here */}
@@ -87,27 +101,31 @@ const UserSettings = () => {
                               type="password"
                               placeholder="Old password"
                               name="oldPass"
+                              onChange={updateField}
                               
                           />
                           <input
                               className="input"
                               type="password"
                               placeholder="New password"
-                              name="oldPass"
+                              name="newPass"
+                              onChange={updateField}
                         
                           />
                           <input
                               className="input"
                               type="password"
                               placeholder="New password retype"
-                              name="oldPass"
+                              name="newPassCheck"
+                              onChange={updateField}
                               
                           />
                       </fieldset>
 
-                      <button className="appBtn" type="submit">
+                      <button className="appBtn" onClick={(changePassword)} type="submit">
                           Save changes
                       </button>
+                      <p className="statusEdits">{currentStatus}</p>
                   </form>
               </div>
           </section>

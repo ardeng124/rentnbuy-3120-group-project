@@ -162,7 +162,13 @@ const modifyFavourite = async(id,action) => {
     return response
 }
 
+const changeUserPassword = async (passwordInfo) => {
+    const response = await axios.put(serverUrl + "auth/password/", passwordInfo, { headers: { "Authorization": `Bearer ${token}` } })
+    return response
+}
+
 export default {
+    changeUserPassword,
     validateToken,
     getUserName,
     getToken,

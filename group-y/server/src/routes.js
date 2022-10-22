@@ -6,7 +6,8 @@ const rent = require('./controllers/rent')
 const buy = require('./controllers/buy')
 const offer = require('./controllers/offers')
 const router = express.Router()
- 
+const upload = require('./controllers/upload')
+
 router.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
@@ -70,4 +71,9 @@ router.get('/api/getOffersToMe', offer.getOffersToMe)
 router.get('/api/getOffersByMe', offer.getOffersByMe)
 router.put('/api/approveOffer/:id', offer.offerStatus)
 
+router.put('/api/uploadUserPhoto', upload.uploadProfilePhoto)
+router.get('/api/getUserPhoto', upload.getUserPhoto)
+// router.get('/api/getFiles', upload.getListFiles)
+router.get('/api/downloadFile/:name', upload.download)
+// router.get('/api/getUserAvatar', upload.getUserAvatar)
 module.exports = router 

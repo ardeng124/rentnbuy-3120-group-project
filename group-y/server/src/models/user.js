@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     emailAddress: String, 
     favourites:  { type : Array , "default" : [] },
     location: String,
+    profilePhotoLocation: String, 
     reviews: [
         {
           type: mongoose.Schema.Types.ObjectId,

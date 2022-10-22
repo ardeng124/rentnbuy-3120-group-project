@@ -104,7 +104,8 @@ const getUserDetails = async (request, response) => {
                     location: match.location,
                     rentedItems: match.rentedItems,
                     boughtItems:match.boughtItems,
-                    myItems: match.myItems
+                    myItems: match.myItems,
+                    profilePhoto: match.profilePhotoLocation
                 })       
             }else{
                 return response.sendStatus(400)

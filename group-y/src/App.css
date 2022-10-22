@@ -157,10 +157,7 @@ font-size: 14pt;
 }
 
 .usrAccBtn {
-  background-color: #D9D9D9;
-  border-radius: 100%;
-  padding:29px;
-  margin:5px
+  border: none;
 }
 
 .usrAccBtn2 {
@@ -169,6 +166,10 @@ font-size: 14pt;
   padding:29px;
   margin:5px;
 
+}
+.profilePhoto {
+  border-radius: 100%;
+  width: 70px
 }
 .dropDownMaster{
   list-style-type: none;

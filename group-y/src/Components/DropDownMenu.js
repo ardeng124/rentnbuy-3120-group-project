@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AxiosService from "../AxiosService"
 
@@ -7,7 +8,7 @@ import AxiosService from "../AxiosService"
 const DropDownMenu = (props) => {
     const {isLoggedIn} = props
     const navigate = useNavigate()
-
+    const [profilePhoto, setProfilePhoto] = useState("")
     const handleUserClicked = (event) => {
         console.log("clicked on user icon")
         navigate("/userview")
@@ -18,7 +19,17 @@ const DropDownMenu = (props) => {
             navigate("/")
             window.location.reload(false);
      }
-
+     const getUserProfilePhoto = () => {
+        AxiosService.getUserDetails()
+         .then(response => {          
+           console.log("GET response", response)
+           console.log("Response Data Is: ", response.data)
+           setProfilePhoto(response.data.profilePhoto)
+         })
+     }
+     useEffect( () => {
+        getUserProfilePhoto()     
+      }, []);
      const handleLogInClicked = (event) => {
         console.log("clicked on user icon")
         navigate("/login")
@@ -28,7 +39,9 @@ const DropDownMenu = (props) => {
          return (
              <div className='dropDownMaster'>
                 <li className="userNamedisplay"> {localStorage.getItem("username")} </li>
-                 <li className='usrAccLi'> <button className='usrAccBtn' onClick={handleUserClicked}></button></li>
+                 <li className='usrAccLi'> <button className='usrAcctn' onClick={handleUserClicked}>
+                 <img className="profilePhoto" src={profilePhoto}/>
+                    </button></li>
                  <div className="dropdownMenu">
                      <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>

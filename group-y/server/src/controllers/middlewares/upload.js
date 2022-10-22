@@ -3,7 +3,7 @@ const multer = require("multer");
 const { GridFsStorage } = require("multer-gridfs-storage");
 const config = require('../../config');
 
-var storage = new GridFsStorage({
+let storage = new GridFsStorage({
   url: config.mongoDBUrl,
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: (req, file) => {
@@ -21,6 +21,6 @@ var storage = new GridFsStorage({
   }
 });
 
-var uploadFiles = multer({ storage: storage }).single("file");
-var uploadFilesMiddleware = util.promisify(uploadFiles);
+let uploadFiles = multer({ storage: storage }).single("file");
+let uploadFilesMiddleware = util.promisify(uploadFiles);
 module.exports = uploadFilesMiddleware;

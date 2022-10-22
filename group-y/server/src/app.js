@@ -11,7 +11,7 @@ const config = require('./config')
 
 
 function errorNotification (err, str, req) {
-    var title = 'Error in ' + req.method + ' ' + req.url
+    let title = 'Error in ' + req.method + ' ' + req.url
     notifier.notify({
       title: title,
       message: str

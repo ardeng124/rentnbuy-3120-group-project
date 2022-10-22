@@ -6,6 +6,18 @@ import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 // var loggedIn = false;
 const UserSettings = () => {
+
+    const initialState = {
+        username: localStorage.getItem('username'), 
+        oldPassword: '', 
+        newPassword: '', 
+        repeatNewPassword: ''
+    }
+
+    const [passwordInfo, setPasswordInfo] = useState(initialState)
+
+    const [currentStatus, setStatus] = useState("")
+
     const [loggedIn, setLoggedIn] = useState(false)
     useEffect(() => {
         AxiosService.validateToken()
@@ -19,23 +31,48 @@ const UserSettings = () => {
            })
        }, [])
     const navigate = useNavigate()
-    const [formInfo, setFormInfo] = useState({username: '', password: ''})
 
     
     const formHandler = (event) => {
         event.preventDefault()
-        console.log("Form submitted: ", formInfo)
-        // setFormInfo(initialState)
+        // console.log("Form submitted: ", passwordInfo)
+        
     }
+
+
+
+        const changePassword = () => {
+            if (passwordInfo.newPassword === passwordInfo.repeatNewPassword) {
+                console.log("Form submitted: ", passwordInfo)
+                AxiosService.changeUserPassword(passwordInfo)
+                .then(response => {
+                    console.log("Edit Response", response)
+                    setStatus("Successfully updated Password")
+                    window.alert("Successfully updated Password")
+                })
+                .catch((e) => {
+                    console.log("e", e)
+                    if(e.response.status === 401) {
+                        setStatus("Your Original Password is Incorrect")
+                    }
+                })
+
+            } else {
+                //Error Message
+                setStatus("The new passwords do not match, try again!")
+            }
+        }
 
 
     const updateField = (event) => {
         // which input element is this
         const name = event.target.attributes.name.value
-        if (name === "username") {
-            setFormInfo({...formInfo, username: event.target.value})
-        } else if (name === "password") {
-            setFormInfo({...formInfo, password: event.target.value})
+        if (name === "oldPass") {
+            setPasswordInfo({...passwordInfo, oldPassword: event.target.value})
+        } else if (name === "newPass") {
+            setPasswordInfo({...passwordInfo, newPassword: event.target.value})
+        } else if (name === "newPassCheck") {
+            setPasswordInfo({...passwordInfo, repeatNewPassword: event.target.value})
         }
     }
 
@@ -76,7 +113,7 @@ const UserSettings = () => {
                           name="profanityFilter"
                           value="profanityFilter"
                       />
-                    <label for="profanityFilter"> Filter profanity?</label>
+                    <label htmlFor="profanityFilter"> Filter profanity?</label>
 
 
                       {/* TODO: state updates on input change here */}
@@ -87,27 +124,31 @@ const UserSettings = () => {
                               type="password"
                               placeholder="Old password"
                               name="oldPass"
+                              onChange={updateField}
                               
                           />
                           <input
                               className="input"
                               type="password"
                               placeholder="New password"
-                              name="oldPass"
+                              name="newPass"
+                              onChange={updateField}
                         
                           />
                           <input
                               className="input"
                               type="password"
                               placeholder="New password retype"
-                              name="oldPass"
+                              name="newPassCheck"
+                              onChange={updateField}
                               
                           />
                       </fieldset>
 
-                      <button className="appBtn" type="submit">
+                      <button className="appBtn" onClick={(changePassword)} type="submit">
                           Save changes
                       </button>
+                      <p className="statusEdits">{currentStatus}</p>
                   </form>
               </div>
           </section>

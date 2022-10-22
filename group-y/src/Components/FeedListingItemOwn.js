@@ -17,7 +17,7 @@ function FeedListingItemOwn(props) {
 
                 </div>
                 <div className="leftNLR">
-                    <h3> Your reqeust to {itemName}</h3>
+                    <h3> Your offer to {itemName}</h3>
                     <p>for <b>{itemToRent}</b> is <i>{status}</i></p>
                 </div>
             </div>

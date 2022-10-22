@@ -5,12 +5,9 @@ const itemSchema = new mongoose.Schema({
         rating: Number,
         price: Number, 
         rentPrice: Number,
-        creatorId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        reviews: {type: mongoose.Types.ObjectId, ref: 'Reviews'},
-        categoryId: {type: mongoose.Types.ObjectId, ref: 'Category'},
+        creatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+        categoryId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
         location: String, 
         ageRating: Number, 
         description: String, 

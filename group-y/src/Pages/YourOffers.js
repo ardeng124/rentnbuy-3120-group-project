@@ -8,8 +8,9 @@ import {
     Routes, Route, Link
   } from "react-router-dom"
 
-import MenuBarSearch from '../Components/MenuBarSearch';
 import OfferComponent from '../Components/OfferComponent';
+
+import MenuBarSearch from '../Components/MenuBarSearch';
 
 const YourOffers = () => {
     const [loggedIn, setLoggedIn] = useState(false)

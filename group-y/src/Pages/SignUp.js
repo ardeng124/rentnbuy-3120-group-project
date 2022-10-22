@@ -59,26 +59,6 @@ const SignIn = () => {
     })
 }
 
-  //Create new User Function
-//   const createNewUser = (newUser) => {
-
-//     axios.post("http://localhost:8102/auth/register", newUser)
-//     .then(response => {          
-//       console.log("POST response", response)
-//       if (response.data.status === "username taken") {
-//         setErrorMessages({name: "uname", message: "Username already Exists!"})
-//       } else {
-//         console.log("new user")
-//         logInTracker = true;
-//         setErrorMessages({name: "uname", message: ""})
-//         localStorage.setItem('user', response.data)
-//         localStorage.setItem('token', response.data.token)
-//         localStorage.setItem('username', response.data.username)
-//         navigate("/")
-//       }
-//     })
-//   }
-
   //User can log out 
   const logOut = () => {
     localStorage.clear()

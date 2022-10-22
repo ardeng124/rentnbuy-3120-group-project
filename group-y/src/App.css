@@ -426,6 +426,7 @@ font-size: 14pt;
   /* padding: 35px; */
   display: flex;
   max-width: 23.5% ;
+  /* max-width: 350px; */
   margin: 9px;
   /* flex: 1 1 28%; */
   flex-shrink: 1;
@@ -499,7 +500,7 @@ font-size: 14pt;
   flex-grow: 1;
   background-color: #D9D9D9;
   margin:20px;
-  padding:10px;
+  padding:30px;
   border-radius: 20px;
 }
 .itemImg{
@@ -748,7 +749,6 @@ margin:5px;
   font-size:14px;
   height: auto;
   display: block;
-
 }
 
 .appBtnNotifDeny{
@@ -812,11 +812,87 @@ margin:5px;
   margin-bottom:20px;
 }
   
-    .offerItemLi{
-      flex-grow: 1;
-      padding: 10px;
-    margin:5px;
-    }
+.offerItemLi{
+  flex-grow: 1;
+  padding: 10px;
+  margin:5px;
+}
+
+.favouritesPageMainContent{
+  list-style-type: none;
+  background-color: #e5ece7ab;
+  margin:auto;
+  padding:20px;
+  width:92%;
+  border-radius: 10px;
+}
+
+.favouritesPageMainContent .searchResultItem {
+  display: flex;
+  background-color: #c4ecdbdf;
+  padding:20px;
+  width:95%;
+  margin: auto;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.favouritesPageMainContent .searchResultItemDisabled{
+  display: flex;
+  background-color: #c4eada;
+  opacity: 65%;
+  padding:20px;
+  width:95%;
+  margin: auto;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.FavItemDiv{
+  display: flex;
+  width:85%;
+  margin:auto;
+}
+.favPageButtonContainer{
+  padding:20px;
+  /* display: flex; */
+  flex-direction: column;
+}
+.favPageButtonContainer .appBtnNotifDeny{
+  margin-top:50%;
+  margin-bottom: 50%; 
+  padding: 10px 20px;
+}
+.favPageButtonContainer .appBtnNotif{
+  flex:1
+}
+
+.appBtnFav{
+  background-color: #81BEA4;
+  padding:2px;
+  width:120px;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  height: 45px !important;
+
+  font-size:14px;
+}
+
+.appBtnFavRemove{
+  background-color: #babe81;
+  padding:2px 5px;
+  /* width:120px; */
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  height: 45px !important;
+}
+
+
+
 
 /*  Animations  */
 @keyframes homePageItemHover {

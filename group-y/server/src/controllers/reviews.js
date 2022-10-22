@@ -1,21 +1,49 @@
 const Review = require('../models/review')
 const User = require('../models/user')
+const Util = require('./util')
+const Item = require('../models/item')
+
 
 const getReviews = async (request, response) => {
     const reviews = await Review.find({})
     response.json({reviews})
 }
 
+//Find by Id - ALL ones with the item? or go to ITEM and get all ids in review?
+// const getReviewsById = async (request, response) => {
+
+//     const reviews = await Review.findById({})
+//     response.json({reviews})
+// }
+
 const addReview = async(request, response) =>{
-    const body = request.body 
-    const user = await User.findById(body.creatorId)
+    
+    const decodedToken = Util.getDecodedToken(Util.getToken(request));
+
+    const body = request.body
+
+    const inUser = await User.findById(decodedToken.id)
+
+    console.log(inUser)
+
     const review = new Review({
-        creatorId: body.userId,
+        creator: inUser.username,
         text: body.text, 
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        stars: body.stars
     })
     const savedReview = await review.save()
-    user.reviews = user.reviews.concat(savedReview.id)
+    
+    const userPush = await User.findByIdAndUpdate(
+        decodedToken.id,
+        {"$push" : {"reviews": review.id}}
+    )
+
+    const item = await Item.findByIdAndUpdate(
+        request.body.itemId,
+        {"$push" : {"reviews": review.id}}
+    )
+
     response.json(savedReview)
 }
 

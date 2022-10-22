@@ -83,7 +83,7 @@ const addItems = async(request, response) =>{
         AgeRating: body.ageRating, 
         description: body.description, 
         timestamp: new Date(),
-        categoryId: CategoryItem
+        categoryId: CategoryItem.name
     })
     const savedItem = await item.save()
 

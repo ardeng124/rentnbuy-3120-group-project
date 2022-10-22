@@ -18,7 +18,16 @@ const ItemPage = () => {
 
     const [itemAuthor, setAuthor] = useState([])
     const id = useParams().id
-    const [itemDetails, setItemDetails] = useState({creatorId: "", price: "", rating: "", description: "", location: "",isAvailable:true, rentPrice:""})
+    const [itemDetails, setItemDetails] = useState({
+        creatorId: "",
+        price: "", 
+        rating: "", 
+        description: "", 
+        location: "",
+        isAvailable:true, 
+        rentPrice:""
+    })
+
     useEffect(() => {
         AxiosService.validateToken()
         .then(response => {

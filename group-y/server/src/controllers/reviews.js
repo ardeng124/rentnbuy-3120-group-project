@@ -13,15 +13,23 @@ const addReview = async(request, response) =>{
     
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
 
-    const body = request.body 
+    const body = request.body
+
+    console.log("id", request.body)
+    console.log("huh?", decodedToken)
+
+    const inUser = await User.findById(decodedToken.id)
+
+    console.log(inUser)
+
     const review = new Review({
-        creatorId: body.userId,
+        creator: inUser.username,
         text: body.text, 
         timestamp: Date.now()
     })
     const savedReview = await review.save()
     
-    const user = await User.findByIdAndUpdate(
+    const userPush = await User.findByIdAndUpdate(
         decodedToken.id,
         {"$push" : {"reviews": review.id}}
     )

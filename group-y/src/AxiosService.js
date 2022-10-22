@@ -167,7 +167,28 @@ const changeUserPassword = async (passwordInfo) => {
     return response
 }
 
+const postReview = async (review) => {
+    getToken()
+
+    const response = await axios.post(serverUrl + "api/reviews", review, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const getReviewsPerItem = async () => {
+    getToken()
+    const response = await axios.get(serverUrl + "api/reviews", { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
 export default {
+    getReviewsPerItem,
+    postReview,
     changeUserPassword,
     validateToken,
     getUserName,

@@ -3,6 +3,7 @@ import {useNavigate,useParams, useLocation} from "react-router-dom"
 import AxiosService from "../AxiosService";
 import DropDownMenu from '../Components/DropDownMenu'
 import MenuBarSearch from "../Components/MenuBarSearch";
+import ChatWindow from "../Components/ReviewWindows.js"
 
 
 
@@ -148,6 +149,9 @@ const ItemPage = () => {
                 <p>{reqStatus}</p>
             </div>
         </div>
+
+        <ChatWindow></ChatWindow>
+
         </div>
         </section>
         </div>

@@ -39,6 +39,7 @@ const createUser = async(request, response)  => {
         phoneNumber: body.phoneNumber, 
         emailAddress: body.emailAddress, 
         location: body.location,
+        isAdmin:false
     })
     const savedUser = await user.save()
     const userForToken = {
@@ -106,7 +107,8 @@ const getUserDetails = async (request, response) => {
                     rentedItems: match.rentedItems,
                     boughtItems:match.boughtItems,
                     myItems: match.myItems,
-                    favourites:match.favourites
+                    favourites:match.favourites,
+                    isAdmin:match.isAdmin
                 })       
             }else{
                 return response.sendStatus(400)

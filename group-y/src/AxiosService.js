@@ -167,6 +167,10 @@ const changeUserPassword = async (passwordInfo) => {
     return response
 }
 
+const getCategories = async () =>{
+    const response = await axios.get(serverUrl + "api/category/")
+    return response
+}
 export default {
     changeUserPassword,
     validateToken,
@@ -185,5 +189,6 @@ export default {
     getOffersToMe,
     offerStatus,
     addFavourite,
-    modifyFavourite
+    modifyFavourite,
+    getCategories
 }

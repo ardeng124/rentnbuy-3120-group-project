@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
         ref: 'User'
       }],
     location: String,
+    profilePhotoLocation: String, 
     reviews: [
         {
           type: mongoose.Schema.Types.ObjectId,

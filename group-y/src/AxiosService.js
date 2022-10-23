@@ -2,8 +2,8 @@ import axios from "axios"
 
 const serverUrl = "http://localhost:8102/"
 
-var token = ""
-var username = ""
+let token = ""
+let username = ""
 
 const getUserName = () => {
     username = localStorage.getItem('username')
@@ -60,7 +60,7 @@ const login = async (newUser) => {
     token = response2.data.token
     // localStorage.setItem('token',token)
     const expiration_date = new Date()
-    var expires = new Date(Date.now() + 86400 * 1000).toUTCString()
+    let expires = new Date(Date.now() + 86400 * 1000).toUTCString()
     document.cookie = `token=${token}; SameSite=None` + expires + ";path=/;"
     username = response2.data.username;
     localStorage.setItem('username',username)
@@ -77,7 +77,7 @@ const register = async (newUser) => {
     token = response2.data.token
     // localStorage.setItem('token',token)
     const expiration_date = new Date()
-    var expires = new Date(Date.now() + 86400 * 1000).toUTCString()
+    let expires = new Date(Date.now() + 86400 * 1000).toUTCString()
     document.cookie = `token=${token}; SameSite=None` + expires + ";path=/;"
     username = response2.data.username;
     localStorage.setItem('username',username)
@@ -177,7 +177,28 @@ const getCategories = async () =>{
     const response = await axios.get(serverUrl + "api/category/")
     return response
 }
+const postReview = async (review) => {
+    getToken()
+
+    const response = await axios.post(serverUrl + "api/reviews", review, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const getReviewsPerItem = async () => {
+    getToken()
+    const response = await axios.get(serverUrl + "api/reviews", { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
 export default {
+    getReviewsPerItem,
+    postReview,
     changeUserPassword,
     validateToken,
     getUserName,
@@ -196,5 +217,7 @@ export default {
     offerStatus,
     addFavourite,
     modifyFavourite,
-    getCategories
+    getCategories,
+    postReview,
+    getReviewsPerItem
 }

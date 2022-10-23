@@ -7,7 +7,8 @@ const buy = require('./controllers/buy')
 const offer = require('./controllers/offers')
 const categories = require('./controllers/categories')
 const router = express.Router()
- 
+const upload = require('./controllers/upload')
+
 router.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
@@ -52,4 +53,8 @@ router.put('/api/user/favourites', auth.modifyFavourite)
 router.post('/api/category/add', categories.addCategory)
 router.get('/api/category/', categories.getCategories)
 
+router.put('/api/uploadUserPhoto', upload.uploadProfilePhoto)
+router.get('/api/getUserPhoto', upload.getUserPhoto)
+router.get('/api/downloadFile/:name', upload.download)
+router.put('/api/addPhotoToItem/:itemId', items.addPhotoToItem)
 module.exports = router 

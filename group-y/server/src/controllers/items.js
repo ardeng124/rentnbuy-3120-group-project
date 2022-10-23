@@ -2,7 +2,8 @@ const Items = require('../models/item')
 const User = require('../models/user')
 const Auth = require('./auth')
 const Util = require('./util')
-
+const uploadMiddleware = require('../controllers/middlewares/upload')
+const Config = require('../config')
 const getItems = async (request, response) => {
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     let id = request.params.id;
@@ -70,6 +71,8 @@ const addItems = async(request, response) =>{
         AgeRating: body.ageRating, 
         description: body.description, 
         timestamp: new Date(),
+        imageURL: `http://localhost:8102/api/downloadFile/${request.file.filename}`
+
     })
     const savedItem = await item.save()
 
@@ -83,10 +86,23 @@ const addItems = async(request, response) =>{
     response.json(savedItem)
 }
 
-
-
+const addPhotoToItem = async(request, response) =>{
+    if(!request.params.itemId){
+        return response.json({message:"missing itemid"}).sendStatus(400)
+    }
+    try{
+        await uploadMiddleware(request, response)
+    }catch(error){
+        response.json({message:"Image upload failed"}).sendStatus(500)
+    }
+    const item = await Items.findById(request.params.itemId)
+    item.itemPhotoUrl = `${Config.downloadURL}${request.file.filename}`
+    console.log(Config.downloadURL)
+    return response.json(await item.save())
+}
 module.exports = {
     getItems, 
     addItems,
-    searchItems
+    searchItems,
+    addPhotoToItem
 }

@@ -26,7 +26,8 @@ const ItemPage = () => {
         description: "", 
         location: "",
         isAvailable:true, 
-        rentPrice:""
+        rentPrice:"",
+        reviews:[]
     })
 
     useEffect(() => {
@@ -153,7 +154,7 @@ const ItemPage = () => {
             </div>
         </div>
 
-        <ChatWindow></ChatWindow>
+        <ChatWindow id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
 
         </div>
         </section>

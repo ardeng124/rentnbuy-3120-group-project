@@ -26,7 +26,7 @@ const ReviewForm = ({updateFn}) => {
     let initialState = {text: "", stars: 0}
 
     //Hover Rating
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(null);
     const [hover, setHover] = React.useState(-1);
 
     const [review, setReview] = useState(initialState)
@@ -48,11 +48,11 @@ const ReviewForm = ({updateFn}) => {
     }
 
     return (
-        <div className ="container">
-            <form onSubmit={formHandler}>
-                <input type="text" placeholder="Exter a Message" name="text" onChange={updateField} value={review.text} required/>
+        <div className ="ReviewformContainer">
+            <form onSubmit={formHandler} className = "reviewForm">
+                <textarea rows={40} cols={100} type="text" placeholder="Leave a comment or review" name="text" onChange={updateField} value={review.text} required/>
 
-                <Box onChange={updateField} sx={{width: 200, display: 'flex', alignItems: 'center',}}>
+                <Box className = "starContainer" onChange={updateField} sx={{width: 200, display: 'flex', alignItems: 'center',}}>
                     <Rating name="stars" value={value} precision={0.5}
                         getLabelText={getLabelText}
                         onChange={(event, newValue) => {
@@ -61,6 +61,7 @@ const ReviewForm = ({updateFn}) => {
                         onChangeActive={(event, newHover) => {
                         setHover(newHover);
                         }}
+                        size="large"
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                     {value !== null && (
@@ -68,7 +69,7 @@ const ReviewForm = ({updateFn}) => {
                     )}
                 </Box>
 
-                <button type="submit">Send</button>
+                <button className="appBtn" type="submit">Send</button>
             </form>
         </div>
     )

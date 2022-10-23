@@ -84,7 +84,7 @@ const addItems = async(request, response) =>{
         AgeRating: body.ageRating, 
         description: body.description, 
         timestamp: new Date(),
-        categoryId: CategoryItem.name
+        categoryId: CategoryItem.name,
         imageURL: `http://localhost:8102/api/downloadFile/${request.file.filename}`
     })
     const savedItem = await item.save()

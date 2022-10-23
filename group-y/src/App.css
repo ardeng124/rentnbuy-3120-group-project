@@ -165,11 +165,17 @@ font-size: 14pt;
   border-radius: 100%;
   padding:29px;
   margin:5px;
+  cursor: pointer;
 
 }
 .profilePhoto {
   border-radius: 100%;
-  width: 70px
+  /* padding:29px; */
+  margin:5px;
+  cursor: pointer;
+  width:60px;
+
+
 }
 .dropDownMaster{
   list-style-type: none;
@@ -932,6 +938,57 @@ margin:5px;
   display: flex;
 }
 
+.reviewItemDiv{
+  background-color: #E9ECEA;
+  width:80%;
+  margin:auto;
+  border-radius: 20px;
+  padding:20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.reviewWindow{
+  background-color: #D9D9D9;
+  width:90%;
+  border-radius:10px;
+  margin:auto;
+  padding:10px;
+}
+.reviewDivContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.reviewText{
+  flex-grow:0.95;
+  text-align: left;
+
+}
+.reviewCreator{
+  flex-grow:0.95;
+  /* float:left; */
+  text-align: left;
+  font-weight:500;
+}
+
+.reviewTime{
+  font-size:12pt
+}
+.ReviewformContainer{
+  background-color: #FBFBFB; 
+  border-radius: 10px;
+  width:80%;
+  margin:auto;
+  padding:20px;
+}
+.reviewForm{
+  display: flex;
+  flex-direction: column;
+}
+.reviewForm .appBtn{
+  margin:auto
+}
 
 /*  Animations  */
 @keyframes homePageItemHover {

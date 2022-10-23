@@ -39,9 +39,10 @@ const DropDownMenu = (props) => {
          return (
              <div className='dropDownMaster'>
                 <li className="userNamedisplay"> {localStorage.getItem("username")} </li>
-                 <li className='usrAccLi'> <button className='usrAcctn' onClick={handleUserClicked}>
-                 <img className="profilePhoto" src={profilePhoto}/>
-                    </button></li>
+                 <li className='usrAccLi'>
+                 {profilePhoto ? <img className="profilePhoto" src={profilePhoto} onClick={handleUserClicked} /> : <img className="usrAccBtn2" src={profilePhoto} onClick={handleUserClicked} />}
+
+                    </li>
                  <div className="dropdownMenu">
                      <li className='dropDownLi'><a className='dropDownA' href='/settings'>Settings</a></li>
                      <li className='dropDownLi'><a className='dropDownA' href='/userdetails'>Edit details</a></li>

@@ -108,7 +108,7 @@ const getUserDetails = async (request, response) => {
                     boughtItems:match.boughtItems,
                     myItems: match.myItems,
                     favourites:match.favourites,
-                    isAdmin:match.isAdmin
+                    isAdmin:match.isAdmin,
                     profilePhoto: match.profilePhotoLocation
                 })       
             }else{

@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
         price: Number, 
         rentPrice: Number,
         creatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-        reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
+        reviews: [{ type: Object, ref: 'Review' }],
         categoryId:{type: Object, ref: 'Category'},
         location: String, 
         ageRating: Number, 

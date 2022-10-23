@@ -14,6 +14,7 @@ const itemSchema = new mongoose.Schema({
         isAvailable: Boolean, 
         timestamp: {type: Date, default: Date.now},
         currentlyAvailable: Boolean,
+        itemPhotoUrl: String
     },
   {
     toJSON: {virtuals: true},

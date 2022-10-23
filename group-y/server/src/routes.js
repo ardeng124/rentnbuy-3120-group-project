@@ -74,7 +74,6 @@ router.put('/api/user/favourites', auth.modifyFavourite)
 
 router.put('/api/uploadUserPhoto', upload.uploadProfilePhoto)
 router.get('/api/getUserPhoto', upload.getUserPhoto)
-// router.get('/api/getFiles', upload.getListFiles)
 router.get('/api/downloadFile/:name', upload.download)
-// router.get('/api/getUserAvatar', upload.getUserAvatar)
+router.put('/api/addPhotoToItem/:itemId', items.addPhotoToItem)
 module.exports = router 

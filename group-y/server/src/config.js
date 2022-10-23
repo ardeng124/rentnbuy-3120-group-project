@@ -9,5 +9,5 @@ const mongoDBUrl = process.env.MONGODB_URL
 const sessionSecret =  process.env.SESSION_DB_SECRET || 'notVerySecretSecret'
 const SECRET = process.env.SECRET || "notVerySecret"
 const port = process.env.PORT || '8000'
-
-module.exports = { corsClientDomain, sessionSecret, port, mongoDBUrl }
+const downloadURL = process.env.SERVER_ADDRESS
+module.exports = { corsClientDomain, sessionSecret, port, mongoDBUrl, downloadURL }

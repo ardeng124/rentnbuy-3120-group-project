@@ -3,30 +3,10 @@ const Config = require("../config");
 const MongoClient = require("mongodb").MongoClient;
 const GridFSBucket = require("mongodb").GridFSBucket;
 const Util = require('./util')
-const url = Config.mongoDBUrl;
 const User = require('../models/user')
 
-const mongoClient = new MongoClient(url);
+const mongoClient = new MongoClient(Config.mongoDBUrl);
 
-const uploadFiles = async (req, res) => {
-  try {
-    await upload(req, res);
-    if (req.file == undefined) {
-      return res.send({
-        message: "You must select a file.",
-      });
-    }
-    return res.send({
-      message: "File has been uploaded.",
-    });
-  } catch (error) {
-    console.log(error);
-
-    return res.send({
-      message: "Error when trying upload image: ${error}",
-    });
-  }
-};
 
 const uploadProfilePhoto = async(request, response) => {
     try{
@@ -64,39 +44,10 @@ const getUserPhoto = async(request, response) => {
     }
 }
 
-const getListFiles = async (req, res) => {
-  try {
-    await mongoClient.connect();
 
-    const database = mongoClient.db();
-    const images = database.collection("images" + ".files");
-
-    const cursor = await images.find({});
-
-    if ((await cursor.count()) === 0) {
-      return res.status(500).send({
-        message: "No files found!",
-      });
-    }
-
-    let fileInfos = [];
-    await cursor.forEach((doc) => {
-      fileInfos.push({
-        name: doc.filename,
-        url: "http://localhost:8102/api/downloadFile/" + doc.filename,
-      });
-    });
-
-    return res.status(200).send(fileInfos);
-  } catch (error) {
-    return res.status(500).send({
-      message: error.message,
-    });
-  }
-};
 
 const getFileLocation =  (filename) =>{
-    return  "http://localhost:8102/api/downloadFile/" + filename
+    return   `${Config.downloadURL}${filename}`
 }
 
 const download = async (req, res) => {

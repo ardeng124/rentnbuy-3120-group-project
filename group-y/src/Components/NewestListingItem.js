@@ -20,6 +20,11 @@ function NewestListingItem(props) {
     if (typeof itemPrice !== "undefined") {
         modifiedPrice = "$"+(itemPrice/100)
     }
+    let modifiedName = itemName
+    if(itemName.length > 30) {
+        modifiedName = itemDesc.substring(0, 30) + "..."
+
+    }
 
     if(!isAvailable) {
         return(
@@ -33,7 +38,7 @@ function NewestListingItem(props) {
                     <b>Unavailable</b>
                 </div>
                 <div className="leftNLR">
-                    <h3>{itemName}</h3>
+                    <h3>{modifiedName}</h3>
                     <p>{modifiedDesc}</p>
 
                 </div>
@@ -51,7 +56,7 @@ function NewestListingItem(props) {
                     </p>
                 </div>
                 <div className="leftNLR">
-                    <h3>{itemName}</h3>
+                    <h3>{modifiedName}</h3>
                     <p>{modifiedDesc}</p>
                 </div>
             </div>

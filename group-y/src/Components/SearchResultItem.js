@@ -5,8 +5,8 @@ import { useNavigate} from "react-router-dom"
  * SearchResultItem: Used on the search page to wrap each search result
  */
 const SearchResultItem = (props) => {
-
     const {name,price,description,category,id,isAvailable} = props
+    console.log(category)
     const img = "https://i.stack.imgur.com/mwFzF.png"
     const itemClicked = (id) => {
         navigate(`/item/${id}`)

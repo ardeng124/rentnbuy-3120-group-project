@@ -38,8 +38,14 @@ const validateToken = async () => {
 }
 
 const getItems = async () => {
-    const response = await axios.get(serverUrl + "api/items/", { headers: { "Authorization": `Bearer ${token}` } })
-    return response.data.items
+    if(token){
+
+        const response = await axios.get(serverUrl + "api/items/", { headers: { "Authorization": `Bearer ${token}` } })
+        return response.data.items
+    } else {
+        const response = await axios.get(serverUrl + "api/items/")
+        return response.data.items
+    }
     
 }
 
@@ -167,6 +173,10 @@ const changeUserPassword = async (passwordInfo) => {
     return response
 }
 
+const getCategories = async () =>{
+    const response = await axios.get(serverUrl + "api/category/")
+    return response
+}
 const postReview = async (review) => {
     getToken()
 
@@ -206,5 +216,8 @@ export default {
     getOffersToMe,
     offerStatus,
     addFavourite,
-    modifyFavourite
+    modifyFavourite,
+    getCategories,
+    postReview,
+    getReviewsPerItem
 }

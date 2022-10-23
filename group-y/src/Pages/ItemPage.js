@@ -43,6 +43,7 @@ const ItemPage = () => {
         let arr = response.data.items[0]
         arr.price = "$"+( arr.price/100)
         setAuthor(response.data.usrObj)
+        console.log(response.data.items)
         if(response.data.isFavourited != undefined) {
             setFavourited(true)
             console.log("True")
@@ -128,6 +129,8 @@ const ItemPage = () => {
             <div className='itemInfoBox'> 
                 <h2>{itemDetails.name}</h2>
                 <h4>Price: {itemDetails.price}</h4>
+                <h4>Category: {itemDetails.categoryId}</h4>
+
                 {/* todo: make this navigate to a user */}
                 <h4 onClick={() => (navigate(`/userview/${itemAuthor.id}`))}> Author: {itemAuthor.username}</h4>
                 <h4>Price to rent: {itemDetails.rentPrice} </h4> 
@@ -135,7 +138,7 @@ const ItemPage = () => {
                 <p>Description: {itemDetails.description}</p>
                 <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
-                {isFavourited ? <button onClick={() => removeFavourite(itemDetails.id)} className="appBtnFavRemove">Remove Favourite</button> : <button className="appBtnFav" onClick={() => addFavourite(itemDetails.id)}>Favourite</button>}
+                {loggedIn && isFavourited ? <button onClick={() => removeFavourite(itemDetails.id)} className="appBtnFavRemove">Remove Favourite</button> : <button className="appBtnFav" onClick={() => addFavourite(itemDetails.id)}>Favourite</button>}
                 {itemDetails.isAvailable && <div> 
                     <form onSubmit={rentItem} className = "formContainer">
                 

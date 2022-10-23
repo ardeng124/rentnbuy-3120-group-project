@@ -49,6 +49,7 @@ const Search = () => {
             // console.log(response)
             let arr = response
             // console.log(response)
+
             arr.forEach(element => {
                 element.description = element.description.substring(0, 250) + "..."
                 element.price = "$".concat((element.price/100))
@@ -105,7 +106,7 @@ const Search = () => {
                             value = {searchVal} onChange={(e) => {setSearchVal(e.target.value)}}
                             />
                     </form>
-                    {filteredItems.map(x => (<SearchResultItem name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.category} isAvailable={x.isAvailable}></SearchResultItem>))}
+                    {filteredItems.map(x => (<SearchResultItem name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.categoryId} isAvailable={x.isAvailable}></SearchResultItem>))}
                     </div>
                 </section>
                 </div>

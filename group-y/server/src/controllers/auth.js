@@ -39,6 +39,7 @@ const createUser = async(request, response)  => {
         phoneNumber: body.phoneNumber, 
         emailAddress: body.emailAddress, 
         location: body.location,
+        isAdmin:false
     })
     const savedUser = await user.save()
     const userForToken = {
@@ -107,6 +108,7 @@ const getUserDetails = async (request, response) => {
                     boughtItems:match.boughtItems,
                     myItems: match.myItems,
                     favourites:match.favourites,
+                    isAdmin:match.isAdmin
                     profilePhoto: match.profilePhotoLocation
                 })       
             }else{

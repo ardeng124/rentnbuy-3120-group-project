@@ -108,7 +108,6 @@ const HomePage = () => {
                         <div className="homePageContainer">
                             <h3> Your Feed</h3>
                             <div className="itemContainer">
-                                {offers.map(x=> console.log(x))}
                             {offers.map(x=> 
                                 <FeedListingItem
                                     itemName={x.offerMadeBy.username}
@@ -117,7 +116,7 @@ const HomePage = () => {
                                     ClickFunc = {() => navigate("/notifications")}
                                     status ={x.status}
                                 ></FeedListingItem>)}
-                                {yourOffers.map(x=><FeedListingItemOwn
+                                {yourOffers && yourOffers.map(x=><FeedListingItemOwn
                                     itemName={x.offerMadeTo.username}
                                     itemToRent={x.item.name}
                                     itemPrice={x.rentPrice}

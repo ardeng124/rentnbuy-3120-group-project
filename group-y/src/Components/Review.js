@@ -1,21 +1,42 @@
 //Imports
 import { useEffect, useState } from "react"
+import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
+import Box from '@mui/material/Box';
 
 function Review ({creator, text, timestamp, reviewId, stars}) {
-    
-    //CSS for seperating tables
-    const padding = {
-        padding: 10
-    }
+    let dateTrimEnd = timestamp.slice(0,-14)
 
+    // //CSS for seperating tables
+    // const labels = {
+    //     0.5: 'Useless',
+    //     1: 'Useless+',
+    //     1.5: 'Poor',
+    //     2: 'Poor+',
+    //     2.5: 'Ok',
+    //     3: 'Ok+',
+    //     3.5: 'Good',
+    //     4: 'Good+',
+    //     4.5: 'Excellent',
+    //     5: 'Excellent+',
+    //   };
+      
+    //   function getLabelText(stars) {
+    //     return `${stars} Star${stars !== 1 ? 's' : ''}, ${labels[stars]}`;
+    //   }
     //The user logged in can edit and delete their messages whilst all other
     //messages are shown on the left in red
     return (
-        <div>
-            <p style={padding}>Creator: {creator} </p>
-            <p style={padding}>Text: {text} </p>
-            <p style={padding}>Time: {timestamp} </p>
-            <p style={padding}>Rating: {stars} </p>
+        <div className="reviewItemDiv"> 
+            <div className="reviewDivContainer">
+                <li className="reviewCreator"> {creator} </li>
+                {stars ? <Rating name="text-feedback" value={stars} readOnly label="Rating" precision={0.5} size="large" 
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />} />: <li></li> }
+            </div>
+            <div className="reviewDivContainer">
+                <li className="reviewText">{text} </li>
+                <li className="reviewTime">{dateTrimEnd} </li>
+            </div>
         </div>   
     );
 }

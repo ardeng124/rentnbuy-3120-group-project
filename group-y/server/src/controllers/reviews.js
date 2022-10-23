@@ -5,6 +5,8 @@ const Item = require('../models/item')
 
 
 const getReviews = async (request, response) => {
+    const body = request.body 
+    const id = body.id
     const reviews = await Review.find({})
     response.json({reviews})
 }
@@ -23,14 +25,15 @@ const addReview = async(request, response) =>{
     const body = request.body
 
     const inUser = await User.findById(decodedToken.id)
-
+    
     console.log(inUser)
 
+    console.log(body.stars)
     const review = new Review({
         creator: inUser.username,
         text: body.text, 
         timestamp: Date.now(),
-        stars: body.stars
+        stars: body.stars ? body.stars : null
     })
     const savedReview = await review.save()
     
@@ -39,10 +42,12 @@ const addReview = async(request, response) =>{
         {"$push" : {"reviews": review.id}}
     )
 
+    //pushes entire item as object to reviews array
     const item = await Item.findByIdAndUpdate(
         request.body.itemId,
-        {"$push" : {"reviews": review.id}}
+        {"$push" : {"reviews": review}}
     )
+    console.log(item)
 
     response.json(savedReview)
 }

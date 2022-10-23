@@ -165,11 +165,17 @@ font-size: 14pt;
   border-radius: 100%;
   padding:29px;
   margin:5px;
+  cursor: pointer;
 
 }
 .profilePhoto {
   border-radius: 100%;
-  width: 70px
+  /* padding:29px; */
+  margin:5px;
+  cursor: pointer;
+  width:60px;
+
+
 }
 .dropDownMaster{
   list-style-type: none;
@@ -416,10 +422,11 @@ font-size: 14pt;
   /* padding: 35px; */
   display: flex;
   /* max-width: 23.5% ; */
-  max-width:400px;
+  max-width:420px;
   margin: 9px;
   /* flex: 1 1 28%; */
   /* flex-shrink: 1; */
+  overflow-wrap: anywhere;
 }
 
 .overallListingItemFeed{
@@ -848,11 +855,14 @@ margin:5px;
   margin-bottom: 5px;
   cursor: pointer;
 }
-
+.favouritesPageMainContent .SearchResultContainer {
+  width:100%;
+}
 .FavItemDiv{
   display: flex;
   width:85%;
   margin:auto;
+
 }
 .favPageButtonContainer{
   padding:20px;
@@ -860,7 +870,7 @@ margin:5px;
   flex-direction: column;
 }
 .favPageButtonContainer .appBtnNotifDeny{
-  margin-top:50%;
+  margin-top:40%;
   margin-bottom: 50%; 
   padding: 10px 20px;
 }
@@ -892,7 +902,94 @@ margin:5px;
 }
 
 
+.categoriesPageMainContent{
+  list-style-type: none;
+  background-color: #e5ece7ab;
+  margin:auto;
+  padding:20px;
+  width:92%;
+  border-radius: 10px;
+}
 
+.categoryItem {
+  display: flex;
+  background-color: #D5EFE4;
+  padding:20px;
+  width:85%;
+  margin: auto;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.catItemP{
+  background-color: transparent !important;
+  position: relative;
+  top:30%;
+  text-align: left;
+  margin-left:50px;
+}
+
+.categoriesPageMainContent .appBtnFav{
+  margin:auto;
+  background-color: #81BEA4 !important;
+}
+.categoriesPageMainContent .animationParent {
+  display: flex;
+}
+
+.reviewItemDiv{
+  background-color: #E9ECEA;
+  width:80%;
+  margin:auto;
+  border-radius: 20px;
+  padding:20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  overflow-wrap:anywhere;
+}
+.reviewWindow{
+  background-color: #D9D9D9;
+  width:90%;
+  border-radius:10px;
+  margin:auto;
+  padding:10px;
+}
+.reviewDivContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.reviewText{
+  flex-grow:0.95;
+  text-align: left;
+  max-width:88%;
+}
+.reviewCreator{
+  flex-grow:0.95;
+  /* float:left; */
+  text-align: left;
+  font-weight:500;
+}
+
+.reviewTime{
+  font-size:12pt
+}
+.ReviewformContainer{
+  background-color: #FBFBFB; 
+  border-radius: 10px;
+  width:80%;
+  margin:auto;
+  padding:20px;
+}
+.reviewForm{
+  display: flex;
+  flex-direction: column;
+}
+.reviewForm .appBtn{
+  margin:auto
+}
 
 /*  Animations  */
 @keyframes homePageItemHover {

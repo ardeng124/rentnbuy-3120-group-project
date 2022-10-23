@@ -41,12 +41,7 @@ const ChatWindow = (props) => {
         AxiosService.postReview(dataToPost)
         .then(response => {
             console.log("Post Review", response)
-
-            AxiosService.getReviewsPerItem()
-            .then(response => {
-                console.log(response.data)
-                setReview(response.data.reviews) 
-            })
+            setReview([...reviews,response.data])
         })
     }
 

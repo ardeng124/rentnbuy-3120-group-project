@@ -1,6 +1,9 @@
 # Group Y
 This is the initial README file for GROUP Y in the COMP 3120 Group Project. This README detaills the elements of the application being created by Group Y, including the team members involved in the project, the application and its intended purpose, target user group, use cases and data sources.
 
+## Expected Delivery
+Sunday 6th of November (Week 13) at 11:55pm  
+
 ## Team Members / Roles / Contact Details
 ---
 This section details the assigned roles of each team member in Group Y. Members will assume responsibility over these development areas, but will also branch out into other areas if support from other members is needed.
@@ -164,28 +167,71 @@ This section details the features that Group Y aims to include in its MVP that w
 ---
 This section details the goals set by Group Y for each sprint over the following weeks. This will progress from the initial setup of the web application all the way to the final MVP. The milestones for weeks 9, 10, 11 and 12 are as follows:
 
-### Milestones: Needs to be advised and fixed to what has actually happened
----
+### Milestones (Sprints):
 
-#### Week 9:
+#### Sprint 1 - Week 9:
+- Sprint Goal: “User is able to sign up/login and view the listings on the home page”
+- Recent Progress:
+    - Product and Sprint BackLog Grooming - Completed 
+    - Sprint Backlog - Completed
+    - UI (User Interface) / UX (User Experience) - Established
+    - Project skeleton - Completed 
+    - Front-end and Back-end Builds - In-Progress
+- Biggest Risk: None at the moment
+- Completed:
+    - Product and Sprint BackLog Grooming
+        - Trello board established
+            - Team wrote user stories for all tasks for duration of sprint and entire project
+            - Team members picked up tasks to be executed during sprint
+            - URL to view Trello Board - https://trello.com/b/91SpBsnm/rentnbuy
+    - UI / UX Established
+        - Design done and CSS Framework established
+            - Figma designs done
+            - CSS incorporated into design
+            - URL for the Github - https://github.com/MQCOMP3120/group-project-group-y
+        - Login / Sign up page design implemented
+            - We've implemented the sign up and sign in page.
+            Right now the login is stored in plain-text.
+- In-Progress
+    - Data Models and Authentication
+        - Data Models
+            - Team is currently building the data models and schema definitions 
+            - Data seeding to be done by end of sprint
+        - Authentication
+            - Team is implementing authentication and assessing if we can use OAuth
+- Schedule
+
+- Next Steps heading towards Sprint 2 (Sprint 2 Tasks)
+    - Logged in user is able to buy, sell and rent from listings
+    - Logged in user is able to create, delete and update their listing 
+    - Logged in user is able to favourite a listing 
+    - Log in and authentication
+    - Logged in user is able to report another user (stretch goal)
+
+
+
+
+
+
+
 - Basic application talking to the MongoDB database 
 - Authentication of users, displaying basic profile information
 - Skeleton framework for all aforementioned pages (Profile, Settings, Categories etc.)
 
-#### Week 10:
+#### Sprint 2 - Week 10:
 - Integration test of the week 9 build and any feedback
 - Implement APIs that allow for adding, updating and deleting a listing 
 - Implement APIs that support getting listings based on a category
 - Implement skeleton frontend that calls those APIs 
 - Deploy the application 
 
-#### Week 11:
+#### Sprint 3 - Week 11:
 - Integration test of the week 10 build and any feedback
 - Finish the front end implementation
 - Implement search and find listing based on categories
 - Support search using free text
 
-#### Week 12:
+#### Sprint 4 - Week 12:
 - Integration test of the week 11 build and any feedback
 - Finalising application by reviewing codebase and testing functionality
 

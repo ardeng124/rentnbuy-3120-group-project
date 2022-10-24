@@ -201,6 +201,9 @@ This section details the goals set by Group Y for each sprint over the following
             - Team is implementing authentication and assessing if we can use OAuth
 - Schedule
 
+![Sprint1-Schedule-SprintBurnRate](Sprint1-Schedule-SprintBurnRate.png)
+![Sprint1-Schedule-Progress](Sprint1-Schedule.png)
+
 - Next Steps heading towards Sprint 2 (Sprint 2 Tasks)
     - Logged in user is able to buy, sell and rent from listings
     - Logged in user is able to create, delete and update their listing 

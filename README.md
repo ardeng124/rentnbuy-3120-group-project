@@ -174,8 +174,9 @@ This section details the goals set by Group Y for each sprint over the following
 - Recent Progress:
     - Product and Sprint BackLog Grooming - Completed 
     - Sprint Backlog - Completed
+    - Basic application talking to the MongoDB database
     - UI (User Interface) / UX (User Experience) - Established
-    - Project skeleton - Completed 
+    - Project skeleton for all aforementioned pages (Profile, Settings, Categories etc.) - Completed 
     - Front-end and Back-end Builds - In-Progress
 - Biggest Risk: None at the moment
 - Completed:
@@ -200,9 +201,8 @@ This section details the goals set by Group Y for each sprint over the following
         - Authentication
             - Team is implementing authentication and assessing if we can use OAuth
 - Schedule
-
-![Sprint1-Schedule-SprintBurnRate](Sprint1-Schedule-SprintBurnRate.png)
-![Sprint1-Schedule-Progress](Sprint1-Schedule.png)
+![Sprint1-Schedule-SprintBurnRate](./SCREENSHOTS/Milestones/Sprint1-Schedule-SprintBurnRate.png)
+![Sprint1-Schedule-Progress](./SCREENSHOTS/Milestones/Sprint1-Schedule.png)
 
 - Next Steps heading towards Sprint 2 (Sprint 2 Tasks)
     - Logged in user is able to buy, sell and rent from listings
@@ -211,24 +211,86 @@ This section details the goals set by Group Y for each sprint over the following
     - Log in and authentication
     - Logged in user is able to report another user (stretch goal)
 
-
-
-
-
-
-
-- Basic application talking to the MongoDB database 
-- Authentication of users, displaying basic profile information
-- Skeleton framework for all aforementioned pages (Profile, Settings, Categories etc.)
-
 #### Sprint 2 - Week 10:
-- Integration test of the week 9 build and any feedback
-- Implement APIs that allow for adding, updating and deleting a listing 
-- Implement APIs that support getting listings based on a category
-- Implement skeleton frontend that calls those APIs 
-- Deploy the application 
+- Sprint Goal: “User is able to rent a listing”
+- Recent Progress:
+    - Sprint Backlog based on feedback received from Sprint 1 and groups progress - Updated
+    - Login, Sign up and Home Pages - Completed 
+    - Authentication Mechanism - Established
+    - User is able to update their Account Information
+- Biggest Risk: Storing images in database is proving to be complex
+- Completed:
+    - Login, Sign up and Home Page
+        - Login page implemented with latest UX 
+        - Sign up page allows users to register with a unique username 
+        - Backend provides a valid token on each request
+        ![Sprint2-Completed-LoginSignUpHomePages](./SCREENSHOTS/Milestones/Sprint2-Completed-LoginSignUpHomePages.png)
+    - User Authentication and Password Storage
+        - Team discussed pros and cons of session and JSON Web Token (jwt)
+        - To allow for scalability of app and security,  team implemented jwt 
+        - All passwords are stored as hashes in database
+        ![Sprint2-Completed-UserAuthenticationAndPasswordStorage](./SCREENSHOTS/Milestones/Sprint2-Completed-UserAuthenticationAndPasswordStorage.png)
+- In-Progress
+    - Renting Journey
+        - Backend for renting an item implemented 
+        - Front end in progress 
+        - Team is exploring how to store images in database
+        ![Sprint2-InProgress-RentingJourney](./SCREENSHOTS/Milestones/Sprint2-InProgress-RentingJourney.png)
+    - Changing the Users Password
+        - Hashing of password has introduced complexity due to the way token generation is handled 
+        - The team have the front end logic and will be implementing  backend as a stretch goal
+        ![Sprint2-InProgress-ChangingPassword](./SCREENSHOTS/Milestones/Sprint2-InProgress-ChangingPassword.png)
+- Schedule
+![Sprint2-Schedule-SprintBurnRate](./SCREENSHOTS/Milestones/Sprint2-Schedule-SprintBurnRate.png)
+![Sprint2-Schedule-Progress](./SCREENSHOTS/Milestones/Sprint2-Schedule.png)
+- Next Steps heading towards Sprint 3 (Sprint 3 Tasks)
+    - Logged in user is able to create, delete and update their listing 
+    - Logged in user is able to buy, and rent from listings
+    - Logged in user is able to favourite a listing 
 
 #### Sprint 3 - Week 11:
+- Sprint Goal: “User is able to make and accept an offer”
+- Recent Progress:
+    - Sprint Backlog - Updated
+    - Offer Model - Defined 
+    - Offer Accepting and decline - Implemented
+    - Search bar - Completed
+- Biggest Risk: Storing images in database is proving to be complex
+- Completed:
+    - Updated Project Documentation
+        - User documentation done for other developers and project stakeholders understand how to use and setup the app
+        - Programming Documentation in progress 
+        ![Sprint3-Completed-UpdatedProjectDocumentation](./SCREENSHOTS/Milestones/Sprint3-Completed-UpdatedProjectDocumentation.png)
+    - A User can now Make, Accept and/or Decline an Offer
+        - Implementation of working rent request.
+        - Sent to creator of the item, who then can approve or deny the request.
+        - Confirmation sent back to user.
+        ![Sprint3-Completed-UserCanMakeAcceptOrDeclineAnOffer](./SCREENSHOTS/Milestones/Sprint3-Completed-UserCanMakeAcceptOrDeclineAnOffer.png)
+    - A Search Bar for the User to make Queries
+        - Implementation complete for front and backend
+        ![Sprint3-Completed-Searchbar](./SCREENSHOTS/Milestones/Sprint3-Completed-Searchbar.png)
+- In-Progress
+    - In progress Comments and Ratings for an Item
+        - User should be able to add comments on an item 
+        - User should be able to rate items
+        - Frontend and backend logic in progress
+        ![Sprint3-InProgress-CommentsAndRatings](./SCREENSHOTS/Milestones/Sprint3-InProgress-CommentsAndRatings.png)
+    - Changing the Users Password
+        - Front end implementation in process
+        - Backend implementation working 
+        - User asked for current and new password
+        ![Sprint3-InProgress-ChangingPassword](./SCREENSHOTS/Milestones/Sprint3-InProgress-ChangingPassword.png)
+- Schedule
+![Sprint3-Schedule-SprintBurnRate](./SCREENSHOTS/Milestones/Sprint3-Schedule-SprintBurnRate.png)
+![Sprint3-Schedule-Progress](./SCREENSHOTS/Milestones/Sprint3-Schedule.png)
+- Next Steps heading towards Sprint 4 (Sprint 4 Tasks)
+    - Logged in user is able to upload and view profile and item images
+    - Logged in admin is able to delete, view and remove anyone’s listings and add categories
+
+
+
+
+
 - Integration test of the week 10 build and any feedback
 - Finish the front end implementation
 - Implement search and find listing based on categories

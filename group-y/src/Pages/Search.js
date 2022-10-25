@@ -86,6 +86,7 @@ const Search = () => {
                                     Categories
                                 </a>
                             </li>
+                            <li><a href="/addlisting">Add Listing </a></li>
                             <li>
                                 <a className="active" href="/search">
                                     Search

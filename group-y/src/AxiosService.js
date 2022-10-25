@@ -85,6 +85,7 @@ const register = async (newUser) => {
 }
 
 const getUserDetails = async () => {
+    getToken()
     const response = await axios.get(serverUrl + "auth/getUserDetails/",{ headers: { "Authorization": `Bearer ${token}` } })
     return response
 }

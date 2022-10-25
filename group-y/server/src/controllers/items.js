@@ -110,7 +110,7 @@ const addPhotoToItem = async(request, response) =>{
     }
     const item = await Items.findById(request.params.itemId)
     item.itemPhotoUrl = `${Config.downloadURL}${request.file.filename}`
-    console.log(Config.downloadURL)
+    // console.log(Config.downloadURL)
     return response.json(await item.save())
 }
 module.exports = {

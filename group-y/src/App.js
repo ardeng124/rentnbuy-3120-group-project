@@ -11,6 +11,7 @@ import YourOffers from './Pages/YourOffers.js';
 import Categories from "./Pages/Categories.js"
 import Notifications from './Pages/Notifications.js';
 import FavouritesPage from './Pages/FavouritesPage.js';
+import AddListing from './Pages/AddListing.js';
 
 import {
   BrowserRouter as Router,
@@ -44,6 +45,7 @@ function App() {
                     <Route path="/notifications" element={<Notifications/>} />
                     <Route path="/offers" element={<YourOffers/>} />
                     <Route path="/favourites" element={<FavouritesPage />} />
+                    <Route path="/addlisting" element={<AddListing />} />
 
                 </Routes>
             </Router>

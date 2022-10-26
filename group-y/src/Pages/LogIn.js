@@ -73,6 +73,7 @@ const Login = () => {
         <ul>
             <li><a  href="/">Home</a></li>
             <li><a href="/categories"> Categories </a> </li>
+            <li><a href="/addlisting">Add Listing </a></li>
             <li> <a href="/search"> Search </a></li>
             <li>
                 <MenuBarSearch></MenuBarSearch>

@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
     phoneNumber: String, 
     emailAddress: String, 
     isAdmin:Boolean,
+    profilePhotoName: String,
+    profilePhotoLocation: String,
     favourites: [
       {
         type: Object,

@@ -87,7 +87,6 @@ const getUserDetails = async (request, response) => {
         const username = decodedToken.username
 
         try {
-            console.log("i am here", username)
             // this will throw an error if token isn't of the right format
             const match = await User.findOne({username: username})
                             .populate("rentedItems")
@@ -146,8 +145,6 @@ const existingUser = async (request, response) => {
 
     //Find a match on 'username' and 'password'
     const matchExistingUser = await models.Session.findOne({ username, password })
-
-    console.log("Hi", matchExistingUser)
 
     //If the user 'username' and 'password' matches an exisiting entry
     //then it will be true
@@ -209,7 +206,6 @@ const changeUserPassword = async (request, response) => {
     }
     const passwordCorrect = user === null ? false : await bcrypt.compare(oldPassword, user.passwordHash)
     if(!passwordCorrect){
-        console.log("Sssssss: ", passwordCorrect)
         return response.status(401).json({"status": "Old password does not match"})
     }
     user.passwordHash = await Util.hashPassword(newPassword)
@@ -246,7 +242,6 @@ const modifyFavourite = async (request, response) => {
         return response.status(200).json({status:"favourite added", favs})
     }
     if(action == "delete") {
-        console.log(request.get('Authorization'))
        
         // console.log(favss
         favs = favs.filter(x => x._id != item.id)

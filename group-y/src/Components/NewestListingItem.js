@@ -11,6 +11,8 @@ function NewestListingItem(props) {
     const { itemPrice } = props  
     const { ClickFunc } = props  
     const { isAvailable } = props  
+    const { img } = props  
+
 
     let modifiedDesc = ""
     if (typeof itemDesc !== "undefined") {
@@ -31,7 +33,9 @@ function NewestListingItem(props) {
             <section className='overallListingItem'>
             <div className="newestListingItemDisabled" onClick={ClickFunc} >
                 <div>
-                    <div className="NLRimagePlaceholder"></div>
+                    {/* <div className="NLRimagePlaceholder"></div> */}
+                    {img ? <img className="NLRimagePlaceholder" src={img}/> : <img className='NLRimagePlaceholder' src= "https://i.stack.imgur.com/mwFzF.png"/>}
+
                     <p>
                         <em>{modifiedPrice}</em>
                     </p>
@@ -50,7 +54,7 @@ function NewestListingItem(props) {
           <section className='overallListingItem'>
             <div className="newestListingItem" onClick={ClickFunc} >
                 <div>
-                    <div className="NLRimagePlaceholder"></div>
+                {img ? <img className="NLRimagePlaceholder" src={img}/> : <img className='NLRimagePlaceholder' src= "https://i.stack.imgur.com/mwFzF.png"/>}
                     <p>
                         <em>{modifiedPrice}</em>
                     </p>

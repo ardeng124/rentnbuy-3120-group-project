@@ -38,7 +38,7 @@ const HomePage = () => {
             //todo FIX THIS 
            
         
-            arr = arr.slice(-8)
+            arr = arr.slice(-9)
             arr = arr.reverse()
             
             setListings(arr)
@@ -89,6 +89,11 @@ const HomePage = () => {
                                     Categories
                                 </a>
                             </li>
+                            <li>
+                                <a href="/addlisting">
+                                    Add Listing
+                                </a>
+                            </li>
                             <li> <a href="/search"> Search </a></li>
                             <li>
                                 <MenuBarSearch></MenuBarSearch>
@@ -115,6 +120,7 @@ const HomePage = () => {
                                     itemPrice={x.rentPrice}
                                     ClickFunc = {() => navigate("/notifications")}
                                     status ={x.status}
+                                    img={x.item.itemPhotoUrl}
                                 ></FeedListingItem>)}
                                 {yourOffers && yourOffers.map(x=><FeedListingItemOwn
                                     itemName={x.offerMadeTo.username}
@@ -122,6 +128,7 @@ const HomePage = () => {
                                     itemPrice={x.rentPrice}
                                     ClickFunc = {() => navigate("/offers")}
                                     status ={x.status}
+                                    img={x.item.itemPhotoUrl}
                                 ></FeedListingItemOwn>)}
                         </div>
                         </div>
@@ -137,6 +144,8 @@ const HomePage = () => {
                                     itemId = {x.id}
                                     isAvailable={x.isAvailable}
                                     ClickFunc = {() => itemClicked(x.id)}
+                                    img = {x.itemPhotoUrl}
+
                                 ></NewestListingItem>
                             ))}
                         </div>

@@ -10,7 +10,6 @@ const DropDownMenu = (props) => {
     const navigate = useNavigate()
     const [profilePhoto, setProfilePhoto] = useState("")
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
     //TODO: do something with the future axios file here
@@ -22,8 +21,7 @@ const DropDownMenu = (props) => {
      const getUserProfilePhoto = () => {
         AxiosService.getUserDetails()
          .then(response => {          
-           console.log("GET response", response)
-           console.log("Response Data Is: ", response.data)
+
            setProfilePhoto(response.data.profilePhoto)
          })
      }
@@ -31,7 +29,6 @@ const DropDownMenu = (props) => {
         getUserProfilePhoto()     
       }, []);
      const handleLogInClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/login")
     }
 

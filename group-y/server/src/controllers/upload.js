@@ -58,10 +58,9 @@ const download = async (req, res) => {
     const bucket = new GridFSBucket(database, {
       bucketName: "images",
     });
-    
+
     let downloadStream = bucket.openDownloadStreamByName(req.params.name);
     downloadStream.on("data", function (data) {
-        console.log(data)
       return res.status(200).write(data);
     });
 

@@ -38,7 +38,7 @@ const HomePage = () => {
             //todo FIX THIS 
            
         
-            arr = arr.slice(-8)
+            arr = arr.slice(-9)
             arr = arr.reverse()
             
             setListings(arr)

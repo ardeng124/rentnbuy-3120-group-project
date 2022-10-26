@@ -8,7 +8,7 @@ import MenuBarSearch from "../Components/MenuBarSearch";
 
 const AccountDetails = () => {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [userDetails, setUserDetails] = useState({_id: "", status: "", emailAddress: "", location: "", img:""})
+    const [userDetails, setUserDetails] = useState({_id: "", status: "", emailAddress: "", location: "", profilePhoto:"https://i.stack.imgur.com/mwFzF.png"})
     const [currentStatus, setStatus] = useState("")
     const [imgUpdated, setImgUpdated] = useState(false)
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
@@ -27,9 +27,14 @@ const AccountDetails = () => {
     const getUserDetails = () => {
        AxiosService.getUserDetails()
         .then(response => {          
-          console.log("GET response", response)
-          console.log("Response Data Is: ", response.data)
           setUserDetails(response.data)
+          console.log(userDetails.profilePhoto)
+          if(!response.data.profilePhoto || response.data.profilePhoto == "" ) {
+            setTempUrl("https://i.stack.imgur.com/mwFzF.png")
+          } else {
+              setTempUrl(response.data.profilePhoto)
+
+          }
         })
     }
 
@@ -73,8 +78,7 @@ const AccountDetails = () => {
             AxiosService.uploadImagetoUser(userDetails.profilePhoto, userDetails._id)
         }
     }
-console.log(loggedIn)
-console.log(tempUrl)
+
 const imgClicked = (event) => {
     document.getElementById('file').click()
 }
@@ -116,8 +120,8 @@ const imgClicked = (event) => {
                             className="editUsrIconBtn"
                             onClick={() => imgClicked()}
                         /> */}
-                        {userDetails.profilePhoto? <img className="editUsrIconBtn"  onClick={() => imgClicked()} src={userDetails.profilePhoto}/> : <img className='editUsrIconBtn'  onClick={() => imgClicked()} src= {userDetails.profilePhoto}/>}
-
+                        {/* {userDetails.profilePhoto? <img className="editUsrIconBtn"  onClick={() => imgClicked()} src={userDetails.profilePhoto}/> : <img className='editUsrIconBtn'  onClick={() => imgClicked()} src= {tempUrl}/>} */}
+                        <img className="editUsrIconBtn"  onClick={() => imgClicked()} src={tempUrl}/>
                         <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
 
                         <fieldset className="passChangeFieldSet">

@@ -120,6 +120,7 @@ const HomePage = () => {
                                     itemPrice={x.rentPrice}
                                     ClickFunc = {() => navigate("/notifications")}
                                     status ={x.status}
+                                    img={x.item.itemPhotoUrl}
                                 ></FeedListingItem>)}
                                 {yourOffers && yourOffers.map(x=><FeedListingItemOwn
                                     itemName={x.offerMadeTo.username}
@@ -127,6 +128,7 @@ const HomePage = () => {
                                     itemPrice={x.rentPrice}
                                     ClickFunc = {() => navigate("/offers")}
                                     status ={x.status}
+                                    img={x.item.itemPhotoUrl}
                                 ></FeedListingItemOwn>)}
                         </div>
                         </div>
@@ -142,6 +144,8 @@ const HomePage = () => {
                                     itemId = {x.id}
                                     isAvailable={x.isAvailable}
                                     ClickFunc = {() => itemClicked(x.id)}
+                                    img = {x.itemPhotoUrl}
+
                                 ></NewestListingItem>
                             ))}
                         </div>

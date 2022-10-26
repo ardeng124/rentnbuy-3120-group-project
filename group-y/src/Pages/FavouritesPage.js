@@ -10,6 +10,8 @@ import SearchResultItem from '../Components/SearchResultItem';
 const FavouritesPage = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [userDetails, setUserDetails] = useState([])
+    const [itemDetails, setItemDetails] = useState({})
+
 
     const navigate = useNavigate()
 
@@ -36,6 +38,7 @@ const FavouritesPage = () => {
                 element.description = element.description.substring(0, 250) + "..."
                 element.price = "$".concat((element.price/100))
             });
+
           setUserDetails(arr)
         })
     }, [])
@@ -84,7 +87,7 @@ const FavouritesPage = () => {
                 <section className='favouritesPageMainContent'>
                     {userDetails.map(x => (
                     <div className='FavItemDiv'>
-                        <SearchResultItem name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.category} isAvailable={x.isAvailable}></SearchResultItem> 
+                        <SearchResultItem img={x.itemPhotoUrl} name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.category} isAvailable={x.isAvailable}></SearchResultItem> 
                         <div className='favPageButtonContainer'>
                         <button onClick={() => itemRemove(x.id)} className='appBtnNotifDeny'>Remove</button>
                         </div>

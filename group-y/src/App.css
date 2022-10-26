@@ -439,6 +439,7 @@ font-size: 14pt;
   /* flex: 1 1 28%; */
   flex-shrink: 1;
   list-style-type: none;
+  overflow-wrap: anywhere;
 }
 .overallListingItemFeed :hover {
   animation: homePageItemHover 0.1s ease-in;
@@ -453,13 +454,13 @@ font-size: 14pt;
   animation: anti-homePageItemHover 0.1s linear;
 }
 .NLRimagePlaceholder {
-  background-color: #DFE1DD !important;
+  /* background-color: #DFE1DD !important; */
   border-radius: 5px !important;
-  padding: 85px;
+  /* padding: 85px; */
   /* margin: 15px; */
-  padding: 15px;
-  width: 60px;
-  height: 60px;
+  /* padding: 15px; */
+  width: 85px;
+  height: 85px;
   border: 1px solid #6B9080;
 
 }
@@ -1011,7 +1012,6 @@ margin:5px;
   width:auto;
 
 }
-
 
 
 /*  Animations  */

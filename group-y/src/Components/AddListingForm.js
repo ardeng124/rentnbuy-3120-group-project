@@ -54,7 +54,11 @@ const AddListingForm = ({updateFn}) => {
                 </select>
                 <input className="input" type="number" placeholder="Enter price (cents)" name="price" onChange={updateField} required/>
                 <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} required/>
-                <label class="custom-uploader" for="file">Upload Your File</label> <input id="file" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" onChange={updateField} name="img" type="file" />
+                <fieldset>
+                <label class="custom-uploader" for="file">Upload Your File</label> 
+                
+                <input className ="fileUpload" id="file" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" onChange={updateField} name="img" type="file" />
+                </fieldset>
                 <button className='appBtn' type='submit'>Create Listing</button>
             </form>
         </div>

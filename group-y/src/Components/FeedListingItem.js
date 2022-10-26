@@ -8,12 +8,14 @@ function FeedListingItem(props) {
     const {itemToRent} = props
     const { ClickFunc } = props  
     const {status} = props
+    const {img} = props
 
+    console.log(img)
         return (
           <section className='overallListingItemFeed'>
             <div className="newestListingItemFeed" onClick={ClickFunc} >
                 <div>
-                    <div className="NLRimagePlaceholder"></div>
+                {img ? <img className="NLRimagePlaceholder" src={img}/> : <img className='NLRimagePlaceholder' src= "https://i.stack.imgur.com/mwFzF.png"/>}
 
                 </div>
                 <div className="leftNLR">

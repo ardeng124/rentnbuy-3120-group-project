@@ -107,7 +107,7 @@ const Search = () => {
                             value = {searchVal} onChange={(e) => {setSearchVal(e.target.value)}}
                             />
                     </form>
-                    {filteredItems.map(x => (<SearchResultItem name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.categoryId} isAvailable={x.isAvailable}></SearchResultItem>))}
+                    {filteredItems.map(x => (<SearchResultItem img={x.itemPhotoUrl} name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.categoryId} isAvailable={x.isAvailable}></SearchResultItem>))}
                     </div>
                 </section>
                 </div>

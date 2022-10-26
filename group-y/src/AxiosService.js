@@ -217,6 +217,7 @@ const uploadImageToListing = async(img,id) => {
     return response
 }
 
+
 export default {
     getReviewsPerItem,
     postReview,

@@ -217,7 +217,17 @@ const uploadImageToListing = async(img,id) => {
     return response
 }
 
-
+const uploadImagetoUser = async(img) => {
+    console.log(img)
+    getToken()
+    const formData = new FormData();
+    formData.append('file',img)
+    const response = await axios.put(serverUrl + "api/uploadUserPhoto/",formData, { headers: { "Authorization": `Bearer ${token}`, 'content-type': 'multipart/form-data' } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
 export default {
     getReviewsPerItem,
     postReview,
@@ -243,5 +253,6 @@ export default {
     postReview,
     getReviewsPerItem,
     createListing,
-    uploadImageToListing
+    uploadImageToListing,
+    uploadImagetoUser
 }

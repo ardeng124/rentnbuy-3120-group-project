@@ -41,11 +41,12 @@ const AddListingForm = ({updateFn}) => {
     }
     const formHandler = (event) => {
         event.preventDefault()
+        document.listingform.reset()
         updateFn(formInfo)
     }
     return (
         <div className='addListingForm'>
-            <form className="formContainer" onSubmit={formHandler}>
+            <form className="formContainer" onSubmit={formHandler} name="listingform">
                 <input className="input" type="text" placeholder="Enter Title" name="name" onChange={updateField} required/>
                 <textarea rows={40} cols={100} className="input" type="text" placeholder="Enter Description" name="description" onChange={updateField} required/>
                 <select name="category" onChange={updateField}>
@@ -57,7 +58,7 @@ const AddListingForm = ({updateFn}) => {
                 <fieldset>
                 <label class="custom-uploader" for="file">Upload Your File</label> 
                 
-                <input className ="fileUpload" id="file" accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps" onChange={updateField} name="img" type="file" />
+                <input className ="fileUpload" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
                 </fieldset>
                 <button className='appBtn' type='submit'>Create Listing</button>
             </form>

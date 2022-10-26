@@ -115,6 +115,7 @@ const ItemPage = () => {
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/categories"> Categories </a> </li>
+                <li><a href="/addlisting">Add Listing </a></li>
                 <li> <a href="/search"> Search </a></li>
                 <li>
                     <MenuBarSearch></MenuBarSearch>
@@ -126,7 +127,9 @@ const ItemPage = () => {
         <section className="itemPageMainContent">
         <div className='itemPageContainer'>
         <div className='topPageFlex'>
-            <img className='itemImg' src= "https://i.stack.imgur.com/mwFzF.png"/>
+        {itemDetails.itemPhotoUrl ? <img className="itemImg" src={itemDetails.itemPhotoUrl}/> : <img className='itemImg' src= "https://i.stack.imgur.com/mwFzF.png"/>
+}
+
             <div className='itemInfoBox'> 
                 <h2>{itemDetails.name}</h2>
                 <h4>Price: {itemDetails.price}</h4>

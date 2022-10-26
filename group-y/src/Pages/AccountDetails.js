@@ -8,8 +8,11 @@ import MenuBarSearch from "../Components/MenuBarSearch";
 
 const AccountDetails = () => {
     const [loggedIn, setLoggedIn] = useState(false)
-    const [userDetails, setUserDetails] = useState({_id: "", status: "", emailAddress: "", location: ""})
+    const [userDetails, setUserDetails] = useState({_id: "", status: "", emailAddress: "", location: "", profilePhoto:"https://i.stack.imgur.com/mwFzF.png"})
     const [currentStatus, setStatus] = useState("")
+    const [imgUpdated, setImgUpdated] = useState(false)
+    const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
+    // let imgUpdated = false
     useEffect(() => {
         AxiosService.validateToken()
            .then(response => {
@@ -24,9 +27,14 @@ const AccountDetails = () => {
     const getUserDetails = () => {
        AxiosService.getUserDetails()
         .then(response => {          
-          console.log("GET response", response)
-          console.log("Response Data Is: ", response.data)
           setUserDetails(response.data)
+          console.log(userDetails.profilePhoto)
+          if(!response.data.profilePhoto || response.data.profilePhoto == "" ) {
+            setTempUrl("https://i.stack.imgur.com/mwFzF.png")
+          } else {
+              setTempUrl(response.data.profilePhoto)
+
+          }
         })
     }
 
@@ -52,18 +60,28 @@ const AccountDetails = () => {
             setUserDetails({ ...userDetails, emailAddress: event.target.value })
         } else if (name === "Address") {
         setUserDetails({ ...userDetails, location: event.target.value })
+    } else if (name === "img") {
+        setImgUpdated(true)
+        setUserDetails({...userDetails, profilePhoto: event.target.files[0]})
+        setTempUrl(URL.createObjectURL(event.target.files[0]))
     }
     }
 
     const editAccountDetails = () => {
         AxiosService.editUserDetails(userDetails)
         .then(response => {
-            console.log("Edit Response", response)
+            // console.log("Edit Response", response)
             setStatus("Successfully updated details")
             window.alert("Successfully updated details")
         })
+        if(imgUpdated) {
+            AxiosService.uploadImagetoUser(userDetails.profilePhoto, userDetails._id)
+        }
     }
-console.log(loggedIn)
+
+const imgClicked = (event) => {
+    document.getElementById('file').click()
+}
     return (
         <div className="AccountDetailsPage">
             <section className="loginheader">
@@ -72,6 +90,11 @@ console.log(loggedIn)
                     <ul>
                         <li> <a href="/">Home</a> </li>
                         <li><a href="/categories"> Categories </a> </li>
+                        <li>
+                                <a href="/addlisting">
+                                    Add Listing
+                                </a>
+                            </li>
                         <li> <a href="/search"> Search </a></li>
                         <li>
                                 <MenuBarSearch></MenuBarSearch>
@@ -93,10 +116,14 @@ console.log(loggedIn)
                     <br></br>
                     <form className="border" onSubmit={formHandler}>
                         {/* TODO: state updates on input change here */}
-                        <button
+                        {/* <button
                             className="editUsrIconBtn"
-                            onClick={() => console.log("update")}
-                        />
+                            onClick={() => imgClicked()}
+                        /> */}
+                        {/* {userDetails.profilePhoto? <img className="editUsrIconBtn"  onClick={() => imgClicked()} src={userDetails.profilePhoto}/> : <img className='editUsrIconBtn'  onClick={() => imgClicked()} src= {tempUrl}/>} */}
+                        <img className="editUsrIconBtn"  onClick={() => imgClicked()} src={tempUrl}/>
+                        <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
+
                         <fieldset className="passChangeFieldSet">
                             {/* <input
                                 className="input"

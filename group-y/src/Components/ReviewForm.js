@@ -44,12 +44,14 @@ const ReviewForm = ({updateFn}) => {
     const formHandler = (event) => {
         event.preventDefault()
         console.log("Form submitted: ", review)
+        document.reviewform.reset()
+
         updateFn(review)
     }
 
     return (
         <div className ="ReviewformContainer">
-            <form onSubmit={formHandler} className = "reviewForm">
+            <form onSubmit={formHandler} className = "reviewForm" name='reviewform'>
                 <textarea rows={40} cols={100} type="text" placeholder="Leave a comment or review" name="text" onChange={updateField} value={review.text} required/>
 
                 <Box className = "starContainer" onChange={updateField} sx={{width: 200, display: 'flex', alignItems: 'center',}}>

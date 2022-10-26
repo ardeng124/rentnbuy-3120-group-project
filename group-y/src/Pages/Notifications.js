@@ -73,6 +73,7 @@ const Notifications = () => {
                                     Categories
                                 </a>
                             </li>
+                            <li><a href="/addlisting">Add Listing </a></li>
                             <li> <a href="/search"> Search </a></li>
                             <li>
                                 <MenuBarSearch></MenuBarSearch>

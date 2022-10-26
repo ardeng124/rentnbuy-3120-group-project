@@ -69,10 +69,10 @@ const addItems = async(request, response) =>{
     const body = request.body 
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     const userFind = await User.findOne({username:username})
-
+    console.log(request.body.categoryId)
     let CategoryItem = {}
-    if(request.body.category) {
-        CategoryItem = await Categories.findOne({name:request.body.category})
+    if(request.body.categoryId) {
+        CategoryItem = await Categories.findOne({name:request.body.categoryId})
     }
     const item = new Items({
         name: body.name,
@@ -85,7 +85,7 @@ const addItems = async(request, response) =>{
         description: body.description, 
         timestamp: new Date(),
         categoryId: CategoryItem.name,
-        imageURL: `http://localhost:8102/api/downloadFile/${request.file.filename}`
+        imageURL: "",
     })
     const savedItem = await item.save()
 
@@ -110,7 +110,7 @@ const addPhotoToItem = async(request, response) =>{
     }
     const item = await Items.findById(request.params.itemId)
     item.itemPhotoUrl = `${Config.downloadURL}${request.file.filename}`
-    console.log(Config.downloadURL)
+    // console.log(Config.downloadURL)
     return response.json(await item.save())
 }
 module.exports = {

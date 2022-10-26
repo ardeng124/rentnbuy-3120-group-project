@@ -5,9 +5,9 @@ import { useNavigate} from "react-router-dom"
  * SearchResultItem: Used on the search page to wrap each search result
  */
 const SearchResultItem = (props) => {
-    const {name,price,description,category,id,isAvailable} = props
+    const {name,price,description,category,id,isAvailable,img} = props
     console.log(category)
-    const img = "https://i.stack.imgur.com/mwFzF.png"
+
     const itemClicked = (id) => {
         navigate(`/item/${id}`)
     }
@@ -20,7 +20,8 @@ const SearchResultItem = (props) => {
                 <div className='animationParent'>
             
                     <div className='searchResultItem'onClick={() => itemClicked(id)}>
-                    <img className = 'searchImage' src={img}></img>
+                    {img ? <img className="searchImage" src={img}/> : <img className='searchImage' src= "https://i.stack.imgur.com/mwFzF.png"/>}
+
                     <div className='rightContainer'>
                         <li className='TopLineSearch'><span className='leftAlignItemSearchTitle'>{name}</span> <span className='rightAlignItemSearch'> {category}</span></li>
 
@@ -38,7 +39,7 @@ const SearchResultItem = (props) => {
         <div className='disabledItemParent'>
         
             <div className='searchResultItemDisabled'onClick={() => itemClicked(id)}>
-            <img className = 'searchImage' src={img}></img>
+            {img ? <img className="searchImage" src={img}/> : <img className='searchImage' src= "https://i.stack.imgur.com/mwFzF.png"/>}
             <div className='rightContainer'>
                 <li className='TopLineSearch'><span className='leftAlignItemSearchTitle'>{name}</span> Unavailable<span className='rightAlignItemSearch'> {category}</span></li>
 

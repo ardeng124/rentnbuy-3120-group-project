@@ -76,7 +76,7 @@ font-size: 14pt;
   margin:auto
 }
 .formContainer .input{
-  background-color: #CCE3DE;
+  background-color: #d3e4e0;
   border: 1px solid #a4c3b27d ;
   border-radius: 10px;
   color: #747c78;
@@ -97,6 +97,7 @@ font-size: 14pt;
   margin-bottom:20px;
   margin-top: 20px;
 }
+
 .appBtn{
   background-color: #81BEA4;
 
@@ -174,7 +175,7 @@ font-size: 14pt;
   margin:5px;
   cursor: pointer;
   width:60px;
-
+  height:60px;
 
 }
 .dropDownMaster{
@@ -272,8 +273,11 @@ font-size: 14pt;
 .editUsrIconBtn{
   background-color: #D9D9D9;
     border-radius: 100%;
-    padding: 85px;
-    margin: 5px
+    /* padding: 85px; */
+    margin: 5px;
+    width:200px;
+    height:200px;
+    cursor:pointer;
 }
 .dropDownA{
   padding: 5px !important;
@@ -438,6 +442,7 @@ font-size: 14pt;
   /* flex: 1 1 28%; */
   flex-shrink: 1;
   list-style-type: none;
+  overflow-wrap: anywhere;
 }
 .overallListingItemFeed :hover {
   animation: homePageItemHover 0.1s ease-in;
@@ -452,13 +457,13 @@ font-size: 14pt;
   animation: anti-homePageItemHover 0.1s linear;
 }
 .NLRimagePlaceholder {
-  background-color: #DFE1DD !important;
+  /* background-color: #DFE1DD !important; */
   border-radius: 5px !important;
-  padding: 85px;
+  /* padding: 85px; */
   /* margin: 15px; */
-  padding: 15px;
-  width: 60px;
-  height: 60px;
+  /* padding: 15px; */
+  max-width: 92px;
+  max-height: 92px;
   border: 1px solid #6B9080;
 
 }
@@ -511,8 +516,9 @@ font-size: 14pt;
   border-radius: 20px;
 }
 .itemImg{
-  width: 450px;
-  height: 450px;
+  
+  max-width: 450px;
+  max-height: 450px;
   margin:10px;
 }
 button {
@@ -990,6 +996,47 @@ margin:5px;
 .reviewForm .appBtn{
   margin:auto
 }
+
+.addListingMain{
+  background-color: #E3EDE9;
+  padding:10px;
+  margin: auto;
+  width:75%;
+  border-radius: 10pt;
+}
+.addListingForm .formContainer .input {
+  width:50%;
+}
+.addListingForm select{
+  background-color:  #E0E7DD;
+}
+
+.addListingForm .appBtn{
+  width:auto;
+
+}
+.hideMe{
+  display: none;
+}
+
+.listingPrevIcon{
+  background-color: #D9D9D9;
+    /* border-radius: 100%; */
+    /* padding: 85px; */
+    margin: 5px;
+    width:300px;
+    height:300px;
+    cursor:pointer;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
 
 /*  Animations  */
 @keyframes homePageItemHover {

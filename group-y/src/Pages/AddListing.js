@@ -3,45 +3,69 @@ import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
 
+import {
+    BrowserRouter as Router,
+    Routes, Route, Link
+  } from "react-router-dom"
+
 
 import MenuBarSearch from '../Components/MenuBarSearch';
-import SearchResultItem from '../Components/SearchResultItem';
-import CategoryItem from '../Components/CategoryItem';
-const Categories = () => {
+import AddListingForm from '../Components/AddListingForm';
+
+const AddListing = () => {
 
     const [loggedIn, setLoggedIn] = useState(false)
-    const [categories, setCategories] = useState([])
-
     const navigate = useNavigate()
+
+    // const [convos, setConversations] = useState([])
+
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
             if(response == 'success'){
                 setLoggedIn(true)
             // navigate("/")
-            
+            } else {
+                navigate('/login')
             }
+      })
 
-        })
-        AxiosService.getCategories().then(response => {
-            setCategories(response.data)
-        })
-  }, [])
+    }, [])
+    
+    const handleUserClicked = (event) => {
+        console.log("clicked on user icon")
+        navigate("/userview")
+    }
 
+    const createListing = (Listing) => {
+        console.log(Listing)
+        const file = Listing.img
+        const listingToUpload = delete Listing.img
+        AxiosService.createListing(Listing).then(response => {
+            console.log(response)
+            const id = response.data.id
+            if(file) {
+                AxiosService.uploadImageToListing(file,id).then(response => {
+                    console.log(response)
+                })
+            }
+        })
+    }
+    
   return (
-    <div className='categoriesPage'>
-      <section className="loginheader">
+    <div className='AddListingPage'>
+        <section className="loginheader">
                     <div className="MasterHeader">
                         <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
                         <ul>
-
+                            
                             <li>
                                 <a href="/">
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a className='active' href="/categories">
+                                <a href="/categories">
                                     Categories
                                 </a>
                             </li>
@@ -55,14 +79,15 @@ const Categories = () => {
                                 <MenuBarSearch></MenuBarSearch>
                             </li>
                         </ul>
-                        <h1>Categories</h1>
+                        <h1>Add a listing</h1>
                     </div>
                 </section>
-                <section className='categoriesPageMainContent'>
-                   {categories.map(x => <CategoryItem name={x.name}></CategoryItem>)}
-                </section>
+            <section className='addListingMain'>
+                 <AddListingForm updateFn={createListing}></AddListingForm>
+            </section>
     </div>
   )
 }
 
-export default Categories
+export default AddListing
+

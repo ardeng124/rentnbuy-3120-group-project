@@ -85,6 +85,7 @@ const register = async (newUser) => {
 }
 
 const getUserDetails = async () => {
+    getToken()
     const response = await axios.get(serverUrl + "auth/getUserDetails/",{ headers: { "Authorization": `Bearer ${token}` } })
     return response
 }
@@ -196,6 +197,37 @@ const getReviewsPerItem = async () => {
     return response
 }
 
+const createListing = async(item) => {
+    getToken()
+    const response = await axios.post(serverUrl + "api/items",item, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const uploadImageToListing = async(img,id) => {
+    getToken()
+    const formData = new FormData();
+    formData.append('file',img)
+    const response = await axios.put(serverUrl + "api/addPhotoToItem/"+id,formData, { headers: { "Authorization": `Bearer ${token}`, 'content-type': 'multipart/form-data' } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const uploadImagetoUser = async(img) => {
+    console.log(img)
+    getToken()
+    const formData = new FormData();
+    formData.append('file',img)
+    const response = await axios.put(serverUrl + "api/uploadUserPhoto/",formData, { headers: { "Authorization": `Bearer ${token}`, 'content-type': 'multipart/form-data' } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
 export default {
     getReviewsPerItem,
     postReview,
@@ -219,5 +251,8 @@ export default {
     modifyFavourite,
     getCategories,
     postReview,
-    getReviewsPerItem
+    getReviewsPerItem,
+    createListing,
+    uploadImageToListing,
+    uploadImagetoUser
 }

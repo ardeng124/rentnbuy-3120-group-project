@@ -1,3 +1,8 @@
+// Below code has been referenced from 
+// https://github.com/expressjs/multer#multeropts
+// https://www.bezkoder.com/node-js-express-file-upload/
+// For more info on GRIDFs, please see https://www.mongodb.com/docs/manual/core/gridfs/
+
 const util = require("util");
 const multer = require("multer");
 const { GridFsStorage } = require("multer-gridfs-storage");

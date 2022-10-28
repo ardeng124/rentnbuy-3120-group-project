@@ -168,8 +168,10 @@ This section details the features that Group Y aims to include in its MVP that w
 This section details the goals set by Group Y for each sprint over the following weeks. This will progress from the initial setup of the web application all the way to the final MVP. The milestones for weeks 9, 10, 11 and 12 are as follows:
 
 ### Milestones (Sprints):
+---
 
 #### Sprint 1 - Week 9:
+---
 - **Sprint Goal:** “User is able to sign up/login and view the listings on the home page”
 - **Recent Progress:**
     - Product and Sprint BackLog Grooming - Completed 
@@ -212,6 +214,7 @@ This section details the goals set by Group Y for each sprint over the following
     - Logged in user is able to report another user (stretch goal)
 
 #### Sprint 2 - Week 10:
+---
 - **Sprint Goal:** “User is able to rent a listing”
 - **Recent Progress:**
     - Sprint Backlog based on feedback received from Sprint 1 and groups progress - Updated
@@ -249,6 +252,7 @@ This section details the goals set by Group Y for each sprint over the following
     - Logged in user is able to favourite a listing 
 
 #### Sprint 3 - Week 11:
+---
 - **Sprint Goal:** “User is able to make and accept an offer”
 - **Recent Progress:**
     - Sprint Backlog - Updated
@@ -288,6 +292,7 @@ This section details the goals set by Group Y for each sprint over the following
     - Logged in admin is able to delete, view and remove anyone’s listings and add categories
 
 #### Sprint 4 - Week 12:
+---
 - **Sprint Goal:** “User is able to create, modify a listing, upload images and change their password”
 - **Recent Progress:**
     - **Completed**

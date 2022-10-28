@@ -6,7 +6,6 @@ import { useNavigate} from "react-router-dom"
  */
 const SearchResultItem = (props) => {
     const {name,price,description,category,id,isAvailable,img} = props
-    console.log(category)
 
     const itemClicked = (id) => {
         navigate(`/item/${id}`)

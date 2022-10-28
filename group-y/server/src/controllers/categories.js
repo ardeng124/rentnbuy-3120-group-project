@@ -11,7 +11,6 @@ const addCategory = async (request, response) => {
     }
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     const userFind = await User.findOne({username:username})
-    console.log(userFind)
     if(userFind.isAdmin) {
         const categorytoAdd = new category({
             name: body.name,

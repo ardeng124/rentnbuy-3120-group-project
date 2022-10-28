@@ -43,7 +43,6 @@ const ReviewForm = ({updateFn}) => {
     //Form Handler for Chats
     const formHandler = (event) => {
         event.preventDefault()
-        console.log("Form submitted: ", review)
         document.reviewform.reset()
 
         updateFn(review)

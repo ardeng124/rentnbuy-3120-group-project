@@ -44,10 +44,8 @@ const ItemPage = () => {
         let arr = response.data.items[0]
         arr.price = "$"+( arr.price/100)
         setAuthor(response.data.usrObj)
-        console.log(response.data.items)
         if(response.data.isFavourited != undefined) {
             setFavourited(true)
-            console.log("True")
         }
         setItemDetails(response.data.items[0])
     }) 
@@ -84,12 +82,10 @@ const ItemPage = () => {
     }
 
     const addFavourite = (id) => {
-        console.log("a")
         AxiosService.modifyFavourite(id,"add").then(response=> {
             if(response.status == "error"){
                 window.alert("error adding favourite")
             } else {
-            console.log(response)
             setFavourited(true)
             }
         })
@@ -100,7 +96,6 @@ const ItemPage = () => {
             if(response.status == "error"){
                 window.alert("error adding favourite")
             } else {
-            console.log(response)
             setFavourited(false)
             }
         })

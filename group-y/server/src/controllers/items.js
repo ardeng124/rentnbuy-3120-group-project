@@ -69,7 +69,6 @@ const addItems = async(request, response) =>{
     const body = request.body 
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     const userFind = await User.findOne({username:username})
-    console.log(request.body.categoryId)
     let CategoryItem = {}
     if(request.body.categoryId) {
         CategoryItem = await Categories.findOne({name:request.body.categoryId})

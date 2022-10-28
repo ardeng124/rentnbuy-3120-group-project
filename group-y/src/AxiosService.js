@@ -71,7 +71,6 @@ const register = async (newUser) => {
     //do some stuff with cookies
     const response2 = await axios.post(serverUrl + "auth/register/", newUser)
     if (response2.data.status == 409){
-        console.log("aaa")
         return response2
     }
     token = response2.data.token
@@ -218,7 +217,6 @@ const uploadImageToListing = async(img,id) => {
 }
 
 const uploadImagetoUser = async(img) => {
-    console.log(img)
     getToken()
     const formData = new FormData();
     formData.append('file',img)

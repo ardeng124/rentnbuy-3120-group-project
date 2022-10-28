@@ -26,7 +26,6 @@ const HomePage = () => {
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
             if(response == 'success'){
                 setLoggedIn(true)
             // navigate("/")
@@ -45,13 +44,11 @@ const HomePage = () => {
             // console.log(response.data.items)
         })
         AxiosService.getOffersToMe().then(response => {
-            console.log(response)
             let arr = response.data
             arr = arr.slice(-4)
             setOffers(arr)
         })
         AxiosService.getOffersByMe().then(response => {
-            console.log(response)
             let arr = response.data
             arr = arr.slice(-4)
             setYourOffers(arr)
@@ -59,7 +56,6 @@ const HomePage = () => {
     }, [])
     
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
     const handleLoginButtonClicked = (event) => {

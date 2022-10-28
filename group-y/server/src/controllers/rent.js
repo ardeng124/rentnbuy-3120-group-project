@@ -20,10 +20,8 @@ const getRentedItemsForAUser = async (request, response) => {
 
 
 const rentAnItem = async (request, response) => {
-    console.log(request)
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     const itemId = request.params.itemId;
-    console.log(decodedToken)
     if(!decodedToken){
         return response.status(401).json({status:"Unauthorised"})
     }

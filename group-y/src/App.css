@@ -616,7 +616,12 @@ a :hover .seeMoreBtn{
 }
 
 .SearchPage .loginheader{
-  background-color: #F6FFF8 !important;
+  background-color: #F6FFF8 ;
+}
+
+.CategorySearch .loginheader{
+  background-color:var(--header);
+
 }
 .SearchPage{
   list-style-type: none;
@@ -868,8 +873,11 @@ margin:5px;
   display: flex;
   width:85%;
   margin:auto;
-
 }
+.unavText{
+  overflow-wrap: normal;
+}
+
 .favPageButtonContainer{
   padding:20px;
   /* display: flex; */

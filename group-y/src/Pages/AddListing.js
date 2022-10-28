@@ -33,16 +33,13 @@ const AddListing = () => {
     }, [])
     
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
 
     const createListing = (Listing) => {
-        console.log(Listing)
         const file = Listing.img
         const listingToUpload = delete Listing.img
         AxiosService.createListing(Listing).then(response => {
-            console.log(response)
             const id = response.data.id
             if(file) {
                 AxiosService.uploadImageToListing(file,id).then(response => {

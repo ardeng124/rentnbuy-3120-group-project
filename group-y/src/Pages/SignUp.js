@@ -32,7 +32,6 @@ const SignIn = () => {
   useEffect(() => {
    AxiosService.validateToken()
       .then(response => {
-        console.log(response)
         if(response == 'success'){
           logInTracker= true
           navigate("/")
@@ -46,12 +45,10 @@ const SignIn = () => {
   //Create new User Function
   const createNewUser = (newUser) => {
     AxiosService.register(newUser).then(response => {
-        console.log("POST response", response)
       if (response.data.error === "username taken") {
         console.log("fail")
         setErrorMessages({name: "uname", message: "Username taken!"})
       } else {
-        console.log("A User has logged in!")
         logInTracker = true;
         setErrorMessages({name: "uname", message: ""})
         navigate("/")

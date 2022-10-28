@@ -26,9 +26,6 @@ const addReview = async(request, response) =>{
 
     const inUser = await User.findById(decodedToken.id)
     
-    console.log(inUser)
-
-    console.log(body.stars)
     const review = new Review({
         creator: inUser.username,
         text: body.text, 

@@ -30,7 +30,6 @@ const ChatWindow = (props) => {
    
     useEffect(() => {
         setReview(reviewIn)
-        console.log("REVIEWS"+reviewIn)
     }, [reviewIn])
     const createNewReview = (formInfo) => {
         const dataToPost = {
@@ -40,7 +39,6 @@ const ChatWindow = (props) => {
         }
         AxiosService.postReview(dataToPost)
         .then(response => {
-            console.log("Post Review", response)
             setReview([...reviews,response.data])
         })
     }

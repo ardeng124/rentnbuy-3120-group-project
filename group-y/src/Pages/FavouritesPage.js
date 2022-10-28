@@ -17,7 +17,6 @@ const FavouritesPage = () => {
 
     // const [convos, setConversations] = useState([])
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
     useEffect(() => {   
@@ -48,7 +47,6 @@ const FavouritesPage = () => {
             if(response.status == "error"){
                 window.alert("error removing favourite")
             } else {
-            console.log(response)
             setUserDetails(response.data.favs)
             }
         })

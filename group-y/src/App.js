@@ -12,6 +12,7 @@ import Categories from "./Pages/Categories.js"
 import Notifications from './Pages/Notifications.js';
 import FavouritesPage from './Pages/FavouritesPage.js';
 import AddListing from './Pages/AddListing.js';
+import CategorySearch from './Pages/CategorySearch.js';
 
 import {
   BrowserRouter as Router,
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/settings" element={<UserSettings />} />
                     <Route path="/userdetails" element={<AccountDetails />} />
                     <Route path="/categories" element={<Categories />} />
+                    <Route path="/categories/:name" element={<CategorySearch />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/userview" element={<UserView />} />
                     <Route path="/item/:id" element={<ItemPage/>} />

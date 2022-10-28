@@ -39,7 +39,7 @@ function NewestListingItem(props) {
                     <p>
                         <em>{modifiedPrice}</em>
                     </p>
-                    <b>Unavailable</b>
+                    <b className = 'unavText'>Unavailable</b>
                 </div>
                 <div className="leftNLR">
                     <h3>{modifiedName}</h3>

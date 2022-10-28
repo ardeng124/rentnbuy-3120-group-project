@@ -40,15 +40,12 @@ const getOffersToMe = async (request, response) => {
 const makeOffer = async(request, response) =>{
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
     const user = await User.findOne({username:decodedToken.username})
-    console.log(request.body)
     if(request.body.startDate == "" || request.body.endDate == ""){
         return response.status(304).json(({"status":"Please enter both start and end date"}))
     }
-    console.log(user)
     
     
     const item = await Item.findById(request.body.itemId)
-    console.log(item.creatorId)
     const reciever = await User.findById(item.creatorId)
 
     const offer = new Offers ({

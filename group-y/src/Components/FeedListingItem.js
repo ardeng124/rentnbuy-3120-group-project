@@ -10,7 +10,6 @@ function FeedListingItem(props) {
     const {status} = props
     const {img} = props
 
-    console.log(img)
         return (
           <section className='overallListingItemFeed'>
             <div className="newestListingItemFeed" onClick={ClickFunc} >

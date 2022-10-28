@@ -16,8 +16,7 @@ const UserView = () => {
     const getUserDetails = () => {
         AxiosService.getUserDetails()
          .then(response => {          
-           console.log("GET response", response)
-           console.log("Response Data Is: ", response.data)
+         
            setUserDetails(response.data)
          })
      }
@@ -25,7 +24,6 @@ const UserView = () => {
     useEffect( () => {
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
             if(response == 'success'){
                 setLoggedIn(true)
             } else {
@@ -35,7 +33,6 @@ const UserView = () => {
         getUserDetails()
       }, []);
  
-    console.log (userDetails)
     return (
         <div className="UserViewPage">
             <section className="loginheader">

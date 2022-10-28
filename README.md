@@ -288,9 +288,55 @@ This section details the goals set by Group Y for each sprint over the following
     - Logged in admin is able to delete, view and remove anyone’s listings and add categories
 
 #### Sprint 4 - Week 12:
-- Integration test of the week 11 build and any feedback
-- Finalising application by reviewing codebase and testing functionality
+- **Sprint Goal:** “User is able to create, modify a listing, upload images and change their password”
+- **Recent Progress:**
+    - **Completed**
+       - Uploading Images to an item and profile
+        - Changing the users password 
+        - Creating a Listing
+        - Updated main readme with milestones
+        - Added comments and ratings to each item
+        - Users can favourite an item
+    - **In Progress**
+        - Modifying a Listing
+        - Being able to search by categories
+        - Testing the Application
 
+- **Biggest Risk:** None
+- **Completed:**
+    - **Updated Project Documentation**
+        - Sprints 1, 2 and 3 Milestones added to the main ReadMe Markdown file
+        - Sprint 4 to be added at the end of this week
+        ![Sprint4-Completed-UpdatedProjectDocumentation](./SCREENSHOTS/Milestones/Sprint4-Completed-UpdatedProjectDocumentation.png)
+    - **Changing the Users Password**
+        - Front end  and Back end implementation working as anticipated 
+        - User is asked for their current and new password before saving any changes
+        ![Sprint3-InProgress-ChangingPassword](./SCREENSHOTS/Milestones/Sprint3-InProgress-ChangingPassword.png)
+    - **A User can add comments and ratings to an item**
+        - User can add comments on an item 
+        - User can rate items
+        - Frontend and backend logic completed
+        ![Sprint4-Completed-CommentsAndRatings](./SCREENSHOTS/Milestones/Sprint4-Completed-CommentsAndRatings.png)
+    - **A user is able to create a listing**
+        - Logged in users can now create a new listing
+        - They can add an optional image to this listing
+        ![Sprint4-Completed-CreatingAListing](./SCREENSHOTS/Milestones/Sprint4-Completed-CreatingAListing.png)
+    - **Uploading an image to an Item or Profile page**
+        - You asked and we delivered - users can now have their photo on their profile! 
+        - More importantly, you can post photos of your items up for rent!
+        - Images stored in MongoDB and no file size limitation!
+        ![Sprint4-Completed-UploadingAnImage](./SCREENSHOTS/Milestones/Sprint4-Completed-UploadingAnImage.png)
+    - **Favoriting an Item**
+        - A logged in user is able to favourite an item which they would like to save in their favourites list. Allowing them to view the item at a later date.
+        - Although, if an item is removed it will automatically be removed from their favourites list.
+        ![Sprint4-Completed-FavouritingAnItem](./SCREENSHOTS/Milestones/Sprint4-Completed-FavouritingAnItem.png)
+- **Schedule**
+![Sprint4-Schedule-SprintBurnRate](./SCREENSHOTS/Milestones/Sprint4-Schedule-SprintBurnRate.png)
+![Sprint4-Schedule-Progress](./SCREENSHOTS/Milestones/Sprint4-Schedule.png)
+- **Next Steps heading towards the Final Presentation and Submission of the MVP**
+    - Adding an Admin User who is able to manage the application
+    - Profanity Filtering by age as well as a setting for any user to trigger this on or off
+    - Testing the application using Jest
 
 ## References
 ---

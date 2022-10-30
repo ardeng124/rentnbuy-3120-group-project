@@ -4,7 +4,9 @@ import AxiosService from "../AxiosService";
 import DropDownMenu from '../Components/DropDownMenu'
 import MenuBarSearch from "../Components/MenuBarSearch";
 import ChatWindow from "../Components/ReviewWindows.js"
+import Rating from '@mui/material/Rating';
 
+import StarIcon from '@mui/icons-material/Star';
 
 
 const ItemPage = () => {
@@ -54,7 +56,22 @@ const ItemPage = () => {
         setItemDetails(response.data.items[0])
     }) 
     }, [])
-
+    const calculateAverageRating = () => {
+        let avgRating = 0 
+        let sum = 0
+        let len = 0
+        itemDetails.reviews.forEach(x => {
+            if(x.stars) {
+                len ++
+                sum += x.stars
+            }
+        })
+        avgRating = sum/len
+        if(!avgRating) {
+            avgRating = ""
+        }
+        return avgRating
+    }
     const rentItem = (event) => {
         event.preventDefault()
         const rentRequest = {
@@ -134,30 +151,54 @@ const ItemPage = () => {
             <div className='itemInfoBox'> 
             {currentUserId === itemAuthor.id &&  <button className="appBtnEdit" onClick={() => navigate("/editItem/"+itemDetails.id)}>Modify Listing</button>}
                 <h2>{itemDetails.name}</h2>
+                <section className="group1">
+                <h4 className="categoryTitle" onClick = {() => navigate(`/categories/${itemDetails.categoryId}`)}>Category: {itemDetails.categoryId}</h4>
+                <h4> Author: {itemAuthor.username}</h4>
+                {/* <h4 onClick={() => (navigate(`/userview/${itemAuthor.id}`))}> Author: {itemAuthor.username}</h4> */}
+                </section>
+                <section className="group2">
+
                 <h4>Price: {itemDetails.price}</h4>
-                <h4>Category: {itemDetails.categoryId}</h4>
 
                 {/* todo: make this navigate to a user */}
-                <h4 onClick={() => (navigate(`/userview/${itemAuthor.id}`))}> Author: {itemAuthor.username}</h4>
                 <h4>Price to rent: {itemDetails.rentPrice} </h4> 
-                <h4>Rating - calculate average rating: {itemDetails.rating}</h4>
+                </section>
+                {calculateAverageRating() && <h4>Average rating - 
+                 <Rating name="text-feedback" value={calculateAverageRating()} readOnly label="Rating" precision={0.5} size="large" 
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />} /> {calculateAverageRating()} </h4>}
                 <p>Description: {itemDetails.description}</p>
-                <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
+                {loggedIn ? <div>
                 {isFavourited ? <button onClick={() => removeFavourite(itemDetails.id)} className="appBtnFavRemove">Remove Favourite</button> : <button className="appBtnFav" onClick={() => addFavourite(itemDetails.id)}>Favourite</button>}
-                {itemDetails.isAvailable && <div> 
-                 {loggedIn &&    <form onSubmit={rentItem} className = "formContainer">
-                
-                <label htmlFor="start">Rent Period: </label>
-                <li> From</li>
-                <input className="input1" type="date" id="start" name="start" min={new Date().toLocaleDateString('en-ca')} onChange={updateField} required/>
-                <li>To</li>
-                <input className="input1" type="date" id="start" name="end" min={formInfo.start} onChange={updateField} required/>
+                    </div> : <h5> Log in or create an account to rent</h5>}
 
-            </form>}
-                    </div>}
+
+            {currentUserId != itemAuthor.id && <div> 
+                        
+                {itemDetails.isAvailable && <div>
+                    {loggedIn && <section className="rentFunctions"> 
+                    {loggedIn && <form onSubmit={rentItem} className = "formContainer">
+                        <label htmlFor="start">Rent Period: </label>
+                        <div className="flexContainerForm">
+                            
+                        <fieldset>
+                        <li> From</li>
+                        <input className="input1" type="date" id="start" name="start" min={new Date().toLocaleDateString('en-ca')} onChange={updateField} required/>
+
+                        </fieldset>
+                        <fieldset>
+                        <li>To</li>
+                        <input className="input1" type="date" id="start" name="end" min={formInfo.start} onChange={updateField} required/>
+                        </fieldset>
+                        </div>
+                    </form>}
+
+                {loggedIn && <div>
                 {itemDetails.isAvailable ?  <button className="appBtn" type='submit' onClick={rentItem}>Rent</button> : <button disabled className="btnReplacment">Unavailable</button>}
+                     </div>}
+                    </section>} </div>}
                 <p>{reqStatus}</p>
+                        </div>}
             </div>
         </div>
 

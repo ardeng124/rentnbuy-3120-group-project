@@ -9,7 +9,7 @@ const CategoryItem = (props) => {
   return (
     <div className='animationParent'>
     <div className='categoryItem' onClick={ () => navigate(`/categories/${name}`)}>
-        <img className = 'searchImage' src={img}></img>
+        {/* <img className = 'searchImage' src={img}></img> */}
         <div className='rightContainer'>
             <h2 className='catItemP'> {name} </h2>
         </div>

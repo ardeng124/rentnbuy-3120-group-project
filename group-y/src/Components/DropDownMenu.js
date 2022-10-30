@@ -17,6 +17,7 @@ const DropDownMenu = (props) => {
         AxiosService.logOut()
             navigate("/")
             window.location.reload(false);
+
      }
      const getUserProfilePhoto = () => {
         AxiosService.getUserDetails()

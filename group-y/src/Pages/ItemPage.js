@@ -174,7 +174,7 @@ console.log(itemAuthor)
                     </div> : <h5> Log in or create an account to rent</h5>}
 
 
-            {currentUserId != itemAuthor.id && <div> 
+            {(currentUserId != itemAuthor.id) && <div> 
                         
                 {itemDetails.isAvailable && <div>
                     {loggedIn && <section className="rentFunctions"> 
@@ -205,7 +205,7 @@ console.log(itemAuthor)
             </div>
         </div>
 
-        <ChatWindow isOwner ={currentUserId == itemAuthor.id} id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
+        <ChatWindow loggedIn = {loggedIn} isOwner ={currentUserId == itemAuthor.id} id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
 
         </div>
         </section>

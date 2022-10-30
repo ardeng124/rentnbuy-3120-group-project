@@ -659,6 +659,7 @@ button {
   top:70px !important;
   background-color: #F6FFF8 !important;
   width:40% !important;
+  border:1px solid var(--nav-header);
 }
 .searchResults li{
   display: block;
@@ -1038,9 +1039,10 @@ margin:5px;
 .catItemP{
   background-color: transparent !important;
   position: relative;
-  top:30%;
+  /* top:30%; */
   text-align: left;
   margin-left:50px;
+  margin: auto;
 }
 
 .categoriesPageMainContent .appBtnFav{

@@ -45,6 +45,8 @@ const ItemPage = () => {
       AxiosService.getItemDetails(id).then(response => {
         let arr = response.data.items[0]
         arr.price = "$"+( arr.price/100)
+        arr.rentPrice = "$"+( arr.rentPrice/100)
+
         setAuthor(response.data.usrObj)
         if(response.data.isFavourited != undefined) {
             setFavourited(true)

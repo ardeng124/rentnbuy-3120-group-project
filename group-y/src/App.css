@@ -1060,6 +1060,16 @@ margin:5px;
 }
 
 
+.appBtnDelete{
+  background-color: #be8a81;
+
+  width:auto;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  height: auto;
+}
 
 
 

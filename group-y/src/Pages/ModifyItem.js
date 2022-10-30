@@ -74,8 +74,13 @@ const ModifyItem = () => {
     }
     const deleteListing = () => {
         AxiosService.deleteListing(itemDetails.id).then(response => {
-            window.alert("Successfully deleted listing")
-            navigate("/")
+            if(response == "error") {
+                window.alert("error deleting item")
+            } else {
+
+                window.alert("Successfully deleted listing")
+                navigate("/")
+            }
         })
     }
     
@@ -110,7 +115,7 @@ const ModifyItem = () => {
                     </div>
                 </section>
             <section className='ModListingMain'>
-                 <ModifyListingForm updateFn={editListing} deleteFn = {deleteListing}></ModifyListingForm>
+                 <ModifyListingForm updateFn={editListing} deleteFn = {deleteListing} inData={itemDetails}></ModifyListingForm>
             </section>
     </div>
   )

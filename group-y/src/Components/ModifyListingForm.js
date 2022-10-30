@@ -31,6 +31,7 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
         } else {
             setTempUrl(inData.itemPhotoUrl)
         }
+        console.log(inData)
 
     }, [inData])
     const updateField = (event) => {
@@ -70,14 +71,16 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
                 <img className="listingPrevIcon"  onClick={() => imgClicked()} src={tempUrl}/>
                 <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
 
-                <input className="input" type="text" placeholder={inData.name} name="name" onChange={updateField}  />
+                <input className="inputFaded" type="text" placeholder={inData.name} name="name" onChange={updateField} disabled />
+                <label> Description</label>
+
                 <textarea rows={40} cols={100} className="input" type="text" placeholder={inData.description} name="description" onChange={updateField}  />
-                <select name="category" onChange={updateField}>
-                    <option value="" disabled selected hidden>Choose a category</option>
-                        {categories.map(x => <option value={x.name}>{x.name}</option>)}
-                </select>
+                <input className="inputFaded" type="text" placeholder={inData.categoryId} name="category" onChange={updateField} disabled />
+                <label> Price</label>
                 <input className="input" type="number" placeholder={inData.price} name="price" onChange={updateField}  />
+                <label> Rent price </label>
                 <input className="input" type="number" placeholder={inData.rentprice}  name="rentprice" onChange={updateField}  />
+                <label> Location </label>
 
                 <input className="input" type="text" placeholder={inData.location}  name="location" onChange={updateField}  />
                 <fieldset>

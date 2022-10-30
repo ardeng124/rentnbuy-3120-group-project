@@ -6,6 +6,14 @@ const Categories = require('../models/category')
 const Util = require('./util')
 const uploadMiddleware = require('../controllers/middlewares/upload')
 const Config = require('../config')
+
+/**
+ * Returns all items 
+ * @param {*} request 
+ * @param {HTTPStatus} response 
+ * @returns two objects, one with the details of an item and one with the details of the author
+ */
+
 const getItems = async (request, response) => {
     const authorisation = request.get('Authorization')
     let username
@@ -49,7 +57,12 @@ const getItems = async (request, response) => {
     }
     
 }
-
+/**
+ * Searches through database for match to query 
+ * @param {query} request 
+ * @param {HTTPStatus} response 
+ * @returns an array of items matching the search query passed in 
+ */
 const searchItems = async (request, response) => {
 
     let query = request.body.query
@@ -64,7 +77,12 @@ const searchItems = async (request, response) => {
     }
     response.json({items})
 }
-
+/**
+ * Adds a new item 
+ * @param {Object{name,rating,price,rentPrice,location,description,categoryItem}} request 
+ * @param {HTTPStatus} response 
+ * @returns The JSON Object for the item that is added to the database
+ */
 const addItems = async(request, response) =>{
     const body = request.body 
     const username = await Util.getDecodedToken(Util.getToken(request)).username
@@ -99,6 +117,12 @@ const addItems = async(request, response) =>{
     response.json(savedItem)
 }
 
+/**
+ * Edits the specified item
+ * @param {*} request 
+ * @param {HTTPStatus} response 
+ * @returns The JSON Object for the item that was edited
+ */
 const editItems = async(request, response) =>{
     const body = request.body 
     

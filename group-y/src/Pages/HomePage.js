@@ -26,7 +26,7 @@ const HomePage = () => {
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             }

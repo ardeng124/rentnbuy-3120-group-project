@@ -1,7 +1,8 @@
+import { ListItemSecondaryAction } from '@mui/material'
 import React, {useState, useEffect} from 'react'
 import AxiosService from "../AxiosService"
 
-const AddListingForm = ({updateFn}) => {
+const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
     const [categories, setCategories] = useState([])
     const initialState = {
@@ -12,6 +13,7 @@ const AddListingForm = ({updateFn}) => {
         img: '', 
         description: ''
     }
+    const [inData1, setInData] = useState([])
     const [formInfo, setFormInfo] = useState(initialState)
 
     useEffect(() => {   
@@ -19,8 +21,19 @@ const AddListingForm = ({updateFn}) => {
         .then(response => {
            setCategories(response.data)
       })
-    }, [])
+      setInData(inData)
 
+    }, [])
+    
+    useEffect( () => {
+        if(!inData.itemPhotoUrl || inData.itemPhotoUrl == "" ) {
+          setTempUrl("https://i.stack.imgur.com/mwFzF.png")
+        } else {
+            setTempUrl(inData.itemPhotoUrl)
+        }
+        console.log(inData)
+
+    }, [inData])
     const updateField = (event) => {
         //Assign Input Elements to each attributes 
         const name = event.target.attributes.name.value
@@ -54,25 +67,31 @@ const AddListingForm = ({updateFn}) => {
     return (
         <div className='addListingForm'>
             <form className="formContainer" onSubmit={formHandler} name="listingform">
+                {/* <img className="listingPrevIcon"  onClick={() => imgClicked()} src={tempUrl}/> */}
                 <img className="listingPrevIcon"  onClick={() => imgClicked()} src={tempUrl}/>
-                <input className="input" type="text" placeholder="Enter Title" name="name" onChange={updateField} required/>
-                <textarea rows={40} cols={100} className="input" type="text" placeholder="Enter Description" name="description" onChange={updateField} required/>
-                <select name="category" onChange={updateField}>
-                    <option value="" disabled selected hidden>Choose a category</option>
-                        {categories.map(x => <option value={x.name}>{x.name}</option>)}
-                </select>
-                <input className="input" type="number" placeholder="Enter price (cents)" name="price" onChange={updateField} required/>
-                <input className="input" type="number" placeholder="Enter price to rent (cents)" name="rentprice" onChange={updateField} required/>
+                <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
 
-                <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} required/>
+                <input className="inputFaded" type="text" placeholder={inData.name} name="name" onChange={updateField} disabled />
+                <label> Description</label>
+
+                <textarea rows={40} cols={100} className="input" type="text" placeholder={inData.description} name="description" onChange={updateField}  />
+                <input className="inputFaded" type="text" placeholder={inData.categoryId} name="category" onChange={updateField} disabled />
+                <label> Price</label>
+                <input className="input" type="number" placeholder={inData.price} name="price" onChange={updateField}  />
+                <label> Rent price </label>
+                <input className="input" type="number" placeholder={inData.rentprice}  name="rentprice" onChange={updateField}  />
+                <label> Location </label>
+
+                <input className="input" type="text" placeholder={inData.location}  name="location" onChange={updateField}  />
                 <fieldset>
                 {/* <label class="custom-uploader" for="file">Upload Your File</label>  */}
                 <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
                 </fieldset>
-                <button className='appBtn' type='submit'>Create Listing</button>
+                <button className='appBtn' type='submit'>Save changes</button>
             </form>
+            <button onClick = {deleteFn} className='appBtnDelete'> Delete Listing</button>
         </div>
     )
 }
 
-export default AddListingForm
+export default ModifyListingForm

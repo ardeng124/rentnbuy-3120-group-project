@@ -130,7 +130,7 @@ const validUser = async (request, response) => {
         if (!decodedToken.id) {
             return response.status(200).json({status:"unregistered"})
         }else{
-            return  response.status(200).json({status:"success"})
+            return  response.status(200).json({status:"success", id:decodedToken.id})
         }
     }catch(err){
         return response.status(200).json({status:"unregistered"})

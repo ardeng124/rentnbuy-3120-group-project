@@ -13,10 +13,10 @@ function FeedListingItem(props) {
         return (
           <section className='overallListingItemFeed'>
             <div className="newestListingItemFeed" onClick={ClickFunc} >
-                <div>
+
                 {img ? <img className="NLRimagePlaceholder" src={img}/> : <img className='NLRimagePlaceholder' src= "https://i.stack.imgur.com/mwFzF.png"/>}
 
-                </div>
+
                 <div className="leftNLR">
                     <h3>{itemName}</h3>
                     <p>Wants to rent <b>{itemToRent}</b></p>

@@ -40,7 +40,7 @@ const Search = () => {
         AxiosService.validateToken()
         .then(response => {
             // console.log(response)
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             }

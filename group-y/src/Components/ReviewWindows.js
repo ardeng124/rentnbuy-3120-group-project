@@ -7,7 +7,6 @@ import AxiosService from "../AxiosService";
 
 const ChatWindow = (props) => {
     const {id, reviewIn} = props
-    console.log(reviewIn)
     const [reviews, setReview] = useState([])
 
     //Interval to refresh the ReviewWindow every 60000ms 

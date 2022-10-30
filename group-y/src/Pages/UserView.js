@@ -24,7 +24,7 @@ const UserView = () => {
     useEffect( () => {
         AxiosService.validateToken()
         .then(response => {
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             } else {
                 
@@ -55,7 +55,9 @@ const UserView = () => {
             </section>
             <section className="ProfileBox">
                 <div className="ProfileColLarge">
-                    <div className ="ProfileIconLarge"> </div>
+                    {/* <div className ="ProfileIconLarge"> </div> */}
+                    {userDetails.profilePhoto ? <img className="ProfileIconLarge" src={userDetails.profilePhoto}/> : <img className='ProfileIconLarge' src= "https://i.stack.imgur.com/mwFzF.png"/>}
+
                     <li className="ProfileName">Name: {userDetails.firstName} {userDetails.lastName} </li>
                     <li className="ProfileName">Username: {userDetails.username}</li>
                     <li> Email: {userDetails.emailAddress}</li>

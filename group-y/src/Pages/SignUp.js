@@ -32,7 +32,7 @@ const SignIn = () => {
   useEffect(() => {
    AxiosService.validateToken()
       .then(response => {
-        if(response == 'success'){
+        if(response.status == 'success'){
           logInTracker= true
           navigate("/")
         }

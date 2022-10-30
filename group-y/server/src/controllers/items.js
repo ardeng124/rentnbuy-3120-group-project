@@ -77,6 +77,7 @@ const addItems = async(request, response) =>{
         name: body.name,
         rating: body.rating,
         price: body.price, 
+        rentPrice: body.rentprice,
         isAvailable: true,
         creatorId: userFind,
         location: body.location, 

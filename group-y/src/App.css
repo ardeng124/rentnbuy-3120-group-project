@@ -324,14 +324,14 @@ font-size: 14pt;
 .ProfileIconLarge {
   background-color: #D9D9D9;
   border-radius: 100%;
-  padding: 85px;
+  /* padding: 85px; */
   margin: auto;
   margin-top: 30px;
   /* margin: 15px; */
   margin-bottom: 60px;
-  padding:50px;
-  width: 100px;
-  height: 100px;
+  /* padding:50px; */
+  width: 250px;
+  height: 250px;
   border: 1px solid #6B9080;
 }
 .ProfileInterestLi{
@@ -1012,6 +1012,15 @@ margin:5px;
   width:75%;
   border-radius: 10pt;
 }
+
+
+.ModListingMain{
+  background-color: #e1edeccc;
+  padding:10px;
+  margin: auto;
+  width:75%;
+  border-radius: 10pt;
+}
 .addListingForm .formContainer .input {
   width:50%;
 }
@@ -1021,7 +1030,6 @@ margin:5px;
 
 .addListingForm .appBtn{
   width:auto;
-
 }
 .hideMe{
   display: none;
@@ -1038,7 +1046,18 @@ margin:5px;
     border-radius: 4px;
 }
 
-
+.appBtnEdit{
+  background-color: #89e6be;
+  /* float:left; */
+  display: inline-block;
+  margin: none;
+  width:auto;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  flex: 0.1;
+}
 
 
 

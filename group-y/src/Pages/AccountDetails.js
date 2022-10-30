@@ -16,7 +16,7 @@ const AccountDetails = () => {
     useEffect(() => {
         AxiosService.validateToken()
            .then(response => {
-             if(response == 'success'){
+             if(response.status == 'success'){
                 setLoggedIn(true)
              } else {
                 navigate("/")

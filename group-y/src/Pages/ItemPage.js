@@ -18,6 +18,7 @@ const ItemPage = () => {
     const [reqStatus, setReqStatus] = useState("")
 
     const [itemAuthor, setAuthor] = useState([])
+    const [currentUserId, setCurrentId] = useState("")
     const id = useParams().id
     const [itemDetails, setItemDetails] = useState({
         creatorId: "",
@@ -33,8 +34,9 @@ const ItemPage = () => {
     useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
+                setCurrentId(response.id)
             // navigate("/")
             }
       })
@@ -101,6 +103,8 @@ const ItemPage = () => {
         })
     }
 
+        
+
     return (
         <div className="ItemPage">
         <section className="loginheader">
@@ -126,6 +130,7 @@ const ItemPage = () => {
 }
 
             <div className='itemInfoBox'> 
+            {currentUserId === itemAuthor.id &&  <button className="appBtnEdit" onClick={() => navigate("/editItem/"+itemDetails.id)}>Modify Listing</button>}
                 <h2>{itemDetails.name}</h2>
                 <h4>Price: {itemDetails.price}</h4>
                 <h4>Category: {itemDetails.categoryId}</h4>
@@ -137,15 +142,17 @@ const ItemPage = () => {
                 <p>Description: {itemDetails.description}</p>
                 <p>Features: </p>
                 <p>Location: {itemDetails.location}</p>
-                {loggedIn && isFavourited ? <button onClick={() => removeFavourite(itemDetails.id)} className="appBtnFavRemove">Remove Favourite</button> : <button className="appBtnFav" onClick={() => addFavourite(itemDetails.id)}>Favourite</button>}
+                {isFavourited ? <button onClick={() => removeFavourite(itemDetails.id)} className="appBtnFavRemove">Remove Favourite</button> : <button className="appBtnFav" onClick={() => addFavourite(itemDetails.id)}>Favourite</button>}
                 {itemDetails.isAvailable && <div> 
-                    <form onSubmit={rentItem} className = "formContainer">
+                 {loggedIn &&    <form onSubmit={rentItem} className = "formContainer">
                 
                 <label htmlFor="start">Rent Period: </label>
-                <li> From</li><input className="input1" type="date" id="start" name="start" min={new Date().toLocaleDateString('en-ca')} onChange={updateField} required/>
-                <li>To</li><input className="input1" type="date" id="start" name="end" min={formInfo.start} onChange={updateField} required/>
+                <li> From</li>
+                <input className="input1" type="date" id="start" name="start" min={new Date().toLocaleDateString('en-ca')} onChange={updateField} required/>
+                <li>To</li>
+                <input className="input1" type="date" id="start" name="end" min={formInfo.start} onChange={updateField} required/>
 
-            </form>
+            </form>}
                     </div>}
                 {itemDetails.isAvailable ?  <button className="appBtn" type='submit' onClick={rentItem}>Rent</button> : <button disabled className="btnReplacment">Unavailable</button>}
                 <p>{reqStatus}</p>

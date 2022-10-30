@@ -33,7 +33,7 @@ const validateToken = async () => {
         return response.data.status
     } else {
         token = response.data.token
-        return response.data.status
+        return response.data
     }
 }
 
@@ -205,6 +205,25 @@ const createListing = async(item) => {
     return response
 }
 
+const deleteListing = async(id) => {
+    getToken()
+    const response = await axios.delete(serverUrl + "api/items/"+id, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+
+const editListing = async(item,id) => {
+    getToken()
+    const response = await axios.put(serverUrl + "api/items/"+id,item, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
 const uploadImageToListing = async(img,id) => {
     getToken()
     const formData = new FormData();
@@ -252,5 +271,7 @@ export default {
     getReviewsPerItem,
     createListing,
     uploadImageToListing,
-    uploadImagetoUser
+    uploadImagetoUser,
+    deleteListing,
+    editListing
 }

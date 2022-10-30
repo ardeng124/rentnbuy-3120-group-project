@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate} from "react-router-dom"
+import {useNavigate,useParams, useLocation} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
 
@@ -10,25 +10,49 @@ import {
 
 
 import MenuBarSearch from '../Components/MenuBarSearch';
-import AddListingForm from '../Components/AddListingForm';
+import ModifyListingForm from '../Components/ModifyListingForm';
 
-const AddListing = () => {
+const ModifyItem = () => {
+    const [itemAuthor, setAuthor] = useState([])
+    const [currentUserId, setCurrentId] = useState("")
+    const id = useParams().id
+    const [itemDetails, setItemDetails] = useState({
+        creatorId: "",
+        price: "", 
+        rating: "", 
+        rentPrice:"",
+        description: "", 
+        location: "",
+        isAvailable:true, 
+        rentPrice:"",
+        reviews:[]
+    })
 
     const [loggedIn, setLoggedIn] = useState(false)
     const navigate = useNavigate()
 
     // const [convos, setConversations] = useState([])
 
-    useEffect(() => {   
+    useEffect(() => {
         AxiosService.validateToken()
         .then(response => {
             if(response.status == 'success'){
                 setLoggedIn(true)
+                setCurrentId(response.id)
             // navigate("/")
             } else {
-                navigate('/login')
+                navigate("/")
             }
+            AxiosService.getItemDetails(id).then(response2 => {
+              setAuthor(response2.data.usrObj)
+              setItemDetails(response2.data.items[0])
+              if(response.id !== response2.data.usrObj.id) {
+
+                navigate("/item/"+id)
+            }
+          }) 
       })
+    
 
     }, [])
     
@@ -36,16 +60,22 @@ const AddListing = () => {
         navigate("/userview")
     }
 
-    const createListing = (Listing) => {
+    const editListing = (Listing) => {
         const file = Listing.img
         const listingToUpload = delete Listing.img
-        AxiosService.createListing(Listing).then(response => {
-            const id = response.data.id
+        AxiosService.editListing(Listing, itemDetails.id).then(response => {
             if(file) {
-                AxiosService.uploadImageToListing(file,id).then(response => {
+                AxiosService.uploadImageToListing(file,itemDetails.id).then(response => {
                     console.log(response)
                 })
             }
+            navigate("/item/"+itemDetails.id)
+        })
+    }
+    const deleteListing = () => {
+        AxiosService.deleteListing(itemDetails.id).then(response => {
+            window.alert("Successfully deleted listing")
+            navigate("/")
         })
     }
     
@@ -76,15 +106,15 @@ const AddListing = () => {
                                 <MenuBarSearch></MenuBarSearch>
                             </li>
                         </ul>
-                        <h1>Add a listing</h1>
+                        <h1>Modify your listing</h1>
                     </div>
                 </section>
-            <section className='addListingMain'>
-                 <AddListingForm updateFn={createListing}></AddListingForm>
+            <section className='ModListingMain'>
+                 <ModifyListingForm updateFn={editListing} deleteFn = {deleteListing}></ModifyListingForm>
             </section>
     </div>
   )
 }
 
-export default AddListing
+export default ModifyItem
 

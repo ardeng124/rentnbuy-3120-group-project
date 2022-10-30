@@ -22,19 +22,18 @@ const getItems = async (request, response) => {
 
     }
     let id = request.params.id;
-    let user;
-    let items;  
+    let user; 
     if(id){
-        items = await Items.find({
+        let items = await Items.find({
             "_id":id
+    
         })
-        console.log(items)
-        user =  await User.findOne({id:items.creatorId})
+        const user2 =  await User.findById(items[0].creatorId)
         const usrObj = {
-            'username':user.username,
-            'id': user.id,
-            'firstName':user.firstName,
-            'lastName':user.lastName,
+            'username':user2.username,
+            'id': user2.id,
+            'firstName':user2.firstName,
+            'lastName':user2.lastName,
         }
 
         if(authorisation) {
@@ -51,7 +50,7 @@ const getItems = async (request, response) => {
             response.json({items,usrObj})
         }
     } else {
-        items = await Items.find({})
+       let items = await Items.find({})
         response.json({items})
 
     }
@@ -85,8 +84,10 @@ const searchItems = async (request, response) => {
  */
 const addItems = async(request, response) =>{
     const body = request.body 
+    const decodedToken1 = Util.getDecodedToken(Util.getToken(request));
+
     const username = await Util.getDecodedToken(Util.getToken(request)).username
-    const userFind = await User.findOne({username:username})
+    const userFind = await User.findById(decodedToken1.id)
     let CategoryItem = {}
     if(request.body.categoryId) {
         CategoryItem = await Categories.findOne({name:request.body.categoryId})
@@ -133,7 +134,8 @@ const editItems = async(request, response) =>{
         return response.status(400).json({message:"missing itemid"}).sendStatus(400)
     }
     const item = await Items.findById(request.params.itemId)
-    if(decodedToken.id !== item.creatorId.toString()) {
+    console.log(body)
+    if(decodedToken.id != item.creatorId.toString()) {
         return response.status(403).json({status:"not allowed"})
     }
     let CategoryItem = {}
@@ -144,10 +146,11 @@ const editItems = async(request, response) =>{
     const itemNew = {
         "name": body.name ? body.name : item.name,
         "price": body.price ? body.price : item.price, 
-        "rentPrice": body.rentprice ? body.rentprice : item.rentprice,
+        "rentPrice": body.rentPrice ? body.rentPrice : item.rentPrice,
         "location": body.location ? body.location : item.location, 
         "description" :body.description ? body.description : item.description, 
-        "categoryId": body.categoryId ? body.categoryId : item.categoryId, 
+        "categoryId": body.categoryId ? body.categoryId : item.categoryId,
+        "isAvailable": body.isAvailable ? body.isAvailable : item.isAvailable
     }
     const it = await Items.findByIdAndUpdate(item.id, itemNew)
     console.log(it)

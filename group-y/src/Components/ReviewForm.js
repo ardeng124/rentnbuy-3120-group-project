@@ -21,7 +21,7 @@ function getLabelText(value) {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
-const ReviewForm = ({updateFn}) => {
+const ReviewForm = ({updateFn, IsOwner}) => {
 
     let initialState = {text: "", stars: 0}
 
@@ -53,7 +53,7 @@ const ReviewForm = ({updateFn}) => {
             <form onSubmit={formHandler} className = "reviewForm" name='reviewform'>
                 <textarea rows={40} cols={100} type="text" placeholder="Leave a comment or review" name="text" onChange={updateField} value={review.text} required/>
 
-                <Box className = "starContainer" onChange={updateField} sx={{width: 200, display: 'flex', alignItems: 'center',}}>
+                {!IsOwner && <Box className = "starContainer" onChange={updateField} sx={{width: 200, display: 'flex', alignItems: 'center',}}>
                     <Rating name="stars" value={value} precision={0.5}
                         getLabelText={getLabelText}
                         onChange={(event, newValue) => {
@@ -68,7 +68,7 @@ const ReviewForm = ({updateFn}) => {
                     {value !== null && (
                         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                     )}
-                </Box>
+                </Box>}
 
                 <button className="appBtn" type="submit">Send</button>
             </form>

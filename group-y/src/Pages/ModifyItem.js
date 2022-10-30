@@ -46,7 +46,7 @@ const ModifyItem = () => {
             AxiosService.getItemDetails(id).then(response2 => {
               setAuthor(response2.data.usrObj)
               setItemDetails(response2.data.items[0])
-              if(response.id !== response2.data.usrObj.id) {
+              if(response.id !== response2.data.items[0].creatorId) {
 
                 navigate("/item/"+id)
             }
@@ -61,6 +61,7 @@ const ModifyItem = () => {
     }
 
     const editListing = (Listing) => {
+        console.log(Listing)
         const file = Listing.img
         const listingToUpload = delete Listing.img
         AxiosService.editListing(Listing, itemDetails.id).then(response => {

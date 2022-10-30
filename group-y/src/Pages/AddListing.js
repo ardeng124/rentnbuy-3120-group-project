@@ -42,10 +42,11 @@ const AddListing = () => {
         AxiosService.createListing(Listing).then(response => {
             const id = response.data.id
             if(file) {
-                AxiosService.uploadImageToListing(file,id).then(response => {
-                    console.log(response)
+                AxiosService.uploadImageToListing(file,id).then(response2 => {
+                    console.log(response2)
                 })
             }
+            navigate('/item/'+response.data.id)
         })
     }
     

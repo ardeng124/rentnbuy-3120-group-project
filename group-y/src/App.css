@@ -508,6 +508,13 @@ font-size: 14pt;
 .newestListingItem p, em, li, h3, li, b{
   background-color: transparent !important;
 }
+
+.newestListingItemDisabled p, em, li, h3, li, b{
+  background-color: transparent !important;
+}
+.newestListingItemDisabled div {
+  background-color: transparent !important;
+} 
 /* .newestListingItem em {
   background-color: transparent !important;
 }
@@ -604,7 +611,7 @@ flex:1;
 }
 .itemImg{
   
-  max-width: 450px;
+  max-width: 500px;
   max-height: 450px;
   margin:10px;
 }
@@ -822,7 +829,7 @@ a :hover .seeMoreBtn{
 }
 
 .btnReplacment{
-  background-color: #81BEA4;
+  background-color: #BE8184;
   cursor: none;
   margin: auto;
   margin-bottom: 10px;
@@ -1170,7 +1177,11 @@ margin:5px;
 h3{
   background-color: transparent;
 }
-
+.availabilityDisplay {
+  margin:10px;
+  font-weight: 500;
+  color: #936546;
+}
 
 
 /*  Animations  */

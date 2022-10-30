@@ -55,7 +55,8 @@ const ItemPage = () => {
         }
         setItemDetails(response.data.items[0])
     }) 
-    }, [])
+}, [])
+console.log(itemAuthor)
     const calculateAverageRating = () => {
         let avgRating = 0 
         let sum = 0
@@ -149,7 +150,7 @@ const ItemPage = () => {
 }
 
             <div className='itemInfoBox'> 
-            {currentUserId === itemAuthor.id &&  <button className="appBtnEdit" onClick={() => navigate("/editItem/"+itemDetails.id)}>Modify Listing</button>}
+            {currentUserId === itemDetails.creatorId &&  <button className="appBtnEdit" onClick={() => navigate("/editItem/"+itemDetails.id)}>Modify Listing</button>}
                 <h2>{itemDetails.name}</h2>
                 <section className="group1">
                 <h4 className="categoryTitle" onClick = {() => navigate(`/categories/${itemDetails.categoryId}`)}>Category: {itemDetails.categoryId}</h4>
@@ -164,7 +165,7 @@ const ItemPage = () => {
                 <h4>Price to rent: {itemDetails.rentPrice} </h4> 
                 </section>
                 {calculateAverageRating() && <h4>Average rating - 
-                 <Rating name="text-feedback" value={calculateAverageRating()} readOnly label="Rating" precision={0.5} size="large" 
+                 <Rating name="text-feedback" value={calculateAverageRating()} readOnly label="Rating" precision={0.25} size="large" 
         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />} /> {calculateAverageRating()} </h4>}
                 <p>Description: {itemDetails.description}</p>
                 <p>Location: {itemDetails.location}</p>
@@ -199,10 +200,12 @@ const ItemPage = () => {
                     </section>} </div>}
                 <p>{reqStatus}</p>
                         </div>}
+                    {!itemDetails.isAvailable &&  <button disabled className="btnReplacment">Unavailable</button>}
+            {/* {currentUserId == itemAuthor.id && <p className="availabilityDisplay"> Currently Available: {itemDetails.isAvailable.toString()}</p>} */}
             </div>
         </div>
 
-        <ChatWindow id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
+        <ChatWindow isOwner ={currentUserId == itemAuthor.id} id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
 
         </div>
         </section>

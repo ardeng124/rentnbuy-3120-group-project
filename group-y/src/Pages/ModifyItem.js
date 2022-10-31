@@ -22,7 +22,6 @@ const ModifyItem = () => {
         rentPrice:"",
         reviews:[]
     })
-
     const [loggedIn, setLoggedIn] = useState(false)
 
     //Allows functions to navigate to different web pages 
@@ -35,13 +34,11 @@ const ModifyItem = () => {
         .then(response => {
             if(response.status == 'success'){
                 setLoggedIn(true)
-                setCurrentId(response.id)
             } else {
                 navigate("/")
             }
             AxiosService.getItemDetails(id)
             .then(response2 => {
-                setAuthor(response2.data.usrObj)
                 setItemDetails(response2.data.items[0])
                 if(response.id !== response2.data.items[0].creatorId) {
                     navigate("/item/"+id)

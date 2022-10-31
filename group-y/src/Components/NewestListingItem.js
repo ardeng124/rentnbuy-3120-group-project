@@ -6,7 +6,6 @@ import React from 'react'
  */
 function NewestListingItem(props) {
     const { itemName } = props
-    const { itemImg } = props
     const { itemDesc } = props  
     const { itemPrice } = props  
     const { ClickFunc } = props  

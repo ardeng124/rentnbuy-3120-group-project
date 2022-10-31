@@ -1,4 +1,3 @@
-import { ListItemSecondaryAction } from '@mui/material'
 import React, {useState, useEffect} from 'react'
 import AxiosService from "../AxiosService"
 
@@ -8,7 +7,6 @@ import AxiosService from "../AxiosService"
  */
 const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
-    const [categories, setCategories] = useState([])
     const initialState = {
         name: '',
         categoryId: '',
@@ -19,17 +17,7 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
         description: '',
         isAvailable: '',
     }
-    const [inData1, setInData] = useState([])
     const [formInfo, setFormInfo] = useState(initialState)
-
-    useEffect(() => {   
-        AxiosService.getCategories()
-        .then(response => {
-           setCategories(response.data)
-      })
-      setInData(inData)
-
-    }, [])
     
     useEffect( () => {
         if(!inData.itemPhotoUrl || inData.itemPhotoUrl == "" ) {

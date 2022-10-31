@@ -11,7 +11,6 @@ import AxiosService from '../AxiosService';
 const MenuBarSearch = (props) => {
     const navigate = useNavigate()
 
-    const {items} = props
     const [itemsArr, setItemsArr] = useState([])
     const [searchVal, setSearchVal] = useState("")
     const [focus, setFocus] = useState(false)

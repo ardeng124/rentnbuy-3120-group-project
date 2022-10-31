@@ -349,8 +349,8 @@ This section details the goals set by Group Y for each sprint over the following
 2. Heroku, ‘Documentation: Deployment’, 2022. [Online]. Available at: https://devcenter.heroku.com/categories/reference
 3. MongoDB manual ver. 6.0 ‘Getting Started’. [Online]. Available at: https://www.mongodb.com/docs/manual/tutorial/getting-started/
 4. Fullstack Open 2022, ‘Deep Dive Into Modern Web Development’. [Online]. Available at: https://fullstackopen.com/en/#course-contents
-
-
+5. https://developers.google.com/maps/documentation/places/web-service/autocomplete#required-parameters 
+6. https://www.telerik.com/blogs/integrating-google-places-autocomplete-api-react-app 
 
 
 Things left to do

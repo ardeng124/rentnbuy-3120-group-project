@@ -33,7 +33,7 @@ const validateToken = async () => {
         return response.data.status
     } else {
         token = response.data.token
-        return response.data.status
+        return response.data
     }
 }
 
@@ -71,7 +71,6 @@ const register = async (newUser) => {
     //do some stuff with cookies
     const response2 = await axios.post(serverUrl + "auth/register/", newUser)
     if (response2.data.status == 409){
-        console.log("aaa")
         return response2
     }
     token = response2.data.token
@@ -206,6 +205,25 @@ const createListing = async(item) => {
     return response
 }
 
+const deleteListing = async(id) => {
+    getToken()
+    const response = await axios.delete(serverUrl + "api/items/"+id, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+
+const editListing = async(item,id) => {
+    getToken()
+    const response = await axios.put(serverUrl + "api/items/"+id,item, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
 const uploadImageToListing = async(img,id) => {
     getToken()
     const formData = new FormData();
@@ -218,11 +236,19 @@ const uploadImageToListing = async(img,id) => {
 }
 
 const uploadImagetoUser = async(img) => {
-    console.log(img)
     getToken()
     const formData = new FormData();
     formData.append('file',img)
     const response = await axios.put(serverUrl + "api/uploadUserPhoto/",formData, { headers: { "Authorization": `Bearer ${token}`, 'content-type': 'multipart/form-data' } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
+
+const removeComment = async(commentsArr,id,reviewId) => {
+    getToken()
+    const response = await axios.put(serverUrl + "api/items/reviews/"+id,{"comments":commentsArr,"reviewId":reviewId}, { headers: { "Authorization": `Bearer ${token}` } })
     .catch((error) => {
         return "error"
     })
@@ -254,5 +280,8 @@ export default {
     getReviewsPerItem,
     createListing,
     uploadImageToListing,
-    uploadImagetoUser
+    uploadImagetoUser,
+    deleteListing,
+    editListing,
+    removeComment
 }

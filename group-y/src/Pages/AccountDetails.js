@@ -16,8 +16,7 @@ const AccountDetails = () => {
     useEffect(() => {
         AxiosService.validateToken()
            .then(response => {
-             console.log(response)
-             if(response == 'success'){
+             if(response.status == 'success'){
                 setLoggedIn(true)
              } else {
                 navigate("/")
@@ -28,7 +27,6 @@ const AccountDetails = () => {
        AxiosService.getUserDetails()
         .then(response => {          
           setUserDetails(response.data)
-          console.log(userDetails.profilePhoto)
           if(!response.data.profilePhoto || response.data.profilePhoto == "" ) {
             setTempUrl("https://i.stack.imgur.com/mwFzF.png")
           } else {
@@ -44,7 +42,6 @@ const AccountDetails = () => {
 
     const navigate = useNavigate()
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
     const formHandler = (event) => {

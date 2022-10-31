@@ -28,7 +28,6 @@ const MenuBarSearch = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         AxiosService.searchItems(searchVal).then(response => {
-            console.log(response.data.items)
             let arr = response.data.items
             //hide items that are unavailable
             arr = arr.filter(x => x.isAvailable==true)

@@ -3,7 +3,12 @@ const User = require('../models/user')
 const Item = require('../models/item')
 const category = require('../models/category')
 
-
+/**
+ * Adds a new category (only if user is an admin)
+ * @param {*} request 
+ * @param {*} response 
+ * @returns either the new category or status text saying unauthorised
+ */
 const addCategory = async (request, response) => {
     const body = request.body 
     if(!body.name) {
@@ -11,7 +16,6 @@ const addCategory = async (request, response) => {
     }
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     const userFind = await User.findOne({username:username})
-    console.log(userFind)
     if(userFind.isAdmin) {
         const categorytoAdd = new category({
             name: body.name,

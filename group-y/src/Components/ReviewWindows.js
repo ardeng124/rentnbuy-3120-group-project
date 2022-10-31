@@ -4,33 +4,15 @@ import ReviewForm from "./ReviewForm.js";
 import Review from "./Review.js";
 
 import AxiosService from "../AxiosService";
-
+/**
+ * 
+ * ChatWindow: displays all reviews for an item and includes a form if the user is logged in to add their own
+ */
 const ChatWindow = (props) => {
-    const {id, reviewIn} = props
-    console.log(reviewIn)
+    const {id, reviewIn, isOwner, loggedIn, inCurrentUser} = props
     const [reviews, setReview] = useState([])
-
-    //Interval to refresh the ReviewWindow every 60000ms 
-    // useEffect(() => {
-    //     AxiosService.getReviewsPerItem()
-    //     .then(response => {
-    //         console.log(response.data)
-    //         setReview(response.data.reviews) 
-    //     })
-    //     const ReviewListInterval = setInterval(() => {
-    //         AxiosService.getReviewsPerItem()
-    //         .then(response => {
-    //             console.log(response.data)
-    //             setReview(response.data.reviews) 
-    //         })
-    //     }, 60000); // will run this request every 1 min
-    
-    //     return () => clearInterval(ReviewListInterval);
-    // }, [])
-   
     useEffect(() => {
         setReview(reviewIn)
-        console.log("REVIEWS"+reviewIn)
     }, [reviewIn])
     const createNewReview = (formInfo) => {
         const dataToPost = {
@@ -40,20 +22,24 @@ const ChatWindow = (props) => {
         }
         AxiosService.postReview(dataToPost)
         .then(response => {
-            console.log("Post Review", response)
             setReview([...reviews,response.data])
         })
     }
-
+  const removeItem = (Inid) => {
+    let arr = reviews.filter(x => x.id!== Inid)
+    AxiosService.removeComment(arr,id,Inid).then(response => {
+      setReview(response.data.reviews)
+    })
+  }
   return (
     <div className="reviewWindow">
 
       <h3>Reviews</h3>
       
       {reviews.map(R => <Review key={R.id} creator={R.creator} stars={R.stars}
-        text={R.text} timestamp={R.timestamp} reviewId={R.id}/>)}  
+        text={R.text} timestamp={R.timestamp} reviewId={R.id} currentUser={inCurrentUser} deleteReview = {removeItem}/>)}  
 
-      <ReviewForm updateFn={createNewReview}/>
+      {loggedIn && <ReviewForm updateFn={createNewReview} IsOwner = {isOwner}/>}
     </div>
   )
 }

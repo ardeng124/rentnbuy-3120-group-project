@@ -10,7 +10,10 @@ import {
 
 import MenuBarSearch from '../Components/MenuBarSearch';
 import NotificationComponent from '../Components/NotificationComponent';
-
+/**
+ * Notifcations page:
+ * Displays all rent requests made to items the user owns
+ */
 const Notifications = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [offers, setOffers] = useState([])
@@ -21,20 +24,16 @@ const Notifications = () => {
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             } else {
                 navigate('/login')
             }
             AxiosService.getOffersToMe().then(response => {
-                console.log(response)
                 let arr = response.data
                 
-                arr = arr.filter(x => x.status == "Pending")
-                console.log(arr)
-                
+                arr = arr.filter(x => x.status == "Pending")                
 
                 setOffers(arr)
             })
@@ -44,17 +43,14 @@ const Notifications = () => {
     }, [])
     
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
 
     const denyOffer = (id) => {
         AxiosService.offerStatus(id, "Denied").then(response => console.log(response))
-        console.log("deny")
     }
     const approveOffer = (id) => {
         AxiosService.offerStatus(id, "Approved").then(response => console.log(response))
-        console.log("approve")
     }
         return (
             <div className="NotificationPage">

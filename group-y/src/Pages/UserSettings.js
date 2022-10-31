@@ -22,8 +22,7 @@ const UserSettings = () => {
     useEffect(() => {
         AxiosService.validateToken()
            .then(response => {
-             console.log(response)
-             if(response == 'success'){
+             if(response.status == 'success'){
                 setLoggedIn(true)
              } else {
                 navigate("/")
@@ -43,10 +42,8 @@ const UserSettings = () => {
 
         const changePassword = () => {
             if (passwordInfo.newPassword === passwordInfo.repeatNewPassword) {
-                console.log("Form submitted: ", passwordInfo)
                 AxiosService.changeUserPassword(passwordInfo)
                 .then(response => {
-                    console.log("Edit Response", response)
                     setStatus("Successfully updated Password")
                     window.alert("Successfully updated Password")
                 })

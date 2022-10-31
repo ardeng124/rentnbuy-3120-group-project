@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate} from "react-router-dom"
+import {useNavigate,useParams} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
 
@@ -11,10 +11,11 @@ import MenuBarSearch from '../Components/MenuBarSearch';
 import SearchResultItem from '../Components/SearchResultItem';
 
 /**
- * Search: Works by getting all items from database and then filtering what is shown to the user based on input 
+ * CategorySearch: Works by getting all items from database and then filtering out items from other categories and what is shown to the user based on input 
  *
  */
-const Search = () => {
+const CategorySearch = () => {
+    const CategoryName = useParams().name
     const [loggedIn, setLoggedIn] = useState(false)
     const [itemsArr, setItemsArr] = useState([])
     const [searchVal, setSearchVal] = useState("")
@@ -23,7 +24,7 @@ const Search = () => {
     // const [convos, setConversations] = useState([])
 
     const [error, setError] = useState(false)
-     const filterItems = (items, query) => {
+    const filterItems = (items, query) => {
 
         if (!query) {
           return [] 
@@ -54,6 +55,8 @@ const Search = () => {
                 element.description = element.description.substring(0, 250) + "..."
                 element.price = "$".concat((element.price/100))
             });
+            //DIFFERENCE FROM SEARCH PAGE - VVV
+            arr = arr.filter(x => x.categoryId == CategoryName)
             setItemsArr(arr)
             // console.log(response.data.items)
         })
@@ -69,6 +72,7 @@ const Search = () => {
     }
     
         return (
+            <div className = "CategorySearch">
             <div className="SearchPage">
                 <section className="loginheader">
                     <div className="MasterHeader">
@@ -82,18 +86,20 @@ const Search = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="/categories">
+                                <a  className = "active" href="/categories">
                                     Categories
                                 </a>
                             </li>
                             <li><a href="/addlisting">Add Listing </a></li>
                             <li>
-                                <a className="active" href="/search">
+                                <a href="/search">
                                     Search
                                 </a>
                             </li>
 
                         </ul>
+                        <h1>{CategoryName}</h1>
+
                     </div>
                 </section>
                 <section className='mainSearchContent'>
@@ -107,11 +113,12 @@ const Search = () => {
                             value = {searchVal} onChange={(e) => {setSearchVal(e.target.value)}}
                             />
                     </form>
-                    {filteredItems.map(x => (<SearchResultItem img={x.itemPhotoUrl} name={x.name} id={x.id} description={x.description} price = {x.price} category = {x.categoryId} isAvailable={x.isAvailable}></SearchResultItem>))}
+                    {filteredItems.map(x => (<SearchResultItem img={x.itemPhotoUrl} name={x.name} id={x.id} description={x.description} price = {x.price}  isAvailable={x.isAvailable}></SearchResultItem>))}
                     </div>
                 </section>
+                </div>
                 </div>
   )
 }
 
-export default Search
+export default CategorySearch

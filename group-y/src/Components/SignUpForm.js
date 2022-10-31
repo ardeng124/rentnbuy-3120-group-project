@@ -58,11 +58,9 @@ const SignUpForm = ({updateFn}) => {
     }
 
     const formHandler = (event) => {
-        console.log("password", formInfo.password == formInfo.repeatPassword)
         event.preventDefault()
         
         if (formInfo.password === formInfo.repeatPassword) {
-            console.log("Form submitted: ", formInfo)
             updateFn(formInfo)
             // setFormInfo(initialState)
         } else {

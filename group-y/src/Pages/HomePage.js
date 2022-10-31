@@ -26,32 +26,22 @@ const HomePage = () => {
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
-            // navigate("/")
             }
       })
         AxiosService.getItems().then(response => {
-            // console.log(response)
             let arr = response
-            //todo FIX THIS 
-           
-        
             arr = arr.slice(-9)
             arr = arr.reverse()
-            
             setListings(arr)
-            // console.log(response.data.items)
         })
         AxiosService.getOffersToMe().then(response => {
-            console.log(response)
             let arr = response.data
             arr = arr.slice(-4)
             setOffers(arr)
         })
         AxiosService.getOffersByMe().then(response => {
-            console.log(response)
             let arr = response.data
             arr = arr.slice(-4)
             setYourOffers(arr)
@@ -59,7 +49,6 @@ const HomePage = () => {
     }, [])
     
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
     const handleLoginButtonClicked = (event) => {
@@ -76,7 +65,6 @@ const HomePage = () => {
                 <section className="loginheader">
                     <div className="MasterHeader">
                         <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
-
                         <ul>
                             
                             <li>

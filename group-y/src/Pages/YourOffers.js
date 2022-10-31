@@ -22,7 +22,7 @@ const YourOffers = () => {
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             } else {
@@ -30,7 +30,6 @@ const YourOffers = () => {
             }
             AxiosService.getOffersByMe().then(response => {
                 setOffers(response.data)
-                console.log(response.data)
             })
 
       })
@@ -38,7 +37,6 @@ const YourOffers = () => {
     }, [])
     
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
 

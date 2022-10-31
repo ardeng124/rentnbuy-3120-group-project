@@ -2,6 +2,12 @@ const Util = require('./util')
 const User = require('../models/user')
 const Item = require('../models/item')
 
+/**
+ * Gets all items the user has rented
+ * @param {*} request 
+ * @param {*} response 
+ * @returns an array of items the user has rented
+ */
 const getRentedItemsForAUser = async (request, response) => {
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     if(!decodedToken){
@@ -18,12 +24,15 @@ const getRentedItemsForAUser = async (request, response) => {
     }
 }
 
-
+/**
+ * Rents an item
+ * @param {*} request 
+ * @param {*} response 
+ * @returns JSON object with updated item
+ */ 
 const rentAnItem = async (request, response) => {
-    console.log(request)
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
     const itemId = request.params.itemId;
-    console.log(decodedToken)
     if(!decodedToken){
         return response.status(401).json({status:"Unauthorised"})
     }

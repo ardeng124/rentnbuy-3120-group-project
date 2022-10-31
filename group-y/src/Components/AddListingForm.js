@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import AxiosService from "../AxiosService"
 
+/**
+ * 
+ * AddListingForm: form for adding a new listing
+ * Paramters: updateFn : form submission
+ */
 const AddListingForm = ({updateFn}) => {
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
     const [categories, setCategories] = useState([])
@@ -34,9 +39,10 @@ const AddListingForm = ({updateFn}) => {
             setFormInfo({...formInfo, location: event.target.value})
         } else if (name === "category") {
             setFormInfo({...formInfo, categoryId: event.target.value})
+        } else if (name === "rentprice") {
+            setFormInfo({...formInfo, rentprice: event.target.value})
         } else if (name === "img") {
             setTempUrl(URL.createObjectURL(event.target.files[0]))
-
             setFormInfo({...formInfo, img: event.target.files[0]})
         }
         
@@ -61,6 +67,8 @@ const AddListingForm = ({updateFn}) => {
                         {categories.map(x => <option value={x.name}>{x.name}</option>)}
                 </select>
                 <input className="input" type="number" placeholder="Enter price (cents)" name="price" onChange={updateField} required/>
+                <input className="input" type="number" placeholder="Enter price to rent (cents)" name="rentprice" onChange={updateField} required/>
+
                 <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} required/>
                 <fieldset>
                 {/* <label class="custom-uploader" for="file">Upload Your File</label>  */}

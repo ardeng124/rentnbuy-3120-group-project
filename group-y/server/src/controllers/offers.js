@@ -5,6 +5,12 @@ const Item = require('../models/item')
 const Util = require('./util')
 const offer = require('../models/offer')
 
+/**
+ * Gets offers made by current user
+ * @param {*} request 
+ * @param {*} response 
+ * @returns A json object containing the array of all offers made by the user
+ */
 const getOffersByMe = async (request, response) => {
 
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
@@ -20,6 +26,12 @@ const getOffersByMe = async (request, response) => {
     response.json(allOffers)
 }
 
+/**
+ * Gets offers made TO the user
+ * @param {*} request 
+ * @param {*} response 
+ * @returns a json object with an array of all offers made to items the user owns
+ */
 const getOffersToMe = async (request, response) => {
 
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
@@ -35,20 +47,19 @@ const getOffersToMe = async (request, response) => {
     response.json(allOffers)
 }
 /**
- * Make offer
+ * Creates a rent offer with start and end dates on an item
+ * @param {*} request 
+ * @param {*} response 
+ * @returns A JSON object containing the new offer
  */
 const makeOffer = async(request, response) =>{
     const decodedToken = Util.getDecodedToken(Util.getToken(request))
     const user = await User.findOne({username:decodedToken.username})
-    console.log(request.body)
     if(request.body.startDate == "" || request.body.endDate == ""){
         return response.status(304).json(({"status":"Please enter both start and end date"}))
     }
-    console.log(user)
-    
     
     const item = await Item.findById(request.body.itemId)
-    console.log(item.creatorId)
     const reciever = await User.findById(item.creatorId)
 
     const offer = new Offers ({
@@ -64,6 +75,12 @@ const makeOffer = async(request, response) =>{
     return response.status(201).json((savedOffer))
 }
 
+/**
+ * Changes the offer status to either Approved or Denied
+ * @param {*} request 
+ * @param {*} response 
+ * @returns JSON object with status text
+ */
 const offerStatus = async(request, response) => {
     //TODO
     //offer status is set to approved

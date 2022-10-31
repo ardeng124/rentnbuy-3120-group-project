@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
-
-
 import MenuBarSearch from '../Components/MenuBarSearch';
 import SearchResultItem from '../Components/SearchResultItem';
 
@@ -17,13 +15,12 @@ const FavouritesPage = () => {
 
     // const [convos, setConversations] = useState([])
     const handleUserClicked = (event) => {
-        console.log("clicked on user icon")
         navigate("/userview")
     }
     useEffect(() => {   
         AxiosService.validateToken()
         .then(response => {
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             // navigate("/")
             } else {
@@ -43,12 +40,14 @@ const FavouritesPage = () => {
         })
     }, [])
 
+    /**
+     * removes item from favourites
+    **/
     const itemRemove= (id) => {
         AxiosService.modifyFavourite(id,"delete").then(response=> {
             if(response.status == "error"){
                 window.alert("error removing favourite")
             } else {
-            console.log(response)
             setUserDetails(response.data.favs)
             }
         })
@@ -60,7 +59,6 @@ const FavouritesPage = () => {
                     <div className="MasterHeader">
                         <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
                         <ul>
-                            
                             <li>
                                 <a href="/">
                                     Home

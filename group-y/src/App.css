@@ -91,8 +91,17 @@ font-size: 14pt;
   border: 1px solid #a4c3b27d ;
   border-radius: 10px;
   color: #747c78;
-
-
+  margin: auto;
+  margin-bottom:20px;
+  margin-top: 20px;
+}
+.formContainer .inputFaded{
+  background-color: #e8f3f0;
+  border: 1px solid #afccbc7d ;
+  border-radius: 10px;
+  color: #747c78;
+  /* opacity: 95%; */
+  display: block;
   margin: auto;
   margin-bottom:20px;
   margin-top: 20px;
@@ -250,6 +259,27 @@ font-size: 14pt;
   margin-top: 0px;
   /* padding-bottom: 0px; */
 }
+.rentFunctions {
+  padding:10px;
+  background-color: #c7cdcb;
+  border-radius: 20px;
+  width:60%;
+  margin: auto;
+  margin-top:20px;
+}
+
+.flexContainerForm {
+  /* display: flex; */
+  flex-direction: row;
+  margin: 10px;
+}
+.flexContainerForm fieldset {
+  flex:0.2;
+  margin:30px;
+  margin-top:10px;
+  margin-bottom: 0px;
+  display: inline;
+}
 .formContainer label {
   display: inline !important;
 }
@@ -324,14 +354,14 @@ font-size: 14pt;
 .ProfileIconLarge {
   background-color: #D9D9D9;
   border-radius: 100%;
-  padding: 85px;
+  /* padding: 85px; */
   margin: auto;
   margin-top: 30px;
   /* margin: 15px; */
   margin-bottom: 60px;
-  padding:50px;
-  width: 100px;
-  height: 100px;
+  /* padding:50px; */
+  width: 250px;
+  height: 250px;
   border: 1px solid #6B9080;
 }
 .ProfileInterestLi{
@@ -467,10 +497,40 @@ font-size: 14pt;
   border: 1px solid #6B9080;
 
 }
-
-.newestListingItem h3 {
-  font-size:20pt
+.leftNLR {
+  background-color: transparent !important;
 }
+
+.leftNLR h3, em, p, b, li, i {
+  background-color: transparent !important;
+}
+
+.newestListingItem p, em, li, h3, li, b{
+  background-color: transparent !important;
+}
+
+.newestListingItemDisabled p, em, li, h3, li, b{
+  background-color: transparent !important;
+}
+.newestListingItemDisabled div {
+  background-color: transparent !important;
+} 
+/* .newestListingItem em {
+  background-color: transparent !important;
+}
+
+.newestListingItem li {
+  background-color: transparent !important;
+}
+*/
+.newestListingItem div {
+  background-color: transparent !important;
+} 
+.newestListingItem h3 {
+  font-size:20pt;
+  background-color: transparent !important;
+}
+
 .itemContainer{
   display: flex;
   flex-wrap: wrap;
@@ -514,10 +574,44 @@ font-size: 14pt;
   margin:20px;
   padding:30px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.ItemPage .appBtn{
+  margin: auto;
+  margin-top:10px;
+  margin-bottom: 10px;
+
+}
+.itemInfoBox h2 {
+  font-weight: 500;
+}
+.group1{
+  flex:1;
+  display: flex;
+  flex-direction: row;
+}
+.group1 h4 {
+  width: 300px;
+  flex:0.5;
+  font-weight: 300;
+}
+.group2{
+  flex:1;
+  display: flex;
+  flex-direction: row;
+}
+.group2 h4 {
+
+flex:1;
+}
+.categoryTitle{
+  cursor: pointer;
+  font-weight:400 !important;
 }
 .itemImg{
   
-  max-width: 450px;
+  max-width: 500px;
   max-height: 450px;
   margin:10px;
 }
@@ -565,6 +659,7 @@ button {
   top:70px !important;
   background-color: #F6FFF8 !important;
   width:40% !important;
+  border:1px solid var(--nav-header);
 }
 .searchResults li{
   display: block;
@@ -616,7 +711,12 @@ a :hover .seeMoreBtn{
 }
 
 .SearchPage .loginheader{
-  background-color: #F6FFF8 !important;
+  background-color: #F6FFF8 ;
+}
+
+.CategorySearch .loginheader{
+  background-color:var(--header);
+
 }
 .SearchPage{
   list-style-type: none;
@@ -730,8 +830,11 @@ a :hover .seeMoreBtn{
 }
 
 .btnReplacment{
-  background-color: #81BEA4;
+  background-color: #BE8184;
   cursor: none;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 
@@ -868,8 +971,11 @@ margin:5px;
   display: flex;
   width:85%;
   margin:auto;
-
 }
+.unavText{
+  overflow-wrap: normal;
+}
+
 .favPageButtonContainer{
   padding:20px;
   /* display: flex; */
@@ -892,7 +998,7 @@ margin:5px;
   border: 1px solid #6b908090;
   font-weight: 400;
   height: 45px !important;
-
+  margin: auto;
   font-size:14px;
 }
 
@@ -904,6 +1010,8 @@ margin:5px;
   border: 1px solid #6b908090;
   font-weight: 400;
   font-size:14px;
+  margin: auto;
+
   height: 45px !important;
 }
 
@@ -931,9 +1039,10 @@ margin:5px;
 .catItemP{
   background-color: transparent !important;
   position: relative;
-  top:30%;
+  /* top:30%; */
   text-align: left;
   margin-left:50px;
+  margin: auto;
 }
 
 .categoriesPageMainContent .appBtnFav{
@@ -954,6 +1063,9 @@ margin:5px;
   flex-direction: column;
   margin-bottom: 30px;
   overflow-wrap:anywhere;
+}
+.reviewItemDiv:hover .deleteMsg{
+  display: inline;
 }
 .reviewWindow{
   background-color: #D9D9D9;
@@ -1004,7 +1116,19 @@ margin:5px;
   width:75%;
   border-radius: 10pt;
 }
+
+
+.ModListingMain{
+  background-color: #e1edeccc;
+  padding:10px;
+  margin: auto;
+  width:75%;
+  border-radius: 10pt;
+}
 .addListingForm .formContainer .input {
+  width:50%;
+}
+.addListingForm .formContainer .inputFaded {
   width:50%;
 }
 .addListingForm select{
@@ -1013,7 +1137,6 @@ margin:5px;
 
 .addListingForm .appBtn{
   width:auto;
-
 }
 .hideMe{
   display: none;
@@ -1025,28 +1148,76 @@ margin:5px;
     /* padding: 85px; */
     margin: 5px;
     width:300px;
-    height:300px;
+    height:auto;
     cursor:pointer;
     border-radius: 4px;
 }
 
+.appBtnEdit{
+  background-color: #89e6be;
+  /* float:left; */
+  display: inline-block;
+  margin: none;
+  width:auto;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  flex: 0.1;
+}
 
 
+.appBtnDelete{
+  background-color: #be8a81;
+
+  width:auto;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  font-size:14px;
+  height: auto;
+}
 
 
+h3{
+  background-color: transparent;
+}
+.availabilityDisplay {
+  margin:10px;
+  font-weight: 500;
+  color: #936546;
+}
+.deleteMsg {
+  background-color: #e68989;
+  /* float:left; */
+  display: inline-block;
+  margin: none !important;
+  /* margin-bottom:-24.5px; */
+  width:25px;
+  border-radius: 11px;
+  border: 1px solid #6b908090;
+  font-weight: 400;
+  padding: 0px 5px;
+  line-height: 0px !important;
+  height: 30px;
+  position: absolute;
+  cursor: pointer;
 
-
-
+  left:81vw;
+  display: none;
+}
 
 /*  Animations  */
 @keyframes homePageItemHover {
 
   from {
+    background-color: #D9D9D9;
     border-radius: 28px;
   }
 
   to {
-    border-radius: 58px
+    background-color: #d0cccc;
+    border-radius: 58px;
   }
 }
 

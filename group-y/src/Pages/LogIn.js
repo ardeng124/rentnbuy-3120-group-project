@@ -23,8 +23,7 @@ const Login = () => {
   useEffect(() => {
    AxiosService.validateToken()
       .then(response => {
-        console.log(response)
-        if(response == 'success'){
+        if(response.status == 'success'){
           logInTracker= true
           navigate("/")
         }
@@ -37,7 +36,6 @@ const Login = () => {
   //Create new User Function
   const createNewUser = (newUser) => {
     AxiosService.login(newUser).then(response => {
-      console.log("hi", response)
       if (response.data.error === "user does not exist") {
         setErrorMessages({name: "uname", message: "Your Username or password is incorrect!"})
       } else {

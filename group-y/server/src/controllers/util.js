@@ -17,7 +17,6 @@ const getDecodedToken = (token) => {
 }
 const hashPassword =  async (plainTextPassword) =>{
     const saltRounds = 10
-    console.log(plainTextPassword)
     return bcrypt.hash(plainTextPassword, saltRounds)
     
 }

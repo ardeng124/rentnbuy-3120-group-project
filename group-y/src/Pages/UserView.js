@@ -16,8 +16,7 @@ const UserView = () => {
     const getUserDetails = () => {
         AxiosService.getUserDetails()
          .then(response => {          
-           console.log("GET response", response)
-           console.log("Response Data Is: ", response.data)
+         
            setUserDetails(response.data)
          })
      }
@@ -25,8 +24,7 @@ const UserView = () => {
     useEffect( () => {
         AxiosService.validateToken()
         .then(response => {
-            console.log(response)
-            if(response == 'success'){
+            if(response.status == 'success'){
                 setLoggedIn(true)
             } else {
                 
@@ -35,7 +33,6 @@ const UserView = () => {
         getUserDetails()
       }, []);
  
-    console.log (userDetails)
     return (
         <div className="UserViewPage">
             <section className="loginheader">
@@ -58,7 +55,9 @@ const UserView = () => {
             </section>
             <section className="ProfileBox">
                 <div className="ProfileColLarge">
-                    <div className ="ProfileIconLarge"> </div>
+                    {/* <div className ="ProfileIconLarge"> </div> */}
+                    {userDetails.profilePhoto ? <img className="ProfileIconLarge" src={userDetails.profilePhoto}/> : <img className='ProfileIconLarge' src= "https://i.stack.imgur.com/mwFzF.png"/>}
+
                     <li className="ProfileName">Name: {userDetails.firstName} {userDetails.lastName} </li>
                     <li className="ProfileName">Username: {userDetails.username}</li>
                     <li> Email: {userDetails.emailAddress}</li>

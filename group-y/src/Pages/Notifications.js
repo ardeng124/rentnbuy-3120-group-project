@@ -10,7 +10,10 @@ import {
 
 import MenuBarSearch from '../Components/MenuBarSearch';
 import NotificationComponent from '../Components/NotificationComponent';
-
+/**
+ * Notifcations page:
+ * Displays all rent requests made to items the user owns
+ */
 const Notifications = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [offers, setOffers] = useState([])

@@ -1,6 +1,10 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom"
 
+/**
+ * 
+ * CategoryItem: Displays category name with some padding
+ */
 const CategoryItem = (props) => {
     const {name, isFollowing} = props
     const img = "https://i.stack.imgur.com/mwFzF.png"

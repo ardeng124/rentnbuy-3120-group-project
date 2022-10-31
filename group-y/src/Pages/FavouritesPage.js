@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
-
-
 import MenuBarSearch from '../Components/MenuBarSearch';
 import SearchResultItem from '../Components/SearchResultItem';
 
@@ -42,6 +40,9 @@ const FavouritesPage = () => {
         })
     }, [])
 
+    /**
+     * removes item from favourites
+    **/
     const itemRemove= (id) => {
         AxiosService.modifyFavourite(id,"delete").then(response=> {
             if(response.status == "error"){
@@ -58,7 +59,6 @@ const FavouritesPage = () => {
                     <div className="MasterHeader">
                         <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
                         <ul>
-                            
                             <li>
                                 <a href="/">
                                     Home

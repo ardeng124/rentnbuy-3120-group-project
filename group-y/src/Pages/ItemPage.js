@@ -43,7 +43,6 @@ const ItemPage = () => {
             }
       })
       //Get Item Details
-      
       AxiosService.getItemDetails(id).then(response => {
         let arr = response.data.items[0]
         arr.price = "$"+( arr.price/100)
@@ -56,7 +55,7 @@ const ItemPage = () => {
         setItemDetails(response.data.items[0])
     }) 
 }, [])
-
+    //Calculates average rating
     const calculateAverageRating = () => {
         let avgRating = 0 
         let sum = 0
@@ -73,6 +72,7 @@ const ItemPage = () => {
         }
         return avgRating
     }
+    //Sends request to rent an item
     const rentItem = (event) => {
         event.preventDefault()
         const rentRequest = {
@@ -81,7 +81,6 @@ const ItemPage = () => {
             itemId:id
         }
         AxiosService.rentAnItem(rentRequest).then(response => {
-
             if(response.status == 201) {
                 setReqStatus("Successfully sent request")
             } 
@@ -91,7 +90,7 @@ const ItemPage = () => {
               
         })
     }
-
+    //used for rent form
     const updateField = (event) => {
         // which input element is this
         const name = event.target.attributes.name.value
@@ -102,7 +101,7 @@ const ItemPage = () => {
         }
 
     }
-
+    //adds current item as favourite
     const addFavourite = (id) => {
         AxiosService.modifyFavourite(id,"add").then(response=> {
             if(response.status == "error"){

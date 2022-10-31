@@ -11,7 +11,7 @@ import MenuBarSearch from '../Components/MenuBarSearch';
 import SearchResultItem from '../Components/SearchResultItem';
 
 /**
- * Search: Works by getting all items from database and then filtering what is shown to the user based on input 
+ * CategorySearch: Works by getting all items from database and then filtering out items from other categories and what is shown to the user based on input 
  *
  */
 const CategorySearch = () => {
@@ -55,6 +55,7 @@ const CategorySearch = () => {
                 element.description = element.description.substring(0, 250) + "..."
                 element.price = "$".concat((element.price/100))
             });
+            //DIFFERENCE FROM SEARCH PAGE - VVV
             arr = arr.filter(x => x.categoryId == CategoryName)
             setItemsArr(arr)
             // console.log(response.data.items)

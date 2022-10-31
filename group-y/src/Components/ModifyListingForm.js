@@ -2,6 +2,10 @@ import { ListItemSecondaryAction } from '@mui/material'
 import React, {useState, useEffect} from 'react'
 import AxiosService from "../AxiosService"
 
+/**
+ * 
+ * ModifyListingForm: Form for updating item details: Does not allow title or category change
+ */
 const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
     const [categories, setCategories] = useState([])

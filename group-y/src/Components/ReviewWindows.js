@@ -4,29 +4,13 @@ import ReviewForm from "./ReviewForm.js";
 import Review from "./Review.js";
 
 import AxiosService from "../AxiosService";
-
+/**
+ * 
+ * ChatWindow: displays all reviews for an item and includes a form if the user is logged in to add their own
+ */
 const ChatWindow = (props) => {
     const {id, reviewIn, isOwner, loggedIn, inCurrentUser} = props
     const [reviews, setReview] = useState([])
-
-    //Interval to refresh the ReviewWindow every 60000ms 
-    // useEffect(() => {
-    //     AxiosService.getReviewsPerItem()
-    //     .then(response => {
-    //         console.log(response.data)
-    //         setReview(response.data.reviews) 
-    //     })
-    //     const ReviewListInterval = setInterval(() => {
-    //         AxiosService.getReviewsPerItem()
-    //         .then(response => {
-    //             console.log(response.data)
-    //             setReview(response.data.reviews) 
-    //         })
-    //     }, 60000); // will run this request every 1 min
-    
-    //     return () => clearInterval(ReviewListInterval);
-    // }, [])
-   
     useEffect(() => {
         setReview(reviewIn)
     }, [reviewIn])

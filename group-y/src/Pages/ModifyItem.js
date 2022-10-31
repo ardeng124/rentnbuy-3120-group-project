@@ -2,16 +2,12 @@ import React, {useState, useEffect} from 'react'
 import {useNavigate,useParams, useLocation} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
-
-import {
-    BrowserRouter as Router,
-    Routes, Route, Link
-  } from "react-router-dom"
-
-
 import MenuBarSearch from '../Components/MenuBarSearch';
 import ModifyListingForm from '../Components/ModifyListingForm';
 
+/**
+ * Modifyitem: contains a form that allows a user to edit items the have created
+ */
 const ModifyItem = () => {
     const [itemAuthor, setAuthor] = useState([])
     const [currentUserId, setCurrentId] = useState("")

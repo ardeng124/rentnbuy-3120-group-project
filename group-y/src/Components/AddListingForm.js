@@ -1,6 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import AxiosService from "../AxiosService"
 
+/**
+ * 
+ * AddListingForm: form for adding a new listing
+ * Paramters: updateFn : form submission
+ */
 const AddListingForm = ({updateFn}) => {
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
     const [categories, setCategories] = useState([])

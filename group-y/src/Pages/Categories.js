@@ -18,10 +18,7 @@ const Categories = () => {
         .then(response => {
             if(response.status == 'success'){
                 setLoggedIn(true)
-            // navigate("/")
-            
             }
-
         })
         AxiosService.getCategories().then(response => {
             setCategories(response.data)

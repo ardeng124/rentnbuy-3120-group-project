@@ -4,7 +4,10 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
 
-function Review ({creator, text, timestamp, reviewId, stars, currentUser, deleteReview}) {
+/**
+ * Review: Review component displaying creator, text, rating
+ */
+const Review = ({creator, text, timestamp, reviewId, stars, currentUser, deleteReview})=> {
     let dateTrimEnd = timestamp.slice(0,-14)
 
     // //CSS for seperating tables

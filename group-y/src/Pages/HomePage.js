@@ -28,20 +28,13 @@ const HomePage = () => {
         .then(response => {
             if(response.status == 'success'){
                 setLoggedIn(true)
-            // navigate("/")
             }
       })
         AxiosService.getItems().then(response => {
-            // console.log(response)
             let arr = response
-            //todo FIX THIS 
-           
-        
             arr = arr.slice(-9)
             arr = arr.reverse()
-            
             setListings(arr)
-            // console.log(response.data.items)
         })
         AxiosService.getOffersToMe().then(response => {
             let arr = response.data
@@ -72,7 +65,6 @@ const HomePage = () => {
                 <section className="loginheader">
                     <div className="MasterHeader">
                         <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
-
                         <ul>
                             
                             <li>

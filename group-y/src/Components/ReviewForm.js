@@ -21,6 +21,10 @@ function getLabelText(value) {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
+/**
+ * 
+ * ReviewForm: Form for adding a review or comment to an item
+ */
 const ReviewForm = ({updateFn, IsOwner}) => {
 
     let initialState = {text: "", stars: 0}

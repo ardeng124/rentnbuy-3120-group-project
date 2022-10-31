@@ -1,3 +1,4 @@
+//Imports
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import FriendItemProfile from "../Components/FriendItemProfile";
@@ -7,27 +8,32 @@ import MenuBarSearch from "../Components/MenuBarSearch.js";
 
 
 const UserView = () => {
+    //Check if the user is logged in
     const [loggedIn, setLoggedIn] = useState(false)
 
+    //Temporary Fields
     const dummyInterests = ['Houses','Electronics','Random Categeory']
-    const dummyFriends = ["Arden", "Anubhav", "Raffi","Nicholas"]
+    
+    //Temporary Fields
+    const dummyFriends = ["Arden", "Anubhav", "Raffi", "Nicholas"]
+    
+    //Used to hold the user details in the front end
     const [userDetails, setUserDetails] = useState({status: "", firstname: "", lastName: "", username: "", emailAddress: "", location: ""})
 
+    //Function to get the user details from the backend
     const getUserDetails = () => {
         AxiosService.getUserDetails()
-         .then(response => {          
-         
+        .then(response => {          
            setUserDetails(response.data)
-         })
-     }
+        })
+    }
 
+    //Validates the user token when the page is rendered
     useEffect( () => {
         AxiosService.validateToken()
         .then(response => {
             if(response.status == 'success'){
                 setLoggedIn(true)
-            } else {
-                
             }
         })   
         getUserDetails()
@@ -37,21 +43,16 @@ const UserView = () => {
         <div className="UserViewPage">
             <section className="loginheader">
                 <div className="MasterHeader">
-
-                <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
-
-                  <ul>
-                      <li> <a href="/">Home</a> </li>
-                      <li><a href="/categories"> Categories </a> </li>
-                      <li><a href="/addlisting">Add Listing </a></li>
-                      <li> <a href="/search"> Search </a></li>
-                      <li>
-                    <MenuBarSearch></MenuBarSearch>
-                </li>
-
-                  </ul>
-              </div>
-              <h1> {userDetails.username}'s Profile</h1>
+                    <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
+                    <ul>
+                        <li> <a href="/">Home</a> </li>
+                        <li><a href="/categories"> Categories </a> </li>
+                        <li><a href="/addlisting">Add Listing </a></li>
+                        <li> <a href="/search"> Search </a></li>
+                        <li> <MenuBarSearch></MenuBarSearch> </li>
+                    </ul>
+                </div>
+                <h1> {userDetails.username}'s Profile</h1>
             </section>
             <section className="ProfileBox">
                 <div className="ProfileColLarge">
@@ -71,10 +72,9 @@ const UserView = () => {
                     <h3>Friends</h3>
                     {dummyFriends.map(x=> <FriendItemProfile friendName={x}></FriendItemProfile>)}
                 </div>
-          </section>
-
-      </div>
-  )
+            </section>
+        </div>
+    )
 }
 
 export default UserView

@@ -1,9 +1,8 @@
+//Imports
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import SignUpForm from "../Components/SignUpForm.js";
 import Stack from '@mui/material/Stack';
-import button from '@mui/material/button';
 import AxiosService from "../AxiosService"
 import MenuBarSearch from "../Components/MenuBarSearch.js";
 
@@ -69,6 +68,7 @@ const SignIn = () => {
     navigate("/login")
   }
 
+  //Error Message function (contains HTML)
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
     <div className="error">{errorMessages.message}</div>

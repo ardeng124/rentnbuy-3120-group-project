@@ -2,11 +2,6 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate} from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from '../AxiosService';
-
-import {
-    BrowserRouter as Router,
-    Routes, Route, Link
-  } from "react-router-dom"
 import NewestListingItem from '../Components/NewestListingItem';
 import MenuBarSearch from '../Components/MenuBarSearch';
 import FeedListingItem from '../Components/FeedListingItem';

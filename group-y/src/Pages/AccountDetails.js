@@ -1,18 +1,38 @@
+//Imports
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import DropDownMenu from "../Components/DropDownMenu";
 import AxiosService from "../AxiosService"
-import axios from "axios"
 import MenuBarSearch from "../Components/MenuBarSearch";
 
 
 const AccountDetails = () => {
+
+    //Logged in Status of the user is stored
     const [loggedIn, setLoggedIn] = useState(false)
-    const [userDetails, setUserDetails] = useState({_id: "", status: "", emailAddress: "", location: "", profilePhoto:"https://i.stack.imgur.com/mwFzF.png"})
+
+    //Defined Navigate Functionality
+    const navigate = useNavigate()
+    
+    //Details of the user is stored
+    const [userDetails, setUserDetails] = useState({
+        _id: "",
+        status: "",
+        emailAddress: "",
+        location: "",
+        profilePhoto:"https://i.stack.imgur.com/mwFzF.png"
+    })
+
+    //
     const [currentStatus, setStatus] = useState("")
+    
+    //Stores any uploaded images that will be used to update any current image
     const [imgUpdated, setImgUpdated] = useState(false)
+
+    //Temporary URL
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
-    // let imgUpdated = false
+    
+    //When the page is rendered the user token is validated
     useEffect(() => {
         AxiosService.validateToken()
            .then(response => {
@@ -22,52 +42,51 @@ const AccountDetails = () => {
                 navigate("/")
              }
            })
-       }, [])
+    }, [])
+    
+    //User Details is pulled from the backend with this Axios Request
     const getUserDetails = () => {
-       AxiosService.getUserDetails()
+        AxiosService.getUserDetails()
         .then(response => {          
-          setUserDetails(response.data)
-          if(!response.data.profilePhoto || response.data.profilePhoto == "" ) {
-            setTempUrl("https://i.stack.imgur.com/mwFzF.png")
-          } else {
-              setTempUrl(response.data.profilePhoto)
-
-          }
+            setUserDetails(response.data)
+            if(!response.data.profilePhoto || response.data.profilePhoto == "" ) {
+                setTempUrl("https://i.stack.imgur.com/mwFzF.png")
+            } else {
+                setTempUrl(response.data.profilePhoto)
+            }
         })
     }
 
+    //Run when the page is rendered, getting all the user details.
     useEffect( () => {
         getUserDetails()     
-      }, []);
-
-    const navigate = useNavigate()
-    const handleUserClicked = (event) => {
-        navigate("/userview")
-    }
+    }, []);
+    
+    //Form Handler to prevent default actions on events
     const formHandler = (event) => {
         event.preventDefault()
-        console.log("Form submitted: ", userDetails)
-        // setFormInfo(initialState)
     }
 
+    //Update field is called when the user makes changes to any inputs
+    //in the account details form
     const updateField = (event) => {
-        // which input element is this
+        // Ensures the correct attribute is changed when the user is making inputs
         const name = event.target.attributes.name.value
         if (name === "Email") {
             setUserDetails({ ...userDetails, emailAddress: event.target.value })
         } else if (name === "Address") {
-        setUserDetails({ ...userDetails, location: event.target.value })
-    } else if (name === "img") {
-        setImgUpdated(true)
-        setUserDetails({...userDetails, profilePhoto: event.target.files[0]})
-        setTempUrl(URL.createObjectURL(event.target.files[0]))
-    }
+            setUserDetails({ ...userDetails, location: event.target.value })
+        } else if (name === "img") {
+            setImgUpdated(true)
+            setUserDetails({...userDetails, profilePhoto: event.target.files[0]})
+            setTempUrl(URL.createObjectURL(event.target.files[0]))
+        }
     }
 
+    //Allows the user to edit their account details
     const editAccountDetails = () => {
         AxiosService.editUserDetails(userDetails)
         .then(response => {
-            // console.log("Edit Response", response)
             setStatus("Successfully updated details")
             window.alert("Successfully updated details")
         })
@@ -76,26 +95,21 @@ const AccountDetails = () => {
         }
     }
 
-const imgClicked = (event) => {
-    document.getElementById('file').click()
-}
+    //Acknowledges when an image is clicked on to trigger other events
+    const imgClicked = (event) => {
+        document.getElementById('file').click()
+    }
     return (
         <div className="AccountDetailsPage">
             <section className="loginheader">
                 <div className="MasterHeader">
-                <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
+                    <DropDownMenu isLoggedIn = {loggedIn}></DropDownMenu>
                     <ul>
                         <li> <a href="/">Home</a> </li>
-                        <li><a href="/categories"> Categories </a> </li>
-                        <li>
-                                <a href="/addlisting">
-                                    Add Listing
-                                </a>
-                            </li>
-                        <li> <a href="/search"> Search </a></li>
-                        <li>
-                                <MenuBarSearch></MenuBarSearch>
-                            </li>
+                        <li> <a href="/categories"> Categories </a> </li>
+                        <li> <a href="/addlisting"> Add Listing </a> </li>
+                        <li> <a href="/search"> Search </a> </li>
+                        <li> <MenuBarSearch></MenuBarSearch> </li>
                     </ul>
                 </div>
                 <h1> {userDetails.username}'s Account Details</h1>
@@ -122,15 +136,6 @@ const imgClicked = (event) => {
                         <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />
 
                         <fieldset className="passChangeFieldSet">
-                            {/* <input
-                                className="input"
-                                type="text"
-                                placeholder={userDetails.username}
-                                name="Username"
-                                value={userDetails.username}
-                                onChange={updateField}
-                                disabled
-                            /> */}
                             <input
                                 className="input"
                                 type="text"

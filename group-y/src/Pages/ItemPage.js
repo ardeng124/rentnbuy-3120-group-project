@@ -18,9 +18,9 @@ const ItemPage = () => {
     const initialState = {start: '', end: ''}
     const [formInfo, setFormInfo] = useState(initialState)
     const [reqStatus, setReqStatus] = useState("")
+    const [userDetails, setUserDetails] = useState("")
 
     const [itemAuthor, setAuthor] = useState([])
-    const [currentUserId, setCurrentId] = useState("")
     const id = useParams().id
     const [itemDetails, setItemDetails] = useState({
         creatorId: "",
@@ -38,7 +38,7 @@ const ItemPage = () => {
         .then(response => {
             if(response.status == 'success'){
                 setLoggedIn(true)
-                setCurrentId(response.id)
+                setUserDetails(response)
             // navigate("/")
             }
       })
@@ -56,7 +56,7 @@ const ItemPage = () => {
         setItemDetails(response.data.items[0])
     }) 
 }, [])
-console.log(itemAuthor)
+
     const calculateAverageRating = () => {
         let avgRating = 0 
         let sum = 0
@@ -150,7 +150,7 @@ console.log(itemAuthor)
 }
 
             <div className='itemInfoBox'> 
-            {currentUserId === itemDetails.creatorId &&  <button className="appBtnEdit" onClick={() => navigate("/editItem/"+itemDetails.id)}>Modify Listing</button>}
+            { userDetails.id === itemDetails.creatorId &&  <button className="appBtnEdit" onClick={() => navigate("/editItem/"+itemDetails.id)}>Modify Listing</button>}
                 <h2>{itemDetails.name}</h2>
                 <section className="group1">
                 <h4 className="categoryTitle" onClick = {() => navigate(`/categories/${itemDetails.categoryId}`)}>Category: {itemDetails.categoryId}</h4>
@@ -174,7 +174,7 @@ console.log(itemAuthor)
                     </div> : <h5> Log in or create an account to rent</h5>}
 
 
-            {(currentUserId != itemAuthor.id) && <div> 
+            {( userDetails.id != itemAuthor.id) && <div> 
                         
                 {itemDetails.isAvailable && <div>
                     {loggedIn && <section className="rentFunctions"> 
@@ -201,11 +201,11 @@ console.log(itemAuthor)
                 <p>{reqStatus}</p>
                         </div>}
                     {!itemDetails.isAvailable &&  <button disabled className="btnReplacment">Unavailable</button>}
-            {/* {currentUserId == itemAuthor.id && <p className="availabilityDisplay"> Currently Available: {itemDetails.isAvailable.toString()}</p>} */}
+            {/* { userDetails.id == itemAuthor.id && <p className="availabilityDisplay"> Currently Available: {itemDetails.isAvailable.toString()}</p>} */}
             </div>
         </div>
 
-        <ChatWindow loggedIn = {loggedIn} isOwner ={currentUserId == itemAuthor.id} id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
+        <ChatWindow inCurrentUser = {localStorage.getItem("username")} loggedIn = {loggedIn} isOwner ={ userDetails.id == itemAuthor.id} id = {itemDetails.id} reviewIn={itemDetails.reviews}></ChatWindow>
 
         </div>
         </section>

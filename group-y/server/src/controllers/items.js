@@ -157,6 +157,29 @@ const editItems = async(request, response) =>{
     response.json(itemNew)
 }
 
+const removeComments = async(request, response) =>{
+    const body = request.body 
+    
+    const username = await Util.getDecodedToken(Util.getToken(request)).username
+    const decodedToken = Util.getDecodedToken(Util.getToken(request));
+    if(!request.params.itemId){
+        return response.status(400).json({message:"missing itemid"}).sendStatus(400)
+    }
+    const item = await Items.findById(request.params.itemId)
+    const review = item.reviews.filter(x => x.id == body.reviewId)
+
+    if(username != review[0].creator) {
+        return response.status(403).json({status:"not allowed"})
+    }
+    const itemNew = {
+        "reviews":body.comments
+    }
+    const it = await Items.findByIdAndUpdate(item.id, itemNew)
+    console.log(it)
+    response.json(itemNew)
+}
+
+
 const deleteItems = async(request,response) => {
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
@@ -196,5 +219,6 @@ module.exports = {
     searchItems,
     addPhotoToItem,
     editItems,
-    deleteItems
+    deleteItems,
+    removeComments
 }

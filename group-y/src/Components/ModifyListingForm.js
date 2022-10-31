@@ -33,7 +33,7 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
         } else {
             setTempUrl(inData.itemPhotoUrl)
         }
-        console.log(inData)
+
 
     }, [inData])
     const updateField = (event) => {

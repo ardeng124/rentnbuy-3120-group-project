@@ -6,7 +6,7 @@ import Review from "./Review.js";
 import AxiosService from "../AxiosService";
 
 const ChatWindow = (props) => {
-    const {id, reviewIn, isOwner, loggedIn} = props
+    const {id, reviewIn, isOwner, loggedIn, inCurrentUser} = props
     const [reviews, setReview] = useState([])
 
     //Interval to refresh the ReviewWindow every 60000ms 
@@ -41,14 +41,19 @@ const ChatWindow = (props) => {
             setReview([...reviews,response.data])
         })
     }
-
+  const removeItem = (Inid) => {
+    let arr = reviews.filter(x => x.id!== Inid)
+    AxiosService.removeComment(arr,id,Inid).then(response => {
+      setReview(response.data.reviews)
+    })
+  }
   return (
     <div className="reviewWindow">
 
       <h3>Reviews</h3>
       
       {reviews.map(R => <Review key={R.id} creator={R.creator} stars={R.stars}
-        text={R.text} timestamp={R.timestamp} reviewId={R.id}/>)}  
+        text={R.text} timestamp={R.timestamp} reviewId={R.id} currentUser={inCurrentUser} deleteReview = {removeItem}/>)}  
 
       {loggedIn && <ReviewForm updateFn={createNewReview} IsOwner = {isOwner}/>}
     </div>

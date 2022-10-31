@@ -43,7 +43,6 @@ const AddListing = () => {
             const id = response.data.id
             if(file) {
                 AxiosService.uploadImageToListing(file,id).then(response2 => {
-                    console.log(response2)
                 })
             }
             navigate('/item/'+response.data.id)

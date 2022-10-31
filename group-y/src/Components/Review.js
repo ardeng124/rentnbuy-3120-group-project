@@ -4,7 +4,7 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
 
-function Review ({creator, text, timestamp, reviewId, stars}) {
+function Review ({creator, text, timestamp, reviewId, stars, currentUser, deleteReview}) {
     let dateTrimEnd = timestamp.slice(0,-14)
 
     // //CSS for seperating tables
@@ -28,6 +28,9 @@ function Review ({creator, text, timestamp, reviewId, stars}) {
     //messages are shown on the left in red
     return (
         <div className="reviewItemDiv"> 
+        {currentUser == creator && <div>
+                <button className="deleteMsg" onClick = {() => deleteReview(reviewId)}> X </button>
+        </div>}
             <div className="reviewDivContainer">
                 <li className="reviewCreator"> {creator} </li>
                 {stars ? <Rating name="text-feedback" value={stars} readOnly label="Rating" precision={0.5} size="large" 

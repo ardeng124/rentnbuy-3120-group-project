@@ -34,6 +34,8 @@ router.post('/api/search', items.searchItems)
 /* POST an item */
 router.post('/api/items', items.addItems)
 router.put('/api/items/:itemId', items.editItems)
+router.put('/api/items/reviews/:itemId', items.removeComments)
+
 router.delete('/api/items/:itemId', items.deleteItems)
 
 /* GET all reviews */

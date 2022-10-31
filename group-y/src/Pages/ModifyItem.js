@@ -61,13 +61,11 @@ const ModifyItem = () => {
     }
 
     const editListing = (Listing) => {
-        console.log(Listing)
         const file = Listing.img
         const listingToUpload = delete Listing.img
         AxiosService.editListing(Listing, itemDetails.id).then(response => {
             if(file) {
                 AxiosService.uploadImageToListing(file,itemDetails.id).then(response => {
-                    console.log(response)
                 })
             }
             navigate("/item/"+itemDetails.id)

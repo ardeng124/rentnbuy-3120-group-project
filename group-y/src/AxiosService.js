@@ -245,6 +245,15 @@ const uploadImagetoUser = async(img) => {
     })
     return response
 }
+
+const removeComment = async(commentsArr,id,reviewId) => {
+    getToken()
+    const response = await axios.put(serverUrl + "api/items/reviews/"+id,{"comments":commentsArr,"reviewId":reviewId}, { headers: { "Authorization": `Bearer ${token}` } })
+    .catch((error) => {
+        return "error"
+    })
+    return response
+}
 export default {
     getReviewsPerItem,
     postReview,
@@ -273,5 +282,6 @@ export default {
     uploadImageToListing,
     uploadImagetoUser,
     deleteListing,
-    editListing
+    editListing,
+    removeComment
 }

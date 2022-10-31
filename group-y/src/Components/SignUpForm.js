@@ -1,5 +1,5 @@
 //Imports
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Stack from '@mui/material/Stack';
 
 /**
@@ -20,7 +20,21 @@ const SignUpForm = ({updateFn}) => {
         gender: '',
         location: ''
     }
-
+    const autoCompleteRef = useRef();
+        const inputRef = useRef();
+        const options = {
+            componentRestrictions: { country: "AU" }
+        }
+    useEffect(() => {
+        autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+            inputRef.current,
+            options
+        );
+        autoCompleteRef.current.addListener("place_changed", async function () {
+            const place = await autoCompleteRef.current.getPlace();
+            setFormInfo({...formInfo, location: place.formatted_address})
+           });
+    }, []);
     const [formInfo, setFormInfo] = useState(initialState)
 
     // const [locationformInfo, setLocationFormInfo] = useState(location)
@@ -53,10 +67,11 @@ const SignUpForm = ({updateFn}) => {
         } else if (name === "gender") {
             setFormInfo({...formInfo, gender: event.target.value})
         } else if (name === "address") {
+            console.log("setting value = " , autoCompleteRef.current.getPlace() )
             setFormInfo({...formInfo, location: event.target.value})
         }
     }
-
+    
     const formHandler = (event) => {
         event.preventDefault()
         
@@ -98,7 +113,7 @@ const SignUpForm = ({updateFn}) => {
                 </select>
 
                 {/* Address */}
-                <input className="input" type="text" placeholder="Address" name="address" onChange={updateField} required/>
+                <input className="input" type="text" placeholder="Address" name="address" ref={inputRef} onChange={updateField} autoComplete="false" required/>
 
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>

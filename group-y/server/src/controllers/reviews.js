@@ -11,13 +11,12 @@ const getReviews = async (request, response) => {
     response.json({reviews})
 }
 
-//Find by Id - ALL ones with the item? or go to ITEM and get all ids in review?
-// const getReviewsById = async (request, response) => {
 
-//     const reviews = await Review.findById({})
-//     response.json({reviews})
-// }
-
+/**
+ * Adds new review to both user reviews array and item reviews array
+ * @param {*} request 
+ * @param {*} response 
+ */
 const addReview = async(request, response) =>{
     
     const decodedToken = Util.getDecodedToken(Util.getToken(request));

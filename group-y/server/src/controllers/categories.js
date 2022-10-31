@@ -3,7 +3,12 @@ const User = require('../models/user')
 const Item = require('../models/item')
 const category = require('../models/category')
 
-
+/**
+ * Adds a new category (only if user is an admin)
+ * @param {*} request 
+ * @param {*} response 
+ * @returns either the new category or status text saying unauthorised
+ */
 const addCategory = async (request, response) => {
     const body = request.body 
     if(!body.name) {

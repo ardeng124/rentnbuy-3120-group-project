@@ -156,7 +156,12 @@ const editItems = async(request, response) =>{
     console.log(it)
     response.json(itemNew)
 }
-
+/**
+ * Removes a specified comment from the reviews array
+ * @param {reviewId} request 
+ * @param {HTTPStatus} response 
+ * @returns the new reviews array without the specified comment
+ */
 const removeComments = async(request, response) =>{
     const body = request.body 
     
@@ -171,15 +176,21 @@ const removeComments = async(request, response) =>{
     if(username != review[0].creator) {
         return response.status(403).json({status:"not allowed"})
     }
+    let comm = review.filter(x => x.id != body.reviewId)
     const itemNew = {
-        "reviews":body.comments
+        "reviews":comm
     }
     const it = await Items.findByIdAndUpdate(item.id, itemNew)
     console.log(it)
     response.json(itemNew)
 }
 
-
+/**
+ * Deletes a listing
+ * @param {*} request 
+ * @param {HTTPStatus} response 
+ * @returns relevant status code and status text
+ */
 const deleteItems = async(request,response) => {
     const username = await Util.getDecodedToken(Util.getToken(request)).username
     const decodedToken = Util.getDecodedToken(Util.getToken(request));
@@ -198,6 +209,12 @@ const deleteItems = async(request,response) => {
         response.status(400).json({ status: "unable to delete item" })
       }
 }
+/**
+ * Adds a photo to an item
+ * @param {*} request 
+ * @param {HTTPStatus} response 
+ * @returns the item details after the image url has been added
+ */
 
 const addPhotoToItem = async(request, response) =>{
     if(!request.params.itemId){

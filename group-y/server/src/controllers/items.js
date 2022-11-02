@@ -162,7 +162,7 @@ const editItems = async(request, response) =>{
  * @param {HTTPStatus} response 
  * @returns the new reviews array without the specified comment
  */
-const removeComments = async(request, response) =>{
+ const removeComments = async(request, response) =>{
     const body = request.body 
     
     const username = await Util.getDecodedToken(Util.getToken(request)).username
@@ -173,15 +173,17 @@ const removeComments = async(request, response) =>{
     const item = await Items.findById(request.params.itemId)
     const review = item.reviews.filter(x => x.id == body.reviewId)
 
-    if(username != review[0].creator) {
-        return response.status(403).json({status:"not allowed"})
+    if (username != review[0].creator) {
+        return response.status(403).json({ status: "not allowed" })
     }
-    let comm = review.filter(x => x.id != body.reviewId)
+    console.log(body.reviewId)
+    let comm = item.reviews.filter((x) => x.id != body.reviewId)
     const itemNew = {
-        "reviews":comm
+        reviews: comm
     }
+
     const it = await Items.findByIdAndUpdate(item.id, itemNew)
-    console.log(it)
+    // console.log(it)
     response.json(itemNew)
 }
 

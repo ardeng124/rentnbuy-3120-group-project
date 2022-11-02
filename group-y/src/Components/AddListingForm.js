@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import AxiosService from "../AxiosService"
-
+import InputAddress from "./InputAddress"
 /**
  * 
  * AddListingForm: form for adding a new listing
@@ -25,7 +25,9 @@ const AddListingForm = ({updateFn}) => {
            setCategories(response.data)
       })
     }, [])
-
+    const setLocation = (location) => {
+        setFormInfo({...formInfo, location: location})
+    }
     const updateField = (event) => {
         //Assign Input Elements to each attributes 
         const name = event.target.attributes.name.value
@@ -68,8 +70,8 @@ const AddListingForm = ({updateFn}) => {
                 </select>
                 <input className="input" type="number" placeholder="Enter price (cents)" name="price" onChange={updateField} required/>
                 <input className="input" type="number" placeholder="Enter price to rent (cents)" name="rentprice" onChange={updateField} required/>
-
-                <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} required/>
+                <InputAddress name = "location" onChange={updateField} setLocation = {setLocation}/>
+                {/* <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} required/> */}
                 <fieldset>
                 {/* <label class="custom-uploader" for="file">Upload Your File</label>  */}
                 <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import AxiosService from "../AxiosService"
 
 /**
@@ -18,7 +18,23 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
         isAvailable: '',
     }
     const [formInfo, setFormInfo] = useState(initialState)
-    
+    const [location, setLocation] = useState(null)
+    const autoCompleteRef = useRef();
+    const inputRef = useRef();
+    const options = {
+        componentRestrictions: { country: "AU" }
+    }
+    useEffect(() => {   
+        autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+            inputRef.current,
+            options
+        );
+        
+        autoCompleteRef.current.addListener("place_changed", async function () {
+            const place = await autoCompleteRef.current.getPlace();
+            setLocation(place.formatted_address) 
+        });
+    }, [])
     useEffect( () => {
         if(!inData.itemPhotoUrl || inData.itemPhotoUrl == "" ) {
           setTempUrl("https://i.stack.imgur.com/mwFzF.png")
@@ -55,6 +71,9 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
         event.preventDefault()
         document.listingform.reset()
         setTempUrl("https://i.stack.imgur.com/mwFzF.png")
+        if(location) {
+            formInfo.location = location
+        }
         updateFn(formInfo)
     }
     const imgClicked = (event) => {
@@ -78,7 +97,7 @@ const ModifyListingForm = ({updateFn, deleteFn, inData}) => {
                 <input className="input" type="number" placeholder={inData.rentPrice}  name="rentPrice" onChange={updateField}  />
                 <label> Location </label>
 
-                <input className="input" type="text" placeholder={inData.location}  name="location" onChange={updateField}  />
+                <input className="input" type="text" placeholder={inData.location} ref={inputRef} name="location" onChange={updateField}  />
                 <fieldset>
                 {/* <label class="custom-uploader" for="file">Upload Your File</label>  */}
                 <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />

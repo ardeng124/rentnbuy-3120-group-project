@@ -1,6 +1,7 @@
 //Imports
 import React, { useState, useEffect, useRef } from "react";
 import Stack from '@mui/material/Stack';
+import InputAddress from "./InputAddress"
 
 /**
  * SignUpForm: contains form info for the sign up page. On submit function is {updateFn}
@@ -20,23 +21,11 @@ const SignUpForm = ({updateFn}) => {
         gender: '',
         location: ''
     }
-    const autoCompleteRef = useRef();
-        const inputRef = useRef();
-        const options = {
-            componentRestrictions: { country: "AU" }
-        }
-    useEffect(() => {
-        autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-            inputRef.current,
-            options
-        );
-        autoCompleteRef.current.addListener("place_changed", async function () {
-            const place = await autoCompleteRef.current.getPlace();
-            setFormInfo({...formInfo, location: place.formatted_address})
-           });
-    }, []);
     const [formInfo, setFormInfo] = useState(initialState)
-
+    const setLocation = (location) => {
+        console.log("Anubhav",location)
+        setFormInfo({...formInfo, location: location})
+    }
     // const [locationformInfo, setLocationFormInfo] = useState(location)
 
     const updateField = (event) => {
@@ -67,7 +56,6 @@ const SignUpForm = ({updateFn}) => {
         } else if (name === "gender") {
             setFormInfo({...formInfo, gender: event.target.value})
         } else if (name === "address") {
-            console.log("setting value = " , autoCompleteRef.current.getPlace() )
             setFormInfo({...formInfo, location: event.target.value})
         }
     }
@@ -113,7 +101,9 @@ const SignUpForm = ({updateFn}) => {
                 </select>
 
                 {/* Address */}
-                <input className="input" type="text" placeholder="Address" name="address" ref={inputRef} onChange={updateField} autoComplete="false" required/>
+                <InputAddress name = "address" onChange={updateField} setLocation = {setLocation}/>
+
+                {/* <input className="input" type="text" placeholder="Address" name="address" ref={inputRef} onChange={updateField} autoComplete="false" required/> */}
 
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>

@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import AxiosService from "../AxiosService"
-import InputAddress from "./InputAddress"
 /**
  * 
  * AddListingForm: form for adding a new listing
@@ -8,6 +7,7 @@ import InputAddress from "./InputAddress"
  */
 const AddListingForm = ({updateFn}) => {
     const[tempUrl, setTempUrl] = useState("https://i.stack.imgur.com/mwFzF.png")
+    const[location, setLocation] = useState("")
     const [categories, setCategories] = useState([])
     const initialState = {
         name: '',
@@ -18,16 +18,26 @@ const AddListingForm = ({updateFn}) => {
         description: ''
     }
     const [formInfo, setFormInfo] = useState(initialState)
-
+    const autoCompleteRef = useRef();
+    const inputRef = useRef();
+    const options = {
+        componentRestrictions: { country: "AU" }
+    }
     useEffect(() => {   
         AxiosService.getCategories()
         .then(response => {
            setCategories(response.data)
-      })
+        })
+        autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+            inputRef.current,
+            options
+        );
+        
+        autoCompleteRef.current.addListener("place_changed", async function () {
+            const place = await autoCompleteRef.current.getPlace();
+            setLocation(place.formatted_address) 
+        });
     }, [])
-    const setLocation = (location) => {
-        setFormInfo({...formInfo, location: location})
-    }
     const updateField = (event) => {
         //Assign Input Elements to each attributes 
         const name = event.target.attributes.name.value
@@ -47,12 +57,15 @@ const AddListingForm = ({updateFn}) => {
             setTempUrl(URL.createObjectURL(event.target.files[0]))
             setFormInfo({...formInfo, img: event.target.files[0]})
         }
-        
     }
     const formHandler = (event) => {
         event.preventDefault()
         document.listingform.reset()
         setTempUrl("https://i.stack.imgur.com/mwFzF.png")
+        if(location){
+            formInfo.location = location
+        }
+        console.log(formInfo)
         updateFn(formInfo)
     }
     const imgClicked = (event) => {
@@ -70,8 +83,8 @@ const AddListingForm = ({updateFn}) => {
                 </select>
                 <input className="input" type="number" placeholder="Enter price (cents)" name="price" onChange={updateField} required/>
                 <input className="input" type="number" placeholder="Enter price to rent (cents)" name="rentprice" onChange={updateField} required/>
-                <InputAddress name = "location" onChange={updateField} setLocation = {setLocation}/>
-                {/* <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} required/> */}
+                {/* <InputAddress name = "location" onChange={updateField} setLocation = {setLocation}/> */}
+                <input className="input" type="text" placeholder="Enter location" name="location" onChange={updateField} ref={inputRef} required/>
                 <fieldset>
                 {/* <label class="custom-uploader" for="file">Upload Your File</label>  */}
                 <input className ="hideMe" id="file" accept="image/jpeg,image/png" onChange={updateField} name="img" type="file" />

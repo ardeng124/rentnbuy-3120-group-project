@@ -1,7 +1,6 @@
 //Imports
 import React, { useState, useEffect, useRef } from "react";
 import Stack from '@mui/material/Stack';
-import InputAddress from "./InputAddress"
 
 /**
  * SignUpForm: contains form info for the sign up page. On submit function is {updateFn}
@@ -22,10 +21,23 @@ const SignUpForm = ({updateFn}) => {
         location: ''
     }
     const [formInfo, setFormInfo] = useState(initialState)
-    const setLocation = (location) => {
-        console.log("Anubhav",location)
-        setFormInfo({...formInfo, location: location})
+    const [location, setLocation] = useState("")
+    const autoCompleteRef = useRef();
+    const inputRef = useRef();
+    const options = {
+        componentRestrictions: { country: "AU" }
     }
+    useEffect(() => {   
+        autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+            inputRef.current,
+            options
+        );
+        
+        autoCompleteRef.current.addListener("place_changed", async function () {
+            const place = await autoCompleteRef.current.getPlace();
+            setLocation(place.formatted_address) 
+        });
+    }, [])
     // const [locationformInfo, setLocationFormInfo] = useState(location)
 
     const updateField = (event) => {
@@ -62,7 +74,9 @@ const SignUpForm = ({updateFn}) => {
     
     const formHandler = (event) => {
         event.preventDefault()
-        
+        if(location){
+            formInfo.location = location
+        }
         if (formInfo.password === formInfo.repeatPassword) {
             updateFn(formInfo)
             // setFormInfo(initialState)
@@ -101,9 +115,7 @@ const SignUpForm = ({updateFn}) => {
                 </select>
 
                 {/* Address */}
-                <InputAddress name = "address" onChange={updateField} setLocation = {setLocation}/>
-
-                {/* <input className="input" type="text" placeholder="Address" name="address" ref={inputRef} onChange={updateField} autoComplete="false" required/> */}
+                <input className="input" type="text" placeholder="Address" name="address" ref={inputRef} onChange={updateField} autoComplete="false" required/>
 
 
                 <p> By creating an account you agree to our Terms & Privacy. </p>

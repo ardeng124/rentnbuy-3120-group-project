@@ -7,12 +7,12 @@ Sunday 6th of November (Week 13) at 11:55pm
 ## Team Members / Roles / Contact Details
 ---
 This section details the assigned roles of each team member in Group Y. Members will assume responsibility over these development areas, but will also branch out into other areas if support from other members is needed.
-| Team Member:         | Assigned Role(s):                    | Student Number: | Student Email:                          |
-|----------------------|--------------------------------------|-----------------|-----------------------------------------|
-| Nicholas Albert      | Frontend Design, Database management | 46469001        | Nicholas.Albert@students.mq.edu.au      |
-| Raffi Tchamkertenian | Backend and Test Specialist          | 46464565        | Raffi.Tchamkertenian@students.mq.edu.au |
-| Arden Gourlay        | Frontend Design                      | 46447849        | Arden.Gourlay@students.mq.edu.au        |
-| Anubhav Ashish       | Backend Development                  | 45317569        | Anubhav.Ashish@students.mq.edu.au       |
+| Team Member:         | Assigned Role(s):                    |       
+|----------------------|--------------------------------------|
+| Nicholas Albert      | Frontend Design, Database management
+| Raffi Tchamkertenian | Backend and Test Specialist         
+| Arden Gourlay        | Frontend Design                    
+| Anubhav Ashish       | Backend Development                 
 
 
 ## Application
